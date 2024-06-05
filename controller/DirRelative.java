@@ -1,5 +1,6 @@
 package controller;
 
 public enum DirRelative {
-   Devant,Derriere,Gauche,Droite,Soi; 
+    Devant, Gauche, Droite, Derriere, soi;
+    
 }

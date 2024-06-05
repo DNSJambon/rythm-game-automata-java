@@ -2,6 +2,7 @@ package model;
 
 import controller.Direction;
 import controller.Automaton;
+import controller.DirRelative;
 
 public class Pomme extends Entity {
     
@@ -23,7 +24,7 @@ public class Pomme extends Entity {
     }
 
     @Override
-    public boolean eval_cell(Entity e, Direction dir, cellType type) {
+    public boolean eval_cell(Entity e, DirRelative dir, cellType type) {
         switch (dir) {
             case soi:
                 return g.getCell(x, y).getType() == type;
@@ -33,7 +34,7 @@ public class Pomme extends Entity {
     }
 
     @Override
-    public boolean do_move(Entity e,Direction direction) {
+    public boolean do_move(Entity e) {
         g.getCell(x, y).reset();
         x = (x + 1) % g.getRows();
         y = (y + 1) % g.getCols();
@@ -58,7 +59,7 @@ public class Pomme extends Entity {
     }
 
     @Override
-    public boolean do_turn(Entity e) {
+    public boolean do_turn(Entity e,DirRelative dir) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
