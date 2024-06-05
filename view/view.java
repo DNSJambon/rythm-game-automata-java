@@ -20,7 +20,7 @@ public class view extends JPanel {
         this.grille = grille;
         try {
             String userHome = System.getProperty("user.home");
-            backgroundImage = ImageIO.read(new File(userHome + "/../bg_green.jpeg"));// jsp comment adapter le path  !
+            backgroundImage = ImageIO.read(new File("bg_green.jpeg"));// jsp comment adapter le path  !
         } catch (IOException e) {
             e.printStackTrace();
         }

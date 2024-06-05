@@ -7,12 +7,15 @@ public class Main {
     public static void main(String[] args) {
         Grille g = new Grille(10, 10);
 
-        
+        //Pomme:
         Transition[] T = new Transition[1];
-        //Move p = new Move();
+
+        Cell c = new Cell(DirRelative.soi, cellType.Snake); 
+
         Pick p = new Pick();
-        Cell c = new Cell(DirRelative.soi, cellType.Snake);
+
         T[0] = new Transition(p, c, 0, 0);
+
         Automaton a = new Automaton(0, T);
         Pomme item_pomme = new Pomme(g, a);
 
@@ -21,7 +24,7 @@ public class Main {
 
         Cell cond_obsatcle = new Cell(DirRelative.Devant, cellType.Obstacle);
         True cond_true = new True();
-        Random r = new Random(25);
+        Random r = new Random(10);
 
         Turn gauche = new Turn(DirRelative.Gauche);
         Turn droite = new Turn(DirRelative.Droite);
@@ -30,8 +33,7 @@ public class Main {
         T2[0] = new Transition(gauche, cond_obsatcle, 0, 0);
         T2[1] = new Transition(droite, r, 0, 0);
         T2[2] = new Transition(gauche, r, 0, 0);
-        T2[3] = new Transition(m, cond_true, 0, 0);
-        
+        T2[3] = new Transition(m, cond_true, 0, 0);  
 
         Automaton a2 = new Automaton(0, T2);
         Snake snake = new Snake(a2, g);
