@@ -32,22 +32,22 @@ public class Obstacle extends Entity {
                     case Droite:
                         return type==g.getCell(x+1%g.getRows(),y).getType();
                     case Gauche:
-                        return type==g.getCell(x-1%g.getRows(),y).getType();
+                        return type==g.getCell((x+g.getRows()-1)%g.getRows(),y).getType();
                     case Derriere:
                         return type==g.getCell(x,y+1%g.getCols()).getType();
                     case Devant:
-                        return type==g.getCell(x,y-1%g.getCols()).getType();
+                        return type==g.getCell(x,y+(g.getCols()-1)%g.getCols()).getType();
                     default:
                         return false;
                 }
             case Sud:
                 switch (dir) {
                     case Droite:
-                        return type==g.getCell(x-1%g.getRows(),y).getType();
+                        return type==g.getCell((x+g.getRows()-1)%g.getRows(),y).getType();
                     case Gauche:
                         return type==g.getCell(x+1%g.getRows(),y).getType();
                     case Derriere:
-                        return type==g.getCell(x,y-1%g.getCols()).getType();
+                        return type==g.getCell(x,y+(g.getCols()-1)%g.getCols()).getType();
                     case Devant:
                         return type==g.getCell(x,y+1%g.getCols()).getType();
                     default:
@@ -56,11 +56,11 @@ public class Obstacle extends Entity {
             case Est:
                 switch (dir) {
                     case Droite:
-                        return type==g.getCell(x,y-1%g.getCols()).getType();
+                        return type==g.getCell(x,y+(g.getCols()-1)%g.getCols()).getType();
                     case Gauche:
                         return type==g.getCell(x,y+1%g.getCols()).getType();
                     case Derriere:
-                        return type==g.getCell(x-1%g.getRows(),y).getType();
+                        return type==g.getCell((x+g.getRows()-1)%g.getRows(),y).getType();
                     case Devant:
                         return type==g.getCell(x+1%g.getRows(),y).getType();
                     default:
@@ -71,11 +71,11 @@ public class Obstacle extends Entity {
                     case Droite:
                         return type==g.getCell(x,y+1%g.getCols()).getType();
                     case Gauche:
-                        return type==g.getCell(x,y-1%g.getCols()).getType();
+                        return type==g.getCell(x,y+(g.getCols()-1)%g.getCols()).getType();
                     case Derriere:
                         return type==g.getCell(x+1%g.getRows(),y).getType();
                     case Devant:
-                        return type==g.getCell(x-1%g.getRows(),y).getType();
+                        return type==g.getCell((x+g.getRows()-1)%g.getRows(),y).getType();
                     default:
                         return false;
                 }
@@ -91,26 +91,26 @@ public class Obstacle extends Entity {
         int xclear=x;
         switch (e.direction) {
             case Nord:
-                e.y-=1;
-                e.y=e.y%g.getCols();
+                e.y+=(g.getCols()-1);
+                e.y=e.y%g.getRows();
                 g.getCell(xclear,yclear).reset();
                 g.getCell(x,y).setEntity(this);
                 return true;
             case Sud:
                 e.y+=1;
-                e.y=e.y%g.getCols();
+                e.y=e.y%g.getRows();
                 g.getCell(xclear,yclear).reset();
                 g.getCell(x,y).setEntity(this);
                 return true;
             case Est:
                 e.x+=1;
-                e.x=e.x%g.getRows();
+                e.x=e.x%g.getCols();
                 g.getCell(xclear,yclear).reset();
                 g.getCell(x,y).setEntity(this);
                 return true;
             case Ouest:
-                e.x-=1;
-                e.x=e.x%g.getRows();
+                e.x+=(g.getRows()-1);
+                e.x=e.x%g.getCols();
                 g.getCell(xclear,yclear).reset();
                 g.getCell(x,y).setEntity(this);
                 return true;
@@ -123,7 +123,7 @@ public class Obstacle extends Entity {
     public boolean do_egg(Entity e) {
         switch (e.direction) {
             case Nord:
-                e.y-=1;
+                e.y+=(g.getCols()-1);
                 e.y=e.y%g.getRows();
                 g.getCell(x,y).setEntity(new Obstacle(g, a, x, y));
                 return true;
@@ -138,7 +138,7 @@ public class Obstacle extends Entity {
                 g.getCell(x,y).setEntity(new Obstacle(g, a, x, y));
                 return true;
             case Ouest:
-                e.x-=1;
+                e.x+=(g.getRows()-1);
                 e.x=e.x%g.getCols();
                 g.getCell(x,y).setEntity(new Obstacle(g, a, x, y));
                 return true;
