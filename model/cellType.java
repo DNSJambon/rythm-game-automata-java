@@ -1,9 +1,9 @@
 package model;
 
 public enum cellType {
-    vide,
+    Vide,
     Snake,
     Apple,
-    obstacle;
+    Obstacle;
     
 }
