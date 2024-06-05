@@ -20,9 +20,69 @@ public class Obstacle extends Entity {
         return cellType.Obstacle;
     }
 
+
     @Override
     public boolean eval_cell(Entity e, DirRelative dir, cellType type) {
-        return true;
+        if (dir==DirRelative.soi) {
+            return type==this.getType();
+        }
+        switch (e.direction) {
+            case Nord:
+                switch (dir) {
+                    case Droite:
+                        return type==g.getCell(x+1%g.getRows(),y).getType();
+                    case Gauche:
+                        return type==g.getCell(x-1%g.getRows(),y).getType();
+                    case Derriere:
+                        return type==g.getCell(x,y+1%g.getCols()).getType();
+                    case Devant:
+                        return type==g.getCell(x,y-1%g.getCols()).getType();
+                    default:
+                        return false;
+                }
+            case Sud:
+                switch (dir) {
+                    case Droite:
+                        return type==g.getCell(x-1%g.getRows(),y).getType();
+                    case Gauche:
+                        return type==g.getCell(x+1%g.getRows(),y).getType();
+                    case Derriere:
+                        return type==g.getCell(x,y-1%g.getCols()).getType();
+                    case Devant:
+                        return type==g.getCell(x,y+1%g.getCols()).getType();
+                    default:
+                        return false;
+                }
+            case Est:
+                switch (dir) {
+                    case Droite:
+                        return type==g.getCell(x,y-1%g.getCols()).getType();
+                    case Gauche:
+                        return type==g.getCell(x,y+1%g.getCols()).getType();
+                    case Derriere:
+                        return type==g.getCell(x-1%g.getRows(),y).getType();
+                    case Devant:
+                        return type==g.getCell(x+1%g.getRows(),y).getType();
+                    default:
+                        return false;
+                }
+            case Ouest:
+                switch (dir) {
+                    case Droite:
+                        return type==g.getCell(x,y+1%g.getCols()).getType();
+                    case Gauche:
+                        return type==g.getCell(x,y-1%g.getCols()).getType();
+                    case Derriere:
+                        return type==g.getCell(x+1%g.getRows(),y).getType();
+                    case Devant:
+                        return type==g.getCell(x-1%g.getRows(),y).getType();
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
+
     }
     
     @Override
