@@ -5,10 +5,10 @@ import model.cellType;
 
 public class Cell implements Condition{
 
-    Direction dir;
+    DirRelative dir;
     cellType cat;
 
-    public Cell(Direction dir, cellType cat) {
+    public Cell(DirRelative dir, cellType cat) {
         this.dir = dir;
         this.cat = cat;
     }
