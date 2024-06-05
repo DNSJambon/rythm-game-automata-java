@@ -19,7 +19,10 @@ public class Automaton {
                     return this.Trans[i].act.exec(e);
                 }
             }
-        i++;
+            i++;
+            if (i== Trans.length) {
+                return false;
+            }
         }
         return true;
         

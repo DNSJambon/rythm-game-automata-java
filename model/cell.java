@@ -21,7 +21,7 @@ public class cell implements Icell{
 
     public cellType getType() {
         if (vide == 1) {
-            return cellType.vide;
+            return cellType.Vide;
         } else {
             return e.getType();
         }

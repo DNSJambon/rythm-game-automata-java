@@ -1,7 +1,6 @@
 package model;
 
-import controller.Automaton;
-import controller.Direction;
+import controller.*;
 
 public class Obstacle extends Entity {
 
@@ -18,11 +17,11 @@ public class Obstacle extends Entity {
 
     @Override
     public cellType getType() {
-        return cellType.obstacle;
+        return cellType.Obstacle;
     }
 
     @Override
-    public boolean eval_cell(Entity e, Direction dir, cellType type) {
+    public boolean eval_cell(Entity e, DirRelative dir, cellType type) {
         return true;
     }
     
@@ -94,7 +93,7 @@ public class Obstacle extends Entity {
     }
 
     @Override
-    public boolean do_turn(Entity e) {
+    public boolean do_turn(Entity e, DirRelative dir) {
         switch (e.direction) {
             case Nord:
                 e.direction=Direction.Est;
