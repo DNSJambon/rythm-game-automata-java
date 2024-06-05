@@ -1,6 +1,7 @@
 package model;
 
 import controller.Automaton;
+import controller.DirRelative;
 import controller.Direction;
 
 public abstract class Entity {
@@ -23,11 +24,11 @@ public abstract class Entity {
     
     
     //abstract boolean eval(...);
-    public abstract boolean eval_cell(Entity e, Direction dir, cellType type);
+    public abstract boolean eval_cell(Entity e, DirRelative dir, cellType type);
     //abstract boolean do(...);
     public abstract boolean do_move(Entity e);
     public abstract boolean do_egg(Entity e);
     public abstract boolean do_pick(Entity e);
-    public abstract boolean do_turn(Entity e,Direction dir);
+    public abstract boolean do_turn(Entity e,DirRelative dir);
 
 }
