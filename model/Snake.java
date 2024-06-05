@@ -41,13 +41,13 @@ public class Snake extends Entity {
             case Nord:
                 switch (dir) {
                     case Devant:
-                        return g.getCell(head.x,(head.y-1)%g.getRows()).getType()==t;   
+                        return g.getCell(head.x,(head.y + g.getRows() -1)%g.getRows()).getType()==t;   
                     case Derriere:
                         return g.getCell(head.x, (head.y + 1) % g.getRows()).getType() == t;
                     case Droite:
                         return g.getCell((head.x+1)%g.getCols(), head.y).getType() == t;
                     case Gauche:
-                        return g.getCell((head.x -1) % g.getCols(), head.y).getType() == t;
+                        return g.getCell((head.x + g.getCols() -1) % g.getCols(), head.y).getType() == t;
                     default:
                         return false;
                 }
@@ -58,11 +58,11 @@ public class Snake extends Entity {
                         return g.getCell(head.x, (head.y + 1) % g.getRows()).getType() == t;
                         
                     case Derriere: 
-                        return g.getCell(head.x, (head.y - 1) % g.getRows()).getType() == t;
+                        return g.getCell(head.x, (head.y  + g.getRows() - 1) % g.getRows()).getType() == t;
                         
                         
                     case Droite:
-                        return g.getCell((head.x - 1) % g.getCols(), head.y).getType() == t;
+                        return g.getCell((head.x+g.getCols() - 1) % g.getCols(), head.y).getType() == t;
                         
                     case Gauche:
                         return g.getCell((head.x + 1) % g.getCols(), head.y).getType() == t;
@@ -77,13 +77,13 @@ public class Snake extends Entity {
                         return g.getCell((head.x + 1) % g.getCols(), head.y).getType() == t;
                         
                     case Derriere:
-                        return g.getCell((head.x - 1) % g.getCols(), head.y).getType() == t;
+                        return g.getCell((head.x +g.getCols()- 1) % g.getCols(), head.y).getType() == t;
                         
                     case Droite:
                         return g.getCell(head.x, (head.y + 1) % g.getRows()).getType() == t;
                         
                     case Gauche:
-                        return g.getCell(head.x, (head.y - 1) % g.getRows()).getType() == t;
+                        return g.getCell(head.x, (head.y + g.getRows()  - 1) % g.getRows()).getType() == t;
                         
                     default:
                         return false;
@@ -93,13 +93,13 @@ public class Snake extends Entity {
                 switch (dir) {
                     case Devant:
 
-                        return true;
+                        return g.getCell((head.x +g.getCols()- 1) % g.getCols(), head.y).getType() == t;
                     case Derriere:
                         return g.getCell((head.x + 1) % g.getCols(), head.y).getType() == t;
                         
                     case Droite:
 
-                        return g.getCell(head.x, (head.y - 1) % g.getRows()).getType() == t;
+                        return g.getCell(head.x, (head.y + g.getRows() - 1) % g.getRows()).getType() == t;
                     case Gauche:
                         return g.getCell(head.x, (head.y + 1) % g.getRows()).getType() == t;
                         
@@ -121,8 +121,8 @@ public class Snake extends Entity {
 
             case Nord:
                 g.getCell(head.x, head.y).reset();
-                g.getCell(head.x, (head.y - 1) % g.getRows()).setEntity(this);
-                head.y=(head.y - 1) % g.getRows();
+                g.getCell(head.x, (head.y + g.getRows() - 1) % g.getRows()).setEntity(this);
+                head.y=(head.y + g.getRows() - 1) % g.getRows();
                 return true;
             case Sud:
                 g.getCell(head.x, head.y).reset();
@@ -136,8 +136,8 @@ public class Snake extends Entity {
                 return true;
             case Ouest:
                 g.getCell(head.x, head.y).reset();
-                g.getCell((head.x - 1) % g.getCols(), head.y).setEntity(this);
-                head.x=(head.x -1 ) % g.getCols();
+                g.getCell((head.x + g.getCols() -1) % g.getCols(), head.y).setEntity(this);
+                head.x=(head.x + g.getCols() -1) % g.getCols();
                 return true;
 
             default:
@@ -166,23 +166,28 @@ public class Snake extends Entity {
     public boolean do_turn(Entity e, DirRelative d) {
         switch (d) {
             case Devant:
-            return true;
+                this.do_move(e);
+                return true;
             case Derriere:
-
+                this.do_move(e);
                 return true;
             case Droite:
                 switch (direction) {
                     case Nord:
-                        direction=Direction.Est;
+                        direction = Direction.Est;
+                        this.do_move(e);
                         return true;
                     case Sud:
-                        direction=Direction.Ouest;
+                        direction = Direction.Ouest;
+                        this.do_move(e);
                         return true;
                     case Est:
-                        direction=Direction.Sud;
+                        direction = Direction.Sud;
+                        this.do_move(e);
                         return true;
                     case Ouest:
-                        direction=Direction.Nord;
+                        direction = Direction.Nord;
+                        this.do_move(e);
                         return true;
                     default:
                         return false;
@@ -191,16 +196,20 @@ public class Snake extends Entity {
             case Gauche:
                 switch (direction) {
                     case Nord:
-                        direction=Direction.Ouest;
+                        direction = Direction.Ouest;
+                        this.do_move(e);
                         return true;
                     case Sud:
-                        direction=Direction.Est;
+                        direction = Direction.Est;
+                        this.do_move(e);
                         return true;
                     case Est:
-                        direction=Direction.Sud;
+                        direction = Direction.Nord;
+                        this.do_move(e);
                         return true;
                     case Ouest:
-                        direction=Direction.Nord;
+                        direction = Direction.Sud;
+                        this.do_move(e);
                         return true;
                     default:
                         return false;
