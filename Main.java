@@ -38,22 +38,17 @@ public class Main {
         Automaton a2 = new Automaton(0, T2);
         Snake snake = new Snake(a2, g);
 
+
         // Create and show the GUI
         SwingUtilities.invokeLater(() -> {
             view.createAndShowGUI(g);
         });
 
-        // Use a Swing Timer to periodically update the automaton and repaint the view
+        view v = new view(g);
+        // Use a Swing Timer to periodically update the automaton
         Timer timer = new Timer(250, e -> {
             a.step_A(item_pomme);
             a2.step_A(snake);
-            // Trigger a repaint of the view
-            SwingUtilities.invokeLater(() -> {
-                JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(new view(g));
-                if (topFrame != null) {
-                    topFrame.repaint();
-                }
-            });
         });
         timer.start();
     }
