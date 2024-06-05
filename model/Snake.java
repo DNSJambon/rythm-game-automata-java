@@ -21,7 +21,7 @@ public class Snake extends Entity {
     int size;
     coordonnees head;
 
-    Snake(Automaton a, IGrille g) {
+    public Snake(Automaton a, IGrille g) {
         super(g);
         super.a = a;
         size = 1;
@@ -153,8 +153,7 @@ public class Snake extends Entity {
 
     @Override
     public cellType getType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getType'");
+        return cellType.Snake;
     }
 
     @Override
