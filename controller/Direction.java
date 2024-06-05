@@ -1,5 +1,5 @@
 package controller;
 
 public enum Direction {
-    Nord,Sud,Est,Ouest,soi;
+    Nord,Sud,Est,Ouest;
 }
