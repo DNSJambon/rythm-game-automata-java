@@ -34,7 +34,7 @@ public class Snake extends Entity {
 
     @Override
     public boolean eval_cell(Entity e, DirRelative dir, cellType t) {
-        if (dir==DirRelative.Soi){
+        if (dir==DirRelative.soi){
             return g.getCell(head.x, head.y).getType() == t;
         }
         switch (direction) {
