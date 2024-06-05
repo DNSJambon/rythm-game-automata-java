@@ -34,7 +34,7 @@ public class Grille implements IGrille{
     public cell randomCell_libre() {
         int x = (int) (Math.random() * rows);
         int y = (int) (Math.random() * cols);
-        while (grille[x][y].getType() != cellType.vide) {
+        while (grille[x][y].getType() != cellType.Vide) {
             x = (int) (Math.random() * rows);
             y = (int) (Math.random() * cols);
         }
