@@ -1,8 +1,6 @@
 package model;
 
-import controller.Direction;
-import controller.Automaton;
-import controller.DirRelative;
+import controller.*;
 
 public class Pomme extends Entity {
     
