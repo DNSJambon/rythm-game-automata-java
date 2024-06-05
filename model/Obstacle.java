@@ -23,7 +23,7 @@ public class Obstacle extends Entity {
 
     @Override
     public boolean eval_cell(Entity e, Direction dir, cellType type) {
-        
+        return true;
     }
     
     @Override
