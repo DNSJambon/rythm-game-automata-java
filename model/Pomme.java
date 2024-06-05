@@ -11,8 +11,8 @@ public class Pomme extends Entity {
         this.a = a;
         etat_courant = 0;
 
-        this.x = 0;
-        this.y = 0;
+        this.x = g.getCols() - 1;
+        this.y = 1;
         g.getCell(x,y).setEntity(this);
 
 

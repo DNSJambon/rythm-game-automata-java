@@ -24,7 +24,7 @@ public class display {
                         System.out.print("S");
                         break;
                     
-                    case obstacle:
+                    case Obstacle:
                         System.out.print("O");
                         break;
                     

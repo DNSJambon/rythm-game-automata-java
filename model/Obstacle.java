@@ -1,8 +1,6 @@
 package model;
 
-import controller.Automaton;
-import controller.DirRelative;
-import controller.Direction;
+import controller.*;
 
 public class Obstacle extends Entity {
 
@@ -19,72 +17,13 @@ public class Obstacle extends Entity {
 
     @Override
     public cellType getType() {
-        return cellType.obstacle;
+        return cellType.Obstacle;
     }
 
     @Override
     public boolean eval_cell(Entity e, DirRelative dir, cellType type) {
-        if (dir==DirRelative.soi) {
-            return type==this.getType();
-        }
-        switch (e.direction) {
-            case Nord:
-                switch (dir) {
-                    case Droite:
-                        return type==g.getCell(x+1%g.getRows(),y).getType();
-                    case Gauche:
-                        return type==g.getCell(x-1%g.getRows(),y).getType();
-                    case Derriere:
-                        return type==g.getCell(x,y+1%g.getCols()).getType();
-                    case Devant:
-                        return type==g.getCell(x,y-1%g.getCols()).getType();
-                    default:
-                        return false;
-                }
-            case Sud:
-                switch (dir) {
-                    case Droite:
-                        return type==g.getCell(x-1%g.getRows(),y).getType();
-                    case Gauche:
-                        return type==g.getCell(x+1%g.getRows(),y).getType();
-                    case Derriere:
-                        return type==g.getCell(x,y-1%g.getCols()).getType();
-                    case Devant:
-                        return type==g.getCell(x,y+1%g.getCols()).getType();
-                    default:
-                        return false;
-                }
-            case Est:
-                switch (dir) {
-                    case Droite:
-                        return type==g.getCell(x,y-1%g.getCols()).getType();
-                    case Gauche:
-                        return type==g.getCell(x,y+1%g.getCols()).getType();
-                    case Derriere:
-                        return type==g.getCell(x-1%g.getRows(),y).getType();
-                    case Devant:
-                        return type==g.getCell(x+1%g.getRows(),y).getType();
-                    default:
-                        return false;
-                }
-            case Ouest:
-                switch (dir) {
-                    case Droite:
-                        return type==g.getCell(x,y+1%g.getCols()).getType();
-                    case Gauche:
-                        return type==g.getCell(x,y-1%g.getCols()).getType();
-                    case Derriere:
-                        return type==g.getCell(x+1%g.getRows(),y).getType();
-                    case Devant:
-                        return type==g.getCell(x-1%g.getRows(),y).getType();
-                    default:
-                        return false;
-                }
-            default:
-                return false;
-        }
+        return true;
     }
-    
     
     @Override
     public boolean do_move(Entity e) {
@@ -154,10 +93,7 @@ public class Obstacle extends Entity {
     }
 
     @Override
-    public boolean do_turn(Entity e,DirRelative dir) {
-        if (dir==DirRelative.soi || dir==DirRelative.Devant){
-            return true;
-        }
+    public boolean do_turn(Entity e, DirRelative dir) {
         switch (e.direction) {
             case Nord:
                 switch (dir) {
