@@ -11,7 +11,7 @@ public class test_affichage {
         Transition[] T = new Transition[1];
         //Move p = new Move();
         Pick p = new Pick();
-        Cell c = new Cell(Direction.soi, cellType.Apple);
+        Cell c = new Cell(DirRelative.soi, cellType.Apple);
         T[0] = new Transition(p, c, 0, 0);
         Automaton a = new Automaton(0, T);
 
