@@ -1,4 +1,4 @@
-package controller;
+package info3.game.controller;
 
 public class BufferAction {
     Action action[];
