@@ -48,6 +48,7 @@ public class affichage_console {
         while (true) {
             item_pomme.step(buffer);
             snake.step(buffer);
+            buffer.resolve();
             display d = new display(g);
             d.afficher_grille();
             try {
