@@ -16,8 +16,8 @@ public abstract class Entity {
 
     public abstract cellType getType();
 
-    void step() {
-        a.step_A(this);
+    public void step(BufferAction buff) {
+        a.step_A(this,buff);
     }
     
     
