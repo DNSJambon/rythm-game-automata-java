@@ -44,7 +44,7 @@ public class Main {
             view.createAndShowGUI(g);
         });
 
-        view v = new view(g);
+ 
         // Use a Swing Timer to periodically update the automaton
         Timer timer = new Timer(250, e -> {
             a.step_A(item_pomme);
