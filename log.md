@@ -1,3 +1,21 @@
+# <span style="color: #d54020 ">***6 juin 2024***</span>
+## <span style="color:green">**snake**</span>
+- avancer code snake
+- egg fonctionne 
+- réorganisation des dossiers
+- creation buffer d'action
+- creation de la queue du snake : 
+    - 2 marche a partir de 3 marche pas
+
+
+
+
+
+
+
+
+
+
 
 # <span style="color: #d54020 ">***5 juin 2024***</span>
 ## <span style="color:green">**snake**</span>
