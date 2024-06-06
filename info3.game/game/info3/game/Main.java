@@ -63,7 +63,7 @@ public class Main {
             view.createAndShowGUI(g);
         });
 
-        BufferAction buffer = new BufferAction(2);
+        BufferAction buffer = new BufferAction(3);
         // Use a Swing Timer to periodically update the automaton
         Timer timer = new Timer(250, e -> {
             item_pomme.step(buffer);
