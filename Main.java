@@ -8,16 +8,26 @@ public class Main {
         Grille g = new Grille(10, 10);
 
         //Pomme:
-        Transition[] T = new Transition[1];
+        Transition[] T = new Transition[3];
 
-        Cell c = new Cell(DirRelative.soi, cellType.Snake); 
+        Cell c1 = new Cell(DirRelative.Devant, cellType.Vide); 
 
-        Pick p = new Pick();
+        Egg e1 = new Egg();
 
-        T[0] = new Transition(p, c, 0, 0);
+        Cell c2 = new Cell(DirRelative.Devant, cellType.Obstacle);
+
+        Turn t2 = new Turn(DirRelative.Derriere);
+
+        Cell c3 = new Cell(DirRelative.Derriere, cellType.Obstacle);
+
+        Move m3 = new Move();
+
+        T[0] = new Transition(m3, c3, 0, 0);
+        T[1] = new Transition(t2, c2, 0, 0);
+        T[2] = new Transition(e1, c1, 0, 0);
 
         Automaton a = new Automaton(0, T);
-        Pomme item_pomme = new Pomme(g, a);
+        Obstacle obs = new Obstacle(g, a,2,3);
 
         //Snake:
         Transition[] T2 = new Transition[4];
@@ -47,7 +57,7 @@ public class Main {
  
         // Use a Swing Timer to periodically update the automaton
         Timer timer = new Timer(250, e -> {
-            a.step_A(item_pomme);
+            a.step_A(obs);
             a2.step_A(snake);
         });
         timer.start();
