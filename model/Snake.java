@@ -20,6 +20,8 @@ public class Snake extends Entity {
     java.util.LinkedList<coordonnees> snake;
     int size;
     coordonnees head;
+    coordonnees last;
+    coordonnees egg;
 
     public Snake(Automaton a, IGrille g) {
         super(g);
@@ -28,7 +30,11 @@ public class Snake extends Entity {
         direction = Direction.Est;
         snake = new LinkedList<coordonnees>();
         coordonnees c = new coordonnees(1, 1);
+        coordonnees c2= new coordonnees(1, 1);
+        coordonnees c3 = new coordonnees(1, 1);
         head = c;
+        last=c2;
+        egg=c3;
         g.getCell(1, 1).setEntity(this);
     }
 
@@ -118,26 +124,69 @@ public class Snake extends Entity {
     public boolean do_move(Entity e) {
 
         switch (this.direction) {
-
+            
             case Nord:
+                
+                last.x = head.x;
+                last.y = head.y;
                 g.getCell(head.x, head.y).reset();
-                g.getCell(head.x, (head.y + g.getRows() - 1) % g.getRows()).setEntity(this);
                 head.y=(head.y + g.getRows() - 1) % g.getRows();
+                g.getCell(head.x, head.y ).setEntity(this);
+                if (size > 1) {
+                    g.getCell(snake.get(size - 2).x, snake.get(size - 2).y).reset();
+                    egg.x=snake.get(size - 2).x;
+                    egg.y=snake.get(size - 2).y;
+                    snake.get(size - 2).x = last.x;
+                    snake.get(size - 2).y = last.y;
+                    g.getCell(last.x, last.y).setEntity(this);
+                }
+                
+                
                 return true;
             case Sud:
+                last.x = head.x;
+                last.y = head.y;
                 g.getCell(head.x, head.y).reset();
-                g.getCell(head.x, (head.y + 1) % g.getRows()).setEntity(this);
                 head.y = (head.y + 1) % g.getRows();
+                g.getCell(head.x, head.y ).setEntity(this);
+
+                if (size > 1) {
+                    g.getCell(snake.get(size - 2).x, snake.get(size - 2).y).reset();
+                    snake.get(size - 2).x = last.x;
+                    snake.get(size - 2).y = last.y;
+                    g.getCell(last.x, last.y).setEntity(this);
+                }
+               
+                
                 return true;
             case Est:
+            
+                last.x=head.x;
+                last.y=head.y;
                 g.getCell(head.x, head.y).reset();
-                g.getCell((head.x + 1) % g.getCols(), head.y).setEntity(this);
                 head.x=(head.x + 1) % g.getCols();
+                g.getCell(head.x, head.y).setEntity(this);
+                if (size>1){
+                    g.getCell(snake.get(size-2).x, snake.get(size-2).y).reset();
+                    snake.get(size-2).x=last.x;
+                    snake.get(size-2).y=last.y;
+                    g.getCell(last.x,last.y).setEntity(this); 
+                }
+                
                 return true;
             case Ouest:
+                last.x = head.x;
+                last.y = head.y;
                 g.getCell(head.x, head.y).reset();
-                g.getCell((head.x + g.getCols() -1) % g.getCols(), head.y).setEntity(this);
                 head.x=(head.x + g.getCols() -1) % g.getCols();
+                g.getCell(head.x, head.y).setEntity(this);
+                if (size > 1) {
+                    g.getCell(snake.get(size - 2).x, snake.get(size - 2).y).reset();
+                    snake.get(size - 2).x = last.x;
+                    snake.get(size - 2).y = last.y;
+                    g.getCell(last.x, last.y).setEntity(this);
+                }
+
                 return true;
 
             default:
@@ -147,9 +196,21 @@ public class Snake extends Entity {
 
     @Override
     public boolean do_egg(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
+        if (size==1){
+            coordonnees c = new coordonnees(last.x, last.y);
+            snake.addFirst(c);
+            g.getCell(c.x, c.y).setEntity(this);
+            size++;
+            return true;
+        }
+        coordonnees c=new coordonnees(egg.x, egg.y);
+        snake.addFirst(c);
+        g.getCell(c.x, c.y).setEntity(this);
+        size++;
+        return true;
+
     }
+
 
     @Override
     public cellType getType() {
