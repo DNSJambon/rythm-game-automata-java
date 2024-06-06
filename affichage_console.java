@@ -17,6 +17,7 @@ public class affichage_console {
         T[0] = new Transition(p, c, 0, 0);
         Automaton a = new Automaton(0, T);
         Pomme item_pomme = new Pomme(g, a);
+        p.e_or=item_pomme;
 
         //Snake:
         Transition[] T2 = new Transition[5];
@@ -39,9 +40,14 @@ public class affichage_console {
 
         Automaton a2 = new Automaton(0, T2);
         Snake snake = new Snake(a2, g);
+        m.e_or=snake;
+        gauche.e_or=snake;
+        droite.e_or=snake;
+
+        BufferAction buffer = new BufferAction(2);
         while (true) {
-            a.step_A(item_pomme);
-            a2.step_A(snake);
+            item_pomme.step(buffer);
+            snake.step(buffer);
             display d = new display(g);
             d.afficher_grille();
             try {

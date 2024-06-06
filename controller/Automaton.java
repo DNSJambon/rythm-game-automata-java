@@ -11,13 +11,14 @@ public class Automaton {
         this.status=s;
     }
     
-    public boolean step_A(Entity e){
+    public boolean step_A(Entity e,BufferAction buff){
         int i=0;
         while (this.Trans[i]!=null) {
             if (e.etat_courant==this.Trans[i].init) {
                 if (this.Trans[i].cond.eval(e)) {
-                    e.etat_courant=Trans[i].end;
-                    return this.Trans[i].act.exec(e);
+                    e.etat_courant = Trans[i].end;
+                    buff.addAction(this.Trans[i].act);
+                    return true;
                 }
             }
             i++;
