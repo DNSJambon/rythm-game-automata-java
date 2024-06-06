@@ -2,6 +2,10 @@ package info3.game.controller;
 
 import info3.game.model.Entity;
 
+/*
+ * Action qui change la direction absolue de l'entité.
+ */
+
 public class Turn extends Action {
 
     DirRelative dir;
