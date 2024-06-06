@@ -4,7 +4,7 @@ import view.display;
 import model.*;
 import controller.*;
 
-public class test_affichage {
+public class affichage_console {
     
     public static void main(String[] args) {
         Grille g = new Grille(10, 10);
