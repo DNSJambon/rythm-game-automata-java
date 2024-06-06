@@ -7,6 +7,18 @@ public class Main {
     public static void main(String[] args) {
         Grille g = new Grille(10, 10);
 
+        //Obstacle
+        Transition[] Tobs = new Transition[1];
+
+        Cell c2_obs = new Cell(DirRelative.Derriere, cellType.Snake);
+
+        Egg e_obs = new Egg();
+
+        Tobs[0]=new Transition(e_obs,c2_obs, 0, 0);
+
+        Automaton a_obs = new Automaton(0, Tobs);
+        Obstacle obs = new Obstacle(g, a_obs, 5, 5);
+
         //Pomme:
         Transition[] T = new Transition[1];
 
@@ -49,6 +61,7 @@ public class Main {
         Timer timer = new Timer(250, e -> {
             a.step_A(item_pomme);
             a2.step_A(snake);
+            a_obs.step_A(obs);
         });
         timer.start();
     }
