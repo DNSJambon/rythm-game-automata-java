@@ -67,6 +67,7 @@ public class Main {
             item_pomme.step(buffer);
             snake.step(buffer);
             obs.step(buffer);
+            buffer.resolve();
         });
         timer.start();
     }
