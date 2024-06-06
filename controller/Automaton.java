@@ -16,6 +16,7 @@ public class Automaton {
         while (this.Trans[i]!=null) {
             if (e.etat_courant==this.Trans[i].init) {
                 if (this.Trans[i].cond.eval(e)) {
+                    e.etat_courant=Trans[i].end;
                     return this.Trans[i].act.exec(e);
                 }
             }

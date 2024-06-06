@@ -7,7 +7,7 @@ import controller.*;
 public class affichage_console {
     
     public static void main(String[] args) {
-        Grille g = new Grille(10, 10);
+        Grille g = new Grille(5, 5);
 
         
         Transition[] T = new Transition[1];
@@ -19,19 +19,22 @@ public class affichage_console {
         Pomme item_pomme = new Pomme(g, a);
 
         //Snake:
-        Transition[] T2 = new Transition[3];
-
+        Transition[] T2 = new Transition[5];
+        Cell cond_apple= new Cell(DirRelative.Devant,cellType.Apple);
         Cell cond_obsatcle = new Cell(DirRelative.Devant, cellType.Obstacle);
         True cond_true = new True();
-        Random r = new Random(33);
-
+        Random r = new Random(20);
+        
+        Egg queue= new Egg();
         Turn gauche = new Turn(DirRelative.Gauche);
         Turn droite = new Turn(DirRelative.Droite);
         Move m = new Move();
 
-        T2[0] = new Transition(gauche, cond_obsatcle, 0, 0);
+        T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);
         T2[1] = new Transition(droite, r, 0, 0);
         T2[2] = new Transition(m, cond_true, 0, 0);
+        T2[0]= new Transition(m, cond_apple, 0, 1);
+        T2[4]=new Transition(queue, cond_true, 1, 0);
         
 
         Automaton a2 = new Automaton(0, T2);
