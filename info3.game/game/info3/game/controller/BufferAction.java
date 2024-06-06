@@ -22,5 +22,6 @@ public class BufferAction {
         for (int i = 0; i < index; i++) {
             action[i].exec(action[i].e_or);
         }
+        index = 0;
     }
 }
