@@ -1,8 +1,11 @@
 package controller;
 import model.Entity;
 
-public interface Action {
+public abstract class Action {
 
-    public boolean exec (Entity e);
+    public Entity e_or;
+    public Entity e_dest;
+    
+    public abstract boolean exec (Entity e);
     
 }
