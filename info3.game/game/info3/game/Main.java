@@ -9,6 +9,19 @@ public class Main {
     public static void main(String[] args) {
         Grille g = new Grille(10, 10);
 
+        //Obstacle
+        Transition[] Tobs = new Transition[1];
+
+        Cell c2_obs = new Cell(DirRelative.Derriere, cellType.Snake);
+
+        Egg e_obs = new Egg();
+
+        Tobs[0]=new Transition(e_obs,c2_obs, 0, 0);
+
+        Automaton a_obs = new Automaton(0, Tobs);
+        Obstacle obs = new Obstacle(g, a_obs, 5, 5);
+        e_obs.e_or=obs;
+
         //Pomme:
         Transition[] T = new Transition[1];
 
@@ -20,6 +33,7 @@ public class Main {
 
         Automaton a = new Automaton(0, T);
         Pomme item_pomme = new Pomme(g, a);
+        p.e_or=item_pomme;
 
         //Snake:
         Transition[] T2 = new Transition[4];
@@ -39,6 +53,9 @@ public class Main {
 
         Automaton a2 = new Automaton(0, T2);
         Snake snake = new Snake(a2, g);
+        m.e_or=snake;
+        gauche.e_or=snake;
+        droite.e_or=snake;
 
 
         // Create and show the GUI
@@ -46,11 +63,13 @@ public class Main {
             view.createAndShowGUI(g);
         });
 
- 
+        BufferAction buffer = new BufferAction(2);
         // Use a Swing Timer to periodically update the automaton
         Timer timer = new Timer(250, e -> {
-            a.step_A(item_pomme);
-            a2.step_A(snake);
+            item_pomme.step(buffer);
+            snake.step(buffer);
+            obs.step(buffer);
+            buffer.resolve();
         });
         timer.start();
     }
