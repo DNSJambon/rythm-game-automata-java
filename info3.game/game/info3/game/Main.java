@@ -3,10 +3,13 @@ package info3.game;
 import info3.game.model.*;
 import info3.game.controller.*;
 import info3.game.view.*;
+
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Grille g = new Grille(7, 7);
 
         //Obstacle

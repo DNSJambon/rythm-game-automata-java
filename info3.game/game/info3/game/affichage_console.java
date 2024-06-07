@@ -3,12 +3,15 @@ package info3.game;
 
 
 import info3.game.model.*;
+
+import java.io.IOException;
+
 import info3.game.controller.*;
 import info3.game.view.*;
 
 public class affichage_console {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Grille g = new Grille(7, 7);
 
         
