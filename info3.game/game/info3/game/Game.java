@@ -26,16 +26,16 @@ public class Game {
         }
     }
 
-    JFrame frame;
+    JFrame m_frame;
     JLabel m_text;
     GameCanvas m_canvas;
     CanvasListener m_listener;
-    Sound m_music;
+    //Sound m_music;
 
     Game() throws Exception {
         // creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
-		m_cowboy = new Cowboy();
+		//Cowboy cowboy = new Cowboy();
 		// creating a listener for all the events
 		// from the game canvas, that would be
 		// the controller in the MVC pattern
@@ -49,7 +49,7 @@ public class Game {
 		m_frame = m_canvas.createFrame(d);
 
 		System.out.println("  - setting up the frame...");
-		setupFrame();
+		//setupFrame();
     }
 
 }
