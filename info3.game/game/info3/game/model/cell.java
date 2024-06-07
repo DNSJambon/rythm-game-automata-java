@@ -73,10 +73,10 @@ public class cell implements Icell {
         if (vide == 0) {
             switch (getType()) {
                 case Snake:
-                    g.drawImage(grid.getImage(2), x * width, y * height, width, height, null);
+                    g.drawImage(grid.getImage(359), x * width, y * height, width, height, null);
                     break;
                 case Apple:
-                    g.drawImage(grid.getImage(3), x * width, y * height, width, height, null);
+                    g.drawImage(grid.getImage(360), x * width, y * height, width, height, null);
                     break;
                 case Obstacle:
                     break;

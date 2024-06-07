@@ -2,7 +2,7 @@ package info3.game.controller;
 
 import java.util.LinkedList;
 
-import info3.game.model.Entity;
+import info3.game.model.*;
 
 
 
@@ -13,7 +13,7 @@ public class Control {
 
     public Control() {
         entities = new LinkedList<Entity>();
-        BufferAction buffer = new BufferAction(3);
+        buffer = new BufferAction(3);
     }
 
     public void addEntity(Entity e) {

@@ -36,6 +36,7 @@ public class Snake extends Entity {
         g.getCell(1, 1).setEntity(this);
     }
     
+    //Constructeur avec automate par défaut
     public Snake(IGrille g) {
         super(g);
         size = 1;
@@ -68,7 +69,8 @@ public class Snake extends Entity {
         T2[4]=new Transition(queue, cond_true, 1, 0);
         
 
-        Automaton a2 = new Automaton(0, T2);
+        Automaton a = new Automaton(0, T2);
+        super.a = a;
         m.e_or=this;
         gauche.e_or = this;
         droite.e_or = this;

@@ -9,10 +9,12 @@ import java.io.RandomAccessFile;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+
 import info3.game.graphics.GameCanvas;
 import info3.game.sound.RandomFileInputStream;
 
 import info3.game.model.*;
+import info3.game.controller.*;
 
 
 public class Game {
@@ -33,7 +35,8 @@ public class Game {
 	JLabel m_text;
 	GameCanvas m_canvas;
     CanvasListener m_listener;
-    Grille m_grille;
+	Grille m_grille;
+	Control m_control;
 
 	//Sound m_music;
 
@@ -48,6 +51,10 @@ public class Game {
 		// creating the game canvas to render the game,
 		// that would be a part of the view in the MVC pattern
 		m_canvas = new GameCanvas(m_listener);
+
+		m_control = new Control();
+		m_control.addEntity(new Snake(m_grille));
+		m_control.addEntity(new Pomme(m_grille));
 
 		System.out.println("  - creating frame...");
 		Dimension d = new Dimension(800, 800);
@@ -133,10 +140,12 @@ public class Game {
             txt = txt + fps + " fps   ";
             m_text.setText(txt);
         }
-        
+        // the step is updated every 250ms
         m_stepElapsed += elapsed;
-        if (m_stepElapsed > 250) {
-            
+		if (m_stepElapsed > 250) {
+			m_stepElapsed = 0;
+			m_control.step();
+
         }
 	}
 

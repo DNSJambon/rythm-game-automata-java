@@ -11,9 +11,29 @@ public class Pomme extends Entity {
 
         this.x = g.getCols() - 1;
         this.y = 1;
-        g.getCell(x,y).setEntity(this);
+        g.getCell(x, y).setEntity(this);
+    }
+    
+    //Constructeur avec automate par defaut
+    public Pomme(Grille g){
+        super(g);
+        etat_courant = 0;
 
+        this.x = g.getCols() - 1;
+        this.y = 1;
+        g.getCell(x, y).setEntity(this);
 
+        Transition[] T = new Transition[1];
+
+        Cell c = new Cell(DirRelative.soi, cellType.Snake); 
+
+        Pick p = new Pick();
+
+        T[0] = new Transition(p, c, 0, 0);
+
+        Automaton a = new Automaton(0, T);
+        this.a = a;
+        p.e_or=this;
     }
 
     @Override
