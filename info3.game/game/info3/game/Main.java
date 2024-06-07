@@ -3,6 +3,9 @@ package info3.game;
 import info3.game.model.*;
 import info3.game.controller.*;
 import info3.game.view.*;
+
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class Main {
@@ -31,6 +34,7 @@ public class Main {
         Move m = new Move();
 
         T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);
+        T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);
         T2[1] = new Transition(droite, r, 0, 0);
         T2[2] = new Transition(m, cond_true, 0, 0);
         T2[0] = new Transition(m, cond_apple, 0, 1);
@@ -49,7 +53,7 @@ public class Main {
             view.createAndShowGUI(g);
         });
 
-        BufferAction buffer = new BufferAction(2);
+        BufferAction buffer = new BufferAction(3);
         // Use a Swing Timer to periodically update the automaton
         Timer timer = new Timer(250, e -> {
             item_pomme.step(buffer);

@@ -3,13 +3,16 @@ package info3.game;
 
 
 import info3.game.model.*;
+
+import java.io.IOException;
+
 import info3.game.controller.*;
 import info3.game.view.*;
 
 public class affichage_console {
     
-    public static void main(String[] args) {
-        Grille g = new Grille(10, 10);
+    public static void main(String[] args) throws IOException {
+        Grille g = new Grille(7, 7);
 
         
         Transition[] T = new Transition[1];
@@ -44,7 +47,7 @@ public class affichage_console {
         Snake snake = new Snake(a2, g);
         m.e_or=snake;
         gauche.e_or=snake;
-        droite.e_or=snake;
+        droite.e_or = snake;
         queue.e_or=snake;
 
         BufferAction buffer = new BufferAction(2);

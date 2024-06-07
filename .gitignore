@@ -1,1 +1,6 @@
-.class
+# Compiled class file
+*.class
+info3.game/bin/
+
+# Log file
+*.log
