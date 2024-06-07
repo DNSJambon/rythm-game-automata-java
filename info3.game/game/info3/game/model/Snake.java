@@ -29,6 +29,7 @@ public class Snake extends Entity {
         size = 1;
         direction = Direction.Est;
         snake = new LinkedList<coordonnees>();
+
         coordonnees c = new coordonnees(1, 1);
         coordonnees c2= new coordonnees(1, 1);
         coordonnees c3 = new coordonnees(1, 1);
