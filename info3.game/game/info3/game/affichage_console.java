@@ -9,7 +9,7 @@ import info3.game.view.*;
 public class affichage_console {
     
     public static void main(String[] args) {
-        Grille g = new Grille(5, 5);
+        Grille g = new Grille(10, 10);
 
         
         Transition[] T = new Transition[1];
@@ -45,6 +45,7 @@ public class affichage_console {
         m.e_or=snake;
         gauche.e_or=snake;
         droite.e_or=snake;
+        queue.e_or=snake;
 
         BufferAction buffer = new BufferAction(2);
         while (true) {
@@ -54,7 +55,7 @@ public class affichage_console {
             display d = new display(g);
             d.afficher_grille();
             try {
-                Thread.sleep(100);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
