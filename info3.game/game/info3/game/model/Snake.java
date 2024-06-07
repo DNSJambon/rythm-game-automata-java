@@ -44,39 +44,41 @@ public class Snake extends Entity {
         size = 1;
         direction = Direction.Est;
         snake = new LinkedList<coordonnees>();
-        coordonnees c = new coordonnees(x, y);
-        coordonnees c2 = new coordonnees(x, y);
-        coordonnees c3 = new coordonnees(x, y);
+          
+        coordonnees c = new coordonnees(1, 1);
+        coordonnees c2 = new coordonnees(1, 1);
+        coordonnees c3 = new coordonnees(1, 1);
         head = c;
-        last = c2;
-        egg = c3;
-        g.getCell(x, y).setEntity(this);
+        snake.addFirst(head);   
+        last=c2;
+        egg=c3;
+        g.getCell(1, 1).setEntity(this);
 
-        //Snake:
+        // Snake:
         Transition[] T2 = new Transition[5];
-        Cell cond_apple= new Cell(DirRelative.Devant,cellType.Apple);
+        Cell cond_apple = new Cell(DirRelative.Devant, cellType.Apple);
         Cell cond_obsatcle = new Cell(DirRelative.Devant, cellType.Obstacle);
         True cond_true = new True();
         Random r = new Random(20);
-        
-        Egg queue= new Egg();
+
+        Egg queue = new Egg();
         Turn gauche = new Turn(DirRelative.Gauche);
         Turn droite = new Turn(DirRelative.Droite);
         Move m = new Move();
 
         T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);
+        T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);
         T2[1] = new Transition(droite, r, 0, 0);
         T2[2] = new Transition(m, cond_true, 0, 0);
-        T2[0]= new Transition(m, cond_apple, 0, 1);
-        T2[4]=new Transition(queue, cond_true, 1, 0);
-        
+        T2[0] = new Transition(m, cond_apple, 0, 1);
+        T2[4] = new Transition(queue, cond_true, 1, 0);
 
-        Automaton a = new Automaton(0, T2);
-        super.a = a;
-        m.e_or=this;
+        Automaton a2 = new Automaton(0, T2);
+        super.a = a2;
+        m.e_or = this;
         gauche.e_or = this;
         droite.e_or = this;
-        queue.e_or=this;
+        queue.e_or = this;
     }
 
     @Override

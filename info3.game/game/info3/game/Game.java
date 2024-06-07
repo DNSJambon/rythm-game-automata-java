@@ -43,7 +43,7 @@ public class Game {
 	Game() throws Exception {
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
-		m_grille = new Grille(10, 10);
+		m_grille = new Grille(7, 7);
 		// creating a listener for all the events
 		// from the game canvas, that would be
 		// the controller in the MVC pattern

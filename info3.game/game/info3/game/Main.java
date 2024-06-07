@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Grille g = new Grille(6, 6);
 
         Transition[] T = new Transition[1];
