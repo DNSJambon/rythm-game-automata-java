@@ -18,7 +18,7 @@ public class MazeSolver extends Entity {
 
 
         //Automate par defaut (technique de la main droite)
-        Transition[] T = new Transition[100];
+        Transition[] T = new Transition[6];
 
         Cell obstacle_devant = new Cell(DirRelative.Devant, cellType.Obstacle);
         Cell obstacle_droite = new Cell(DirRelative.Droite, cellType.Obstacle);
@@ -63,15 +63,27 @@ public class MazeSolver extends Entity {
         g.getCell(x, y).reset();
         switch (direction) {
             case Nord:
+                if (y == 0) {
+                    return false;
+                }
                 y -= 1;
                 break;
             case Est:
+                if (x == g.getCols() - 1) {
+                    return false;
+                }
                 x += 1;
                 break;
             case Sud:
+                if (y == g.getRows() - 1) {
+                    return false;
+                }
                 y += 1;
                 break;
             case Ouest:
+                if (x == 0) {
+                    return false;
+                }
                 x -= 1;
                 break;
         }

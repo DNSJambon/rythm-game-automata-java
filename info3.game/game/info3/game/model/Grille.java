@@ -42,7 +42,7 @@ public class Grille implements IGrille{
         m_control.addEntity(m);
         // ajout des obstacles aléatoirements
         Obstacle o;
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i <15; i++) {
             cell c = randomCell_libre();
             o = new Obstacle(this, c.getCol(), c.getRow());
             m_control.addEntity(o);
