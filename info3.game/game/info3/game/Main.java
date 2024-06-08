@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Grille g = new Grille(6, 6);
+        Grille g = new Grille(6, 6, null);
 
         Transition[] T = new Transition[1];
         // Move p = new Move();

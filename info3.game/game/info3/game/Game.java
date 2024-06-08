@@ -43,7 +43,8 @@ public class Game {
 	Game() throws Exception {
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
-		m_grille = new Grille(7, 7);
+		m_control = new Control();
+		m_grille = new Grille(7, 7, m_control);
 		// creating a listener for all the events
 		// from the game canvas, that would be
 		// the controller in the MVC pattern
@@ -52,9 +53,8 @@ public class Game {
 		// that would be a part of the view in the MVC pattern
 		m_canvas = new GameCanvas(m_listener);
 
-		m_control = new Control();
-		m_control.addEntity(new Snake(m_grille));
-		m_control.addEntity(new Pomme(m_grille));
+		
+		
 
 		System.out.println("  - creating frame...");
 		Dimension d = new Dimension(800, 800);

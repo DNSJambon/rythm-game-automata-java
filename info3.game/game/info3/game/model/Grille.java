@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import info3.game.controller.*;
 
 
 public class Grille implements IGrille{
@@ -15,13 +16,18 @@ public class Grille implements IGrille{
     int rows;
     int cols;
     long m_imageElapsed;
+
+    Control m_control;
     BufferedImage[] m_images;
     
 
-    public Grille(int rows, int cols) throws IOException {
+    public Grille(int rows, int cols, Control m_control) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
         this.rows = rows;
         this.cols = cols;
+        this.m_control = m_control;
+
+        // Création de la grille
         grille = new cell[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -29,6 +35,23 @@ public class Grille implements IGrille{
             }
         }
 
+        m_control.addEntity(new Snake(this));
+        m_control.addEntity(new Pomme(this));
+
+    }
+    
+    public Grille(int rows, int cols) throws IOException {
+        m_images = loadSprite("resources/tiles.png", 24, 21);
+        this.rows = rows;
+        this.cols = cols;
+
+        // Création de la grille
+        grille = new cell[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                grille[i][j] = new cell(this, i, j);
+            }
+        }
     }
 
     public cell getCell(int row, int col) {
