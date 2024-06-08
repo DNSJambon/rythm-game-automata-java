@@ -1,6 +1,6 @@
-package info3.game.controller;
+package info3.game.controller.Conditions;
 
-import info3.game.model.Entity;
+import info3.game.model.Entities.Entity;
 
 public class True implements Condition {
     

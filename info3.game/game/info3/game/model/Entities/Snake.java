@@ -1,8 +1,16 @@
-package info3.game.model;
+package info3.game.model.Entities;
 
 import java.util.LinkedList;
 
 import info3.game.controller.*;
+import info3.game.controller.Actions.Egg;
+import info3.game.controller.Actions.Move;
+import info3.game.controller.Actions.Turn;
+import info3.game.controller.Conditions.Cell;
+import info3.game.controller.Conditions.Random;
+import info3.game.controller.Conditions.True;
+import info3.game.model.IGrille;
+import info3.game.model.cellType;
 
 public class Snake extends Entity {
     private class coordonnees {
@@ -55,23 +63,26 @@ public class Snake extends Entity {
         g.getCell(1, 1).setEntity(this);
 
         // Snake:
-        Transition[] T2 = new Transition[5];
-        Cell cond_apple = new Cell(DirRelative.Devant, cellType.Apple);
-        Cell cond_obsatcle = new Cell(DirRelative.Devant, cellType.Obstacle);
+        Transition[] T2 = new Transition[7];
+        Cell cond_apple_devant = new Cell(DirRelative.Devant, cellType.Apple);
+        Cell cond_apple_droite = new Cell(DirRelative.Droite, cellType.Apple);
+        Cell cond_apple_gauche = new Cell(DirRelative.Gauche, cellType.Apple);
+        Cell cond_obsatcle = new Cell(DirRelative.Devant, cellType.Snake);
         True cond_true = new True();
         Random r = new Random(20);
 
         Egg queue = new Egg();
         Turn gauche = new Turn(DirRelative.Gauche);
         Turn droite = new Turn(DirRelative.Droite);
-        Move m = new Move();
+        Move m = new Move(DirRelative.Devant);
 
-        T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);
-        T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);
-        T2[1] = new Transition(droite, r, 0, 0);
-        T2[2] = new Transition(m, cond_true, 0, 0);
-        T2[0] = new Transition(m, cond_apple, 0, 1);
-        T2[4] = new Transition(queue, cond_true, 1, 0);
+        T2[0] = new Transition(gauche, cond_obsatcle, 0, 0);
+        T2[1] = new Transition(m, cond_apple_devant, 0, 1);
+        T2[2] = new Transition(droite, cond_apple_droite, 0, 1);
+        T2[3] = new Transition(gauche, cond_apple_gauche, 0, 1);
+        T2[4] = new Transition(droite, r, 0, 0);
+        T2[5] = new Transition(m, cond_true, 0, 0);
+        T2[6] = new Transition(queue, cond_true, 1, 0);
 
         Automaton a2 = new Automaton(0, T2);
         super.a = a2;
@@ -164,7 +175,7 @@ public class Snake extends Entity {
     }
 
     @Override
-    public boolean do_move(Entity e) {
+    public boolean do_move(Entity e, DirRelative dir) {
 
         switch (this.direction) {
             
@@ -282,28 +293,28 @@ public class Snake extends Entity {
     public boolean do_turn(Entity e, DirRelative d) {
         switch (d) {
             case Devant:
-                this.do_move(e);
+                this.do_move(e, d);
                 return true;
             case Derriere:
-                this.do_move(e);
+                this.do_move(e, d);
                 return true;
             case Droite:
                 switch (direction) {
                     case Nord:
                         direction = Direction.Est;
-                        this.do_move(e);
+                        this.do_move(e, d);
                         return true;
                     case Sud:
                         direction = Direction.Ouest;
-                        this.do_move(e);
+                        this.do_move(e, d);;
                         return true;
                     case Est:
                         direction = Direction.Sud;
-                        this.do_move(e);
+                        this.do_move(e, d);
                         return true;
                     case Ouest:
                         direction = Direction.Nord;
-                        this.do_move(e);
+                        this.do_move(e, d);
                         return true;
                     default:
                         return false;
@@ -313,19 +324,19 @@ public class Snake extends Entity {
                 switch (direction) {
                     case Nord:
                         direction = Direction.Ouest;
-                        this.do_move(e);
+                        this.do_move(e, d);
                         return true;
                     case Sud:
                         direction = Direction.Est;
-                        this.do_move(e);
+                        this.do_move(e, d);
                         return true;
                     case Est:
                         direction = Direction.Nord;
-                        this.do_move(e);
+                        this.do_move(e, d);
                         return true;
                     case Ouest:
                         direction = Direction.Sud;
-                        this.do_move(e);
+                        this.do_move(e, d);
                         return true;
                     default:
                         return false;
@@ -333,5 +344,11 @@ public class Snake extends Entity {
             default:
                 return false;
         }
+    }
+
+    @Override
+    public boolean do_wait(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
     }
 }

@@ -9,6 +9,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import info3.game.controller.*;
+import info3.game.model.Entities.MazeSolver;
+import info3.game.model.Entities.Obstacle;
+import info3.game.model.Entities.Snake;
 
 
 public class Grille implements IGrille{
@@ -35,8 +38,16 @@ public class Grille implements IGrille{
             }
         }
 
-        m_control.addEntity(new Snake(this));
-        m_control.addEntity(new Pomme(this));
+        MazeSolver m = new MazeSolver(this, 0, 0);
+        m_control.addEntity(m);
+        // ajout des obstacles aléatoirements
+        Obstacle o;
+        for (int i = 0; i < 20; i++) {
+            cell c = randomCell_libre();
+            o = new Obstacle(this, c.getCol(), c.getRow());
+            m_control.addEntity(o);
+            //c.setEntity(o);
+        }
 
     }
     

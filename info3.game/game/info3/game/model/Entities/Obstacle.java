@@ -1,18 +1,42 @@
-package info3.game.model;
+package info3.game.model.Entities;
 
 import info3.game.controller.*;
+import info3.game.controller.Actions.Wait;
+import info3.game.controller.Conditions.True;
+import info3.game.model.IGrille;
+import info3.game.model.cellType;
 
 public class Obstacle extends Entity {
 
-    public Obstacle (IGrille g,Automaton a,int x,int y){
+    public Obstacle(IGrille g, Automaton a, int x, int y) {
         super(g);
-        etat_courant=0;
-        this.a=a;
-        this.x=x;
-        this.y=y;
-        this.direction=Direction.Sud;
+        etat_courant = 0;
+        this.a = a;
+        this.x = x;
+        this.y = y;
+        this.direction = Direction.Sud;
 
-        g.getCell(x,y).setEntity(this);
+        g.getCell(x, y).setEntity(this);
+    }
+    
+    //Obstacle avec automate par défaut (automate vide)
+    public Obstacle(IGrille g, int x, int y) {
+        super(g);
+        etat_courant = 0;
+        this.a = new Automaton(0, new Transition[0]);
+        this.x = x;
+        this.y = y;
+        this.direction = Direction.Sud;
+
+        g.getCell(x, y).setEntity(this);
+
+
+        Transition[] T = new Transition[1];
+        True t = new True();
+        Wait w = new Wait();
+        T[0] = new Transition(w, t, 0, 0);
+        w.e_or = this;
+        this.a = new Automaton(0, T);
     }
 
     @Override
@@ -85,7 +109,7 @@ public class Obstacle extends Entity {
     }
     
     @Override
-    public boolean do_move(Entity e) {
+    public boolean do_move(Entity e, DirRelative dir) {
         int yclear=y;
         int xclear=x;
         switch (e.direction) {
@@ -202,5 +226,11 @@ public class Obstacle extends Entity {
                 return false;
         }
     }
+
+    @Override
+    public boolean do_wait(Entity e) {
+        return true;
+    }
+
     
 }

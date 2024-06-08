@@ -1,5 +1,5 @@
 package info3.game.controller;
-import info3.game.model.Entity;
+import info3.game.model.Entities.Entity;
 
 public class Automaton {
 

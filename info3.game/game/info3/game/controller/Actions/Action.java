@@ -1,9 +1,9 @@
-package info3.game.controller;
-import info3.game.model.Entity;
+package info3.game.controller.Actions;
+import info3.game.model.Entities.Entity;
 
 public abstract class Action {
 
-    public Entity e_or;  /* Ce champs contient l'entité qui fait l'action pour permettre sont appel dans le buffer */
+    public Entity e_or;  /* Ce champs contient l'entité qui fait l'action pour permettre son appel dans le buffer */
     public Entity e_dest;   /* Ce champs contient l'entité qui est la cible de l'action */
     
     /*

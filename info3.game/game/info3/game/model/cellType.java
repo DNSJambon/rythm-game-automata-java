@@ -4,6 +4,7 @@ public enum cellType {
     Vide,
     Snake,
     Apple,
+    MazeSolver,
     Obstacle;
     
 }

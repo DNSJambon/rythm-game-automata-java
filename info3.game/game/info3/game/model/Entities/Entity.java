@@ -1,0 +1,94 @@
+package info3.game.model.Entities;
+
+import info3.game.controller.*;
+import info3.game.model.IGrille;
+import info3.game.model.cell;
+import info3.game.model.cellType;
+
+public abstract class Entity {
+    IGrille g;
+    public int etat_courant;
+    Automaton a;
+    public Direction direction;
+
+    int x, y;
+
+    public Entity(IGrille g) {
+        this.g = g;
+        direction = Direction.Est;
+    }
+
+    public abstract cellType getType();
+
+
+    public void step(BufferAction buff) {
+        a.step_A(this, buff);
+    }
+    
+    public Direction RelativeToAbsolute(DirRelative d){
+        Direction[] dirs = { Direction.Nord, Direction.Est, Direction.Sud, Direction.Ouest };
+        int i = 0;
+        while (dirs[i] != this.direction)
+            i++;
+
+        switch (d) {
+            case Droite:
+                i = (i + 1) % 4;
+                break;
+            case Gauche:
+                i = (i + 3) % 4;
+                break;
+            case Derriere:
+                i = (i + 2) % 4;
+                break;
+            default:
+                break;
+        }
+        
+        return dirs[i];
+    }
+    
+    
+    //abstract boolean eval(...);
+    public boolean eval_cell(Entity e, DirRelative dir, cellType t) {
+        if (dir == DirRelative.soi) {
+            return g.getCell(this.x, this.y).getType() == t;
+        }
+        
+        Direction d = RelativeToAbsolute(dir);
+
+        switch (d) {
+            case Nord:
+                if (this.y == 0)
+                    //On considère que les bords de la grille sont des obstacles
+                    return cellType.Obstacle == t;
+                return g.getCell(this.x, this.y-1).getType() == t;
+
+            case Est:
+                if (this.x == g.getCols()-1)
+                    return cellType.Obstacle == t;
+                return g.getCell(this.x + 1, this.y).getType() == t;
+            
+            case Sud:
+                if (this.y == g.getRows()-1)
+                    return cellType.Obstacle == t;
+                return g.getCell(this.x, this.y + 1).getType() == t;
+            
+            case Ouest:
+                if (this.x == 0)
+                    return cellType.Obstacle == t;
+                return g.getCell(this.x - 1, this.y).getType() == t;
+        }
+        
+        return false;
+
+    }
+    //abstract boolean do(...);
+    public abstract boolean do_move(Entity e, DirRelative dir);
+    public abstract boolean do_egg(Entity e);
+    public abstract boolean do_pick(Entity e);
+
+    public abstract boolean do_turn(Entity e, DirRelative dir);
+    public abstract boolean do_wait(Entity e);
+
+}

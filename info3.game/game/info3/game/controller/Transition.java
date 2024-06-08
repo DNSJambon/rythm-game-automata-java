@@ -1,5 +1,8 @@
 package info3.game.controller;
 
+import info3.game.controller.Actions.Action;
+import info3.game.controller.Conditions.Condition;
+
 /*
  * Transition entre deux états.
  * Une transition est caractérisée par une action, une condition, un état initial et un état final.

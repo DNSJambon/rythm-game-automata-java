@@ -1,6 +1,11 @@
-package info3.game.model;
+package info3.game.model.Entities;
 
 import info3.game.controller.*;
+import info3.game.controller.Actions.Pick;
+import info3.game.controller.Conditions.Cell;
+import info3.game.model.Grille;
+import info3.game.model.cell;
+import info3.game.model.cellType;
 
 public class Pomme extends Entity {
     
@@ -52,7 +57,7 @@ public class Pomme extends Entity {
     }
 
     @Override
-    public boolean do_move(Entity e) {
+    public boolean do_move(Entity e, DirRelative dir) {
         g.getCell(x, y).reset();
         x = (x + 1) % g.getRows();
         y = (y + 1) % g.getCols();
@@ -80,6 +85,12 @@ public class Pomme extends Entity {
     public boolean do_turn(Entity e,DirRelative dir) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
+    }
+
+    @Override
+    public boolean do_wait(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
     }
     
 }

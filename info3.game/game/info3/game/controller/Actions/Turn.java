@@ -1,6 +1,7 @@
-package info3.game.controller;
+package info3.game.controller.Actions;
 
-import info3.game.model.Entity;
+import info3.game.controller.DirRelative;
+import info3.game.model.Entities.Entity;
 
 /*
  * Action qui change la direction absolue de l'entité.

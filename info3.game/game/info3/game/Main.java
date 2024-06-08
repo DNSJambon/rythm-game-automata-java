@@ -1,7 +1,16 @@
 package info3.game;
 
 import info3.game.model.*;
+import info3.game.model.Entities.Pomme;
+import info3.game.model.Entities.Snake;
 import info3.game.controller.*;
+import info3.game.controller.Actions.Egg;
+import info3.game.controller.Actions.Move;
+import info3.game.controller.Actions.Pick;
+import info3.game.controller.Actions.Turn;
+import info3.game.controller.Conditions.Cell;
+import info3.game.controller.Conditions.Random;
+import info3.game.controller.Conditions.True;
 import info3.game.view.*;
 
 import java.io.IOException;
@@ -31,7 +40,7 @@ public class Main {
         Egg queue = new Egg();
         Turn gauche = new Turn(DirRelative.Gauche);
         Turn droite = new Turn(DirRelative.Droite);
-        Move m = new Move();
+        Move m = new Move(DirRelative.Devant);
 
         T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);
         T2[3] = new Transition(gauche, cond_obsatcle, 0, 0);

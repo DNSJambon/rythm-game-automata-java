@@ -1,5 +1,7 @@
 package info3.game.controller;
 
+import info3.game.controller.Actions.Action;
+
 public class BufferAction {
     /* ici on construit un buffer d'action pour permettre au moteur de resoudre toutes les actions en meme temps 
      * (et donc garder le "rythme" ou la "synchroniqation").

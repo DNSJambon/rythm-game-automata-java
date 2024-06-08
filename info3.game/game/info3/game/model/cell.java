@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 
 import com.jcraft.jogg.Buffer;
 
+import info3.game.model.Entities.Entity;
+
 public class cell implements Icell {
 
     Grille grid;
@@ -79,6 +81,10 @@ public class cell implements Icell {
                     g.drawImage(grid.getImage(360), x * width, y * height, width, height, null);
                     break;
                 case Obstacle:
+                    g.drawImage(grid.getImage(361), x * width, y * height, width, height, null);
+                    break;
+                case MazeSolver:    
+                    g.drawImage(grid.getImage(362), x * width, y * height, width, height, null);
                     break;
                 case Vide:
                     break;

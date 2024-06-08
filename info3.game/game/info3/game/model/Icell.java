@@ -1,5 +1,7 @@
 package info3.game.model;
 
+import info3.game.model.Entities.Entity;
+
 public interface Icell {
     public cellType getType();
 
