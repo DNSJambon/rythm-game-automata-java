@@ -69,12 +69,13 @@ public class CanvasListener implements GameCanvasListener {
   @Override
   public void keyPressed(KeyEvent e) {
     System.out.println("Key pressed: "+e.getKeyChar()+" code="+e.getKeyCode());
-    this.m_game.m_grille.key(e.getKeyChar());
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
     System.out.println("Key released: "+e.getKeyChar()+" code="+e.getKeyCode());
+    this.m_game.m_grille.key(e.getKeyChar());
+    this.m_game.m_grille.setAuthorised(false);
   }
 
   @Override

@@ -115,7 +115,7 @@ public class Game {
 	private int m_musicIndex = 0;
 	private String[] m_musicNames = new String[] { "Runaway-Food-Truck" }; 
 
-	private long Rythme=1000;
+	private long Rythme=10000;
     private long m_textElapsed;
     private long m_stepElapsed;
 	private long m_timekey;
@@ -139,6 +139,8 @@ public class Game {
 					m_timekey = 0;
 					authorised = false;
 					m_control.step();
+					System.out.println("touche");
+					System.out.println(m_grille.getTouche());
 				}
 			}
 			

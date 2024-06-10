@@ -14,8 +14,6 @@ public class Key implements Condition {
         this.c = c;
     }
 
-    
-
     public boolean eval (Entity e) {
         key_code=-1;
         return e.getGrille().getTouche()==this.c;
