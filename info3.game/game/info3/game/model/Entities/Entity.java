@@ -1,6 +1,7 @@
 package info3.game.model.Entities;
 
 import info3.game.controller.*;
+import info3.game.model.Category;
 import info3.game.model.IGrille;
 import info3.game.model.cell;
 import info3.game.model.cellType;
@@ -88,7 +89,7 @@ public abstract class Entity {
         return this.direction == RelativeToAbsolute(dir);
     }
 
-    public boolean eval_closest(Categorie c, DirRelative dir) {
+    public boolean eval_closest(Category c, DirRelative dir) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
     }
