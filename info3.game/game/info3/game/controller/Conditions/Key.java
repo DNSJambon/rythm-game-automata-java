@@ -1,7 +1,5 @@
 package info3.game.controller.Conditions;
 
-import java.awt.event.KeyEvent;
-
 import info3.game.controller.*;
 import info3.game.model.Entities.*;
 
