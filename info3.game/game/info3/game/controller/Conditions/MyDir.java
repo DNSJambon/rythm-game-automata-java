@@ -7,6 +7,10 @@ public class MyDir implements Condition{
 
     DirRelative MyDir;
 
+    public MyDir(DirRelative MyDir) {
+        this.MyDir = MyDir;
+    }
+
     public boolean eval (Entity e) {
         return e.eval_dir(MyDir);
     }
