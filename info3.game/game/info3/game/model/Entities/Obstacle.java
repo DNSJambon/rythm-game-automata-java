@@ -1,14 +1,15 @@
 package info3.game.model.Entities;
 
+import java.awt.Graphics;
+
 import info3.game.controller.*;
 import info3.game.controller.Actions.Wait;
 import info3.game.controller.Conditions.True;
-import info3.game.model.IGrille;
-import info3.game.model.cellType;
+import info3.game.model.*;
 
 public class Obstacle extends Entity {
 
-    public Obstacle(IGrille g, Automaton a, int x, int y) {
+    public Obstacle(Grille g, Automaton a, int x, int y) {
         super(g);
         etat_courant = 0;
         this.a = a;
@@ -20,7 +21,7 @@ public class Obstacle extends Entity {
     }
     
     //Obstacle avec automate par défaut (automate vide)
-    public Obstacle(IGrille g, int x, int y) {
+    public Obstacle(Grille g, int x, int y) {
         super(g);
         etat_courant = 0;
         this.a = new Automaton(0, new Transition[0]);
@@ -230,6 +231,11 @@ public class Obstacle extends Entity {
     @Override
     public boolean do_wait(Entity e) {
         return true;
+    }
+
+    @Override
+    public void paint(Graphics graphics, int x, int y, int width, int height) {
+        graphics.drawImage(g.getImage(361), x, y, width, height, null);
     }
 
     

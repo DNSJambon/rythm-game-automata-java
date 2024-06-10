@@ -1,19 +1,21 @@
 package info3.game.model.Entities;
 
+import java.awt.Graphics;
+
 import info3.game.controller.*;
-import info3.game.model.IGrille;
+import info3.game.model.Grille;
 import info3.game.model.cell;
 import info3.game.model.cellType;
 
 public abstract class Entity {
-    IGrille g;
+    Grille g;
     public int etat_courant;
     Automaton a;
     public Direction direction;
 
     int x, y;
 
-    public Entity(IGrille g) {
+    public Entity(Grille g) {
         this.g = g;
         direction = Direction.Est;
     }
@@ -24,6 +26,8 @@ public abstract class Entity {
     public void step(BufferAction buff) {
         a.step_A(this, buff);
     }
+    
+    
     
     public Direction RelativeToAbsolute(DirRelative d){
         Direction[] dirs = { Direction.Nord, Direction.Est, Direction.Sud, Direction.Ouest };
@@ -89,6 +93,10 @@ public abstract class Entity {
     public abstract boolean do_pick(Entity e);
 
     public abstract boolean do_turn(Entity e, DirRelative dir);
+
     public abstract boolean do_wait(Entity e);
+    
+    
+    public abstract void paint (Graphics graphics, int x, int y, int width, int height);
 
 }

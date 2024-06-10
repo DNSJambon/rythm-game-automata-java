@@ -1,6 +1,8 @@
 package info3.game.model.Entities;
 
 
+import java.awt.Graphics;
+
 import info3.game.controller.*;
 import info3.game.controller.Conditions.*;
 import info3.game.controller.Actions.*;
@@ -8,7 +10,7 @@ import info3.game.model.*;
 
 public class MazeSolver extends Entity {
     
-    public MazeSolver(IGrille g, int x, int y) {
+    public MazeSolver(Grille g, int x, int y) {
         super(g);
         etat_courant = 0;
         direction = Direction.Est;
@@ -114,6 +116,11 @@ public class MazeSolver extends Entity {
     public boolean do_wait(Entity e) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
+    }
+
+    @Override
+    public void paint(Graphics graphics, int x, int y, int width, int height) {
+        graphics.drawImage(g.getImage(362), x, y, width, height, null);
     }
     
 }

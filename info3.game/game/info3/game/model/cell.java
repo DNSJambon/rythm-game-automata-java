@@ -73,24 +73,7 @@ public class cell implements Icell {
             g.drawImage(grid.getImage(sols[1]), x * width, y * height, width, height, null);
         
         if (vide == 0) {
-            switch (getType()) {
-                case Snake:
-                    g.drawImage(grid.getImage(359), x * width, y * height, width, height, null);
-                    break;
-                case Apple:
-                    g.drawImage(grid.getImage(360), x * width, y * height, width, height, null);
-                    break;
-                case Obstacle:
-                    g.drawImage(grid.getImage(361), x * width, y * height, width, height, null);
-                    break;
-                case MazeSolver:    
-                    g.drawImage(grid.getImage(362), x * width, y * height, width, height, null);
-                    break;
-                case Vide:
-                    break;
-                default:
-                    break;
-            }
+            e.paint(g, x * width, y * height, width, height);
         }
     }
 
