@@ -119,8 +119,6 @@ public class Grille implements IGrille{
     public void tick(long elapsed) {
         m_imageElapsed += elapsed;
         
-
-
     }
 
     public void paint(Graphics g, int width , int height) {

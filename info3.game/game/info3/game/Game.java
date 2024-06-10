@@ -129,17 +129,18 @@ public class Game {
 		// Update every second
 		// the text on top of the frame: tick and fps
 		m_textElapsed += elapsed;
-        if (m_textElapsed > 1000) {
-            m_textElapsed = 0;
-            float period = m_canvas.getTickPeriod();
-            int fps = m_canvas.getFPS();
+		if (m_textElapsed > 1000) {
+			m_textElapsed = 0;
+			float period = m_canvas.getTickPeriod();
+			int fps = m_canvas.getFPS();
 
-            String txt = "Tick=" + period + "ms";
-            while (txt.length() < 15)
-                txt += " ";
-            txt = txt + fps + " fps   ";
-            m_text.setText(txt);
-        }
+			String txt = "Tick=" + period + "ms";
+			while (txt.length() < 15)
+				txt += " ";
+			txt = txt + fps + " fps   ";
+			m_text.setText(txt);
+		}
+		
         // the step is updated every 250ms
         m_stepElapsed += elapsed;
 		if (m_stepElapsed > 250) {
