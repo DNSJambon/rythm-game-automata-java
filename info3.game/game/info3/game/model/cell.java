@@ -66,31 +66,8 @@ public class cell implements Icell {
     
   
     public void paint(Graphics g, int width, int height) {
-
-        if (x % 2 == 0 && y % 2 == 0 || x % 2 == 1 && y % 2 == 1)
-            g.drawImage(grid.getImage(sols[0]), x * width, y * height, width, height, null);
-        else
-            g.drawImage(grid.getImage(sols[1]), x * width, y * height, width, height, null);
-        
         if (vide == 0) {
-            switch (getType()) {
-                case Snake:
-                    g.drawImage(grid.getImage(359), x * width, y * height, width, height, null);
-                    break;
-                case Apple:
-                    g.drawImage(grid.getImage(360), x * width, y * height, width, height, null);
-                    break;
-                case Obstacle:
-                    g.drawImage(grid.getImage(361), x * width, y * height, width, height, null);
-                    break;
-                case MazeSolver:    
-                    g.drawImage(grid.getImage(362), x * width, y * height, width, height, null);
-                    break;
-                case Vide:
-                    break;
-                default:
-                    break;
-            }
+            e.paint(g, x * width, y * height, width, height);
         }
     }
 

@@ -1,5 +1,7 @@
 package info3.game.model.Entities;
 
+import java.awt.Graphics;
+
 import info3.game.controller.*;
 import info3.game.controller.Actions.Pick;
 import info3.game.controller.Conditions.Cell;
@@ -91,6 +93,17 @@ public class Pomme extends Entity {
     public boolean do_wait(Entity e) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
+    }
+
+    @Override
+    public void paint(Graphics graphics, int x, int y, int width, int height) {
+        graphics.drawImage(g.getImage(360), x, y, width, height, null);
+    }
+
+    @Override
+    public void tick(long elapsed) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tick'");
     }
     
 }

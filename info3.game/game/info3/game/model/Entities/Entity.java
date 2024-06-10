@@ -1,5 +1,7 @@
 package info3.game.model.Entities;
 
+import java.awt.Graphics;
+
 import info3.game.controller.*;
 import info3.game.model.Category;
 import info3.game.model.IGrille;
@@ -104,6 +106,11 @@ public abstract class Entity {
     public abstract boolean do_pick(Entity e);
 
     public abstract boolean do_turn(Entity e, DirRelative dir);
+
     public abstract boolean do_wait(Entity e);
+    
+    
+    public abstract void paint(Graphics graphics, int x, int y, int width, int height);
+    public abstract void tick(long elapsed);
 
 }

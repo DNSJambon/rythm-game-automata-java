@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import info3.game.controller.*;
+import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Snake;
@@ -149,10 +150,24 @@ public class Grille implements IGrille{
     
     public void tick(long elapsed) {
         m_imageElapsed += elapsed;
+
+        for (Entity e : m_control.getEntities()) {
+            e.tick(elapsed);
+        }
         
     }
 
-    public void paint(Graphics g, int width , int height) {
+    public void paint(Graphics g, int width, int height) {
+        //on dessine le sol en premier
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
+                    g.drawImage(m_images[0], i * width / rows, j * height / cols, width / rows, height / cols, null);
+                else
+                    g.drawImage(m_images[21], i * width / rows, j * height / cols, width / rows, height / cols, null);
+            }
+        }
+        //on dessine les entités
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 grille[i][j].paint(g, width/rows, height/cols);

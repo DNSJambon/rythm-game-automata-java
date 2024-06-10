@@ -1,5 +1,6 @@
 package info3.game.model.Entities;
 
+import java.awt.Graphics;
 import java.util.LinkedList;
 
 import info3.game.controller.*;
@@ -9,7 +10,7 @@ import info3.game.controller.Actions.Turn;
 import info3.game.controller.Conditions.Cell;
 import info3.game.controller.Conditions.Random;
 import info3.game.controller.Conditions.True;
-import info3.game.model.IGrille;
+import info3.game.model.Grille;
 import info3.game.model.cellType;
 
 public class Snake extends Entity {
@@ -29,7 +30,7 @@ public class Snake extends Entity {
     public coordonnees last;
     public coordonnees egg;
 
-    public Snake(Automaton a, IGrille g) {
+    public Snake(Automaton a, Grille g) {
         super(g);
         super.a = a;
         size = 1;
@@ -47,7 +48,7 @@ public class Snake extends Entity {
     }
     
     //Constructeur avec automate par défaut
-    public Snake(IGrille g) {
+    public Snake(Grille g) {
         super(g);
         size = 1;
         direction = Direction.Est;
@@ -351,4 +352,17 @@ public class Snake extends Entity {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
     }
+
+    @Override
+    public void paint(Graphics graphics, int x, int y, int width, int height) {
+        graphics.drawImage(g.getImage(359), x, y, width, height, null);
+    }
+
+    @Override
+    public void tick(long elapsed) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tick'");
+    }
+
+    
 }
