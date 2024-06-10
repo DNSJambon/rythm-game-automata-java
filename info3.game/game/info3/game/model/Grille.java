@@ -172,30 +172,31 @@ public class Grille implements IGrille{
         if (x_main < viewport_size / 2) {
             x_main = viewport_size / 2;
         }     
-        if (x_main > rows - viewport_size / 2) {
-            x_main = rows - viewport_size / 2;
+        if (x_main > rows - viewport_size / 2- 1) {
+            x_main = rows - viewport_size / 2 - 1;
         }
         if (y_main < viewport_size / 2) {
             y_main = viewport_size / 2;
         }
-        if (y_main > cols - viewport_size / 2) {
-            y_main = cols - viewport_size / 2;
+        if (y_main > cols - viewport_size / 2 - 1) {
+            y_main = cols - viewport_size / 2 - 1;
         }
+        
 
 
         //on dessine le sol en premier
-        for (int i = x_main - viewport_size/2; i <= x_main + viewport_size/2; i++) {
-            for (int j = y_main - viewport_size/2; j <= y_main + viewport_size/2; j++) {
+        for (int j= y_main - viewport_size/2; j <= y_main + viewport_size/2; j++) {
+            for (int i = x_main - viewport_size/2; i <= x_main + viewport_size/2; i++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
-                    g.drawImage(m_images[0], (j - y_main + viewport_size/2) * width / viewport_size, (i - x_main + viewport_size/2) * height / viewport_size, width / viewport_size, height / viewport_size, null);
+                    g.drawImage(m_images[0], (i - x_main + viewport_size/2) * width / viewport_size, (j - y_main + viewport_size/2) * height / viewport_size, width / viewport_size, height / viewport_size, null);
                 else
-                    g.drawImage(m_images[21], (j - y_main + viewport_size/2) * width / viewport_size, (i - x_main + viewport_size/2) * height / viewport_size, width / viewport_size, height / viewport_size, null);
+                    g.drawImage(m_images[21], (i - x_main + viewport_size/2) * width / viewport_size, (j - y_main + viewport_size/2) * height / viewport_size, width / viewport_size, height / viewport_size, null);
             }
         }
         //on dessine les entités
-        for (int i = x_main - viewport_size/2; i <= x_main + viewport_size/2; i++) {
-            for (int j = y_main - viewport_size/2; j <= y_main + viewport_size/2; j++) {
-                grille[j][i].paint(g, (j - y_main + viewport_size/2) * width / viewport_size, (i - x_main + viewport_size/2) * height / viewport_size, width / viewport_size, height / viewport_size);
+        for (int j = y_main - viewport_size/2; j <= y_main + viewport_size/2; j++) {
+            for (int i = x_main - viewport_size/2; i <= x_main + viewport_size/2; i++) {
+                grille[j][i].paint(g, (i - x_main + viewport_size/2) * width / viewport_size, (j - y_main + viewport_size/2) * height / viewport_size, width / viewport_size, height / viewport_size);
             }
         }
     }
