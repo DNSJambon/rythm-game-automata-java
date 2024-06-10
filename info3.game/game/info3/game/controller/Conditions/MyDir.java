@@ -1,0 +1,14 @@
+package info3.game.controller.Conditions;
+
+import info3.game.controller.*;
+import info3.game.model.Entities.*;
+
+public class MyDir implements Condition{
+
+    DirRelative MyDir;
+
+    public boolean eval (Entity e) {
+        return e.eval_dir(MyDir);
+    }
+
+}

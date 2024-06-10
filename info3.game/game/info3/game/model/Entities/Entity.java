@@ -83,6 +83,16 @@ public abstract class Entity {
         return false;
 
     }
+
+    public boolean eval_dir(DirRelative dir) {
+        return this.direction == RelativeToAbsolute(dir);
+    }
+
+    public boolean eval_closest(Categorie c, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
+    }
+
     //abstract boolean do(...);
     public abstract boolean do_move(Entity e, DirRelative dir);
     public abstract boolean do_egg(Entity e);
