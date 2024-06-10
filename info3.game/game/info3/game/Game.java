@@ -115,7 +115,7 @@ public class Game {
 	private int m_musicIndex = 0;
 	private String[] m_musicNames = new String[] { "Runaway-Food-Truck" }; 
 
-	private long Rythme=10000;
+	private long Rythme=5000;
     private long m_textElapsed;
 	private long m_timekey;
 	private boolean authorised = false;
@@ -165,7 +165,8 @@ public class Game {
 			m_timekey += elapsed;
 			if (m_timekey > Rythme) {
 				m_timekey = 0;
-				m_grille.setAuthorised(!(m_grille.IsAuthorised()));
+				m_grille.switchAuthorised();
+				authorised=!authorised;
 			}
 		}
 	
