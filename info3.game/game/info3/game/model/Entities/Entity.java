@@ -21,6 +21,8 @@ public abstract class Entity {
 
     public abstract cellType getType();
 
+    public abstract char getCategory();
+
 
     public void step(BufferAction buff) {
         a.step_A(this, buff);
@@ -51,9 +53,9 @@ public abstract class Entity {
     
     
     //abstract boolean eval(...);
-    public boolean eval_cell(Entity e, DirRelative dir, cellType t) {
+    public boolean eval_cell(Entity e, DirRelative dir, char c) {
         if (dir == DirRelative.soi) {
-            return g.getCell(this.x, this.y).getType() == t;
+            return g.getCell(this.x, this.y).getCategory() == c;
         }
         
         Direction d = RelativeToAbsolute(dir);
@@ -62,23 +64,23 @@ public abstract class Entity {
             case Nord:
                 if (this.y == 0)
                     //On considère que les bords de la grille sont des obstacles
-                    return cellType.Obstacle == t;
-                return g.getCell(this.x, this.y-1).getType() == t;
+                    return Category.O==c;
+                return g.getCell(this.x, this.y-1).getCategory() == c;
 
             case Est:
                 if (this.x == g.getCols()-1)
-                    return cellType.Obstacle == t;
-                return g.getCell(this.x + 1, this.y).getType() == t;
+                    return Category.O==c;
+                return g.getCell(this.x + 1, this.y).getCategory() == c;
             
             case Sud:
                 if (this.y == g.getRows()-1)
-                    return cellType.Obstacle == t;
-                return g.getCell(this.x, this.y + 1).getType() == t;
+                    return Category.O==c;
+                return g.getCell(this.x, this.y + 1).getCategory() == c;
             
             case Ouest:
                 if (this.x == 0)
-                    return cellType.Obstacle == t;
-                return g.getCell(this.x - 1, this.y).getType() == t;
+                    return Category.O==c;
+                return g.getCell(this.x - 1, this.y).getCategory() == c;
         }
         
         return false;
