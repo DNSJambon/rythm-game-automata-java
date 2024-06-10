@@ -115,40 +115,64 @@ public class Game {
 	private int m_musicIndex = 0;
 	private String[] m_musicNames = new String[] { "Runaway-Food-Truck" }; 
 
+	private long Rythme;
     private long m_textElapsed;
     private long m_stepElapsed;
+	private long m_timekey;
+	private boolean authorised;
 
 	/*
 	 * This method is invoked almost periodically, given the number of milli-seconds
 	 * that elapsed since the last time this method was invoked.
 	 */
 	void tick(long elapsed) {
-
-		m_grille.tick(elapsed);
-
-		// Update every second
-		// the text on top of the frame: tick and fps
-		m_textElapsed += elapsed;
-		if (m_textElapsed > 1000) {
-			m_textElapsed = 0;
-			float period = m_canvas.getTickPeriod();
-			int fps = m_canvas.getFPS();
-
-			String txt = "Tick=" + period + "ms";
-			while (txt.length() < 15)
-				txt += " ";
-			txt = txt + fps + " fps   ";
-			m_text.setText(txt);
-		}
 		
-        // the step is updated every 250ms
-        m_stepElapsed += elapsed;
-		if (m_stepElapsed > 250) {
-			m_stepElapsed = 0;
-			m_control.step();
+			
+			// Check if the game is authorized to proceed
+			if (m_grille.IsAuthorised()) {
+				authorised = true;
+			}
+			
+			// If the game is authorized, check if it becomes unauthorized
+			if (authorised == true) {
+				if (m_grille.IsAuthorised() == false) {
+					m_timekey = 0;
+					authorised = false;
+					m_control.step();
+				}
+			}
+			
+			// Update the game grid
+			m_grille.tick(elapsed);
 
-        }
-	}
+			// Update every second
+			// the text on top of the frame: tick and fps
+			m_textElapsed += elapsed;
+			if (m_textElapsed > 1000) {
+				m_textElapsed = 0;
+				float period = m_canvas.getTickPeriod();
+				int fps = m_canvas.getFPS();
+
+				String txt = "Tick=" + period + "ms";
+				while (txt.length() < 15)
+					txt += " ";
+				txt = txt + fps + " fps   ";
+				m_text.setText(txt);
+			}
+
+			// Update the time key and check if it exceeds the rhythm
+			m_timekey += elapsed;
+			if (m_timekey > Rythme) {
+				m_timekey = 0;
+				m_grille.setAuthorised(false);
+			}
+		}
+	
+		
+  
+      
+	
+
 
 	/*
 	 * This request is to paint the Game Canvas, using the given graphics. This is

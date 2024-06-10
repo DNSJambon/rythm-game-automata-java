@@ -22,6 +22,9 @@ public class Grille implements IGrille{
 
     Control m_control;
     BufferedImage[] m_images;
+
+    boolean authorised;
+    char touche;
     
 
     public Grille(int rows, int cols, Control m_control) throws IOException {
@@ -50,6 +53,22 @@ public class Grille implements IGrille{
         }
 
     }
+   
+    
+    public void setAuthorised(boolean authorised) {
+        this.authorised = authorised;
+    }
+    
+    public boolean IsAuthorised(){
+        return this.authorised;
+    }
+
+    public void key(char touche) {
+        if (this.authorised==true){
+        this.touche = touche;
+        this.authorised = false;
+        }
+    }   
     
     public Grille(int rows, int cols) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
