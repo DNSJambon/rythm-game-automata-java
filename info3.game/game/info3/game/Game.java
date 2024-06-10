@@ -134,12 +134,12 @@ public class Game {
 			
 			// If the game is authorized, check if it becomes unauthorized
 			if (authorised == true) {
-				if (m_grille.IsAuthorised() == false) {
+   	 				if (m_grille.IsAuthorised() == false) {
 					m_timekey = 0;
-					authorised = false;
 					m_control.step();
-					System.out.println("touche");
-					System.out.println(m_grille.getTouche());
+					authorised=false;
+					m_grille.switchAuthorised();
+					
 				}
 			}
 			
@@ -166,7 +166,7 @@ public class Game {
 			if (m_timekey > Rythme) {
 				m_timekey = 0;
 				m_grille.switchAuthorised();
-				authorised=!authorised;
+				
 			}
 		}
 	
