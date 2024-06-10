@@ -20,10 +20,10 @@ public class MazeSolver extends Entity {
         //Automate par defaut (technique de la main droite)
         Transition[] T = new Transition[6];
 
-        Cell obstacle_devant = new Cell(DirRelative.Devant,'O');
-        Cell obstacle_droite = new Cell(DirRelative.Droite, 'O');
-        Cell obstacle_gauche = new Cell(DirRelative.Gauche, 'O');
-        Cell droite_vide = new Cell(DirRelative.Droite, 'V');
+        Cell obstacle_devant = new Cell(DirRelative.Devant, cellType.Obstacle);
+        Cell obstacle_droite = new Cell(DirRelative.Droite, cellType.Obstacle);
+        Cell obstacle_gauche = new Cell(DirRelative.Gauche, cellType.Obstacle);
+        Cell droite_vide = new Cell(DirRelative.Droite, cellType.Vide);
         True t = new True();
 
         Move devant = new Move(DirRelative.Devant);
@@ -46,11 +46,6 @@ public class MazeSolver extends Entity {
         devant.e_or = this;
         demi_tour.e_or = this;
         
-    }
-
-    @Override
-    public char getCategory() {
-        return 'O';
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Pomme extends Entity {
 
         Transition[] T = new Transition[1];
 
-        Cell c = new Cell(DirRelative.soi, 'P'); 
+        Cell c = new Cell(DirRelative.soi, cellType.Snake); 
 
         Pick p = new Pick();
 
@@ -47,15 +47,10 @@ public class Pomme extends Entity {
     }
 
     @Override
-    public char getCategory() {
-        return 'I';
-    }
-
-    @Override
-    public boolean eval_cell(Entity e, DirRelative dir, char cat) {
+    public boolean eval_cell(Entity e, DirRelative dir, cellType type) {
         switch (dir) {
             case soi:
-                return g.getCell(x, y).getCategory() == cat;
+                return g.getCell(x, y).getType() == type;
             default:
                 return false;
         }

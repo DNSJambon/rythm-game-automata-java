@@ -7,7 +7,6 @@ public class MyDir implements Condition{
 
     DirRelative MyDir;
 
-    @Override
     public boolean eval (Entity e) {
         return e.eval_dir(MyDir);
     }

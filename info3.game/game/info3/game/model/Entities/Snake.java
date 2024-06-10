@@ -64,10 +64,10 @@ public class Snake extends Entity {
 
         // Snake:
         Transition[] T2 = new Transition[7];
-        Cell cond_apple_devant = new Cell(DirRelative.Devant, 'I');
-        Cell cond_apple_droite = new Cell(DirRelative.Droite, 'I');
-        Cell cond_apple_gauche = new Cell(DirRelative.Gauche, 'I');
-        Cell cond_obsatcle = new Cell(DirRelative.Devant, 'I');
+        Cell cond_apple_devant = new Cell(DirRelative.Devant, cellType.Apple);
+        Cell cond_apple_droite = new Cell(DirRelative.Droite, cellType.Apple);
+        Cell cond_apple_gauche = new Cell(DirRelative.Gauche, cellType.Apple);
+        Cell cond_obsatcle = new Cell(DirRelative.Devant, cellType.Snake);
         True cond_true = new True();
         Random r = new Random(20);
 
@@ -93,26 +93,21 @@ public class Snake extends Entity {
     }
 
     @Override
-    public char getCategory() {
-        return 'P';
-    }
-
-    @Override
-    public boolean eval_cell(Entity e, DirRelative dir, char cat) {
+    public boolean eval_cell(Entity e, DirRelative dir, cellType t) {
         if (dir==DirRelative.soi){
-            return g.getCell(head.x, head.y).getCategory() == cat;
+            return g.getCell(head.x, head.y).getType() == t;
         }
         switch (direction) {
             case Nord:
                 switch (dir) {
                     case Devant:
-                        return g.getCell(head.x,(head.y + g.getRows() -1)%g.getRows()).getCategory() == cat;
+                        return g.getCell(head.x,(head.y + g.getRows() -1)%g.getRows()).getType()==t;   
                     case Derriere:
-                        return g.getCell(head.x, (head.y + 1) % g.getRows()).getCategory() == cat;
+                        return g.getCell(head.x, (head.y + 1) % g.getRows()).getType() == t;
                     case Droite:
-                        return g.getCell((head.x+1)%g.getCols(), head.y).getCategory() == cat;
+                        return g.getCell((head.x+1)%g.getCols(), head.y).getType() == t;
                     case Gauche:
-                        return g.getCell((head.x + g.getCols() -1) % g.getCols(), head.y).getCategory() == cat;
+                        return g.getCell((head.x + g.getCols() -1) % g.getCols(), head.y).getType() == t;
                     default:
                         return false;
                 }
@@ -120,17 +115,17 @@ public class Snake extends Entity {
             case Sud:
                 switch (dir) {
                     case Devant:
-                        return g.getCell(head.x, (head.y + 1) % g.getRows()).getCategory() == cat;
+                        return g.getCell(head.x, (head.y + 1) % g.getRows()).getType() == t;
                         
                     case Derriere: 
-                        return g.getCell(head.x, (head.y  + g.getRows() - 1) % g.getRows()).getCategory() == cat;
+                        return g.getCell(head.x, (head.y  + g.getRows() - 1) % g.getRows()).getType() == t;
                         
                         
                     case Droite:
-                        return g.getCell((head.x+g.getCols() - 1) % g.getCols(), head.y).getCategory() == cat;
+                        return g.getCell((head.x+g.getCols() - 1) % g.getCols(), head.y).getType() == t;
                         
                     case Gauche:
-                        return g.getCell((head.x + 1) % g.getCols(), head.y).getCategory() == cat;
+                        return g.getCell((head.x + 1) % g.getCols(), head.y).getType() == t;
                         
                     default:
                         return false;
@@ -139,16 +134,16 @@ public class Snake extends Entity {
             case Est:
                 switch (dir) {
                     case Devant:
-                        return g.getCell((head.x + 1) % g.getCols(), head.y).getCategory() == cat;
+                        return g.getCell((head.x + 1) % g.getCols(), head.y).getType() == t;
                         
                     case Derriere:
-                        return g.getCell((head.x +g.getCols()- 1) % g.getCols(), head.y).getCategory() == cat;
+                        return g.getCell((head.x +g.getCols()- 1) % g.getCols(), head.y).getType() == t;
                         
                     case Droite:
-                        return g.getCell(head.x, (head.y + 1) % g.getRows()).getCategory() == cat;
+                        return g.getCell(head.x, (head.y + 1) % g.getRows()).getType() == t;
                         
                     case Gauche:
-                        return g.getCell(head.x, (head.y + g.getRows()  - 1) % g.getRows()).getCategory() == cat;
+                        return g.getCell(head.x, (head.y + g.getRows()  - 1) % g.getRows()).getType() == t;
                         
                     default:
                         return false;
@@ -158,15 +153,15 @@ public class Snake extends Entity {
                 switch (dir) {
                     case Devant:
 
-                        return g.getCell((head.x +g.getCols()- 1) % g.getCols(), head.y).getCategory() == cat;
+                        return g.getCell((head.x +g.getCols()- 1) % g.getCols(), head.y).getType() == t;
                     case Derriere:
-                        return g.getCell((head.x + 1) % g.getCols(), head.y).getCategory() == cat;
+                        return g.getCell((head.x + 1) % g.getCols(), head.y).getType() == t;
                         
                     case Droite:
 
-                        return g.getCell(head.x, (head.y + g.getRows() - 1) % g.getRows()).getCategory() == cat;
+                        return g.getCell(head.x, (head.y + g.getRows() - 1) % g.getRows()).getType() == t;
                     case Gauche:
-                        return g.getCell(head.x, (head.y + 1) % g.getRows()).getCategory() == cat;
+                        return g.getCell(head.x, (head.y + 1) % g.getRows()).getType() == t;
                         
                     default:
                         return false;

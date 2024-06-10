@@ -46,14 +46,6 @@ public class cell implements Icell {
         }
     }
 
-    public char getCategory() {
-        if (vide == 1) {
-            return ' ';
-        } else {
-            return e.getCategory();
-        }
-    }
-
     public void setEntity(Entity e) {
         this.e = e;
         vide = 0;

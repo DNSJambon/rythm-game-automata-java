@@ -27,7 +27,7 @@ public class affichage_console {
         Transition[] T = new Transition[1];
         //Move p = new Move();
         Pick p = new Pick();
-        Cell c = new Cell(DirRelative.soi, 'P');
+        Cell c = new Cell(DirRelative.soi, cellType.Snake);
         T[0] = new Transition(p, c, 0, 0);
         Automaton a = new Automaton(0, T);
         Pomme item_pomme = new Pomme(g, a);
@@ -35,8 +35,8 @@ public class affichage_console {
 
         //Snake:
         Transition[] T2 = new Transition[5];
-        Cell cond_apple= new Cell(DirRelative.Devant,'I');
-        Cell cond_obsatcle = new Cell(DirRelative.Devant, 'O');
+        Cell cond_apple= new Cell(DirRelative.Devant,cellType.Apple);
+        Cell cond_obsatcle = new Cell(DirRelative.Devant, cellType.Obstacle);
         True cond_true = new True();
         Random r = new Random(20);
         

@@ -8,7 +8,6 @@ public class Closest implements Condition{
     Category c;
     DirRelative d;
 
-    @Override
     public boolean eval (Entity e) {
         return e.eval_closest(c, d);
     }

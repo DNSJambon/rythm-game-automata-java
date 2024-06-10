@@ -5,7 +5,6 @@ import info3.game.model.Entities.*;
 
 public class Key implements Condition {
 
-    @Override
     public boolean eval (Entity e) {
         return true;
     }
