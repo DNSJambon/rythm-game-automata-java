@@ -127,12 +127,12 @@ public class Game {
 	void tick(long elapsed) {
 		
 			
-			// Check if the game is authorized to proceed
+			// Check if the game authorize to press a key
 			if (m_grille.IsAuthorised()) {
 				authorised = true;
 			}
 			
-			// If the game is authorized, check if it becomes unauthorized
+			// If the game authorized, check if the grille do not.
 			if (authorised == true) {
 				if (m_grille.IsAuthorised() == false) {
 					m_timekey = 0;
