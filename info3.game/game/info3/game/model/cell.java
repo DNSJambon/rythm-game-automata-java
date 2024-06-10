@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import com.jcraft.jogg.Buffer;
 
 import info3.game.model.Entities.Entity;
+import info3.game.model.Entities.Obstacle;
 
 public class cell implements Icell {
 
@@ -70,6 +71,11 @@ public class cell implements Icell {
             e.paint(g, x * width, y * height, width, height);
         }
     }
+
+    public boolean pas_obstacle() {
+        return !(e instanceof Obstacle); // La cellule est libre si elle ne contient pas un obstacle
+    }
+
 
 
 }
