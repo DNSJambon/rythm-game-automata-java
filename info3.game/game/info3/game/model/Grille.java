@@ -46,8 +46,8 @@ public class Grille implements IGrille{
         //ajoute player1
         Player1 p = new Player1(this);
         m_control.addEntity(p);
-        // MazeSolver m = new MazeSolver(this, 0, 0);
-        // m_control.addEntity(m);
+        MazeSolver m = new MazeSolver(this, 0, 0);
+        m_control.addEntity(m);
         // ajout des obstacles aléatoirements
         Obstacle o;
         for (int i = 0; i <10; i++) {

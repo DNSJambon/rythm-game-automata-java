@@ -235,7 +235,7 @@ public class Obstacle extends Entity {
 
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
-        graphics.drawImage(g.getImage(361), x, y, width, height, null);
+        graphics.drawImage(((Grille)g).getImage(361), x, y, width, height, null);
     }
 
     @Override
