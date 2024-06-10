@@ -12,6 +12,7 @@ import info3.game.controller.*;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
+import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Snake;
 
 
@@ -23,6 +24,9 @@ public class Grille implements IGrille{
 
     Control m_control;
     BufferedImage[] m_images;
+
+    boolean authorised;
+    char touche;
     
 
     public Grille(int rows, int cols, Control m_control) throws IOException {
@@ -30,6 +34,7 @@ public class Grille implements IGrille{
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
+        this.authorised = true;
 
         // Création de la grille
         grille = new cell[rows][cols];
@@ -38,9 +43,11 @@ public class Grille implements IGrille{
                 grille[i][j] = new cell(this, j, i);
             }
         }
-
-        MazeSolver m = new MazeSolver(this, 0, 0);
-        m_control.addEntity(m);
+        //ajoute player1
+        Player1 p = new Player1(this);
+        m_control.addEntity(p);
+        // MazeSolver m = new MazeSolver(this, 0, 0);
+        // m_control.addEntity(m);
         // ajout des obstacles aléatoirements
         Obstacle o;
         for (int i = 0; i <10; i++) {
@@ -51,6 +58,33 @@ public class Grille implements IGrille{
         }
 
     }
+   
+    public char getTouche() {
+        return touche;
+    }
+
+    public void setAuthorised(boolean authorised) {
+        this.authorised = authorised;
+    }
+    
+    public boolean IsAuthorised(){
+        return this.authorised;
+    }
+
+    public void switchAuthorised(){
+        this.authorised = !this.authorised;
+    }
+
+    public void resetTouche() {
+        this.touche = ' ';
+    }
+
+    public void key(char touche) {
+        if (this.authorised==true){
+            this.touche = touche;
+            this.authorised = false;
+        }
+    }   
     
     public Grille(int rows, int cols) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
