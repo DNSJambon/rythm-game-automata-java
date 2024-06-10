@@ -20,6 +20,7 @@ import info3.game.controller.*;
 public class Game {
 
 	static Game game;
+	static int duration = 250;
 
 	public static void main(String args[]) throws Exception {
 		try {
@@ -143,11 +144,12 @@ public class Game {
 		
         // the step is updated every 250ms
         m_stepElapsed += elapsed;
-		if (m_stepElapsed > 250) {
+		if (m_stepElapsed > duration) {
 			m_stepElapsed = 0;
 			m_control.step();
+		}
+		
 
-        }
 	}
 
 	/*

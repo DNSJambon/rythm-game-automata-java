@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import info3.game.controller.*;
+import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Snake;
@@ -118,6 +119,10 @@ public class Grille implements IGrille{
     
     public void tick(long elapsed) {
         m_imageElapsed += elapsed;
+
+        for (Entity e : m_control.getEntities()) {
+            e.tick(elapsed);
+        }
         
     }
 

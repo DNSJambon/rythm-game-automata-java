@@ -97,6 +97,7 @@ public abstract class Entity {
     public abstract boolean do_wait(Entity e);
     
     
-    public abstract void paint (Graphics graphics, int x, int y, int width, int height);
+    public abstract void paint(Graphics graphics, int x, int y, int width, int height);
+    public abstract void tick(long elapsed);
 
 }

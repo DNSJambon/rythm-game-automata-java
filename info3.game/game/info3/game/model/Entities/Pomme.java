@@ -99,5 +99,11 @@ public class Pomme extends Entity {
     public void paint(Graphics graphics, int x, int y, int width, int height) {
         graphics.drawImage(g.getImage(360), x, y, width, height, null);
     }
+
+    @Override
+    public void tick(long elapsed) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tick'");
+    }
     
 }

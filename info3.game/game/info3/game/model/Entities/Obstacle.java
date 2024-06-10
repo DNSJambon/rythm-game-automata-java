@@ -238,5 +238,11 @@ public class Obstacle extends Entity {
         graphics.drawImage(g.getImage(361), x, y, width, height, null);
     }
 
+    @Override
+    public void tick(long elapsed) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tick'");
+    }
+
     
 }

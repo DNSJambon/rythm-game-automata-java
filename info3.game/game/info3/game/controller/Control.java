@@ -28,6 +28,10 @@ public class Control {
         buffer.resolve();
     }
 
+    public LinkedList<Entity> getEntities() {
+        return entities;
+    }
+
 
 
 
