@@ -23,7 +23,10 @@ public class Grille implements IGrille{
     long m_imageElapsed;
 
     Control m_control;
+
+
     BufferedImage[] m_images;
+    int viewport_size = 9;
 
     boolean authorised;
     char touche;

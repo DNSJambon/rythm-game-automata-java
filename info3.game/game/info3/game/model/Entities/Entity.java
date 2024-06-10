@@ -28,6 +28,14 @@ public abstract class Entity {
         a.step_A(this, buff);
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public IGrille getGrille() {
         return g;
     }
