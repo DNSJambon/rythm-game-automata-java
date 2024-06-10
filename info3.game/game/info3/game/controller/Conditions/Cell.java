@@ -10,9 +10,9 @@ import info3.game.model.Entities.Entity;
 public class Cell implements Condition{
 
     DirRelative dir;
-    cellType cat;
+    char cat;
 
-    public Cell(DirRelative dir, cellType cat) {
+    public Cell(DirRelative dir, char cat) {
         this.dir = dir;
         this.cat = cat;
     }
