@@ -240,8 +240,7 @@ public class Obstacle extends Entity {
 
     @Override
     public void tick(long elapsed) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tick'");
+        
     }
 
     

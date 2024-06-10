@@ -20,7 +20,7 @@ import info3.game.controller.*;
 public class Game {
 
 	static Game game;
-	static int duration = 250;
+	static int duration = 750;
 
 	public static void main(String args[]) throws Exception {
 		try {

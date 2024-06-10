@@ -2,6 +2,8 @@ package info3.game.model.Entities;
 
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import info3.game.controller.*;
 import info3.game.controller.Conditions.*;
@@ -9,6 +11,13 @@ import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
 public class MazeSolver extends Entity {
+
+    BufferedImage[] m_images;
+    int image_index = 0;
+
+    //variables pour l'animation de deplacement
+    int in_movement = -1;
+    int nb_frame_move = 6;
     
     public MazeSolver(Grille g, int x, int y) {
         super(g);
@@ -17,6 +26,12 @@ public class MazeSolver extends Entity {
         this.x = x;
         this.y = y;
         g.getCell(x, y).setEntity(this);
+
+        try {
+            m_images = Grille.loadSprite("resources/squelette.png", 1, 4);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         //Automate par defaut (technique de la main droite)
@@ -90,6 +105,7 @@ public class MazeSolver extends Entity {
                 break;
         }
         g.getCell(x, y).setEntity(this);
+        in_movement = nb_frame_move;
         return true;
 
     }
@@ -120,13 +136,33 @@ public class MazeSolver extends Entity {
 
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
-        graphics.drawImage(g.getImage(362), x, y, width, height, null);
+        if (in_movement != -1) {
+            if (direction == Direction.Nord) {
+                y += (height * in_movement) / nb_frame_move;
+            } else if (direction == Direction.Est) {
+                x -= (width * in_movement) / nb_frame_move;
+            } else if (direction == Direction.Sud) {
+                y -= (height * in_movement) / nb_frame_move;
+            } else if (direction == Direction.Ouest) {
+                x += (width * in_movement) / nb_frame_move;
+            }
+            in_movement--;
+        }
+
+        graphics.drawImage(m_images[image_index], x, y, width, height, null);
+
     }
 
+    
+    int animation_elapsed = 0;
     @Override
     public void tick(long elapsed) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tick'");
+        animation_elapsed += elapsed;
+        if (animation_elapsed > 200) {
+            image_index = (image_index + 1) % 4;
+            animation_elapsed = 0;
+        }
+        
     }
     
 }

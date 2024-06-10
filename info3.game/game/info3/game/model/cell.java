@@ -66,12 +66,6 @@ public class cell implements Icell {
     
   
     public void paint(Graphics g, int width, int height) {
-
-        if (x % 2 == 0 && y % 2 == 0 || x % 2 == 1 && y % 2 == 1)
-            g.drawImage(grid.getImage(sols[0]), x * width, y * height, width, height, null);
-        else
-            g.drawImage(grid.getImage(sols[1]), x * width, y * height, width, height, null);
-        
         if (vide == 0) {
             e.paint(g, x * width, y * height, width, height);
         }
