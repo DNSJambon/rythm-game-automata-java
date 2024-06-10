@@ -1,3 +1,20 @@
+# <span style="color: #d54020 ">***10 juin 2024***</span>
+## <span style="color:green">**Game**</span>
+- Matthieu et Sami : - Creation de la condition key
+                     - Jeu avance selon temps gerer dans la variable Rythme dans game
+                     - Jeu fait un step si keyboard pressed
+
+- Arthur et Mathis : - Utilisation des ticks pour les animmation
+                     - Début viewport
+                     - Creation de la classe Player 1
+
+- Omar et Aymanne :  - Génération aléatoire d'une map avec densité obstacle
+                     - Chemin possible entre deux point donné peut importe map
+
+        
+A faire :
+    Regler certain eval qui doivent prendre une catégory au lieu d'un cellType
+
 # <span style="color: #d54020 ">***6 juin 2024***</span>
 ## <span style="color:green">**snake**</span>
 - avancer code snake
@@ -6,15 +23,6 @@
 - creation buffer d'action
 - creation de la queue du snake : 
     - 2 marche a partir de 3 marche pas
-
-
-
-
-
-
-
-
-
 
 
 # <span style="color: #d54020 ">***5 juin 2024***</span>

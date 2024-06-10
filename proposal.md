@@ -19,6 +19,7 @@ But du jeu : trouver une clé puis sortir
         - deplace a laide des fleches
         - point de vie
     - joueur 2 :
+        - curseur 
         - deplace a laide de zqsd
         - spawn des monstre avec e a r f
         - deplace sans colision et peut placer un mob tout les x step grace a egg
@@ -36,7 +37,7 @@ But du jeu : trouver une clé puis sortir
         - pique 
         - punis si imobille 
     - ennemis qui suit
-    - ennemis qui tir des trucs 
+    - ennemis qui tir des boules de feu
     - ennemis qui fonce dessus
 
 
