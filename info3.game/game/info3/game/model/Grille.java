@@ -12,6 +12,7 @@ import info3.game.controller.*;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
+import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Snake;
 
 
@@ -38,9 +39,11 @@ public class Grille implements IGrille{
                 grille[i][j] = new cell(this, i, j);
             }
         }
-
-        MazeSolver m = new MazeSolver(this, 0, 0);
-        m_control.addEntity(m);
+        //ajoute player1
+        Player1 p = new Player1(this);
+        m_control.addEntity(p);
+        // MazeSolver m = new MazeSolver(this, 0, 0);
+        // m_control.addEntity(m);
         // ajout des obstacles aléatoirements
         Obstacle o;
         for (int i = 0; i <15; i++) {
