@@ -140,7 +140,7 @@ public class Game {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
-					authorised=false;
+					authorised = false;
 					m_grille.switchAuthorised();
 					
 				}
@@ -168,9 +168,11 @@ public class Game {
 			m_timekey += elapsed;
 			if (m_timekey > Rythme) {
 				m_timekey = 0;
-				m_grille.switchAuthorised();
 				m_control.step();
+				m_grille.switchAuthorised();
+				authorised = false;
 			}
+			
 		}
 	
 		
