@@ -9,7 +9,7 @@ import info3.game.model.*;
 
 public class Obstacle extends Entity {
 
-    public Obstacle(Grille g, Automaton a, int x, int y) {
+    public Obstacle(IGrille g, Automaton a, int x, int y) {
         super(g);
         etat_courant = 0;
         this.a = a;
@@ -21,7 +21,7 @@ public class Obstacle extends Entity {
     }
     
     //Obstacle avec automate par défaut (automate vide)
-    public Obstacle(Grille g, int x, int y) {
+    public Obstacle(IGrille g, int x, int y) {
         super(g);
         etat_courant = 0;
         this.a = new Automaton(0, new Transition[0]);
