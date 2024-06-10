@@ -71,6 +71,10 @@ public class Grille implements IGrille{
         this.authorised = !this.authorised;
     }
 
+    public void resetTouche() {
+        this.touche = ' ';
+    }
+
     public void key(char touche) {
         if (this.authorised==true){
             this.touche = touche;

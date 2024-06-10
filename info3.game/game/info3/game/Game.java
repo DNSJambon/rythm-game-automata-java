@@ -137,6 +137,7 @@ public class Game {
    	 				if (m_grille.IsAuthorised() == false) {
 					m_timekey = 0;
 					m_control.step();
+					m_grille.resetTouche();
 					authorised=false;
 					m_grille.switchAuthorised();
 					
@@ -166,7 +167,7 @@ public class Game {
 			if (m_timekey > Rythme) {
 				m_timekey = 0;
 				m_grille.switchAuthorised();
-				
+				m_control.step();
 			}
 		}
 	
