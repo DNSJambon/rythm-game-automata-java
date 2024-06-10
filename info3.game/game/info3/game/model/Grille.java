@@ -35,7 +35,7 @@ public class Grille implements IGrille{
         grille = new cell[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                grille[i][j] = new cell(this, i, j);
+                grille[i][j] = new cell(this, j, i);
             }
         }
 
@@ -43,7 +43,7 @@ public class Grille implements IGrille{
         m_control.addEntity(m);
         // ajout des obstacles aléatoirements
         Obstacle o;
-        for (int i = 0; i <15; i++) {
+        for (int i = 0; i <10; i++) {
             cell c = randomCell_libre();
             o = new Obstacle(this, c.getCol(), c.getRow());
             m_control.addEntity(o);
@@ -66,7 +66,7 @@ public class Grille implements IGrille{
         }
     }
 
-    public cell getCell(int row, int col) {
+    public cell getCell(int col, int row) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
             return null;
         }
@@ -131,15 +131,15 @@ public class Grille implements IGrille{
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
-                    g.drawImage(m_images[0], i * width / rows, j * height / cols, width / rows, height / cols, null);
+                    g.drawImage(m_images[0], j * width / cols, i * height / rows, width / cols, height / rows, null);
                 else
-                    g.drawImage(m_images[21], i * width / rows, j * height / cols, width / rows, height / cols, null);
+                    g.drawImage(m_images[21], j * width / cols, i * height / rows, width / cols, height / rows, null);
             }
         }
         //on dessine les entités
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                grille[i][j].paint(g, width/rows, height/cols);
+                grille[i][j].paint(g, width/cols, height/rows);
             }
         }
     }

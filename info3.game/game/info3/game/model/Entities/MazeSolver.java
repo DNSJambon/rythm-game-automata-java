@@ -17,7 +17,7 @@ public class MazeSolver extends Entity {
 
     //variables pour l'animation de deplacement
     int in_movement = -1;
-    int nb_frame_move = 6;
+    int nb_frame_move = 10;
     
     public MazeSolver(Grille g, int x, int y) {
         super(g);
@@ -28,7 +28,7 @@ public class MazeSolver extends Entity {
         g.getCell(x, y).setEntity(this);
 
         try {
-            m_images = Grille.loadSprite("resources/squelette.png", 1, 4);
+            m_images = Grille.loadSprite("resources/slime.png", 1, 4);
         } catch (IOException e) {
             e.printStackTrace();
         }

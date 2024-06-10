@@ -20,7 +20,7 @@ import info3.game.controller.*;
 public class Game {
 
 	static Game game;
-	static int duration = 750;
+	static int duration = 1000;
 
 	public static void main(String args[]) throws Exception {
 		try {
@@ -45,7 +45,8 @@ public class Game {
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
 		m_control = new Control();
-		m_grille = new Grille(7, 7, m_control);
+		//TODO: INVERSER
+		m_grille = new Grille(8, 8, m_control);
 		// creating a listener for all the events
 		// from the game canvas, that would be
 		// the controller in the MVC pattern
@@ -58,7 +59,7 @@ public class Game {
 		
 
 		System.out.println("  - creating frame...");
-		Dimension d = new Dimension(800, 800);
+		Dimension d = new Dimension(756, 756);
 		m_frame = m_canvas.createFrame(d);
 
 		System.out.println("  - setting up the frame...");
