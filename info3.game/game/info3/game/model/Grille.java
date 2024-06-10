@@ -32,6 +32,7 @@ public class Grille implements IGrille{
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
+        this.authorised = true;
 
         // Création de la grille
         grille = new cell[rows][cols];

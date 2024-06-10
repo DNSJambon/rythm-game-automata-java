@@ -117,9 +117,8 @@ public class Game {
 
 	private long Rythme=10000;
     private long m_textElapsed;
-    private long m_stepElapsed;
 	private long m_timekey;
-	private boolean authorised;
+	private boolean authorised = false;
 
 	/*
 	 * This method is invoked almost periodically, given the number of milli-seconds
@@ -166,7 +165,7 @@ public class Game {
 			m_timekey += elapsed;
 			if (m_timekey > Rythme) {
 				m_timekey = 0;
-				m_grille.setAuthorised(!m_grille.IsAuthorised());
+				m_grille.setAuthorised(!(m_grille.IsAuthorised()));
 			}
 		}
 	
