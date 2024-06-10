@@ -8,5 +8,6 @@ public interface IGrille {
 
     public int getCols();
 
+    public char getTouche();
 
 }

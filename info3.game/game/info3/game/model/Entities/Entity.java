@@ -25,6 +25,10 @@ public abstract class Entity {
     public void step(BufferAction buff) {
         a.step_A(this, buff);
     }
+
+    public IGrille getGrille() {
+        return g;
+    }
     
     public Direction RelativeToAbsolute(DirRelative d){
         Direction[] dirs = { Direction.Nord, Direction.Est, Direction.Sud, Direction.Ouest };

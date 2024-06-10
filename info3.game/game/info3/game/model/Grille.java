@@ -54,7 +54,10 @@ public class Grille implements IGrille{
 
     }
    
-    
+    public char getTouche() {
+        return touche;
+    }
+
     public void setAuthorised(boolean authorised) {
         this.authorised = authorised;
     }
