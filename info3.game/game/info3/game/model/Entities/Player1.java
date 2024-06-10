@@ -19,7 +19,7 @@ public class Player1 extends Entity{
     int in_movement = -1;
     int nb_frame_move = 6;
 
-    public Player1(Grille g) {
+    public Player1(IGrille g) {
         super(g);
         life = 3;
         g.getCell(1, 1).setEntity(this);

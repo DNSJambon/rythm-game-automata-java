@@ -3,19 +3,20 @@ package info3.game.model.Entities;
 import java.awt.Graphics;
 
 import info3.game.controller.*;
-import info3.game.model.Grille;
+import info3.game.model.Category;
+import info3.game.model.IGrille;
 import info3.game.model.cell;
 import info3.game.model.cellType;
 
 public abstract class Entity {
-    Grille g;
+    IGrille g;
     public int etat_courant;
     Automaton a;
     public Direction direction;
 
     int x, y;
 
-    public Entity(Grille g) {
+    public Entity(IGrille g) {
         this.g = g;
         direction = Direction.Est;
     }
@@ -26,8 +27,10 @@ public abstract class Entity {
     public void step(BufferAction buff) {
         a.step_A(this, buff);
     }
-    
-    
+
+    public IGrille getGrille() {
+        return g;
+    }
     
     public Direction RelativeToAbsolute(DirRelative d){
         Direction[] dirs = { Direction.Nord, Direction.Est, Direction.Sud, Direction.Ouest };
@@ -87,6 +90,16 @@ public abstract class Entity {
         return false;
 
     }
+
+    public boolean eval_dir(DirRelative dir) {
+        return this.direction == RelativeToAbsolute(dir);
+    }
+
+    public boolean eval_closest(Category c, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
+    }
+
     //abstract boolean do(...);
     public abstract boolean do_move(Entity e, DirRelative dir);
     public abstract boolean do_egg(Entity e);

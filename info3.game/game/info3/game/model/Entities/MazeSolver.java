@@ -42,6 +42,10 @@ public class MazeSolver extends Entity {
         Cell obstacle_gauche = new Cell(DirRelative.Gauche, cellType.Obstacle);
         Cell droite_vide = new Cell(DirRelative.Droite, cellType.Vide);
         True t = new True();
+        //Key devan = new Key('z');
+        //Key derrière = new Key('s');
+        //Key droit = new Key('d');
+        //Key gauch = new Key('q');
 
         Move devant = new Move(DirRelative.Devant);
         Move droite = new Move(DirRelative.Droite);
@@ -49,11 +53,16 @@ public class MazeSolver extends Entity {
         Move demi_tour = new Move(DirRelative.Derriere);
 
         T[0] = new Transition(droite, droite_vide, 0, 0);
+        //T[0] = new Transition(droite, droit, 0, 0);
         T[1] = new Transition(demi_tour, new Et(obstacle_devant, obstacle_droite, obstacle_gauche), 0, 0);
         T[2] = new Transition(gauche, new Et(obstacle_devant, obstacle_droite), 0, 0);
+        //T[1] = new Transition(gauche, gauch, 0, 0);
         T[3] = new Transition(droite, new Et(obstacle_devant, obstacle_gauche), 0, 0);
         T[4] = new Transition(gauche, obstacle_devant, 0, 0);
         T[5] = new Transition(devant, t, 0, 0);
+        //T[2] = new Transition(devant, devan, 0, 0);
+        //T[3] = new Transition(demi_tour, derrière, 0, 0);
+        
 
         Automaton a = new Automaton(0, T);
 
