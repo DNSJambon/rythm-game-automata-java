@@ -11,6 +11,9 @@ public enum cellType {
     Player1,
     Obstacle,
     Key,
-    Door;
+    Door,
+    Player2,
+    Ennemi,
+    Projectile;
     
 }

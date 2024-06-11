@@ -69,8 +69,20 @@ public class cell implements Icell {
         vide = 0;
     }
 
-    public void reset() {
+    public void resetall() {
         vide = 1;
+    }
+
+    public void resetP2() {
+        e[2] = null;
+    }
+
+    public void resetEntity() {
+        e[1] = null;
+    }
+
+    public void resetTrap() {
+        e[0] = null;
     }
 
     public int getRow() {

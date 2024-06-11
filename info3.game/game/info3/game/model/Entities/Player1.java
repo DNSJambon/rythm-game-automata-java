@@ -116,25 +116,25 @@ public class Player1 extends Entity{
             
             case Devant:
                 this.y--;
-                g.getCell(this.x,this.y+1).reset();
+                g.getCell(this.x,this.y+1).resetEntity();
                 g.getCell(this.x,this.y).setEntity(this);
                 direction = Direction.Nord;
                 return true;
             case Derriere:
                 this.y++;
-                g.getCell(this.x,this.y-1).reset();
+                g.getCell(this.x,this.y-1).resetEntity();
                 g.getCell(this.x,this.y).setEntity(this);
                 direction = Direction.Sud;
                 return true;
             case Droite:
                 this.x++;
-                g.getCell(this.x-1,this.y).reset();
+                g.getCell(this.x-1,this.y).resetEntity();
                 g.getCell(this.x,this.y).setEntity(this);
                 direction = Direction.Est;
                 return true;
             case Gauche:
                 this.x--;
-                g.getCell(this.x+1,this.y).reset();
+                g.getCell(this.x+1,this.y).resetEntity();
                 g.getCell(this.x,this.y).setEntity(this);
                 direction = Direction.Ouest;
                 return true;

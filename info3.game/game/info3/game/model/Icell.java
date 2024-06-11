@@ -9,7 +9,13 @@ public interface Icell {
 
     public void setEntity(Entity e);
 
-    public void reset();
+    public void resetall();
+
+    public void resetEntity();
+
+    public void resetP2();
+
+    public void resetTrap();
 
     public int getRow();
 

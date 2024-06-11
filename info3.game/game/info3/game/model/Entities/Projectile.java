@@ -8,58 +8,32 @@ import info3.game.model.Category;
 import info3.game.model.Grille;
 import info3.game.model.cellType;
 
-public class Player2 extends Entity {
+public class Projectile extends Ennemi{
 
-    public Player2(Grille g, int x, int y) {
-        super(g);
+    public Projectile(Grille g, int x, int y,Direction dir) {
+        super(g, x, y);
         etat_courant = 0;
-        direction = Direction.Est;
+        direction = dir;
         this.x = x;
         this.y = y;
-        g.getCell(x, y).setP2(this);
+        g.getCell(x, y).setEntity(this);
     }
 
     @Override
     public cellType getType() {
-        return cellType.Player2;
+        return cellType.Projectile;
     }
 
     @Override
     public char getCategory() {
-        return Category.C;
+        return Category.E;
     }
 
+    @Override
     public boolean do_move(Entity e, DirRelative dir) {
-        switch (dir) {
-            case Devant:
-                this.y--;
-                g.getCell(this.x,this.y+1).resetEntity();
-                g.getCell(this.x,this.y).setEntity(this);
-                direction = Direction.Nord;
-                return true;
-            case Derriere:
-                this.y++;
-                g.getCell(this.x,this.y-1).resetEntity();
-                g.getCell(this.x,this.y).setEntity(this);
-                direction = Direction.Sud;
-                return true;
-            case Droite:
-                this.x++;
-                g.getCell(this.x-1,this.y).resetEntity();
-                g.getCell(this.x,this.y).setEntity(this);
-                direction = Direction.Est;
-                return true;
-            case Gauche:
-                this.x--;
-                g.getCell(this.x+1,this.y).resetEntity();
-                g.getCell(this.x,this.y).setEntity(this);
-                direction = Direction.Ouest;
-                return true;
-            default:
-                return false;
-        }
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
     }
-
 
     @Override
     public boolean do_egg(Entity e) {
@@ -96,6 +70,5 @@ public class Player2 extends Entity {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'tick'");
     }
-    
 
 }

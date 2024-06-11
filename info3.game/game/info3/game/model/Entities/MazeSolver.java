@@ -90,7 +90,7 @@ public class MazeSolver extends Entity {
         direction = RelativeToAbsolute(dir);
 
         //on change sa position
-        g.getCell(x, y).reset();
+        g.getCell(x, y).resetEntity();
         switch (direction) {
             case Nord:
                 if (y == 0) {

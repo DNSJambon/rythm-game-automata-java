@@ -55,7 +55,7 @@ public class Pomme extends Entity {
    
     @Override
     public boolean do_move(Entity e, DirRelative dir) {
-        g.getCell(x, y).reset();
+        g.getCell(x, y).resetEntity();
         x = (x + 1) % g.getRows();
         y = (y + 1) % g.getCols();
         g.getCell(x, y).setEntity(this);
