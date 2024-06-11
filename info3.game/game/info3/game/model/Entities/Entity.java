@@ -111,7 +111,16 @@ public abstract class Entity {
 
     //abstract boolean do(...);
     public abstract boolean do_move(Entity e, DirRelative dir);
-    public abstract boolean do_egg(Entity e);
+
+    public abstract boolean do_egg(Entity e
+    
+    
+    
+    
+    
+    
+    
+    );
     public abstract boolean do_pick(Entity e);
 
     public abstract boolean do_turn(Entity e, DirRelative dir);
