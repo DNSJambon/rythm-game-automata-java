@@ -38,8 +38,94 @@ But du jeu : trouver une clé puis sortir
         - punis si imobille 
     - ennemis qui suit
     - ennemis qui tir des boules de feu
-    - ennemis qui fonce dessus
 
-
-
-
+# jeu 1
+```json
+{
+  
+  "germe" : 734,
+  "difficulty" : 2,  
+  "temps de décision" : 10000,
+  "entities": [
+    { "name" : "PLAYER 1",  
+      "behaviour": "player1.gal",
+      "featurs" : "Warrior",
+      "sprite" : "warrior.png", 
+    },
+    { "name" : "PLAYER 2",  
+      "behaviour": "player2.gal",
+      "features" : "Cursor",
+      "sprite" : "cursor.png", 
+    },
+    { "name" : "WALL breakable", 
+      "%density" : 23, 
+      "behaviour" : "",
+      "features" : "Wall1",
+      "sprite" : "wall1.png",
+    },
+    { "name" : "WALL unbreakable", 
+      "%density" : 23, 
+      "behaviour" : "",
+      "features" : "Wall2",
+      "sprite" : "wall2.png",
+    },
+    { "name" : "SLIME", 
+      "%density" : 5, 
+      "behaviour" : "SLIME.gal",
+      "features" : "Slime",
+      "sprite" : "slime.png",
+    },
+    { "name" : "", 
+      "%density" : 10, 
+      "behaviour" : ".gal",
+      "features" : "",
+      "sprite" : ".png",
+    }
+  ]
+}
+```
+# jeu 2
+```json
+{
+  
+  "germe" : 732,
+  "difficulty" : 2,  
+  "temps de décision" : 1,
+  "entities": [
+    { "name" : "PLAYER 1",  
+      "behaviour": "player1.gal",
+      "featurs" : "Warrior",
+      "sprite" : "warrior.png", 
+    },
+    { "name" : "PLAYER 2",  
+      "behaviour": "player2.gal",
+      "features" : "Cursor",
+      "sprite" : "cursor.png", 
+    },
+    { "name" : "WALL breakable", 
+      "%density" : 23, 
+      "behaviour" : "",
+      "features" : "Wall1",
+      "sprite" : "wall1.png",
+    },
+    { "name" : "WALL unbreakable", 
+      "%density" : 23, 
+      "behaviour" : "",
+      "features" : "Wall2",
+      "sprite" : "wall2.png",
+    },
+    { "name" : "SLIME", 
+      "%density" : 5, 
+      "behaviour" : "SLIME.gal",
+      "features" : "Slime",
+      "sprite" : "slime.png",
+    },
+    { "name" : "", 
+      "%density" : 10, 
+      "behaviour" : ".gal",
+      "features" : "",
+      "sprite" : ".png",
+    }
+  ]
+}
+```

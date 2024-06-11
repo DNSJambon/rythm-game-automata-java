@@ -94,8 +94,9 @@ public class cell implements Icell {
         return x;
     }
   
-    public void paint(Graphics g, int width, int height) {
+    public void paint(Graphics g, int x, int y, int width, int height) {
         if (vide == 0) {
+            e.paint(g, x, y, width, height);
             for (int i = 0; i < 3; i++) {
                 if (e[i] != null) {
                     e[i].paint(g, x * width, y * height, width, height);
