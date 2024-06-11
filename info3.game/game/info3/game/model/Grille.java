@@ -69,7 +69,7 @@ public class Grille implements IGrille{
         main_Entity = m;
         m_control.addEntity(m);
         pourcentage_aleatoire_obstacle(this, 100, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
-        cree_des_salles(666);
+        cree_des_salles(666,4,4, 6);
     }
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
@@ -181,27 +181,41 @@ public class Grille implements IGrille{
 
     //le but est de créer des salles dans le labyrinthe rempli de monstres
     //met des rectangelles de vide dans la grille
-    private void cree_des_salles(long seed) {
+    private void cree_des_salles(long seed, int largeur,int longueur, int nb_salle) {
         Random random = new Random(seed);
-        int nb_salle = random.nextInt(4) + 3;
-        int taille_salle = random.nextInt(3) + 4;
+        int largeur_salle = random.nextInt(4) + largeur;
+        int longueur_salle = random.nextInt(4) + longueur;
 
         for (int i = 0; i < nb_salle; i++) {
-            int x = random.nextInt(rows - taille_salle);
-            int y = random.nextInt(cols - taille_salle);
-            for (int j = 0; j < taille_salle; j++) {
-                for (int k = 0; k < taille_salle; k++) {
+            largeur_salle = random.nextInt(4) + largeur;
+            longueur_salle = random.nextInt(4) + longueur;
+            int x = random.nextInt(rows - largeur_salle);
+            int y = random.nextInt(cols - longueur_salle);
+            for (int j = 0; j < largeur_salle; j++) {
+                for (int k = 0; k < longueur_salle; k++) {
                     grille[x + j][y + k].resetEntity();
                 }
             }
         }
-        //placer quelques monstres (maze solver) dans les salles creees
+        //placer quelques monstres dans les salles creees
         //TODO
         
         
         
 
     }
+
+    //remplir la grille d'obstacle
+    public void remplir_obstacle() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Obstacle o = new Obstacle(this, j, i);
+                m_control.addEntity(o);
+                grille[i][j].setEntity(o);
+            }
+        }
+    }
+
 
 
     /* ======================Partie Synchro========================== */
