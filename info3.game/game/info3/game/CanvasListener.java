@@ -90,8 +90,8 @@ public class CanvasListener implements GameCanvasListener {
 
   @Override
   public void windowOpened() {
-    //m_game.loadMusic();
-//    m_game.m_canvas.setTimer(6000);
+    m_game.loadMusic();
+   m_game.m_canvas.setTimer(6000);
   }
 
   @Override
