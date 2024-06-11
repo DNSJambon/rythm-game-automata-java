@@ -79,6 +79,18 @@ public class Pomme extends Entity {
     }
 
     @Override
+    public boolean do_pop(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+    }
+
+    @Override
+    public boolean do_wizz(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+    }
+
+    @Override
     public boolean do_turn(Entity e,DirRelative dir) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
