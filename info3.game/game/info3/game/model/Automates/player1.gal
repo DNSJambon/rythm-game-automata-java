@@ -1,11 +1,19 @@
 Player1(Init){
 * (Init):
-| PressKey(z,d) & Eval_Cell(N,Enemy) ? Hit(N) :(Init)
-| PressKey(s,d) & Eval_Cell(S,Enemy) ? Hit(S) :(Init)
-| PressKey(q,d) & Eval_Cell(E,Enemy) ? Hit(E) :(Init)
-| PressKey(d,d) & Eval_Cell(O,Enemy) ? Hit(O) :(Init)
-| PressKey(z,d) & (Eval_Cell(N) | Eval_Cell(N,Key)) ? move(N) :(Init)
-| PressKey(s,d) & (Eval_Cell(S) | Eval_Cell(S,Key)) ? move(S) :(Init)
-| PressKey(q,d) & (Eval_Cell(E) | Eval_Cell(E,Key)) ? move(E) :(Init)
-| PressKey(d,d) & (Eval_Cell(O) | Eval_Cell(O,Key)) ? move(O) :(Init)
+| pressKey(fu) & Cell(N,Ennemy) ? Hit(N) :(Init)
+| pressKey(fd) & Cell(S,Ennemy) ? Hit(S) :(Init)
+| pressKey(fr) & Cell(E,Ennemy) ? Hit(E) :(Init)
+| pressKey(fl) & Cell(O,Ennemy) ? Hit(O) :(Init)
+
+| pressKey(fu) & Cell(N) ? move(N) :(Init)
+| pressKey(fu) & Cell(N,Key) ? move(N) :(Init)
+
+| pressKey(fd) & Cell(S) ? move(S) :(Init)
+| pressKey(fd) & Cell(S,Key) ? move(S) :(Init)
+
+| pressKey(fr) & Cell(E) ? move(E) :(Init)
+| pressKey(fr) & Cell(E,Key) ? move(E) :(Init)
+
+| pressKey(fl) & Cell(O) ? move(O) :(Init)
+| pressKey(fl) & Cell(O,Key) ? move(O) :(Init)
 }
