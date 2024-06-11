@@ -24,7 +24,7 @@ Trouver une clé puis sortir.
   - A des points de vie.
 - Joueur 2 :
   - C'est un curseur. 
-  Se déplace à l'aide des touches ZQSD.
+  - Se déplace à l'aide des touches ZQSD.
   - Peut spawn des monstres avec les touches E,A,R,F.
   - Se déplace sans collision et peut placer un mob toutes les X étapes grâce à Egg.
   - Ne peut placer des mobs que sur des cases vides.
