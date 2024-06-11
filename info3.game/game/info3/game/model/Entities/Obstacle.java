@@ -181,6 +181,18 @@ public class Obstacle extends Entity {
     }
 
     @Override
+    public boolean do_pop(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+    }
+
+    @Override
+    public boolean do_wizz(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+    }
+
+    @Override
     public boolean do_turn(Entity e, DirRelative dir) {
         switch (e.direction) {
             case Nord:
@@ -232,10 +244,6 @@ public class Obstacle extends Entity {
         }
     }
 
-    @Override
-    public boolean do_wait(Entity e) {
-        return true;
-    }
 
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
