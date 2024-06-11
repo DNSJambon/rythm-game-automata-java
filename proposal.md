@@ -1,12 +1,14 @@
 # Moteur de jeu synchrone
-But du jeu : trouver une clé puis sortir
-- Grille avec des cases (peux gérer plusieur entités sur une meme case)
+## But du jeu : 
+Trouver une clé puis sortir.
+## Caractéristiques du moteur de jeu
+### Grille
+- La grille est composée de cases pouvant gérer plusieurs entités sur une même case.
 - Vue de dessus
-- Génération aléatoire de map (mur et bot de type labyrinthe***x***s)
+- Génération aléatoire de la map, incluant des murs et des bots de type labyrinthe.
 
-
-- gestion de difficulté :
-    - plus ou moins de mob
+### Gestion de la difficulté
+- plus ou moins de mob
 - parametre synchro au lancement du jeu combien de temps pour réflechir avant le déroulement des actions :
     - 2 jeux: 
         - beaucoup de temps pour réflechir 
@@ -39,8 +41,8 @@ But du jeu : trouver une clé puis sortir
     - ennemis qui suit
     - ennemis qui tir des boules de feu
 
-# Fichiers de configuration 
-- Jeu 1
+## Fichiers de configuration 
+### Jeu 1
 ```json
 {
   
@@ -85,7 +87,7 @@ But du jeu : trouver une clé puis sortir
   ]
 }
 ```
-- Jeu 2
+### Jeu 2
 ```json
 {
   
@@ -130,7 +132,7 @@ But du jeu : trouver une clé puis sortir
   ]
 }
 ```
-# Automates en GAL
+## Automates en GAL
 Joueur 1
 ```gal
 Player1(Init){
@@ -219,3 +221,10 @@ Projectile(Alive){
 
 }
 ```
+## Point Technique - Synchronisation
+### Jeu Synchrone (Jeu 1)
+La durée du jeu est infinie. Les actions sont synchronisées et se déroulent une fois le joueur 1 fait son action. 
+
+### Jeu Asynchrone (Jeu 2)
+Déroulement des actions : Les actions sont asynchrones, le joueur 1 a un temps limité pour faire son action.
+
