@@ -1,6 +1,7 @@
 package info3.game.model;
 
 import info3.game.model.Entities.Player1;
+import info3.game.view.display;
 
 public enum cellType {
     Vide,
@@ -8,6 +9,8 @@ public enum cellType {
     Apple,
     MazeSolver,
     Player1,
-    Obstacle;
+    Obstacle,
+    Key,
+    Door;
     
 }
