@@ -44,9 +44,9 @@ public class Game {
 	Game() throws Exception {
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
-		m_control = new Control();		
-		
-		m_grille = new Grille(15, 15, m_control);
+		m_control = new Control();
+		//TODO: INVERSER
+		m_grille = new Grille(34, 34, m_control);
 		// creating a listener for all the events
 		// from the game canvas, that would be
 		// the controller in the MVC pattern
@@ -59,7 +59,7 @@ public class Game {
 		
 
 		System.out.println("  - creating frame...");
-		Dimension d = new Dimension(756, 756);
+		Dimension d = new Dimension(1138, 817);
 		m_frame = m_canvas.createFrame(d);
 
 		System.out.println("  - setting up the frame...");
@@ -196,7 +196,8 @@ public class Game {
 		g.fillRect(0, 0, width, height);
 
 		// paint
-		m_grille.paint(g, width, height);
+		m_grille.paint(g, width - 340, height);
+		
 	}
 
 }
