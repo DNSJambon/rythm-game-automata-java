@@ -66,12 +66,6 @@ public class Projectile extends Ennemi{
     }
 
     @Override
-    public boolean do_wait(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
-    }
-
-    @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'paint'");

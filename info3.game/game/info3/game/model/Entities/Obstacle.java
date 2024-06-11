@@ -244,10 +244,6 @@ public class Obstacle extends Entity {
         }
     }
 
-    @Override
-    public boolean do_wait(Entity e) {
-        return true;
-    }
 
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {

@@ -370,12 +370,6 @@ public class Snake extends Entity {
     }
 
     @Override
-    public boolean do_wait(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
-    }
-
-    @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
         graphics.drawImage(g.getImage(359), x, y, width, height, null);
     }
