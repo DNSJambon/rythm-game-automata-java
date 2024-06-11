@@ -92,9 +92,6 @@ public class Grille implements IGrille{
             }
         }
         
-        
-        
-
         Collections.shuffle(emptyCells, random);
         // System.out.println("print cells : "+emptyCells);
         boolean[][] tempObstacles = new boolean[grille.rows][grille.cols];
@@ -205,6 +202,7 @@ public class Grille implements IGrille{
 
 
     /* ======================Partie Synchro========================== */
+    //TODO on ne peux pas jouer le tour suivant apres en avoir sauté un
     public char getTouche() {
         return touche;
     }
