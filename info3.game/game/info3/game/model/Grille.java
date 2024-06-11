@@ -44,6 +44,8 @@ public class Grille implements IGrille{
         m_images = loadSprite("resources/tiles.png", 24, 21);
         int debut_entre_X=5;
         int debut_entre_Y=5;
+        int fin_X= 1;
+        int fin_Y= 1;
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
@@ -59,12 +61,9 @@ public class Grille implements IGrille{
         //ajoute player1
         Player1 p = new Player1(this);
         m_control.addEntity(p);
-<<<<<<< HEAD
         MazeSolver m = new MazeSolver(this, debut_entre_X,debut_entre_Y );
-=======
-        MazeSolver m = new MazeSolver(this, 0, 0);
+        // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
->>>>>>> master
         m_control.addEntity(m);
         // ajout des obstacles aléatoirements
         Obstacle o;
@@ -74,7 +73,7 @@ public class Grille implements IGrille{
             m_control.addEntity(o);
             //c.setEntity(o);
         }
-        pourcentage_aleatoire_obstacle(this, 20, 223, debut_entre_X, debut_entre_Y, 14, 14); // Exemple de pourcentage et de seed
+        pourcentage_aleatoire_obstacle(this, 700, 223, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
     }
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
             int endX, int endY) {
@@ -97,7 +96,7 @@ public class Grille implements IGrille{
         }
 
         Collections.shuffle(emptyCells, random);
-
+        // System.out.println("print cells : "+emptyCells);
         boolean[][] tempObstacles = new boolean[grille.rows][grille.cols];
         for (int i = 0; i < grille.rows; i++) {
             for (int j = 0; j < grille.cols; j++) {
