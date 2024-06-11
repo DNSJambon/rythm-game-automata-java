@@ -69,20 +69,71 @@ public class Player2 extends Entity {
 
     @Override
     public boolean do_pick(Entity e) {
+        return true;
+    }
+
+    @Override
+    public boolean do_pop(Entity e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+    }
+
+    @Override
+    public boolean do_wizz(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
     }
 
     @Override
     public boolean do_turn(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
-    }
-
-    @Override
-    public boolean do_wait(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
+        switch (e.direction) {
+            case Nord:
+                switch (dir) {
+                    case Droite:
+                        e.direction=Direction.Est;
+                    case Gauche:
+                        e.direction=Direction.Ouest;
+                    case Derriere:
+                        e.direction=Direction.Sud;
+                    default:
+                        return false;
+                }
+            case Sud:
+                switch (dir) {
+                    case Droite:
+                        e.direction=Direction.Ouest;
+                    case Gauche:
+                        e.direction=Direction.Est;
+                    case Derriere:
+                        e.direction=Direction.Nord;
+                    default:
+                        return false;
+                }
+            case Est:
+                switch (dir) {
+                    case Droite:
+                        e.direction=Direction.Sud;
+                    case Gauche:
+                        e.direction=Direction.Nord;
+                    case Derriere:
+                        e.direction=Direction.Ouest;
+                    default:
+                        return false;
+                }
+            case Ouest:
+                switch (dir) {
+                    case Droite:
+                        e.direction=Direction.Nord;
+                    case Gauche:
+                        e.direction=Direction.Sud;
+                    case Derriere:
+                        e.direction=Direction.Est;
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
     }
 
     @Override

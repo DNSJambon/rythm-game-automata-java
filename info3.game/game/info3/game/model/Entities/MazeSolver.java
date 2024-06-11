@@ -134,16 +134,23 @@ public class MazeSolver extends Entity {
     }
 
     @Override
+    public boolean do_pop(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+    }
+
+    @Override
+    public boolean do_wizz(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+    }
+
+    @Override
     public boolean do_turn(Entity e, DirRelative dir) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
-
-    @Override
-    public boolean do_wait(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
-    }
+    
 
     //variables pour l'animation de deplacement
     int in_movement = -1;
