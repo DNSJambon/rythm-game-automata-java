@@ -19,7 +19,6 @@ import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
-import info3.game.model.Entities.Snake;
 
 
 public class Grille implements IGrille{
@@ -34,7 +33,10 @@ public class Grille implements IGrille{
     BufferedImage[] m_images;
     Entity main_Entity;
     int viewport_size = 7;
-
+    int debut_entre_X=10;
+    int debut_entre_Y=10;
+    int fin_X= 1;
+    int fin_Y= 1;
 
     //Synchro
     boolean authorised;
@@ -43,10 +45,10 @@ public class Grille implements IGrille{
 
     public Grille(int rows, int cols, Control m_control) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
-        int debut_entre_X=0;
-        int debut_entre_Y=0;
-        int fin_X= 33;
-        int fin_Y= 33;
+        int debut_entre_X = 0;
+        int debut_entre_Y = 0;
+        int fin_X = 33;
+        int fin_Y = 33;
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
@@ -62,12 +64,13 @@ public class Grille implements IGrille{
         //ajoute player1
         Player1 p = new Player1(this);
         m_control.addEntity(p);
-        MazeSolver m = new MazeSolver(this, debut_entre_X,debut_entre_Y );
+        MazeSolver m = new MazeSolver(this, debut_entre_X, debut_entre_Y);
         // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
         m_control.addEntity(m);
-        pourcentage_aleatoire_obstacle(this, 50, 23, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        pourcentage_aleatoire_obstacle(this, 50, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
     }
+
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
             int endX, int endY) {
         if (pourcentage < 0 || pourcentage > 100) {
@@ -81,12 +84,15 @@ public class Grille implements IGrille{
         List<cell> emptyCells = new ArrayList<>();
 
         for (int i = 0; i < grille.rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (grille.grille[i][j].pas_obstacle()) {
+            for (int j = 0; j < grille.cols; j++) {
+                if (grille.grille[i][j].pas_obstacle() && !(i == debut_entre_X && j == debut_entre_Y)) {
                     emptyCells.add(grille.grille[i][j]);
                 }
             }
         }
+        
+        
+        
 
         Collections.shuffle(emptyCells, random);
         // System.out.println("print cells : "+emptyCells);
@@ -102,7 +108,7 @@ public class Grille implements IGrille{
             cell c = emptyCells.get(i);
             tempObstacles[c.getRow()][c.getCol()] = true;
 
-            if (chemin_existe(tempObstacles, startX, startY, endX, endY)) {
+            if (chemin_existe(tempObstacles, startX, startY, endX, endY) ) {
                 Obstacle o = new Obstacle(this, c.getCol(), c.getRow());
                 m_control.addEntity(o);
                 c.setEntity(o);
@@ -111,7 +117,6 @@ public class Grille implements IGrille{
                 tempObstacles[c.getRow()][c.getCol()] = false;
             }
         }
-
         return 0;
     }
 
@@ -174,7 +179,7 @@ public class Grille implements IGrille{
     }
 
 
-
+    /* ======================Partie Synchro========================== */
     public char getTouche() {
         return touche;
     }
@@ -277,7 +282,7 @@ public class Grille implements IGrille{
     }
     
 
-    /* -----------Paint et ticks---------------*/
+    /*=========================Paint et ticks=============================*/
 
     int x_main_old = 3;
     int y_main_old = 3;
@@ -368,12 +373,12 @@ public class Grille implements IGrille{
         //MiniMap
         drawMinimap(g, width, (height - 340) / 2, 340, 340);
 
-        //TODO: 
-        //ATH haut
+         
+        //ATH huta
         drawATH_haut(g, width, 0, 340, (height - 340) / 2);
 
-        //TODO:
         //ATH bas
+        drawATH_bas(g, width, (height + 340) / 2, 340, (height - 340) / 2);
 
     }
     
@@ -403,13 +408,16 @@ public class Grille implements IGrille{
 
     
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
+        //TODO:
         g.setColor(Color.WHITE);
         g.fillRect(x, y, width, height);
 
     }
     
     void drawATH_bas(Graphics g, int x, int y, int width, int height) {
-        //TODO
+        //TODO:
+        g.setColor(Color.WHITE);
+        g.fillRect(x, y, width, height);
 
     }
     
