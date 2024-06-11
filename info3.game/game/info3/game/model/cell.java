@@ -14,7 +14,7 @@ import info3.game.model.Entities.Entity;
 public class cell implements Icell {
 
     Grille grid;
-    
+    boolean P2;
     Entity e;
     int vide;
     int x, y;
@@ -29,6 +29,7 @@ public class cell implements Icell {
         this.x = x;
         this.y = y;
         vide = 1;
+        P2=false;
     }
 
     public cell(Grille g, int x, int y, Entity e) {
@@ -36,6 +37,7 @@ public class cell implements Icell {
         this.y = y;
         this.e = e;
         vide = 0;
+        P2=false;
     }
 
     public cellType getType() {
