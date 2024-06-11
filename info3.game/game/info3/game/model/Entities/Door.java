@@ -9,12 +9,15 @@ import info3.game.model.IGrille;
 import info3.game.model.cellType;
 
 public class Door extends Entity{
-
-    public Door(IGrille g,Automaton a,int x,int y) {
+    Key k;
+    boolean opened;
+    public Door(IGrille g,Automaton a,int x,int y,Key k) {
         super(g);
         this.x = x;
         this.y =y;
         this.a = a;
+        this.k=k;
+        opened=false;
     }
 
     @Override
@@ -41,8 +44,11 @@ public class Door extends Entity{
 
     @Override
     public boolean do_pick(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
+        if (k.picked()) {
+            opened=true;
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -19,6 +19,10 @@ public class Key extends Entity {
         g.getCell(x, y).setEntity(this);
         picked=false;
     }
+
+    public boolean picked() {
+        return picked;
+    }
     @Override
     public cellType getType() {
         // TODO Auto-generated method stub
