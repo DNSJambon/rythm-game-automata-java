@@ -129,7 +129,9 @@ But du jeu : trouver une clé puis sortir
   ]
 }
 ```
-#Automates en GAL
+# Automates en gal
+Joueur 1
+```gal
 Player1(Init){
 * (Init):
 | pressKey(FU) & eval_cell(P1, N, Ennemy) ? Hit(N) :(Init)
@@ -149,3 +151,70 @@ Player1(Init){
 | pressKey(FL) & eval_cell(P1, O, Void) ? Move(O) :(Init)
 | pressKey(FL) & eval_cell(P1, O, Key) ? Move(O) :(Init)
 }
+```
+Joueur 2
+```gal
+Player2(Init){
+* (Init):
+| pressKey(Z) ? Move(N) :(Init)
+| pressKey(Q) ? Move(O) :(Init)
+| pressKey(S) ? Move(S) :(Init)
+| pressKey(D) ? Move(E) :(Init)
+
+| pressKey(A) ? Pop() :(Init)
+
+| pressKey(R) ? Egg() :(Init)
+
+| pressKey(E) ? Wizz() :(Init)
+}
+```
+Piege (pique)
+```gal
+Piege(1){
+* (1):
+| Cell(H,P) ? Wait() :(2)
+
+* (2):
+| Cell(H,P) ? Hit(H) :(2)
+}
+```
+Ennemy suiveur
+```gal
+Suiveur(1){
+* (1):
+| Closest(d,P) & Cell(d,Obstacle) ? Wait :(1)
+| Closest(d,P) & Cell(d,Ennemy) ? Wait :(1)
+| Closest(d,P) & Cell(d,Void) ? Move(d) :(1)
+| Cell(d,P) ? Hit(d) :(1)
+}
+```
+Mage
+```gal
+Mage(1){
+*(1):
+| Cell(F,O) ? Turn(D) : (1)
+| Cell(F,V) ? Move(F) : (2)
+ 
+* (2):
+| Cell(F,O) ? Wait() : (3)
+| Cell(F,V) ? Egg() : (3)
+
+* (3):
+| True() ? Wait() : (1)
+
+*()
+}
+```
+Ennemy Projectile
+```gal
+Projectile(Alive){
+
+* (Alive):
+| Cell(F,V) ? Move(F) :(Alive) 
+| Cell(F,P) ?  Hit()  :()
+| True() ? :()
+ 
+* ()
+
+}
+```
