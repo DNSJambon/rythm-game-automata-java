@@ -79,6 +79,7 @@ public class cell implements Icell {
 
     public void resetEntity() {
         e[1] = null;
+        vide = 1;
     }
 
     public void resetTrap() {
