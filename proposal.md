@@ -6,16 +6,16 @@ Trouver une clé puis sortir.
 - La grille est composée de cases pouvant gérer plusieurs entités sur une même case.
 - Vue de dessus
 - Génération aléatoire de la map, incluant des murs et des bots de type labyrinthe.
-
 ### Gestion de la difficulté
-- plus ou moins de mob
-- parametre synchro au lancement du jeu combien de temps pour réflechir avant le déroulement des actions :
-    - 2 jeux: 
-        - beaucoup de temps pour réflechir 
-        - pas beaucoup de temps pour réflechir/réagir
-- ordre des actions (fairness) : 
-    - par entité
-    - joueur 1 en premier puis enemies puis joueur 2
+- Nombre de mobs ajustable pour varier la difficulté.
+### Paramètres de synchronisation
+- Parametre synchro au lancement du jeu.
+- Deux jeux basés sur le temps de réflexion :
+  - Jeu 1 : Beaucoup de temps pour réfléchir avant le déroulement des actions.
+  - Jeu 2 : Peu de temps pour réfléchir/réagir.
+### Ordre des actions (fairness) : 
+  - par entité
+  - joueur 1 en premier puis enemies puis joueur 2
 - joueur :
     - joueur 1 :
         - deplace a laide des fleches
