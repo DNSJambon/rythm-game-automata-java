@@ -175,6 +175,7 @@ public class Player1 extends Entity{
 
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
+        /* 
         if (in_movement != -1) {
             if (direction == Direction.Nord) {
                 y += (height * in_movement) / nb_frame_move;
@@ -187,6 +188,7 @@ public class Player1 extends Entity{
             }
             in_movement--;
         }
+            */
 
         graphics.drawImage(m_images[image_index], x, y, width, height, null);
 

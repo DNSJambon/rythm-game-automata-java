@@ -1,0 +1,16 @@
+Mage(1){
+
+*(1):
+| Cell(F,O) ? Turn(D) : (1)
+| Cell(F,V) ? Move(F) : (2)
+ 
+* (2):
+| Cell(F,O) ? Wait() : (3)
+| Cell(F,V) ? Egg() : (3)
+
+* (3):
+| True() ? Wait() : (1)
+
+*()
+
+}

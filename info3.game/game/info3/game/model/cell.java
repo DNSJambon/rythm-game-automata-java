@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import info3.game.model.Entities.Entity;
+import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player2;
 
 public class cell implements Icell {
@@ -79,7 +80,7 @@ public class cell implements Icell {
 
     public void resetEntity() {
         e[1] = null;
-        vide = 1;
+        vide=1;
     }
 
     public void resetTrap() {
@@ -94,14 +95,20 @@ public class cell implements Icell {
         return x;
     }
   
-    public void paint(Graphics g, int width, int height) {
+    public void paint(Graphics g, int x, int y, int width, int height) {
         if (vide == 0) {
             for (int i = 0; i < 3; i++) {
                 if (e[i] != null) {
-                    e[i].paint(g, x * width, y * height, width, height);
+                    e[i].paint(g, x, y, width, height);
                 }
             }
         }
     }
+
+    public boolean pas_obstacle() {
+        return !(e[1] instanceof Obstacle); // La cellule est libre si elle ne contient pas un obstacle
+    }
+
+
 
 }

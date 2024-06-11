@@ -2,9 +2,15 @@ package info3.game.model;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Random;
 import javax.imageio.ImageIO;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -24,16 +30,23 @@ public class Grille implements IGrille{
 
     Control m_control;
 
-
+    // Viewport
     BufferedImage[] m_images;
-    int viewport_size = 9;
+    Entity main_Entity;
+    int viewport_size = 7;
 
+
+    //Synchro
     boolean authorised;
     char touche;
     
 
     public Grille(int rows, int cols, Control m_control) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
+        int debut_entre_X=0;
+        int debut_entre_Y=0;
+        int fin_X= 33;
+        int fin_Y= 33;
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
@@ -49,19 +62,119 @@ public class Grille implements IGrille{
         //ajoute player1
         Player1 p = new Player1(this);
         m_control.addEntity(p);
-        MazeSolver m = new MazeSolver(this, 0, 0);
+        MazeSolver m = new MazeSolver(this, debut_entre_X,debut_entre_Y );
+        // MazeSolver m = new MazeSolver(this, 0, 0);
+        main_Entity = m;
         m_control.addEntity(m);
-        // ajout des obstacles aléatoirements
-        Obstacle o;
-        for (int i = 0; i <20; i++) {
-            cell c = randomCell_libre();
-            o = new Obstacle(this, c.getCol(), c.getRow());
-            m_control.addEntity(o);
-            //c.setEntity(o);
+        pourcentage_aleatoire_obstacle(this, 50, 23, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+    }
+    private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
+            int endX, int endY) {
+        if (pourcentage < 0 || pourcentage > 100) {
+            return -1;
         }
 
+        int totalCells = grille.rows * grille.cols;
+        int numObstacles = (totalCells * pourcentage) / 100;
+
+        Random random = new Random(seed);
+        List<cell> emptyCells = new ArrayList<>();
+
+        for (int i = 0; i < grille.rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grille.grille[i][j].pas_obstacle()) {
+                    emptyCells.add(grille.grille[i][j]);
+                }
+            }
+        }
+
+        Collections.shuffle(emptyCells, random);
+        // System.out.println("print cells : "+emptyCells);
+        boolean[][] tempObstacles = new boolean[grille.rows][grille.cols];
+        for (int i = 0; i < grille.rows; i++) {
+            for (int j = 0; j < grille.cols; j++) {
+                tempObstacles[i][j] = !grille.grille[i][j].pas_obstacle();
+            }
+        }
+
+        int obstaclesPlaced = 0;
+        for (int i = 0; i < emptyCells.size() && obstaclesPlaced < numObstacles; i++) {
+            cell c = emptyCells.get(i);
+            tempObstacles[c.getRow()][c.getCol()] = true;
+
+            if (chemin_existe(tempObstacles, startX, startY, endX, endY)) {
+                Obstacle o = new Obstacle(this, c.getCol(), c.getRow());
+                m_control.addEntity(o);
+                c.setEntity(o);
+                obstaclesPlaced++;
+            } else {
+                tempObstacles[c.getRow()][c.getCol()] = false;
+            }
+        }
+
+        return 0;
     }
-   
+
+    // L'idéale est d'utiliser un algo de parcours en largeur afin de vérifier
+    // qu'une grille est faisable
+    // pour l'instant on fait que pour 2 cases // 3 cases à faire après( porte, clée
+    // , case de départ )
+    private boolean chemin_existe(boolean[][] obstacles, int startX, int startY, int endX, int endY) {
+        if (startX == endX && startY == endY) {
+            return true;
+        }
+        boolean[][] visitedFromStart = new boolean[rows][cols];
+        boolean[][] visitedFromEnd = new boolean[rows][cols];
+        Queue<int[]> queueStart = new LinkedList<>();
+        Queue<int[]> queueEnd = new LinkedList<>();
+
+        queueStart.add(new int[] { startX, startY });
+        queueEnd.add(new int[] { endX, endY });
+
+        visitedFromStart[startX][startY] = true;
+        visitedFromEnd[endX][endY] = true;
+
+        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+        while (!queueStart.isEmpty() && !queueEnd.isEmpty()) {
+            if (avancer_largeur(queueStart, visitedFromStart, visitedFromEnd, obstacles, directions)) {
+                return true;
+            }
+            if (avancer_largeur(queueEnd, visitedFromEnd, visitedFromStart, obstacles, directions)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean avancer_largeur(Queue<int[]> queue, boolean[][] visited, boolean[][] visitedOther,
+            boolean[][] obstacles, int[][] directions) {
+        int[] current = queue.poll();
+        int x = current[0];
+        int y = current[1];
+
+        for (int[] dir : directions) {
+            int newX = x + dir[0];
+            int newY = y + dir[1];
+
+            if (Valid(newX, newY) && !obstacles[newX][newY] && !visited[newX][newY]) {
+                if (visitedOther[newX][newY]) {
+                    return true;
+                }
+
+                visited[newX][newY] = true;
+                queue.add(new int[] { newX, newY });
+            }
+        }
+
+        return false;
+    }
+    private boolean Valid(int x, int y) {
+        return x >= 0 && x < rows && y >= 0 && y < cols;
+    }
+
+
+
     public char getTouche() {
         return touche;
     }
@@ -160,25 +273,144 @@ public class Grille implements IGrille{
         for (Entity e : m_control.getEntities()) {
             e.tick(elapsed);
         }
-        
-    }
 
+    }
+    
+
+    /* -----------Paint et ticks---------------*/
+
+    int x_main_old = 3;
+    int y_main_old = 3;
+    int mouvement = 8; //nombre de frame pour le decalage de la vue
+    Color vide = new Color(223, 208, 184);
+    Color obstacle = new Color(139, 127, 109);
+    Color player = new Color(60, 91, 111);
+    Color pickable = new Color(240, 194, 80);
+
+   
     public void paint(Graphics g, int width, int height) {
+        int x_main = main_Entity.getX();
+        int y_main = main_Entity.getY();
+
+        //on s'assure que la vue ne sorte pas de la grille
+        if (x_main < viewport_size / 2)
+            x_main = viewport_size / 2;
+        if (x_main > rows - viewport_size / 2 - 1)
+            x_main = rows - viewport_size / 2 - 1;
+        if (y_main < viewport_size / 2)
+            y_main = viewport_size / 2;
+        if (y_main > cols - viewport_size / 2 - 1)
+            y_main = cols - viewport_size / 2 - 1;
+
+        //l'offset permet de faire bouger la vue de facçon fluide quand on se déplace
+        int offset_x = (x_main - x_main_old) * width / viewport_size;
+        int offset_y = (y_main - y_main_old) * height / viewport_size;
+
+        //pour load la ligne d'image qui va disparaitre:
+        int load_x_negatif, load_x_positif, load_y_negatif, load_y_positif;
+        load_x_negatif = load_x_positif = load_y_negatif = load_y_positif = 0;
+        if (offset_x > 0)
+            load_x_negatif = 1;
+
+        if (offset_x < 0)
+            load_x_positif = 1;
+
+        if (offset_y > 0)
+            load_y_negatif = 1;
+
+        if (offset_y < 0)
+            load_y_positif = 1;
+
         //on dessine le sol en premier
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        for (int j = y_main - viewport_size / 2 - load_y_negatif; j <= y_main + viewport_size / 2
+                + load_y_positif; j++) {
+            for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2
+                    + load_x_positif; i++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
-                    g.drawImage(m_images[0], j * width / cols, i * height / rows, width / cols, height / rows, null);
+                    g.drawImage(m_images[0],
+                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
+                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / 8,
+                            width / viewport_size,
+                            height / viewport_size,
+                            null);
                 else
-                    g.drawImage(m_images[21], j * width / cols, i * height / rows, width / cols, height / rows, null);
+                    g.drawImage(m_images[21],
+                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
+                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / 8,
+                            width / viewport_size,
+                            height / viewport_size,
+                            null);
             }
         }
         //on dessine les entités
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                grille[i][j].paint(g, width/cols, height/rows);
+        for (int j = y_main - viewport_size / 2 - load_y_negatif; j <= y_main + viewport_size / 2
+                + load_y_positif; j++) {
+            for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2
+                    + load_x_positif; i++) {
+                grille[j][i].paint(g,
+                        (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
+                        (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / 8,
+                        width / viewport_size,
+                        height / viewport_size);
             }
         }
+
+        if (offset_x != 0 || offset_y != 0) {
+            mouvement--;
+            if (mouvement == -1)
+                mouvement = 8;
+        }
+        if (mouvement == 8) {
+            x_main_old = x_main;
+            y_main_old = y_main;
+        }
+
+        //MiniMap
+        drawMinimap(g, width, (height - 340) / 2, 340, 340);
+
+        //TODO: 
+        //ATH haut
+        drawATH_haut(g, width, 0, 340, (height - 340) / 2);
+
+        //TODO:
+        //ATH bas
+
+    }
+    
+    void drawMinimap(Graphics g, int x, int y, int width, int height) { 
+        for (int j = 0; j < rows; j++) {
+            for (int i = 0; i < cols; i++) {
+                switch (grille[j][i].getCategory()) {
+                    case 'V':
+                        g.setColor(vide);
+                        break;
+                    case 'O':
+                        g.setColor(obstacle);
+                        break;
+                    case 'P':
+                        g.setColor(pickable);
+                        break;
+                    case 'T':
+                        g.setColor(player);
+                        break;
+
+                }
+                g.fillRect(x + (i * width / cols), y + (j * height / rows), width / cols, height / rows);
+            }
+        }
+    }
+    
+
+    
+    void drawATH_haut(Graphics g, int x, int y, int width, int height) {
+        g.setColor(Color.WHITE);
+        g.fillRect(x, y, width, height);
+
+    }
+    
+    void drawATH_bas(Graphics g, int x, int y, int width, int height) {
+        //TODO
+
     }
     
 
