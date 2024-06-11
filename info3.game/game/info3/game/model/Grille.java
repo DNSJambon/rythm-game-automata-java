@@ -262,6 +262,7 @@ public class Grille implements IGrille{
 
         //TODO: 
         //ATH haut
+        drawATH_haut(g, width, 0, 340, (height - 340) / 2);
 
         //TODO:
         //ATH bas
@@ -294,7 +295,8 @@ public class Grille implements IGrille{
 
     
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
-        //TODO
+        g.setColor(Color.WHITE);
+        g.fillRect(x, y, width, height);
 
     }
     
