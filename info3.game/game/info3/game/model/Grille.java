@@ -68,7 +68,8 @@ public class Grille implements IGrille{
         // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
         m_control.addEntity(m);
-        pourcentage_aleatoire_obstacle(this, 50, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        pourcentage_aleatoire_obstacle(this, 100, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        cree_des_salles(666);
     }
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
@@ -182,7 +183,7 @@ public class Grille implements IGrille{
     //met des rectangelles de vide dans la grille
     private void cree_des_salles(long seed) {
         Random random = new Random(seed);
-        int nb_salle = random.nextInt(3) + 2;
+        int nb_salle = random.nextInt(4) + 3;
         int taille_salle = random.nextInt(3) + 4;
 
         for (int i = 0; i < nb_salle; i++) {
@@ -194,6 +195,10 @@ public class Grille implements IGrille{
                 }
             }
         }
+        //placer quelques monstres (maze solver) dans les salles creees
+        //TODO
+        
+        
         
 
     }
