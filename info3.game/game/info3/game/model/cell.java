@@ -7,15 +7,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.jcraft.jogg.Buffer;
-
 import info3.game.model.Entities.Entity;
+import info3.game.model.Entities.Player2;
 
 public class cell implements Icell {
 
     Grille grid;
-    boolean P2;
-    Entity e;
+    Entity[] e;
     int vide;
     int x, y;
 
@@ -29,22 +27,22 @@ public class cell implements Icell {
         this.x = x;
         this.y = y;
         vide = 1;
-        P2=false;
+        this.e = new Entity[3];
     }
 
     public cell(Grille g, int x, int y, Entity e) {
         this.x = x;
         this.y = y;
-        this.e = e;
+        this.e = new Entity[3];
+        this.e[1] = e;
         vide = 0;
-        P2=false;
     }
 
     public cellType getType() {
         if (vide == 1) {
             return cellType.Vide;
         } else {
-            return e.getType();
+            return e[1].getType();
         }
     }
 
@@ -52,12 +50,22 @@ public class cell implements Icell {
         if (vide == 1) {
             return Category.V;
         } else {
-            return e.getCategory();
+            return e[1].getCategory();
         }
     }
 
+    public void setTrap(Entity e) {
+        this.e[0] = e;
+        vide = 0;
+    }
+
     public void setEntity(Entity e) {
-        this.e = e;
+        this.e[1] = e;
+        vide = 0;
+    }
+
+    public void setP2(Player2 p2) {
+        this.e[2] = p2;
         vide = 0;
     }
 
@@ -72,14 +80,15 @@ public class cell implements Icell {
     public int getCol() {
         return x;
     }
-
-    
   
     public void paint(Graphics g, int width, int height) {
         if (vide == 0) {
-            e.paint(g, x * width, y * height, width, height);
+            for (int i = 0; i < 3; i++) {
+                if (e[i] != null) {
+                    e[i].paint(g, x * width, y * height, width, height);
+                }
+            }
         }
     }
-
 
 }

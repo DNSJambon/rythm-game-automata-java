@@ -2,29 +2,32 @@ package info3.game.model.Entities;
 
 import java.awt.Graphics;
 
-import info3.game.controller.Automaton;
 import info3.game.controller.DirRelative;
+import info3.game.controller.Direction;
 import info3.game.model.Category;
-import info3.game.model.IGrille;
+import info3.game.model.Grille;
 import info3.game.model.cellType;
 
-public class Door extends Entity{
+public class Player2 extends Entity {
 
-    public Door(IGrille g,Automaton a,int x,int y) {
+    public Player2(Grille g, int x, int y) {
         super(g);
+        etat_courant = 0;
+        direction = Direction.Est;
         this.x = x;
-        this.y =y;
-        this.a = a;
+        this.y = y;
+        g.getCell(x, y).setP2(this);
     }
 
     @Override
     public cellType getType() {
-        return cellType.Door;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getType'");
     }
 
     @Override
     public char getCategory() {
-        return Category.D;
+        return Category.P;
     }
 
     @Override
@@ -69,4 +72,5 @@ public class Door extends Entity{
         throw new UnsupportedOperationException("Unimplemented method 'tick'");
     }
     
+
 }
