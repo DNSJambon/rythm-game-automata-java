@@ -2,7 +2,12 @@ package info3.game.model;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Random;
 import javax.imageio.ImageIO;
 
 import java.awt.Graphics;
@@ -37,6 +42,10 @@ public class Grille implements IGrille{
 
     public Grille(int rows, int cols, Control m_control) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
+        int debut_entre_X=10;
+        int debut_entre_Y=10;
+        int fin_X= 1;
+        int fin_Y= 1;
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
@@ -52,20 +61,119 @@ public class Grille implements IGrille{
         //ajoute player1
         Player1 p = new Player1(this);
         m_control.addEntity(p);
-        MazeSolver m = new MazeSolver(this, 0, 0);
+        MazeSolver m = new MazeSolver(this, debut_entre_X,debut_entre_Y );
+        // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
         m_control.addEntity(m);
-        // ajout des obstacles aléatoirements
-        Obstacle o;
-        for (int i = 0; i <150; i++) {
-            cell c = randomCell_libre();
-            o = new Obstacle(this, c.getCol(), c.getRow());
-            m_control.addEntity(o);
-            //c.setEntity(o);
+        pourcentage_aleatoire_obstacle(this, 40, 23, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+    }
+    private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
+            int endX, int endY) {
+        if (pourcentage < 0 || pourcentage > 100) {
+            return -1;
         }
 
+        int totalCells = grille.rows * grille.cols;
+        int numObstacles = (totalCells * pourcentage) / 100;
+
+        Random random = new Random(seed);
+        List<cell> emptyCells = new ArrayList<>();
+
+        for (int i = 0; i < grille.rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grille.grille[i][j].pas_obstacle()) {
+                    emptyCells.add(grille.grille[i][j]);
+                }
+            }
+        }
+
+        Collections.shuffle(emptyCells, random);
+        // System.out.println("print cells : "+emptyCells);
+        boolean[][] tempObstacles = new boolean[grille.rows][grille.cols];
+        for (int i = 0; i < grille.rows; i++) {
+            for (int j = 0; j < grille.cols; j++) {
+                tempObstacles[i][j] = !grille.grille[i][j].pas_obstacle();
+            }
+        }
+
+        int obstaclesPlaced = 0;
+        for (int i = 0; i < emptyCells.size() && obstaclesPlaced < numObstacles; i++) {
+            cell c = emptyCells.get(i);
+            tempObstacles[c.getRow()][c.getCol()] = true;
+
+            if (chemin_existe(tempObstacles, startX, startY, endX, endY)) {
+                Obstacle o = new Obstacle(this, c.getCol(), c.getRow());
+                m_control.addEntity(o);
+                c.setEntity(o);
+                obstaclesPlaced++;
+            } else {
+                tempObstacles[c.getRow()][c.getCol()] = false;
+            }
+        }
+
+        return 0;
     }
-   
+
+    // L'idéale est d'utiliser un algo de parcours en largeur afin de vérifier
+    // qu'une grille est faisable
+    // pour l'instant on fait que pour 2 cases // 3 cases à faire après( porte, clée
+    // , case de départ )
+    private boolean chemin_existe(boolean[][] obstacles, int startX, int startY, int endX, int endY) {
+        if (startX == endX && startY == endY) {
+            return true;
+        }
+        boolean[][] visitedFromStart = new boolean[rows][cols];
+        boolean[][] visitedFromEnd = new boolean[rows][cols];
+        Queue<int[]> queueStart = new LinkedList<>();
+        Queue<int[]> queueEnd = new LinkedList<>();
+
+        queueStart.add(new int[] { startX, startY });
+        queueEnd.add(new int[] { endX, endY });
+
+        visitedFromStart[startX][startY] = true;
+        visitedFromEnd[endX][endY] = true;
+
+        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+        while (!queueStart.isEmpty() && !queueEnd.isEmpty()) {
+            if (avancer_largeur(queueStart, visitedFromStart, visitedFromEnd, obstacles, directions)) {
+                return true;
+            }
+            if (avancer_largeur(queueEnd, visitedFromEnd, visitedFromStart, obstacles, directions)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean avancer_largeur(Queue<int[]> queue, boolean[][] visited, boolean[][] visitedOther,
+            boolean[][] obstacles, int[][] directions) {
+        int[] current = queue.poll();
+        int x = current[0];
+        int y = current[1];
+
+        for (int[] dir : directions) {
+            int newX = x + dir[0];
+            int newY = y + dir[1];
+
+            if (Valid(newX, newY) && !obstacles[newX][newY] && !visited[newX][newY]) {
+                if (visitedOther[newX][newY]) {
+                    return true;
+                }
+
+                visited[newX][newY] = true;
+                queue.add(new int[] { newX, newY });
+            }
+        }
+
+        return false;
+    }
+    private boolean Valid(int x, int y) {
+        return x >= 0 && x < rows && y >= 0 && y < cols;
+    }
+
+
+
     public char getTouche() {
         return touche;
     }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import info3.game.model.Entities.Entity;
+import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player2;
 
 public class cell implements Icell {
@@ -103,5 +104,11 @@ public class cell implements Icell {
             }
         }
     }
+
+    public boolean pas_obstacle() {
+        return !(e[1] instanceof Obstacle); // La cellule est libre si elle ne contient pas un obstacle
+    }
+
+
 
 }
