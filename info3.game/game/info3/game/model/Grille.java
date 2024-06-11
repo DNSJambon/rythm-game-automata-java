@@ -178,6 +178,26 @@ public class Grille implements IGrille{
         return x >= 0 && x < rows && y >= 0 && y < cols;
     }
 
+    //le but est de créer des salles dans le labyrinthe rempli de monstres
+    //met des rectangelles de vide dans la grille
+    private void cree_des_salles(long seed) {
+        Random random = new Random(seed);
+        int nb_salle = random.nextInt(3) + 2;
+        int taille_salle = random.nextInt(3) + 4;
+
+        for (int i = 0; i < nb_salle; i++) {
+            int x = random.nextInt(rows - taille_salle);
+            int y = random.nextInt(cols - taille_salle);
+            for (int j = 0; j < taille_salle; j++) {
+                for (int k = 0; k < taille_salle; k++) {
+                    grille[x + j][y + k].resetEntity();
+                }
+            }
+        }
+        
+
+    }
+
 
     /* ======================Partie Synchro========================== */
     public char getTouche() {
