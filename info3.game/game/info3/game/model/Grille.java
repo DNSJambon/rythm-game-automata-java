@@ -66,7 +66,7 @@ public class Grille implements IGrille{
         // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
         m_control.addEntity(m);
-        pourcentage_aleatoire_obstacle(this, 100, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        pourcentage_aleatoire_obstacle(this, 50, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
     }
     
 
