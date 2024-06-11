@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import info3.game.controller.*;
 import info3.game.controller.Actions.Pick;
 import info3.game.controller.Conditions.Cell;
+import info3.game.model.Category;
 import info3.game.model.Grille;
 import info3.game.model.cell;
 import info3.game.model.cellType;
@@ -32,7 +33,7 @@ public class Pomme extends Entity {
 
         Transition[] T = new Transition[1];
 
-        Cell c = new Cell(DirRelative.soi, cellType.Snake); 
+        Cell c = new Cell(DirRelative.soi, Category.T); 
 
         Pick p = new Pick();
 
@@ -47,17 +48,11 @@ public class Pomme extends Entity {
     public cellType getType() {
         return cellType.Apple;
     }
-
-    @Override
-    public boolean eval_cell(Entity e, DirRelative dir, cellType type) {
-        switch (dir) {
-            case soi:
-                return g.getCell(x, y).getType() == type;
-            default:
-                return false;
-        }
+    public char getCategory() {
+        return Category.P;
     }
 
+   
     @Override
     public boolean do_move(Entity e, DirRelative dir) {
         g.getCell(x, y).reset();

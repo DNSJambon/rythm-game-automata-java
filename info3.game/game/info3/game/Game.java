@@ -46,7 +46,11 @@ public class Game {
 		// in an Model-View-Controller pattern (MVC)
 		m_control = new Control();
 		//TODO: INVERSER
+<<<<<<< HEAD
 		m_grille = new Grille(15, 15, m_control);
+=======
+		m_grille = new Grille(24, 24, m_control);
+>>>>>>> master
 		// creating a listener for all the events
 		// from the game canvas, that would be
 		// the controller in the MVC pattern
@@ -140,7 +144,7 @@ public class Game {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
-					authorised=false;
+					authorised = false;
 					m_grille.switchAuthorised();
 					
 				}
@@ -168,9 +172,11 @@ public class Game {
 			m_timekey += elapsed;
 			if (m_timekey > Rythme) {
 				m_timekey = 0;
-				m_grille.switchAuthorised();
 				m_control.step();
+				m_grille.switchAuthorised();
+				authorised = false;
 			}
+			
 		}
 	
 		

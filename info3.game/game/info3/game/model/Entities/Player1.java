@@ -34,14 +34,9 @@ public class Player1 extends Entity{
             e.printStackTrace();
         }
 
-        Cell obstacle_devant = new Cell(DirRelative.Devant, cellType.Obstacle);
-        Cell obstacle_droite = new Cell(DirRelative.Droite, cellType.Obstacle);
-        Cell obstacle_gauche = new Cell(DirRelative.Gauche, cellType.Obstacle);
-        Cell obstacle_derriere = new Cell(DirRelative.Derriere, cellType.Obstacle);
-        Cell droite_vide = new Cell(DirRelative.Droite, cellType.Vide);
-        True t = new True();
-        Cell gauche_vide = new Cell(DirRelative.Gauche, cellType.Vide);
-        Cell devant_vide = new Cell(DirRelative.Devant, cellType.Vide);
+      
+        Cell droite_vide = new Cell(DirRelative.Droite, Category.V);
+        Cell gauche_vide = new Cell(DirRelative.Gauche, Category.V);
 
         Move devant = new Move(DirRelative.Devant);
         Move droite = new Move(DirRelative.Droite);
@@ -75,27 +70,42 @@ public class Player1 extends Entity{
         return cellType.Player1;
     }
 
+     @Override
+    public char getCategory() {
+        return Category.T;
+    }
+
     @Override
-    public boolean eval_cell(Entity e, DirRelative dir, cellType type) {
+    public boolean eval_cell(Entity e, DirRelative dir, char type) {
         switch (dir) {
             case Devant:
-                
-                return g.getCell(x, y-1).getType()==type;
-            case Gauche:
-    
-                return g.getCell(x-1, y).getType()==type;
+                if (y == 0) {
+                    return type == Category.O;
+                }
+                return g.getCell(x, y - 1).getCategory() == type;
+            
+                case Gauche:
+                if (x == 0) {
+                    return type == Category.O;
+                }
+                return g.getCell(x-1, y).getCategory() ==type;
         
+            
             case Droite:
-                    
-                return g.getCell(x+1, y).getType()==type;
+                if (x == g.getCols()-1) {
+                    return type == Category.O;
+                }
+                return g.getCell(x+1, y).getCategory() ==type;
 
             case Derriere:
-                    
-                return g.getCell(x, y+1).getType()==type;
+                if (y == g.getRows()-1) {
+                    return type == Category.O;
+                }
+                return g.getCell(x, y+1).getCategory() ==type;
 
             default:
 
-                return g.getCell(x, y).getType()==type;
+                return g.getCell(x, y).getCategory() ==type;
         }
     }
 
@@ -159,6 +169,7 @@ public class Player1 extends Entity{
 
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
+        /* 
         if (in_movement != -1) {
             if (direction == Direction.Nord) {
                 y += (height * in_movement) / nb_frame_move;
@@ -171,6 +182,7 @@ public class Player1 extends Entity{
             }
             in_movement--;
         }
+            */
 
         graphics.drawImage(m_images[image_index], x, y, width, height, null);
 
@@ -187,5 +199,7 @@ public class Player1 extends Entity{
         }
         
     }
+
+   
 
 }

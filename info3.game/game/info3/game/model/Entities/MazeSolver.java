@@ -37,10 +37,10 @@ public class MazeSolver extends Entity {
         //Automate par defaut (technique de la main droite)
         Transition[] T = new Transition[6];
 
-        Cell obstacle_devant = new Cell(DirRelative.Devant, cellType.Obstacle);
-        Cell obstacle_droite = new Cell(DirRelative.Droite, cellType.Obstacle);
-        Cell obstacle_gauche = new Cell(DirRelative.Gauche, cellType.Obstacle);
-        Cell droite_vide = new Cell(DirRelative.Droite, cellType.Vide);
+        Cell obstacle_devant = new Cell(DirRelative.Devant, Category.O);
+        Cell obstacle_droite = new Cell(DirRelative.Droite, Category.O);
+        Cell obstacle_gauche = new Cell(DirRelative.Gauche, Category.O);
+        Cell droite_vide = new Cell(DirRelative.Droite, Category.V);
         True t = new True();
         //Key devan = new Key('z');
         //Key derrière = new Key('s');
@@ -79,6 +79,10 @@ public class MazeSolver extends Entity {
         return cellType.MazeSolver;
     }
 
+    @Override
+    public char getCategory() {
+        return Category.T;
+    }
 
     @Override
     public boolean do_move(Entity e, DirRelative dir) {
@@ -145,6 +149,7 @@ public class MazeSolver extends Entity {
 
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
+        /* 
         if (in_movement != -1) {
             if (direction == Direction.Nord) {
                 y += (height * in_movement) / nb_frame_move;
@@ -157,7 +162,7 @@ public class MazeSolver extends Entity {
             }
             in_movement--;
         }
-
+        */
         graphics.drawImage(m_images[image_index], x, y, width, height, null);
 
     }

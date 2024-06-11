@@ -47,6 +47,14 @@ public class cell implements Icell {
         }
     }
 
+    public char getCategory() {
+        if (vide == 1) {
+            return Category.V;
+        } else {
+            return e.getCategory();
+        }
+    }
+
     public void setEntity(Entity e) {
         this.e = e;
         vide = 0;
@@ -66,9 +74,9 @@ public class cell implements Icell {
 
     
   
-    public void paint(Graphics g, int width, int height) {
+    public void paint(Graphics g, int x, int y, int width, int height) {
         if (vide == 0) {
-            e.paint(g, x * width, y * height, width, height);
+            e.paint(g, x, y, width, height);
         }
     }
 

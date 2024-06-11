@@ -28,8 +28,14 @@ public class Grille implements IGrille{
     long m_imageElapsed;
 
     Control m_control;
-    BufferedImage[] m_images;
 
+    // Viewport
+    BufferedImage[] m_images;
+    Entity main_Entity;
+    int viewport_size = 7;
+
+
+    //Synchro
     boolean authorised;
     char touche;
     
@@ -53,11 +59,16 @@ public class Grille implements IGrille{
         //ajoute player1
         Player1 p = new Player1(this);
         m_control.addEntity(p);
+<<<<<<< HEAD
         MazeSolver m = new MazeSolver(this, debut_entre_X,debut_entre_Y );
+=======
+        MazeSolver m = new MazeSolver(this, 0, 0);
+        main_Entity = m;
+>>>>>>> master
         m_control.addEntity(m);
         // ajout des obstacles aléatoirements
         Obstacle o;
-        for (int i = 0; i <10; i++) {
+        for (int i = 0; i <150; i++) {
             cell c = randomCell_libre();
             o = new Obstacle(this, c.getCol(), c.getRow());
             m_control.addEntity(o);
@@ -270,25 +281,97 @@ public class Grille implements IGrille{
         for (Entity e : m_control.getEntities()) {
             e.tick(elapsed);
         }
-        
+
     }
+    
+
+    int x_main_old = 3;
+    int y_main_old = 3;
+    int mouvement = 8; //nombre de frame pour le decalage de la vue
 
     public void paint(Graphics g, int width, int height) {
+        int x_main = main_Entity.getX();
+        int y_main = main_Entity.getY();
+        
+        if (x_main < viewport_size / 2) {
+            x_main = viewport_size / 2;
+        }     
+        if (x_main > rows - viewport_size / 2- 1) {
+            x_main = rows - viewport_size / 2 - 1;
+        }
+        if (y_main < viewport_size / 2) {
+            y_main = viewport_size / 2;
+        }
+        if (y_main > cols - viewport_size / 2 - 1) {
+            y_main = cols - viewport_size / 2 - 1;
+        }
+        
+        //l'offset permet de faire bouger la vue de facçon fluide quand on se déplace
+        int offset_x = (x_main - x_main_old) * width / viewport_size;
+        int offset_y = (y_main - y_main_old) * height / viewport_size;
+       
+        //pour load la ligne d'image qui va disparaitre:
+        int load_x_negatif, load_x_positif, load_y_negatif, load_y_positif;
+        load_x_negatif = load_x_positif = load_y_negatif = load_y_positif = 0;
+        if (offset_x > 0) {
+            load_x_negatif = 1;
+        }
+        if (offset_x < 0) {
+            load_x_positif = 1;
+        }
+        if (offset_y > 0) {
+            load_y_negatif = 1;
+        }
+        if (offset_y < 0) {
+            load_y_positif = 1;
+        }
+
+    
+
         //on dessine le sol en premier
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        for (int j = y_main - viewport_size / 2 - load_y_negatif; j <= y_main + viewport_size / 2 + load_y_positif; j++) {
+            for (int i = x_main - viewport_size/2 - load_x_negatif; i <= x_main + viewport_size / 2 + load_x_positif; i++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
-                    g.drawImage(m_images[0], j * width / cols, i * height / rows, width / cols, height / rows, null);
+                    g.drawImage(m_images[0],
+                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
+                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / 8,
+                            width / viewport_size,
+                            height / viewport_size,
+                                                    null);
                 else
-                    g.drawImage(m_images[21], j * width / cols, i * height / rows, width / cols, height / rows, null);
+                    g.drawImage(m_images[21],
+                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
+                            (j - y_main + viewport_size / 2) * height / viewport_size +offset_y * mouvement / 8,
+                            width / viewport_size,
+                            height / viewport_size,
+                                                    null);
             }
         }
         //on dessine les entités
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                grille[i][j].paint(g, width/cols, height/rows);
+        for (int j = y_main - viewport_size / 2 - load_y_negatif; j <= y_main + viewport_size / 2 + load_y_positif; j++) {
+            for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2 + load_x_positif; i++) {
+                grille[j][i].paint(g,
+                        (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
+                        (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / 8,
+                        width / viewport_size,
+                        height / viewport_size);
             }
         }
+
+        
+        if (offset_x != 0 || offset_y != 0) {
+            mouvement--;
+            if (mouvement == -1) {
+                mouvement = 8;
+            }
+        }
+        if (mouvement ==8) {
+            x_main_old = x_main;
+            y_main_old = y_main;
+        }
+
+
+    
     }
     
 

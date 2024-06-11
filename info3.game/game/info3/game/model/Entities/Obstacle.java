@@ -45,62 +45,66 @@ public class Obstacle extends Entity {
         return cellType.Obstacle;
     }
 
+    public char getCategory() {
+        return Category.O;
+    }
+
 
     @Override
-    public boolean eval_cell(Entity e, DirRelative dir, cellType type) {
+    public boolean eval_cell(Entity e, DirRelative dir, char type) {
         if (dir==DirRelative.soi) {
-            return type==this.getType();
+            return type==this.getCategory();
         }
         switch (e.direction) {
             case Nord:
                 switch (dir) {
                     case Devant:
-                        return g.getCell(x,(y + g.getRows() -1)%g.getRows()).getType()==type;   
+                        return g.getCell(x,(y + g.getRows() -1)%g.getRows()).getCategory()==type;   
                     case Derriere:
-                        return g.getCell(x, (y + 1) % g.getRows()).getType() ==type;
+                        return g.getCell(x, (y + 1) % g.getRows()).getCategory() ==type;
                     case Droite:
-                        return g.getCell((x+1)%g.getCols(), y).getType() ==type;
+                        return g.getCell((x+1)%g.getCols(), y).getCategory() ==type;
                     case Gauche:
-                        return g.getCell((x + g.getCols() -1) % g.getCols(), y).getType() ==type;
+                        return g.getCell((x + g.getCols() -1) % g.getCols(), y).getCategory() ==type;
                     default:
                         return false;
                 }
             case Sud:
                 switch (dir) {
                     case Devant:
-                        return g.getCell(x, (y + 1) % g.getRows()).getType() ==type;
+                        return g.getCell(x, (y + 1) % g.getRows()).getCategory() ==type;
                     case Derriere: 
-                        return g.getCell(x, (y  + g.getRows() - 1) % g.getRows()).getType() ==type;
+                        return g.getCell(x, (y  + g.getRows() - 1) % g.getRows()).getCategory() ==type;
                     case Droite:
-                        return g.getCell((x+g.getCols() - 1) % g.getCols(), y).getType() ==type;
+                        return g.getCell((x+g.getCols() - 1) % g.getCols(), y).getCategory() ==type;
                     case Gauche:
-                        return g.getCell((x + 1) % g.getCols(), y).getType() ==type;
+                        return g.getCell((x + 1) % g.getCols(), y).getCategory() ==type;
                     default:
                         return false;
                 }
             case Est:
                 switch (dir) {
                     case Devant:
-                        return g.getCell((x + 1) % g.getCols(), y).getType() ==type;
+                        return g.getCell((x + 1) % g.getCols(), y).getCategory() ==type;
                     case Derriere:
-                        return g.getCell((x +g.getCols()- 1) % g.getCols(), y).getType() ==type;
+                        return g.getCell((x +g.getCols()- 1) % g.getCols(), y).getCategory() ==type;
                     case Droite:
-                        return g.getCell(x, (y + 1) % g.getRows()).getType() ==type;
+                        return g.getCell(x, (y + 1) % g.getRows()).getCategory() ==type;
                     case Gauche:
-                        return g.getCell(x, (y + g.getRows()  - 1) % g.getRows()).getType() ==type;
+                        return g.getCell(x, (y + g.getRows()  - 1) % g.getRows()).getCategory() ==type;
                     default:
                         return false;
                 }
             case Ouest:
                 switch (dir) {
                     case Devant:
-                        return g.getCell((x +g.getCols()- 1) % g.getCols(), y).getType() ==type;
+                        return g.getCell((x +g.getCols()- 1) % g.getCols(), y).getCategory() ==type;
                     case Derriere:
-                        return g.getCell((x + 1) % g.getCols(), y).getType() ==type;
+                        return g.getCell((x + 1) % g.getCols(), y).getCategory() ==type;
                     case Droite:
-                        return g.getCell(x, (y + g.getRows() - 1) % g.getRows()).getType() ==type;
+                        return g.getCell(x, (y + g.getRows() - 1) % g.getRows()).getCategory() ==type;
                     case Gauche:
-                        return g.getCell(x, (y + 1) % g.getRows()).getType() ==type;
+                        return g.getCell(x, (y + 1) % g.getRows()).getCategory() ==type;
                     default:
                         return false;
                 }
