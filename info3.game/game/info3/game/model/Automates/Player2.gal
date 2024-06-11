@@ -1,0 +1,13 @@
+Player2(Init){
+* (Init):
+| pressKey(Z) ? Move(N) :(Init)
+| pressKey(Q) ? Move(O) :(Init)
+| pressKey(S) ? Move(S) :(Init)
+| pressKey(D) ? Move(E) :(Init)
+
+| pressKey(A) ? Pop() :(Init)
+
+| pressKey(R) ? Egg() :(Init)
+
+| pressKey(E) ? Wizz() :(Init)
+}
