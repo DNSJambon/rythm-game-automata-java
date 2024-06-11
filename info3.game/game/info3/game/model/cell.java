@@ -7,15 +7,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.jcraft.jogg.Buffer;
-
 import info3.game.model.Entities.Entity;
+import info3.game.model.Entities.Obstacle;
+import info3.game.model.Entities.Player2;
 
 public class cell implements Icell {
 
     Grille grid;
-    
-    Entity e;
+    Entity[] e;
     int vide;
     int x, y;
 
@@ -29,12 +28,14 @@ public class cell implements Icell {
         this.x = x;
         this.y = y;
         vide = 1;
+        this.e = new Entity[3];
     }
 
     public cell(Grille g, int x, int y, Entity e) {
         this.x = x;
         this.y = y;
-        this.e = e;
+        this.e = new Entity[3];
+        this.e[1] = e;
         vide = 0;
     }
 
@@ -42,7 +43,7 @@ public class cell implements Icell {
         if (vide == 1) {
             return cellType.Vide;
         } else {
-            return e.getType();
+            return e[1].getType();
         }
     }
 
@@ -50,17 +51,40 @@ public class cell implements Icell {
         if (vide == 1) {
             return Category.V;
         } else {
-            return e.getCategory();
+            return e[1].getCategory();
         }
     }
 
-    public void setEntity(Entity e) {
-        this.e = e;
+    public void setTrap(Entity e) {
+        this.e[0] = e;
         vide = 0;
     }
 
-    public void reset() {
+    public void setEntity(Entity e) {
+        this.e[1] = e;
+        vide = 0;
+    }
+
+    public void setP2(Player2 p2) {
+        this.e[2] = p2;
+        vide = 0;
+    }
+
+    public void resetall() {
         vide = 1;
+    }
+
+    public void resetP2() {
+        e[2] = null;
+    }
+
+    public void resetEntity() {
+        e[1] = null;
+        vide=1;
+    }
+
+    public void resetTrap() {
+        e[0] = null;
     }
 
     public int getRow() {
@@ -70,14 +94,21 @@ public class cell implements Icell {
     public int getCol() {
         return x;
     }
-
-    
   
     public void paint(Graphics g, int x, int y, int width, int height) {
         if (vide == 0) {
-            e.paint(g, x, y, width, height);
+            for (int i = 0; i < 3; i++) {
+                if (e[i] != null) {
+                    e[i].paint(g, x, y, width, height);
+                }
+            }
         }
     }
+
+    public boolean pas_obstacle() {
+        return !(e[1] instanceof Obstacle); // La cellule est libre si elle ne contient pas un obstacle
+    }
+
 
 
 }

@@ -1,0 +1,19 @@
+Player1(Init){
+* (Init):
+| pressKey(FU) & eval_cell(P1, N, Ennemy) ? Hit(N) :(Init)
+| pressKey(FD) & eval_cell(P1, S, Ennemy) ? Hit(S) :(Init)
+| pressKey(FR) & eval_cell(P1, E, Ennemy) ? Hit(E) :(Init)
+| pressKey(FL) & eval_cell(P1, O, Ennemy) ? Hit(O) :(Init)
+
+| pressKey(FU) & eval_cell(P1, N, Void) ? Move(N) :(Init)
+| pressKey(FU) & eval_cell(P1, N, Key) ? Move(N) :(Init)
+
+| pressKey(FD) & eval_cell(P1, S, Void) ? Move(S) :(Init)
+| pressKey(FD) & eval_cell(P1, S, Key) ? Move(S) :(Init)
+
+| pressKey(FR) & eval_cell(P1, E, Void) ? Move(E) :(Init)
+| pressKey(FR) & eval_cell(P1, E, Key) ? Move(E) :(Init)
+
+| pressKey(FL) & eval_cell(P1, O, Void) ? Move(O) :(Init)
+| pressKey(FL) & eval_cell(P1, O, Key) ? Move(O) :(Init)
+}

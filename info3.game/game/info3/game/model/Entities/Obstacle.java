@@ -121,25 +121,25 @@ public class Obstacle extends Entity {
             case Nord:
                 e.y+=(g.getCols()-1);
                 e.y=e.y%g.getRows();
-                g.getCell(xclear,yclear).reset();
+                g.getCell(xclear,yclear).resetEntity();
                 g.getCell(x,y).setEntity(this);
                 return true;
             case Sud:
                 e.y+=1;
                 e.y=e.y%g.getRows();
-                g.getCell(xclear,yclear).reset();
+                g.getCell(xclear,yclear).resetEntity();
                 g.getCell(x,y).setEntity(this);
                 return true;
             case Est:
                 e.x+=1;
                 e.x=e.x%g.getCols();
-                g.getCell(xclear,yclear).reset();
+                g.getCell(xclear,yclear).resetEntity();
                 g.getCell(x,y).setEntity(this);
                 return true;
             case Ouest:
                 e.x+=(g.getRows()-1);
                 e.x=e.x%g.getCols();
-                g.getCell(xclear,yclear).reset();
+                g.getCell(xclear,yclear).resetEntity();
                 g.getCell(x,y).setEntity(this);
                 return true;
             default:

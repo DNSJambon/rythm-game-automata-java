@@ -201,13 +201,13 @@ public class Snake extends Entity {
                     last.y = head.y;
                     egg.x=snake.get(size - 1).x;
                     egg.y=snake.get(size - 1).y;
-                    g.getCell(head.x, head.y).reset();
+                    g.getCell(head.x, head.y).resetEntity();
                     head.y=(head.y + g.getRows() - 1) % g.getRows();
                     g.getCell(head.x, head.y ).setEntity(this);
                     if (size>1){
 
                     
-                        g.getCell(snake.get(size - 1).x, snake.get(size - 1).y).reset();
+                        g.getCell(snake.get(size - 1).x, snake.get(size - 1).y).resetEntity();
                         g.getCell(last.x, last.y).setEntity(this);
                         snake.get(size - 1).x = last.x;
                         snake.get(size - 1).y = last.y;
@@ -223,13 +223,13 @@ public class Snake extends Entity {
                 last.y = head.y;
                 egg.x = snake.get(size - 1).x;
                 egg.y = snake.get(size - 1).y;
-                g.getCell(head.x, head.y).reset();
+                g.getCell(head.x, head.y).resetEntity();
                 head.y = (head.y + 1) % g.getRows();
                 g.getCell(head.x, head.y).setEntity(this);
                
                 
                 if (size>1) {
-                    g.getCell(snake.get(size - 1).x, snake.get(size - 1).y).reset();                    
+                    g.getCell(snake.get(size - 1).x, snake.get(size - 1).y).resetEntity();                    
                     g.getCell(last.x, last.y).setEntity(this);
                     snake.get(size - 1).x=last.x;
                     snake.get(size - 1).y=last.y;
@@ -245,12 +245,12 @@ public class Snake extends Entity {
                 last.y = head.y;
                 egg.x = snake.get(size - 1).x;
                 egg.y = snake.get(size - 1).y;
-                g.getCell(head.x, head.y).reset();
+                g.getCell(head.x, head.y).resetEntity();
                 head.x = (head.x + 1) % g.getCols();
                 g.getCell(head.x, head.y).setEntity(this);
                 if (size>1){
 
-                    g.getCell(snake.get(size - 1).x, snake.get(size - 1).y).reset();
+                    g.getCell(snake.get(size - 1).x, snake.get(size - 1).y).resetEntity();
                     g.getCell(last.x, last.y).setEntity(this);
                     snake.get(size - 1).x = last.x;
                     snake.get(size - 1).y = last.y;
@@ -264,12 +264,12 @@ public class Snake extends Entity {
                 last.y = head.y;
                 egg.x = snake.get(size - 1).x;
                 egg.y = snake.get(size - 1).y;
-                g.getCell(head.x, head.y).reset();
+                g.getCell(head.x, head.y).resetEntity();
                 head.x = (head.x + g.getCols() - 1) % g.getCols();
                 g.getCell(head.x, head.y).setEntity(this);
 
                 if (size>1){
-                    g.getCell(snake.get(size - 1).x, snake.get(size - 1).y).reset();
+                    g.getCell(snake.get(size - 1).x, snake.get(size - 1).y).resetEntity();
                     g.getCell(last.x, last.y).setEntity(this);
                     snake.get(size - 1).x = last.x;
                     snake.get(size - 1).y = last.y;
