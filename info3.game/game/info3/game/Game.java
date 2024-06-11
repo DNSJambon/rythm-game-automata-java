@@ -45,6 +45,7 @@ public class Game {
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
 		m_control = new Control();		
+		
 		m_grille = new Grille(15, 15, m_control);
 		// creating a listener for all the events
 		// from the game canvas, that would be

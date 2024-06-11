@@ -42,8 +42,8 @@ public class Grille implements IGrille{
 
     public Grille(int rows, int cols, Control m_control) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
-        int debut_entre_X=5;
-        int debut_entre_Y=5;
+        int debut_entre_X=10;
+        int debut_entre_Y=10;
         int fin_X= 1;
         int fin_Y= 1;
         this.rows = rows;
@@ -65,15 +65,7 @@ public class Grille implements IGrille{
         // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
         m_control.addEntity(m);
-        // ajout des obstacles aléatoirements
-        Obstacle o;
-        for (int i = 0; i <150; i++) {
-            cell c = randomCell_libre();
-            o = new Obstacle(this, c.getCol(), c.getRow());
-            m_control.addEntity(o);
-            //c.setEntity(o);
-        }
-        pourcentage_aleatoire_obstacle(this, 700, 223, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        pourcentage_aleatoire_obstacle(this, 40, 23, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
     }
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
             int endX, int endY) {
