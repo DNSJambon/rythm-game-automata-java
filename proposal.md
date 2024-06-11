@@ -39,7 +39,8 @@ But du jeu : trouver une clé puis sortir
     - ennemis qui suit
     - ennemis qui tir des boules de feu
 
-# jeu 1
+# Fichiers de configuration 
+- Jeu 1
 ```json
 {
   
@@ -84,7 +85,7 @@ But du jeu : trouver une clé puis sortir
   ]
 }
 ```
-# jeu 2
+- Jeu 2
 ```json
 {
   
@@ -129,7 +130,7 @@ But du jeu : trouver une clé puis sortir
   ]
 }
 ```
-# Automates en gal
+# Automates en GAL
 Joueur 1
 ```gal
 Player1(Init){
