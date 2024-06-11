@@ -15,9 +15,7 @@ public class MazeSolver extends Entity {
     BufferedImage[] m_images;
     int image_index = 0;
 
-    //variables pour l'animation de deplacement
-    int in_movement = -1;
-    int nb_frame_move = 10;
+    
     
     public MazeSolver(Grille g, int x, int y) {
         super(g);
@@ -147,9 +145,12 @@ public class MazeSolver extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'do_wait'");
     }
 
+    //variables pour l'animation de deplacement
+    int in_movement = -1;
+    int nb_frame_move = 8;
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
-        /* 
+        
         if (in_movement != -1) {
             if (direction == Direction.Nord) {
                 y += (height * in_movement) / nb_frame_move;
@@ -162,7 +163,7 @@ public class MazeSolver extends Entity {
             }
             in_movement--;
         }
-        */
+        
         graphics.drawImage(m_images[image_index], x, y, width, height, null);
 
     }
