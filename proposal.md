@@ -1,48 +1,50 @@
 # Moteur de jeu synchrone
-But du jeu : trouver une clé puis sortir
-- Grille avec des cases (peux gérer plusieur entités sur une meme case)
+## But du jeu
+Trouver une clé puis sortir.
+## Caractéristiques du moteur de jeu
+### Grille
+- La grille est composée de cases pouvant gérer plusieurs entités sur une même case.
 - Vue de dessus
-- Génération aléatoire de map : 
-    - generation aleatoire de salle
-    - generation aleatoire des monstres
+- Génération aléatoire de la map, incluant des murs et des bots de type labyrinthe.
+### Gestion de la difficulté
+- Nombre de mobs ajustable pour varier la difficulté.
+### Paramètres de synchronisation
+- Parametre synchro au lancement du jeu.
+- Deux jeux basés sur le temps de réflexion :
+  - Jeu 1 : Beaucoup de temps pour réfléchir avant le déroulement des actions.
+  - Jeu 2 : Peu de temps pour réfléchir/réagir.
+### Ordre des actions (fairness) : 
+- Les actions sont exécutées par entité dans l'ordre suivant : 
+  - Joueur 1
+  - Ennemies
+  - Joueur 2
+### Joueurs
+- Joueur 1 :
+  - Se déplace à l'aide des flèches.
+  - A des points de vie.
+- Joueur 2 :
+  - C'est un curseur. 
+  - Se déplace à l'aide des touches ZQSD.
+  - Peut spawn des monstres avec les touches E,A,R,F.
+  - Se déplace sans collision et peut placer un mob toutes les X étapes grâce à Egg.
+  - Ne peut placer des mobs que sur des cases vides.
+### ViewPort (vue) : 
+- Viewport centré sur Joueur 1.
+- Mini-map pour Joueur 2.
 
+### Ennemies
+- Mur cassable
+- Mur incassable
+- Slim qui bouge haut-bas
+- Squelette qui bouge gauche-droite
+- Piège : 
+  - Pique
+  - Punit si immobile 
+- Ennemi qui suit
+- Ennemi qui tire des boules de feu
 
-- gestion de difficulté :
-    - plus ou moins de mob
-- parametre synchro au lancement du jeu combien de temps pour réflechir avant le déroulement des actions :
-    - 2 jeux: 
-        - beaucoup de temps pour réflechir 
-        - pas beaucoup de temps pour réflechir/réagir
-- ordre des actions (fairness) : 
-    - par entité
-    - joueur 1 en premier puis enemies puis joueur 2
-- joueur :
-    - joueur 1 :
-        - deplace a laide des fleches
-        - point de vie
-    - joueur 2 :
-        - curseur 
-        - deplace a laide de zqsd
-        - spawn des monstre avec e a r f
-        - deplace sans colision et peut placer un mob tout les x step grace a egg
-        - ne peut placer que sur case vide
-- viewPort : 
-    - centré sur joueur 1
-    - mini map pour joueur 2
-- <span style="color:  #eda48f  "> ennemies : </span>
-
-    - mur cassable
-    - mur incassable
-    - slim qui bouge haut bas
-    - squelette qui bouge gauche droite
-    - piege : 
-        - pique 
-        - punis si imobille 
-    - ennemis qui suit
-    - ennemis qui tir des boules de feu
-
-# Fichiers de configuration 
-- Jeu 1
+## Fichiers de configuration 
+### Jeu 1
 ```json
 {
   
@@ -87,7 +89,7 @@ But du jeu : trouver une clé puis sortir
   ]
 }
 ```
-- Jeu 2
+### Jeu 2
 ```json
 {
   
@@ -132,8 +134,8 @@ But du jeu : trouver une clé puis sortir
   ]
 }
 ```
-# Automates en GAL
-Joueur 1
+## Automates en GAL
+### Joueur 1
 ```gal
 Player1(Init){
 * (Init):
@@ -155,7 +157,7 @@ Player1(Init){
 | pressKey(FL) & eval_cell(P1, O, Key) ? Move(O) :(Init)
 }
 ```
-Joueur 2
+### Joueur 2
 ```gal
 Player2(Init){
 * (Init):
@@ -171,7 +173,7 @@ Player2(Init){
 | pressKey(E) ? Wizz() :(Init)
 }
 ```
-Piege (pique)
+### Piege (pique)
 ```gal
 Piege(1){
 * (1):
@@ -181,7 +183,7 @@ Piege(1){
 | Cell(H,P) ? Hit(H) :(2)
 }
 ```
-Ennemy suiveur
+### Ennemy suiveur
 ```gal
 Suiveur(1){
 * (1):
@@ -191,7 +193,7 @@ Suiveur(1){
 | Cell(d,P) ? Hit(d) :(1)
 }
 ```
-Mage
+### Mage
 ```gal
 Mage(1){
 *(1):
@@ -208,7 +210,7 @@ Mage(1){
 *()
 }
 ```
-Ennemy Projectile
+### Ennemy Projectile
 ```gal
 Projectile(Alive){
 
@@ -221,3 +223,10 @@ Projectile(Alive){
 
 }
 ```
+## Point Technique - Synchronisation
+### Jeu Synchrone (Jeu 1)
+La durée du jeu est infinie. Les actions sont synchronisées et se déroulent une fois le joueur 1 fait son action. 
+
+### Jeu Asynchrone (Jeu 2)
+Déroulement des actions : Les actions sont asynchrones, le joueur 1 a un temps limité pour faire son action.
+
