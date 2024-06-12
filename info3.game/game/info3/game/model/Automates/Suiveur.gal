@@ -1,8 +1,8 @@
 
-Suiveur(1){
-* (1):
-| Closest(d,P) & Cell(d,Obstacle) ? Wait :(1)
-| Closest(d,P) & Cell(d,Ennemy) ? Wait :(1)
-| Closest(d,P) & Cell(d,Void) ? Move(d) :(1)
-| Cell(d,P) ? Hit(d) :(1)
+Suiveur(S1){
+* (S1):
+| Closest(d,P) & Cell(d,Obstacle) ? Wait :(S1)
+| Closest(d,P) & Cell(d,Ennemy) ? Wait :(S1)
+| Closest(d,P) & Cell(d,Void) ? Move(d) :(S1)
+| Cell(d,P) ? Hit(d) :(S1)
 }

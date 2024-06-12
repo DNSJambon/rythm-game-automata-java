@@ -1,0 +1,43 @@
+// Exporting the CFG of the parsed automata in .dot
+digraph bot{
+node[shape=box, fontsize=16, color=gray];
+
+
+subgraph cluster_Ninja{
+
+"98" [label="Ninja", shape=none, fontname=times, fontsize=12, fontcolor=blue];
+
+"29" [label="Cell(d,A) & ! Got(Power,0)? Jump ; Hit(d)", shape=box, fontname=comic, fontsize=10];
+
+"97" -> "29";
+"29" -> "97";
+"39" [label="Cell(_,V)? Store", shape=box, fontname=comic, fontsize=10];
+
+"97" -> "39";
+"39" -> "38";
+"52" [label="Cell(_,V)? Rest", shape=box, fontname=comic, fontsize=10];
+
+"38" -> "52";
+"52" -> "38";
+"67" [label="Cell(_,A) & Got(Power,1)? Pop", shape=box, fontname=comic, fontsize=10];
+
+"38" -> "67";
+"67" -> "66";
+"81" [label="Cell(_,A) & Got(Power,0)? ", shape=box, fontname=comic, fontsize=10];
+
+"38" -> "81";
+"81" -> "66";
+"91" [label="Cell(_,_)? Get", shape=box, fontname=comic, fontsize=10];
+
+"38" -> "91";
+"91" -> "97";
+"98" -> "97";
+"66" [label="", shape=circle, style=filled, fontsize=5];
+
+"38" [label="Zen", shape=circle, style=filled, fontsize=5];
+
+"97" [label="Zanshin", shape=circle, style=filled, fontsize=5];
+
+} // end of Ninja
+
+} // end of bot

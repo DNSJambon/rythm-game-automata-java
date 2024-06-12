@@ -1,5 +1,6 @@
 JAVAPROJECT = ../../../..
 CLASSPATH = $(JAVAPROJECT)/bin
+AUTOMATES = $(JAVAPROJECT)/game/info3/game/model/Automates
 PARSER = gal.parser.Parser
 
 OUTPUT_DIR = ../output
@@ -12,13 +13,13 @@ help:
 parser:
 	@make -C $(JAVAPROJECT)/src/gal/parser/
 
-%.txt: %.gal 
+%.txt: ../../../../game/info3/game/model/Automates/%.gal 
 	java -cp $(CLASSPATH) $(PARSER) -file $< -txt	
 
-%.aut.dot: %.gal 
+%.aut.dot: ../../../../game/info3/game/model/Automates/%.gal 
 	@java -cp $(CLASSPATH) $(PARSER) -file $< -aut > $@
 
-%.ast.dot: %.gal 
+%.ast.dot: ../../../../game/info3/game/model/Automates/%.gal 
 	@java -cp $(CLASSPATH) $(PARSER) -file $< -ast > $@
 
 %.jpg: %.dot

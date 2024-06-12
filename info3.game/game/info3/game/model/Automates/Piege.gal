@@ -1,7 +1,7 @@
-Piege(1){
-* (1):
-| Cell(H,P) ? Wait() :(2)
+Piege(S1){
+* (S1):
+| Cell(H,P) ? Wait() :(S2)
 
-* (2):
-| Cell(H,P) ? Hit(H) :(2)
+* (S2):
+| Cell(H,P) ? Hit(H) :(S2)
 }

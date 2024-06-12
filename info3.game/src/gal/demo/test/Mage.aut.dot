@@ -1,0 +1,41 @@
+// Exporting the CFG of the parsed automata in .dot
+digraph bot{
+node[shape=box, fontsize=16, color=gray];
+
+
+subgraph cluster_Mage{
+
+"73" [label="Mage", shape=none, fontname=times, fontsize=12, fontcolor=blue];
+
+"22" [label="Cell(F,O)? Turn(D)", shape=box, fontname=comic, fontsize=10];
+
+"72" -> "22";
+"22" -> "72";
+"34" [label="Cell(F,V)? Move(F)", shape=box, fontname=comic, fontsize=10];
+
+"72" -> "34";
+"34" -> "33";
+"47" [label="Cell(F,O)? Wait", shape=box, fontname=comic, fontsize=10];
+
+"33" -> "47";
+"47" -> "46";
+"57" [label="Cell(F,V)? Egg", shape=box, fontname=comic, fontsize=10];
+
+"33" -> "57";
+"57" -> "46";
+"66" [label="True? Wait", shape=box, fontname=comic, fontsize=10];
+
+"46" -> "66";
+"66" -> "72";
+"73" -> "72";
+"46" [label="S3", shape=circle, style=filled, fontsize=5];
+
+"69" [label="", shape=circle, style=filled, fontsize=5];
+
+"72" [label="S1", shape=circle, style=filled, fontsize=5];
+
+"33" [label="S2", shape=circle, style=filled, fontsize=5];
+
+} // end of Mage
+
+} // end of bot

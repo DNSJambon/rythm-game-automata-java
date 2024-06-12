@@ -1,15 +1,15 @@
-Mage(1){
+Mage(S1){
 
-*(1):
-| Cell(F,O) ? Turn(D) : (1)
-| Cell(F,V) ? Move(F) : (2)
+*(S1):
+| Cell(F,O) ? Turn(D) : (S1)
+| Cell(F,V) ? Move(F) : (S2)
  
-* (2):
-| Cell(F,O) ? Wait() : (3)
-| Cell(F,V) ? Egg() : (3)
+* (S2):
+| Cell(F,O) ? Wait() : (S3)
+| Cell(F,V) ? Egg() : (S3)
 
-* (3):
-| True() ? Wait() : (1)
+* (S3):
+| True() ? Wait() : (S1)
 
 *()
 
