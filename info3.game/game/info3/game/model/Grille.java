@@ -65,7 +65,7 @@ public class Grille implements IGrille{
         //======generation du labyrinthe======
         //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
         remplir_obstacle();
-        cree_des_salles(668,5,5, 8, 5);
+        cree_des_salles(662,5,5, 10, 3);
 
         //======generation des entités======
         place_monstre(10);
@@ -245,7 +245,7 @@ public class Grille implements IGrille{
             for (int j = 0; j < cols; j++) {
                 Obstacle o = new Obstacle(this, j, i);
                
-               // m_control.addEntity(o);
+                m_control.addEntity(o);
                 grille[i][j].setEntity(o);
             }
         }
