@@ -122,10 +122,14 @@ public abstract class Entity {
     
     );
     public abstract boolean do_pick(Entity e);
+    public abstract boolean do_pop(Entity e);
+    public abstract boolean do_wizz(Entity e);
 
     public abstract boolean do_turn(Entity e, DirRelative dir);
 
-    public abstract boolean do_wait(Entity e);
+    public boolean do_wait(Entity e) {
+        return true;
+    }
     
     
     public abstract void paint(Graphics graphics, int x, int y, int width, int height);

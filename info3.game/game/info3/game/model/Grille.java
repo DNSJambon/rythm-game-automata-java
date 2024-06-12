@@ -45,6 +45,10 @@ public class Grille implements IGrille{
 
     public Grille(int rows, int cols, Control m_control) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
+        int debut_entre_X = 0;
+        int debut_entre_Y = 0;
+        int fin_X = 33;
+        int fin_Y = 33;
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
@@ -60,11 +64,14 @@ public class Grille implements IGrille{
         //ajoute player1
         Player1 p = new Player1(this);
         m_control.addEntity(p);
-        MazeSolver m = new MazeSolver(this, debut_entre_X,debut_entre_Y );
+        MazeSolver m = new MazeSolver(this, debut_entre_X, debut_entre_Y);
         // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
         m_control.addEntity(m);
-        pourcentage_aleatoire_obstacle(this, 100, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        pourcentage_aleatoire_obstacle(this, 40, 23, debut_entre_X, debut_entre_Y, fin_X, fin_Y);
+         // Exemple de pourcentage et de seed
+         cree_des_salles(666);
+
     }
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
@@ -87,9 +94,6 @@ public class Grille implements IGrille{
             }
         }
         
-        
-        
-
         Collections.shuffle(emptyCells, random);
         // System.out.println("print cells : "+emptyCells);
         boolean[][] tempObstacles = new boolean[grille.rows][grille.cols];
@@ -174,8 +178,33 @@ public class Grille implements IGrille{
         return x >= 0 && x < rows && y >= 0 && y < cols;
     }
 
+    //le but est de créer des salles dans le labyrinthe rempli de monstres
+    //met des rectangelles de vide dans la grille
+    private void cree_des_salles(long seed) {
+        Random random = new Random(seed);
+        int nb_salle = random.nextInt(4) + 3;
+        int taille_salle = random.nextInt(3) + 4;
+
+        for (int i = 0; i < nb_salle; i++) {
+            int x = random.nextInt(rows - taille_salle);
+            int y = random.nextInt(cols - taille_salle);
+            for (int j = 0; j < taille_salle; j++) {
+                for (int k = 0; k < taille_salle; k++) {
+                    grille[x + j][y + k].resetEntity();
+                }
+            }
+        }
+        //placer quelques monstres (maze solver) dans les salles creees
+        //TODO
+        
+        
+        
+
+    }
 
 
+    /* ======================Partie Synchro========================== */
+    //TODO on ne peux pas jouer le tour suivant apres en avoir sauté un
     public char getTouche() {
         return touche;
     }
@@ -278,7 +307,7 @@ public class Grille implements IGrille{
     }
     
 
-    /* -----------Paint et ticks---------------*/
+    /*=========================Paint et ticks=============================*/
 
     int x_main_old = 3;
     int y_main_old = 3;
@@ -369,12 +398,12 @@ public class Grille implements IGrille{
         //MiniMap
         drawMinimap(g, width, (height - 340) / 2, 340, 340);
 
-        //TODO: 
-        //ATH haut
+         
+        //ATH huta
         drawATH_haut(g, width, 0, 340, (height - 340) / 2);
 
-        //TODO:
         //ATH bas
+        drawATH_bas(g, width, (height + 340) / 2, 340, (height - 340) / 2);
 
     }
     
@@ -404,13 +433,16 @@ public class Grille implements IGrille{
 
     
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
+        //TODO:
         g.setColor(Color.WHITE);
         g.fillRect(x, y, width, height);
 
     }
     
     void drawATH_bas(Graphics g, int x, int y, int width, int height) {
-        //TODO
+        //TODO:
+        g.setColor(Color.WHITE);
+        g.fillRect(x, y, width, height);
 
     }
     

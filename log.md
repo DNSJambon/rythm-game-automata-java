@@ -1,15 +1,29 @@
+# <span style="color: #d54020 ">***11 juin 2024***</span>
+## <span style="color:green">**Game**</span>
+- finition du contrat
+- mini map
+- ajout de wizz pop pour les entités
+- player2 (début), ennemies, clé, door
+- chaque cellule plusieur entité possible
+- chemin aleatoire entre deux point
+- view port qui suit le joueur1
+
+
 # <span style="color: #d54020 ">***10 juin 2024***</span>
 ## <span style="color:green">**Game**</span>
-- Matthieu et Sami : - Creation de la condition key
-                     - Jeu avance selon temps gerer dans la variable Rythme dans game
-                     - Jeu fait un step si keyboard pressed
+- Matthieu et Sami : 
+    - Creation de la condition key
+    - Jeu avance selon temps gerer dans la variable Rythme dans game
+    - Jeu fait un step si keyboard pressed
 
-- Arthur et Mathis : - Utilisation des ticks pour les animmation
-                     - Début viewport
-                     - Creation de la classe Player 1
+- Arthur et Mathis : 
+    - Utilisation des ticks pour les animmation
+    - Début viewport
+    - Creation de la classe Player 1
 
-- Omar et Aymanne :  - Génération aléatoire d'une map avec densité obstacle
-                     - Chemin possible entre deux point donné peut importe map
+- Omar et Aymanne :  
+    - Génération aléatoire d'une map avec densité obstacle
+    - Chemin possible entre deux point donné peut importe map
 
         
 A faire :
