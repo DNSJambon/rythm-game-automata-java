@@ -15,6 +15,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import info3.game.controller.*;
+import info3.game.controller.Conditions.Cell;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
@@ -61,17 +62,24 @@ public class Grille implements IGrille{
                 grille[i][j] = new cell(this, j, i);
             }
         }
-        //ajoute player1
-        Player1 p = new Player1(this);
-        m_control.addEntity(p);
-        MazeSolver m = new MazeSolver(this, debut_entre_X, debut_entre_Y);
-        // MazeSolver m = new MazeSolver(this, 0, 0);
-        main_Entity = m;
-        m_control.addEntity(m);
-        pourcentage_aleatoire_obstacle(this, 100, 203, debut_entre_X, debut_entre_Y, fin_X, fin_Y);
-         // Exemple de pourcentage et de seed
-         cree_des_salles(666);
+        //======generation du labyrinthe======
+        //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        remplir_obstacle();
+        cree_des_salles(662,5,5, 10, 3);
 
+        //======generation des entités======
+        place_monstre(10);
+        cell c = randomCell_libre();
+        Player1 p = new Player1(this,c.getCol(),c.getRow());
+        m_control.addEntity(p);
+
+        //======placer le joueur dans le labyrinthe======
+        //case vide random
+        c = randomCell_libre();
+        MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
+        // MazeSolver m = new MazeSolver(this, 0, 0);
+        main_Entity = p;
+        m_control.addEntity(m);
     }
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
@@ -180,27 +188,77 @@ public class Grille implements IGrille{
 
     //le but est de créer des salles dans le labyrinthe rempli de monstres
     //met des rectangelles de vide dans la grille
-    private void cree_des_salles(long seed) {
+    private void cree_des_salles(long seed, int largeur,int longueur, int nb_salle, int variance) {
         Random random = new Random(seed);
-        int nb_salle = random.nextInt(4) + 3;
-        int taille_salle = random.nextInt(3) + 4;
+        int largeur_salle = random.nextInt(variance) + largeur;
+        int longueur_salle = random.nextInt(variance) + longueur;
+        // tableau coordonnees des salles
+        int[][] coordonnees_salle = new int[nb_salle][2];
 
         for (int i = 0; i < nb_salle; i++) {
-            int x = random.nextInt(rows - taille_salle);
-            int y = random.nextInt(cols - taille_salle);
-            for (int j = 0; j < taille_salle; j++) {
-                for (int k = 0; k < taille_salle; k++) {
+            largeur_salle = random.nextInt(variance) + largeur;
+            longueur_salle = random.nextInt(variance) + longueur;
+            int x = random.nextInt(rows - largeur_salle);
+            int y = random.nextInt(cols - longueur_salle);
+            while (grille[x][y].getType() == cellType.Vide) {
+                x = random.nextInt(rows - largeur_salle);
+                y = random.nextInt(cols - longueur_salle);
+            }
+            coordonnees_salle[i][0] = x+largeur_salle/2;
+            coordonnees_salle[i][1] = y+longueur_salle/2;
+            for (int j = 0; j < largeur_salle; j++) {
+                for (int k = 0; k < longueur_salle; k++) {
                     grille[x + j][y + k].resetEntity();
                 }
             }
         }
-        //placer quelques monstres (maze solver) dans les salles creees
-        //TODO
-        
-        
-        
+
+        //creer les chemin entre les salles
+
+        for (int i = 0; i < nb_salle; i++) {
+            int x = coordonnees_salle[i][0];
+            int y = coordonnees_salle[i][1];
+            int x2 = coordonnees_salle[(i + 1) % nb_salle][0];
+            int y2 = coordonnees_salle[(i + 1) % nb_salle][1];
+            while (x != x2 || y != y2) {
+                if (x < x2) {
+                    x++;
+                } else if (x > x2) {
+                    x--;
+                } else if (y < y2) {
+                    y++;
+                } else if (y > y2) {
+                    y--;
+                }
+                grille[x][y].resetEntity();
+            }
+        }
 
     }
+
+    //remplir la grille d'obstacle
+    public void remplir_obstacle() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Obstacle o = new Obstacle(this, j, i);
+               
+                m_control.addEntity(o);
+                grille[i][j].setEntity(o);
+            }
+        }
+    }
+
+    //place les monstres dans la grille a des endroit vide et aléatoire
+    public void place_monstre(int nb_monstre) {
+        
+        for (int i = 0; i < nb_monstre; i++) {
+            cell c = randomCell_libre();
+            MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
+            m_control.addEntity(m);
+            c.setEntity(m);
+        }
+    }
+
 
 
     /* ======================Partie Synchro========================== */

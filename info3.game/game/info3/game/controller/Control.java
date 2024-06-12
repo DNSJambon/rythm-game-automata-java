@@ -13,7 +13,7 @@ public class Control {
 
     public Control() {
         entities = new LinkedList<Entity>();
-        buffer = new BufferAction(3);
+        buffer = new BufferAction(15000);
     }
 
     public void addEntity(Entity e) {

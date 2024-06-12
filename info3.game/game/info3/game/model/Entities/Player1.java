@@ -19,13 +19,13 @@ public class Player1 extends Entity{
     int in_movement = -1;
     int nb_frame_move = 6;
 
-    public Player1(IGrille g) {
+    public Player1(IGrille g, int x, int y) {
         super(g);
         life = 3;
-        g.getCell(1, 1).setEntity(this);
+        g.getCell(x, y).setEntity(this);
         direction = Direction.Nord;
-        x = 1;
-        y = 1;
+        this.x = x;
+        this.y = y;
         //Automate par defaut
         Transition[] T = new Transition[2];
          try {
