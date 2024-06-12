@@ -24,8 +24,8 @@ public class Player1 extends Entity{
         life = 3;
         g.getCell(x, y).setEntity(this);
         direction = Direction.Nord;
-        x = 1;
-        y = 1;
+        this.x = x;
+        this.y = y;
         //Automate par defaut
         Transition[] T = new Transition[2];
          try {

@@ -78,7 +78,7 @@ public class Grille implements IGrille{
         c = randomCell_libre();
         MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
         // MazeSolver m = new MazeSolver(this, 0, 0);
-        main_Entity = m;
+        main_Entity = p;
         m_control.addEntity(m);
     }
 
