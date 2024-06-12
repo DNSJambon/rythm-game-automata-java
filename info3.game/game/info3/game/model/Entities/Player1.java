@@ -24,8 +24,6 @@ public class Player1 extends Entity{
         life = 3;
         g.getCell(x, y).setEntity(this);
         direction = Direction.Nord;
-        x = 1;
-        y = 1;
         //Automate par defaut
         Transition[] T = new Transition[2];
          try {
@@ -54,14 +52,14 @@ public class Player1 extends Entity{
         devant.e_or = this;
     }
     
-    public Player1(Automaton a,Grille g) {
+    public Player1(Automaton a,Grille g, int x, int y) {
         super(g);
         super.a = a;
         life = 3;
-        g.getCell(1, 1).setEntity(this);
+        g.getCell(x,y).setEntity(this);
         direction = Direction.Nord;
-        x = 1;
-        y = 1;
+        
+        
 
     }
 
