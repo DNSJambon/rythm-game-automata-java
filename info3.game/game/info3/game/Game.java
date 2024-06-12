@@ -118,11 +118,11 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=2000;
-	private long Rythme=5000;
+	private long decision=1000;
+	private long Rythme=500;
     private long m_textElapsed;
 	private long m_timekey;
-	private boolean authorised = false;
+	private boolean authorised = true;
 
 	/*
 	 * This method is invoked almost periodically, given the number of milli-seconds
@@ -131,9 +131,8 @@ public class Game {
 	void tick(long elapsed) {
 		
 		m_timekey += elapsed;
-			// Check if the game is authorized to proceed
+
 			
-				authorised = m_grille.IsAuthorised();
 			
 			
 			
@@ -151,8 +150,6 @@ public class Game {
 				if (m_timekey > decision) {
 					m_timekey = 0;
 					m_control.step();
-					m_grille.switchAuthorised();
-					authorised = false;
 				}
 			}
 			else{
