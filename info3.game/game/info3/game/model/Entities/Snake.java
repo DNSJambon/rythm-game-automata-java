@@ -65,7 +65,7 @@ public class Snake extends Entity {
         g.getCell(1, 1).setEntity(this);
 
         // Snake:
-        Transition[] T2 = new Transition[7];
+        Transitions[] T2 = new Transitions[7];
         Cell cond_apple_devant = new Cell(DirRelative.Devant, Category.P);
         Cell cond_apple_droite = new Cell(DirRelative.Droite, Category.P);
         Cell cond_apple_gauche = new Cell(DirRelative.Gauche, Category.P);
@@ -78,15 +78,15 @@ public class Snake extends Entity {
         Turn droite = new Turn(DirRelative.Droite);
         Move m = new Move(DirRelative.Devant);
 
-        T2[0] = new Transition(gauche, cond_obsatcle, 0, 0);
-        T2[1] = new Transition(m, cond_apple_devant, 0, 1);
-        T2[2] = new Transition(droite, cond_apple_droite, 0, 1);
-        T2[3] = new Transition(gauche, cond_apple_gauche, 0, 1);
-        T2[4] = new Transition(droite, r, 0, 0);
-        T2[5] = new Transition(m, cond_true, 0, 0);
-        T2[6] = new Transition(queue, cond_true, 1, 0);
+        T2[0] = new Transitions(gauche, cond_obsatcle, 0, 0);
+        T2[1] = new Transitions(m, cond_apple_devant, 0, 1);
+        T2[2] = new Transitions(droite, cond_apple_droite, 0, 1);
+        T2[3] = new Transitions(gauche, cond_apple_gauche, 0, 1);
+        T2[4] = new Transitions(droite, r, 0, 0);
+        T2[5] = new Transitions(m, cond_true, 0, 0);
+        T2[6] = new Transitions(queue, cond_true, 1, 0);
 
-        Automate a2 = new Automate(0, T2);
+        Automate a2 = new Automate("0", T2);
         super.a = a2;
         m.e_or = this;
         gauche.e_or = this;

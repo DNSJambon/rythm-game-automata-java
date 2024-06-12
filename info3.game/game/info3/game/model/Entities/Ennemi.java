@@ -9,7 +9,7 @@ public abstract class Ennemi extends Entity{
 
     public Ennemi(Grille g, int x, int y) {
         super(g);
-        etat_courant = 0;
+        etat_courant = "0";
         direction = Direction.Est;
         this.x = x;
         this.y = y;

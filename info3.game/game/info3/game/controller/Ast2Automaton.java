@@ -20,36 +20,15 @@ import gal.ast.Transition;
 import gal.ast.UnaryOp;
 import gal.ast.Underscore;
 import gal.ast.Value;
+import info3.game.controller.Actions.*;
+import info3.game.controller.Conditions.*;
 
 public class Ast2Automaton implements IVisitor{
 
 
-    Integer current_source_state;
+    String current_state;
+    Automate current_automate;
 
-	/**
-	 * /!\ States appear as source and target of transitions.
-	 * 
-	 * A naive implementation would create distinct copies of the same state: - one
-	 * when it is a source, - one when it is a target resulting into disconnected
-	 * automaton with floating transitions.
-	 * 
-	 * SOLUTION We need to build a mapping from State name -->
-	 * DoState(id,name,options). Thus, when encountering a state that has already
-	 * been stored in the mapping we can ask the mapping what is the id we must use
-	 * for that state.
-	 */
-
-	private Map<String, State> state_map;
-
-	Integer state_id(State state) {
-		State stored_state = state_map.get(state.name);
-		if (stored_state != null) {
-			return stored_state.id;
-		} else {
-			state_map.put(state.name, state);
-			return state.id;
-		}
-	}
 
 
     List<Automate> automates;
@@ -61,23 +40,23 @@ public class Ast2Automaton implements IVisitor{
     // REQUIRED BY INTERFACE IVisitor
 
 	public Object visit(Category cat) {
-		return null;
+		return cat.terminal.content;
 	}
 
 	public Object visit(Direction dir) {
-		return null;
+		return dir.terminal.content;
 	}
 
-	public Object visit(Key key) {
-		return null;
+	public String visit(Key key) {
+		return key.terminal.content;
 	}
 
 	public Object visit(Value v) {
-		return null;
+		return v.value;
 	}
 
 	public Object visit(Underscore u) {
-		return null;
+		return '_';
 	}
 
 	// FUNCALL
@@ -92,182 +71,177 @@ public class Ast2Automaton implements IVisitor{
 	}
 
 	public Object build(FunCall funcall, List<Object> params) {
-		return null;
+		switch (funcall.name) {
+            case "Move":
+                switch ((String) params.get(0)) {
+                    case "R":
+                        return new Move(DirRelative.Droite);
+                    case "L":
+                        return new Move(DirRelative.Gauche);
+                    case "F":
+                        return new Move(DirRelative.Devant);
+                    case "B":    
+                        return new Move(DirRelative.Derriere);
+                }
+            case "Cell":
+                switch ((String) params.get(0)) {
+                    case "R":
+                        return new Cell(DirRelative.Droite, ((String) params.get(1)).charAt(0));
+                    case "L":
+                        return new Cell(DirRelative.Gauche, ((String) params.get(1)).charAt(0));
+                    case "F":
+                        return new Cell(DirRelative.Devant, ((String) params.get(1)).charAt(0));
+                    case "B":
+                        return new Cell(DirRelative.Derriere, ((String) params.get(1)).charAt(0));
+                }
+            case "True":
+                return new True();
+            //TODO: Add more cases
+        }
+        return null;
+            
 	}
 
 
     @Override
     public void enter(BinaryOp binop) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
     }
 
     @Override
     public void visit(BinaryOp binop) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
     }
 
     @Override
     public void exit(BinaryOp binop) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
     }
 
     @Override
-    public Object build(BinaryOp binop, Object left, Object right) {
-        
-
+    public Binary build(BinaryOp binop, Object left, Object right) {
+        Conditions l = (Conditions) left;
+        Conditions r = (Conditions) right;
+        return new Binary(l, r, binop.operator);
     }
+
 
     @Override
     public void enter(UnaryOp unop) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
     }
 
     @Override
     public void exit(UnaryOp unop) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
     }
 
     @Override
-    public Object build(UnaryOp unop, Object expression) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
+    public Unary build(UnaryOp unop, Object expression) {
+        Conditions expr = (Conditions) expression;
+        return new Unary(expr, unop.operator == "!");
     }
 
     @Override
     public Object visit(State state) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+        current_state = state.name;
+        return state.name;
     }
 
     @Override
     public void enter(Mode mode) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
     }
 
     @Override
     public void visit(Mode mode) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+        
     }
 
     @Override
     public void exit(Mode mode) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
     }
 
     @Override
     public Object build(Mode mode, Object source_state, Object behaviour) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
+        return behaviour;
     }
+
+
 
     @Override
     public Object visit(Behaviour behaviour, List<Object> transitions) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+        return transitions;
     }
+
 
     @Override
     public void enter(Condition condition) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
     }
 
     @Override
     public void exit(Condition condition) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
     }
 
     @Override
-    public Object build(Condition condition, Object expression) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
+    public Conditions build(Condition condition, Object expression) {
+        return (Conditions) expression;
     }
 
     @Override
     public void enter(Actions action) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
     }
 
     @Override
     public void visit(Actions action) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
     }
 
     @Override
     public void exit(Actions action) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
     }
 
     @Override
     public Object build(Actions action, String operator, List<Object> funcalls) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
+        return funcalls.get(0);
+        //TODO: Add more actions
     }
 
     @Override
     public void enter(Transition transition) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
     }
 
     @Override
     public void exit(Transition transition) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
     }
 
-    @Override
-    public Object build(Transition transition, Object condition, Object action, Object target_state) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
-    }
+    
+	@Override
+	public Transitions build(Transition transition, Object condition, Object action, Object target_state) {
+        Conditions cond = (Conditions) condition;
+        Action act = (Action) action;
+        String target = (String) target_state;
+        return new Transitions(act, cond, current_state, target);
+	}
 
     @Override
     public void enter(Automaton automaton) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
     }
 
     @Override
     public void exit(Automaton automaton) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
     }
 
     @Override
     public Object build(Automaton automaton, Object initial_state, List<Object> modes) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
+        return new Automate(automaton.name, (String) initial_state, (List<Transitions>) modes.get(0));
+        //TODO: Add more modes
     }
 
     @Override
     public void enter(AST ast) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
     }
 
     @Override
     public void exit(AST ast) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
     }
 
     @Override
     public Object build(AST ast, List<Object> automata) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
+        return automata;
     }
     
 }

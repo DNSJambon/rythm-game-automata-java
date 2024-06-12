@@ -22,12 +22,13 @@ public class Player1 extends Entity{
     public Player1(IGrille g, int x, int y) {
         super(g);
         life = 3;
+        etat_courant = "0";
         g.getCell(x, y).setEntity(this);
         direction = Direction.Nord;
         this.x = x;
         this.y = y;
         //Automate par defaut
-        Transition[] T = new Transition[2];
+        Transitions[] T = new Transitions[2];
          try {
             m_images = Grille.loadSprite("resources/squelette.png", 1, 4);
         } catch (IOException e) {
@@ -43,10 +44,10 @@ public class Player1 extends Entity{
         Move gauche = new Move(DirRelative.Gauche);
         
 
-        T[0] = new Transition(droite, droite_vide, 0, 0);
-        T[1] = new Transition(gauche, gauche_vide , 0, 0);
+        T[0] = new Transitions(droite, droite_vide, 0, 0);
+        T[1] = new Transitions(gauche, gauche_vide , 0, 0);
         
-        Automate a = new Automate(0, T);
+        Automate a = new Automate("0", T);
 
         this.a = a;
         droite.e_or = this;

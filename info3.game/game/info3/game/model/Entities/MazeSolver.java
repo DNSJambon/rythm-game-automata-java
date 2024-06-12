@@ -19,7 +19,7 @@ public class MazeSolver extends Entity {
     
     public MazeSolver(Grille g, int x, int y) {
         super(g);
-        etat_courant = 0;
+        etat_courant = "0";
         direction = Direction.Est;
         this.x = x;
         this.y = y;
@@ -33,7 +33,7 @@ public class MazeSolver extends Entity {
 
 
         //Automate par defaut (technique de la main droite)
-        Transition[] T = new Transition[6];
+        Transitions[] T = new Transitions[6];
 
         Cell obstacle_devant = new Cell(DirRelative.Devant, Category.O);
         Cell obstacle_droite = new Cell(DirRelative.Droite, Category.O);
@@ -50,19 +50,19 @@ public class MazeSolver extends Entity {
         Move gauche = new Move(DirRelative.Gauche);
         Move demi_tour = new Move(DirRelative.Derriere);
 
-        T[0] = new Transition(droite, droite_vide, 0, 0);
+        T[0] = new Transitions(droite, droite_vide, 0, 0);
         //T[0] = new Transition(droite, droit, 0, 0);
-        T[1] = new Transition(demi_tour, new Et(obstacle_devant, obstacle_droite, obstacle_gauche), 0, 0);
-        T[2] = new Transition(gauche, new Et(obstacle_devant, obstacle_droite), 0, 0);
+        T[1] = new Transitions(demi_tour, new Et(obstacle_devant, obstacle_droite, obstacle_gauche), 0, 0);
+        T[2] = new Transitions(gauche, new Et(obstacle_devant, obstacle_droite), 0, 0);
         //T[1] = new Transition(gauche, gauch, 0, 0);
-        T[3] = new Transition(droite, new Et(obstacle_devant, obstacle_gauche), 0, 0);
-        T[4] = new Transition(gauche, obstacle_devant, 0, 0);
-        T[5] = new Transition(devant, t, 0, 0);
+        T[3] = new Transitions(droite, new Et(obstacle_devant, obstacle_gauche), 0, 0);
+        T[4] = new Transitions(gauche, obstacle_devant, 0, 0);
+        T[5] = new Transitions(devant, t, 0, 0);
         //T[2] = new Transition(devant, devan, 0, 0);
         //T[3] = new Transition(demi_tour, derrière, 0, 0);
         
 
-        Automate a = new Automate(0, T);
+        Automate a = new Automate("0", T);
 
         this.a = a;
         droite.e_or = this;
@@ -70,6 +70,22 @@ public class MazeSolver extends Entity {
         devant.e_or = this;
         demi_tour.e_or = this;
         
+    }
+
+    public MazeSolver(Grille grille, int col, int row, Automate a) {
+        super(grille);
+        etat_courant = a.status;
+        direction = Direction.Est;
+        this.x = col;
+        this.y = row;
+        grille.getCell(col, row).setEntity(this);
+        this.a = a;
+
+        try {
+            m_images = Grille.loadSprite("resources/slime.png", 1, 4);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

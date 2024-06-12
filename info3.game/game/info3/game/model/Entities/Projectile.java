@@ -12,7 +12,7 @@ public class Projectile extends Ennemi{
 
     public Projectile(Grille g, int x, int y,Direction dir) {
         super(g, x, y);
-        etat_courant = 0;
+        etat_courant = "0";
         direction = dir;
         this.x = x;
         this.y = y;

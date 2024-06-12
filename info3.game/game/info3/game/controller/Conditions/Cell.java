@@ -6,7 +6,7 @@ import info3.game.model.Entities.Entity;
 /* Fait un test sur une cellule particulière du modèle pour savoir si une entité particulière s'y trouve.
  */
 
-public class Cell implements Condition{
+public class Cell implements Conditions{
 
     DirRelative dir;
     char cat;

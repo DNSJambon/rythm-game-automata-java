@@ -4,20 +4,20 @@ import java.util.LinkedList;
 
 import info3.game.model.Entities.Entity;
 
-public class Et implements Condition {
+public class Et implements Conditions {
     
-    LinkedList<Condition> conditions;
+    LinkedList<Conditions> conditions;
     
-    public Et(Condition... conditions) {
-        this.conditions = new LinkedList<Condition>();
-        for (Condition c : conditions) {
+    public Et(Conditions... conditions) {
+        this.conditions = new LinkedList<Conditions>();
+        for (Conditions c : conditions) {
             this.conditions.add(c);
         }
     }
 
     @Override
     public boolean eval(Entity e) {
-        for (Condition c : conditions) {
+        for (Conditions c : conditions) {
             if (!c.eval(e)) {
                 return false;
             }

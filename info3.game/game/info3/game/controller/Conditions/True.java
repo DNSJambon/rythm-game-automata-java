@@ -2,7 +2,7 @@ package info3.game.controller.Conditions;
 
 import info3.game.model.Entities.Entity;
 
-public class True implements Condition {
+public class True implements Conditions {
     
     /*
      * Condition toujours vraie.

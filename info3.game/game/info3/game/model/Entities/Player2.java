@@ -12,7 +12,7 @@ public class Player2 extends Entity {
 
     public Player2(Grille g, int x, int y) {
         super(g);
-        etat_courant = 0;
+        etat_courant = "0";
         direction = Direction.Est;
         this.x = x;
         this.y = y;

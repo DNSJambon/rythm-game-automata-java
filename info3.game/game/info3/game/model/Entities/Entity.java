@@ -9,7 +9,7 @@ import info3.game.model.cellType;
 
 public abstract class Entity {
     IGrille g;
-    public int etat_courant;
+    public String etat_courant;
     Automate a;
     public Direction direction;
 

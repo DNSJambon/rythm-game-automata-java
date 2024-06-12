@@ -1,6 +1,7 @@
 package info3.game.controller;
 
 import info3.game.controller.Actions.Action;
+import info3.game.model.Entities.Entity;
 
 public class BufferAction {
     /* ici on construit un buffer d'action pour permettre au moteur de resoudre toutes les actions en meme temps 
@@ -9,6 +10,7 @@ public class BufferAction {
     Action action[];
     int size;
     int index;
+    public Entity main_entity; //TODO: A supprimer
 
     /* Prend en paramètre la taille du buffer a construire.
      * Le buffer doit avoir autant d'action que d'entité qui existe sur le moteur ou qu'il y a a faire.
@@ -43,7 +45,10 @@ public class BufferAction {
 
     public void resolve() {
         for (int i = 0; i < index; i++) {
-            action[i].exec(action[i].e_or);
+            if (action[i].e_or == null)
+                action[i].exec(main_entity); //TODO: A supprimer
+            else
+                action[i].exec(action[i].e_or);
         }
         index = 0;
     }

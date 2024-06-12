@@ -3,7 +3,7 @@ package info3.game.controller.Conditions;
 import info3.game.model.Entities.Entity;
 
 
-public interface Condition {
+public interface Conditions {
 
 
     /*

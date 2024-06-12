@@ -6,23 +6,27 @@ import info3.game.model.Entities.Entity;
 
 public class Automate {
 
-    int status;
-    List<Transition> Trans;
+    String name;
+    public String status;
+    List<Transitions> Trans;
 
-    public Automate(int s, List<Transition> T){
+
+    public Automate(String name ,String s, List<Transitions> T){
+        this.name=name;
         this.Trans=T;
         this.status=s;
     }
 
-    public Automate(int s, Transition[] T){
+    public Automate(String s, Transitions[] T){
+        this.name="Automate";
         this.status=s;
-        this.Trans = new ArrayList<Transition>();
+        this.Trans = new ArrayList<Transitions>();
         for (int i=0;i<T.length;i++){
             Trans.add(T[i]);
         }
     }
 
-    public Transition getLastTrans(){
+    public Transitions getLastTrans(){
         return Trans.get(Trans.size()-1);
 
     }
@@ -36,7 +40,7 @@ public class Automate {
     public boolean step_A(Entity e,BufferAction buff){
         int i=0;
         while (Trans.get(i)!=null) {
-            if (e.etat_courant==Trans.get(i).init) {
+            if (e.etat_courant.equals(Trans.get(i).init)) {
                 if (Trans.get(i).cond.eval(e)) {
                     e.etat_courant = Trans.get(i).end;
                     buff.addAction(Trans.get(i).act);

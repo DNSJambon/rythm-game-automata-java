@@ -2,13 +2,13 @@ package info3.game.controller.Conditions;
 
 import info3.game.model.Entities.Entity;
 
-public class Binary implements Condition{
+public class Binary implements Conditions{
 
-    Condition left;
-    Condition right;
+    Conditions left;
+    Conditions right;
     String operator;
 
-    public Binary(Condition left, Condition right, String operator) {
+    public Binary(Conditions left, Conditions right, String operator) {
         this.left = left;
         this.right = right;
         this.operator = operator;

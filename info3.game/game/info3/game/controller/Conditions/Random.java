@@ -1,7 +1,7 @@
 package info3.game.controller.Conditions;
 import info3.game.model.Entities.Entity;   
 
-public class Random implements Condition {
+public class Random implements Conditions {
     
     int pourcentage;
 

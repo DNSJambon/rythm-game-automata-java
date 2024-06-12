@@ -9,7 +9,8 @@ import info3.game.model.Entities.Entity;
 public class Control {
 
     LinkedList<Entity> entities;
-    BufferAction buffer;
+    public BufferAction buffer;
+
 
     public Control() {
         entities = new LinkedList<Entity>();

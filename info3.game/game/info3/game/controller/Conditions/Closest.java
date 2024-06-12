@@ -4,7 +4,7 @@ import info3.game.controller.*;
 import info3.game.model.Category;
 import info3.game.model.Entities.*;
 
-public class Closest implements Condition{
+public class Closest implements Conditions{
     Category c;
     DirRelative d;
 

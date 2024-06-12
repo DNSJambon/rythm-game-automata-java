@@ -11,7 +11,7 @@ public class Obstacle extends Entity {
 
     public Obstacle(IGrille g, Automate a, int x, int y) {
         super(g);
-        etat_courant = 0;
+        etat_courant = "0";
         this.a = a;
         this.x = x;
         this.y = y;
@@ -23,8 +23,7 @@ public class Obstacle extends Entity {
     //Obstacle avec automate par défaut (automate vide)
     public Obstacle(IGrille g, int x, int y) {
         super(g);
-        etat_courant = 0;
-        this.a = new Automate(0, new Transition[0]);
+        etat_courant = "0";
         this.x = x;
         this.y = y;
         this.direction = Direction.Sud;
@@ -32,12 +31,12 @@ public class Obstacle extends Entity {
         g.getCell(x, y).setEntity(this);
 
 
-        Transition[] T = new Transition[1];
+        Transitions[] T = new Transitions[1];
         True t = new True();
         Wait w = new Wait();
-        T[0] = new Transition(w, t, 0, 0);
+        T[0] = new Transitions(w, t, 0, 0);
         w.e_or = this;
-        this.a = new Automate(0, T);
+        this.a = new Automate("0", T);
     }
 
     @Override

@@ -80,24 +80,29 @@ public class Grille implements IGrille{
         //======placer le joueur dans le labyrinthe======
         //case vide random
         c = randomCell_libre();
-        MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
-        // MazeSolver m = new MazeSolver(this, 0, 0);
+        //MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
+        Automate a = loadAutomate("game/info3/game/model/Automates/Mazesolver.gal").get(0);
+        MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(),a);
         main_Entity = m;
+        m_control.buffer.main_entity = m;
         m_control.addEntity(m);
     }
 
     List<Automate> loadAutomate(String filename) {
         List<Automate> automates= new ArrayList<>();
 
+       
+        AST ast = null;
         try {
-            AST ast = (AST) Parser.from_file(filename);
-            Ast2Automaton visitor = new Ast2Automaton(automates);
-            ast.accept(visitor);
-            return automates;
-        } catch (Exception ex) {
-      return null;
+            ast = (AST) Parser.from_file(filename);
+        } catch (Exception e) {e.printStackTrace();}
+        Ast2Automaton visitor = new Ast2Automaton(automates);
+        automates = (List<Automate>) ast.accept(visitor);
+        return automates;
+
+
     }
-    }
+    
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
             int endX, int endY) {
