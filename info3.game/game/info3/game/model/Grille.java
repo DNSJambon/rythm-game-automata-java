@@ -10,6 +10,9 @@ import java.util.Queue;
 import java.util.Random;
 import javax.imageio.ImageIO;
 
+import gal.ast.AST;
+import gal.parser.Parser;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -64,14 +67,25 @@ public class Grille implements IGrille{
         //ajoute player1
         Player1 p = new Player1(this);
         m_control.addEntity(p);
-        MazeSolver m = new MazeSolver(this, debut_entre_X, debut_entre_Y);
-        // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
         m_control.addEntity(m);
         pourcentage_aleatoire_obstacle(this, 100, 203, debut_entre_X, debut_entre_Y, fin_X, fin_Y);
          // Exemple de pourcentage et de seed
-         cree_des_salles(666);
+        cree_des_salles(666);
 
+    }
+
+    List<Automaton> loadAutomaton(String filename) {
+        List<Automaton> automatas = new ArrayList<>();
+
+        try {
+            AST ast = (AST) Parser.from_file(filename);
+            Ast2Automaton visitor = new Ast2Automaton();
+            automatas = (List<Automaton>) ast.accept(visitor);
+            return automatas;
+        } catch (Exception ex) {
+      return null;
+    }
     }
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
