@@ -118,11 +118,11 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-
-	private long Rythme=5000;
+	private long decision=1000;
+	private long Rythme=500;
     private long m_textElapsed;
 	private long m_timekey;
-	private boolean authorised = false;
+	private boolean authorised = true;
 
 	/*
 	 * This method is invoked almost periodically, given the number of milli-seconds
@@ -130,24 +130,37 @@ public class Game {
 	 */
 	void tick(long elapsed) {
 		
+		m_timekey += elapsed;
+
 			
-			// Check if the game is authorized to proceed
-			if (m_grille.IsAuthorised()) {
-				authorised = true;
-			}
+			
+			
 			
 			// If the game is authorized, check if it becomes unauthorized
-			if (authorised == true) {
-   	 				if (m_grille.IsAuthorised() == false) {
+			
+			
+		
+			if (authorised) {
+   	 			if (m_grille.IsAuthorised() == false) {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
-					authorised = false;
-					m_grille.switchAuthorised();
-					
+					authorised = false;					
+				}
+				if (m_timekey > decision) {
+					m_timekey = 0;
+					m_control.step();
 				}
 			}
-			
+			else{
+				if (m_timekey > Rythme) {
+					m_timekey = 0;
+					m_grille.switchAuthorised();
+					authorised = true;
+				}
+			}
+
+
 			// Update the game grid
 			m_grille.tick(elapsed);
 
@@ -164,16 +177,12 @@ public class Game {
 					txt += " ";
 				txt = txt + fps + " fps   ";
 				m_text.setText(txt);
+				
 			}
 
 			// Update the time key and check if it exceeds the rhythm
-			m_timekey += elapsed;
-			if (m_timekey > Rythme) {
-				m_timekey = 0;
-				m_control.step();
-				m_grille.switchAuthorised();
-				authorised = false;
-			}
+			
+			
 			
 		}
 	
