@@ -2,7 +2,7 @@ package info3.game.model.Entities;
 
 import java.awt.Graphics;
 
-import info3.game.controller.Automaton;
+import info3.game.controller.Automate;
 import info3.game.controller.DirRelative;
 import info3.game.model.IGrille;
 import info3.game.model.cellType;
@@ -11,7 +11,7 @@ public class Key extends Entity {
 
     boolean picked;
 
-    public Key(IGrille g,Automaton a,int x, int y) {
+    public Key(IGrille g,Automate a,int x, int y) {
         super(g);
         this.x = x;
         this.y = y;

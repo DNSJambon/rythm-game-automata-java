@@ -2,7 +2,7 @@ package info3.game.model.Entities;
 
 import java.awt.Graphics;
 
-import info3.game.controller.Automaton;
+import info3.game.controller.Automate;
 import info3.game.controller.DirRelative;
 import info3.game.model.Category;
 import info3.game.model.IGrille;
@@ -11,7 +11,7 @@ import info3.game.model.cellType;
 public class Door extends Entity{
     Key k;
     boolean opened;
-    public Door(IGrille g,Automaton a,int x,int y,Key k) {
+    public Door(IGrille g,Automate a,int x,int y,Key k) {
         super(g);
         this.x = x;
         this.y =y;

@@ -10,7 +10,7 @@ import info3.game.model.cellType;
 public abstract class Entity {
     IGrille g;
     public int etat_courant;
-    Automaton a;
+    Automate a;
     public Direction direction;
 
     int x, y;

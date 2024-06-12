@@ -31,7 +31,7 @@ public class Snake extends Entity {
     public coordonnees last;
     public coordonnees egg;
 
-    public Snake(Automaton a, Grille g) {
+    public Snake(Automate a, Grille g) {
         super(g);
         super.a = a;
         size = 1;
@@ -86,7 +86,7 @@ public class Snake extends Entity {
         T2[5] = new Transition(m, cond_true, 0, 0);
         T2[6] = new Transition(queue, cond_true, 1, 0);
 
-        Automaton a2 = new Automaton(0, T2);
+        Automate a2 = new Automate(0, T2);
         super.a = a2;
         m.e_or = this;
         gauche.e_or = this;

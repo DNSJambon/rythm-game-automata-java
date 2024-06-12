@@ -46,7 +46,7 @@ public class Player1 extends Entity{
         T[0] = new Transition(droite, droite_vide, 0, 0);
         T[1] = new Transition(gauche, gauche_vide , 0, 0);
         
-        Automaton a = new Automaton(0, T);
+        Automate a = new Automate(0, T);
 
         this.a = a;
         droite.e_or = this;
@@ -54,7 +54,7 @@ public class Player1 extends Entity{
         devant.e_or = this;
     }
     
-    public Player1(Automaton a,Grille g) {
+    public Player1(Automate a,Grille g) {
         super(g);
         super.a = a;
         life = 3;

@@ -62,7 +62,7 @@ public class MazeSolver extends Entity {
         //T[3] = new Transition(demi_tour, derrière, 0, 0);
         
 
-        Automaton a = new Automaton(0, T);
+        Automate a = new Automate(0, T);
 
         this.a = a;
         droite.e_or = this;

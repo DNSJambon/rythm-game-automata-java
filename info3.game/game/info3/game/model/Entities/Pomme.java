@@ -12,7 +12,7 @@ import info3.game.model.cellType;
 
 public class Pomme extends Entity {
     
-    public Pomme(Grille g, Automaton a) {
+    public Pomme(Grille g, Automate a) {
         super(g);
         this.a = a;
         etat_courant = 0;
@@ -39,7 +39,7 @@ public class Pomme extends Entity {
 
         T[0] = new Transition(p, c, 0, 0);
 
-        Automaton a = new Automaton(0, T);
+        Automate a = new Automate(0, T);
         this.a = a;
         p.e_or=this;
     }

@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import gal.ast.AST;
+import gal.ast.Automaton;
 import gal.parser.Parser;
 
 import java.awt.Color;
@@ -68,7 +69,7 @@ public class Grille implements IGrille{
         //======generation du labyrinthe======
         //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
         remplir_obstacle();
-        cree_des_salles(662,5,5, 10, 3);
+        cree_des_salles(51,5,5, 10, 3);
 
         //======generation des entités======
         place_monstre(10);
@@ -85,14 +86,14 @@ public class Grille implements IGrille{
         m_control.addEntity(m);
     }
 
-    List<Automaton> loadAutomaton(String filename) {
-        List<Automaton> automatas = new ArrayList<>();
+    List<Automate> loadAutomate(String filename) {
+        List<Automate> automates= new ArrayList<>();
 
         try {
             AST ast = (AST) Parser.from_file(filename);
-            Ast2Automaton visitor = new Ast2Automaton();
-            automatas = (List<Automaton>) ast.accept(visitor);
-            return automatas;
+            Ast2Automaton visitor = new Ast2Automaton(automates);
+            ast.accept(visitor);
+            return automates;
         } catch (Exception ex) {
       return null;
     }

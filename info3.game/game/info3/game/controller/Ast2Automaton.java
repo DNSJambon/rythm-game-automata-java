@@ -1,6 +1,7 @@
 package info3.game.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import gal.ast.AST;
 import gal.ast.Actions;
@@ -22,59 +23,78 @@ import gal.ast.Value;
 
 public class Ast2Automaton implements IVisitor{
 
-    @Override
-    public Object visit(Category cat) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+
+    Integer current_source_state;
+
+	/**
+	 * /!\ States appear as source and target of transitions.
+	 * 
+	 * A naive implementation would create distinct copies of the same state: - one
+	 * when it is a source, - one when it is a target resulting into disconnected
+	 * automaton with floating transitions.
+	 * 
+	 * SOLUTION We need to build a mapping from State name -->
+	 * DoState(id,name,options). Thus, when encountering a state that has already
+	 * been stored in the mapping we can ask the mapping what is the id we must use
+	 * for that state.
+	 */
+
+	private Map<String, State> state_map;
+
+	Integer state_id(State state) {
+		State stored_state = state_map.get(state.name);
+		if (stored_state != null) {
+			return stored_state.id;
+		} else {
+			state_map.put(state.name, state);
+			return state.id;
+		}
+	}
+
+
+    List<Automate> automates;
+
+    public Ast2Automaton(List<Automate> automates){
+        this.automates = automates;
     }
 
-    @Override
-    public Object visit(Direction dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
-    }
+    // REQUIRED BY INTERFACE IVisitor
 
-    @Override
-    public Object visit(Key key) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
-    }
+	public Object visit(Category cat) {
+		return null;
+	}
 
-    @Override
-    public Object visit(Value v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
-    }
+	public Object visit(Direction dir) {
+		return null;
+	}
 
-    @Override
-    public Object visit(Underscore u) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
-    }
+	public Object visit(Key key) {
+		return null;
+	}
 
-    @Override
-    public void enter(FunCall funcall) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
-    }
+	public Object visit(Value v) {
+		return null;
+	}
 
-    @Override
-    public void visit(FunCall funcall) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
-    }
+	public Object visit(Underscore u) {
+		return null;
+	}
 
-    @Override
-    public void exit(FunCall funcall) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exit'");
-    }
+	// FUNCALL
 
-    @Override
-    public Object build(FunCall funcall, List<Object> parameters) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
-    }
+	public void enter(FunCall funcall) {
+	}
+
+	public void visit(FunCall funcall) {
+	}
+
+	public void exit(FunCall funcall) {
+	}
+
+	public Object build(FunCall funcall, List<Object> params) {
+		return null;
+	}
+
 
     @Override
     public void enter(BinaryOp binop) {
@@ -96,8 +116,8 @@ public class Ast2Automaton implements IVisitor{
 
     @Override
     public Object build(BinaryOp binop, Object left, Object right) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'build'");
+        
+
     }
 
     @Override

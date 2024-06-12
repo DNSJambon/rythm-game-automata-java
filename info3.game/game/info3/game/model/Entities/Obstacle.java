@@ -9,7 +9,7 @@ import info3.game.model.*;
 
 public class Obstacle extends Entity {
 
-    public Obstacle(IGrille g, Automaton a, int x, int y) {
+    public Obstacle(IGrille g, Automate a, int x, int y) {
         super(g);
         etat_courant = 0;
         this.a = a;
@@ -24,7 +24,7 @@ public class Obstacle extends Entity {
     public Obstacle(IGrille g, int x, int y) {
         super(g);
         etat_courant = 0;
-        this.a = new Automaton(0, new Transition[0]);
+        this.a = new Automate(0, new Transition[0]);
         this.x = x;
         this.y = y;
         this.direction = Direction.Sud;
@@ -37,7 +37,7 @@ public class Obstacle extends Entity {
         Wait w = new Wait();
         T[0] = new Transition(w, t, 0, 0);
         w.e_or = this;
-        this.a = new Automaton(0, T);
+        this.a = new Automate(0, T);
     }
 
     @Override

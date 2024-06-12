@@ -1,0 +1,12 @@
+Mazesolver(S1){
+*(S1):
+| Cell(R, V) ? Move(R) : (S1)
+| Cell(F,O) & Cell(R, O) & Cell(L, O) ? Move(B) : (S1)
+| Cell(F,O) & Cell(R, O) ? Move(L) : (S1)
+| Cell(F,O) & Cell(L, O) ? Move(R) : (S1)
+| Cell(F,O) ? Move(L) : (S1)
+| True ? Move(F) : (S1)
+
+
+
+}
