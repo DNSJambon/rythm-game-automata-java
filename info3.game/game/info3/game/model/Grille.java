@@ -244,8 +244,9 @@ public class Grille implements IGrille{
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 Obstacle o = new Obstacle(this, j, i);
-                m_control.addEntity(o);
-                // grille[i][j].setEntity(o);
+               
+               // m_control.addEntity(o);
+                grille[i][j].setEntity(o);
             }
         }
     }
