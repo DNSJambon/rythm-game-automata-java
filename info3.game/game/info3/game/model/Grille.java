@@ -33,10 +33,10 @@ public class Grille implements IGrille{
     BufferedImage[] m_images;
     Entity main_Entity;
     int viewport_size = 7;
-    int debut_entre_X=10;
-    int debut_entre_Y=10;
-    int fin_X= 1;
-    int fin_Y= 1;
+    int debut_entre_X=0;
+    int debut_entre_Y=0;
+    int fin_X= 33;
+    int fin_Y= 33;
 
     //Synchro
     boolean authorised;
@@ -64,7 +64,7 @@ public class Grille implements IGrille{
         // MazeSolver m = new MazeSolver(this, 0, 0);
         main_Entity = m;
         m_control.addEntity(m);
-        pourcentage_aleatoire_obstacle(this, 40, 23, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        pourcentage_aleatoire_obstacle(this, 100, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
     }
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
