@@ -68,12 +68,13 @@ public class Grille implements IGrille{
         cree_des_salles(668,5,5, 8, 5);
 
         //======generation des entités======
-        //place_monstre(10);
+        place_monstre(10);
         cell c = randomCell_libre();
-        //Player1 p = new Player1(this,c.getCol(),c.getRow());
-        //m_control.addEntity(p);
+        Player1 p = new Player1(this,c.getCol(),c.getRow());
+        m_control.addEntity(p);
 
         //======placer le joueur dans le labyrinthe======
+        //case vide random
         c = randomCell_libre();
         MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
         // MazeSolver m = new MazeSolver(this, 0, 0);
@@ -243,8 +244,8 @@ public class Grille implements IGrille{
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 Obstacle o = new Obstacle(this, j, i);
-                //m_control.addEntity(o);
-                grille[i][j].setEntity(o);
+                m_control.addEntity(o);
+                // grille[i][j].setEntity(o);
             }
         }
     }
