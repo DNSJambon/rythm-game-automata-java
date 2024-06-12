@@ -2,7 +2,9 @@
 But du jeu : trouver une clé puis sortir
 - Grille avec des cases (peux gérer plusieur entités sur une meme case)
 - Vue de dessus
-- Génération aléatoire de map (mur et bot de type labyrinthe***x***s)
+- Génération aléatoire de map : 
+    - generation aleatoire de salle
+    - generation aleatoire des monstres
 
 
 - gestion de difficulté :
