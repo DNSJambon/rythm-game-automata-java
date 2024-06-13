@@ -19,41 +19,7 @@ public class Player1 extends Entity{
     int in_movement = -1;
     int nb_frame_move = 6;
 
-    public Player1(IGrille g, int x, int y) {
-        super(g);
-        life = 3;
-        etat_courant = "0";
-        g.getCell(x, y).setEntity(this);
-        direction = Direction.Nord;
-        this.x = x;
-        this.y = y;
-        //Automate par defaut
-        Transitions[] T = new Transitions[2];
-         try {
-            m_images = Grille.loadSprite("resources/squelette.png", 1, 4);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-      
-        Cell droite_vide = new Cell(DirRelative.Droite, Category.V);
-        Cell gauche_vide = new Cell(DirRelative.Gauche, Category.V);
-
-        Move devant = new Move(DirRelative.Devant);
-        Move droite = new Move(DirRelative.Droite);
-        Move gauche = new Move(DirRelative.Gauche);
-        
-
-        T[0] = new Transitions(droite, droite_vide, 0, 0);
-        T[1] = new Transitions(gauche, gauche_vide , 0, 0);
-        
-        Automate a = new Automate("0", T);
-
-        this.a = a;
-        droite.e_or = this;
-        gauche.e_or = this;
-        devant.e_or = this;
-    }
+    
     
     public Player1(Automate a,Grille g) {
         super(g);
