@@ -51,10 +51,10 @@ public class Grille implements IGrille{
 
     public Grille(int rows, int cols, Control m_control) throws IOException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
-        int debut_entre_X = 0;
-        int debut_entre_Y = 0;
-        int fin_X = 33;
-        int fin_Y = 33;
+        //int debut_entre_X = 0;
+        //int debut_entre_Y = 0;
+        //int fin_X = 33;
+        //int fin_Y = 33;
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
@@ -67,6 +67,8 @@ public class Grille implements IGrille{
                 grille[i][j] = new cell(this, j, i);
             }
         }
+
+        setup_config("game/info3/game/config.json");//TODO
         automates = loadAutomate("game/info3/game/model/Automates/automates.gal");
         //======generation du labyrinthe======
         //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
@@ -111,6 +113,10 @@ public class Grille implements IGrille{
         return null;
     }
     
+    public void setup_config(String filename) {
+        
+    }
+
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
             int endX, int endY) {

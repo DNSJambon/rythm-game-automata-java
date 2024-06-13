@@ -1,0 +1,33 @@
+{
+    "seed": 1,
+    "difficulty": 1,
+    "decision_time" : 1,
+    "automates" : "automates.gal",
+    "entities" : [
+        {   
+            "name" : "Joueur1",
+            "automate" : "Player1",
+            "class" : "Player1"
+        },
+        {
+            "name" : "Joueur2",
+            "automate" : "Player2",
+            "class" : "Player2"
+        },
+        {
+            "name" : "MurIncassable",
+            "automate" : "Wall",
+            "class" : "Obstacle"
+
+        },
+        {
+            "name" : "Slime",
+            "automate" : "Mazesolveur",
+            "class" : "MazeSolver"
+
+        }
+
+    ]
+
+
+}
