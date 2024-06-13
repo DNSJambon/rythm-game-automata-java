@@ -1,3 +1,15 @@
+# <span style="color: #d54020 ">***13 juin 2024***</span>
+## <span style="color:green">**Game**</span>
+- régler le déplacement du player1
+- génèration des salles
+- faire le file config
+- écrire les automates qu'on utilise pour l'instant dans un seul fichier automates.gal
+
+# <span style="color: #d54020 ">***12 juin 2024***</span>
+## <span style="color:green">**Game**</span>
+- comprendre le parser des automates GAL fourni par l'enseignant
+- fixer les automates GAL en respectant la syntaxe fournie par le prof
+
 # <span style="color: #d54020 ">***11 juin 2024***</span>
 ## <span style="color:green">**Game**</span>
 - finition du contrat
