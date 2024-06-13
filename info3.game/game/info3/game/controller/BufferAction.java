@@ -7,7 +7,7 @@ public class BufferAction {
     /* ici on construit un buffer d'action pour permettre au moteur de resoudre toutes les actions en meme temps 
      * (et donc garder le "rythme" ou la "synchroniqation").
     */
-    Action action[];
+    Act act[];
     int size;
     int index;
     public Entity main_entity; //TODO: A supprimer
@@ -19,7 +19,7 @@ public class BufferAction {
 
     public BufferAction(int size) {
         this.size = size;
-        this.action = new Action[size];
+        this.act = new Act[size];
         this.index = 0;
     }
 
@@ -28,10 +28,10 @@ public class BufferAction {
      * Si Action=null, buffer inchangé.
      * Si buffer plein, action non ajoutée.
     */
-    public void addAction(Action action) {
-        if (action != null) {
+    public void addAct(Entity e, Transitions T) {
+        if (T != null) {
             if (index < size) {
-                this.action[index] = action;
+                this.act[index] = new Act(e, T.act, T.cond);
                 index++;
             }
         }
@@ -45,10 +45,15 @@ public class BufferAction {
 
     public void resolve() {
         for (int i = 0; i < index; i++) {
-            if (action[i].e_or == null)
-                action[i].exec(main_entity); //TODO: A supprimer
-            else
-                action[i].exec(action[i].e_or);
+            if (this.act!=null) {
+                if (act[i].cond.eval(act[i].owner)) {
+                    act[i].action.exec(act[i].owner);
+                }
+                else {
+                    System.out.println("Condition non remplie");
+                    i++;
+                }
+            }
         }
         index = 0;
     }
