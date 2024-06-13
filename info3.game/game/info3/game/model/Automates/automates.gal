@@ -16,10 +16,10 @@ Wall(S1){
 
 Player1(S1){
 *(S1):
-| Key(d) ? Move(R) : (S1)
-| Key(z) ? Move(F) : (S1)
-| Key(s) ? Move(B) : (S1)
-| Key(q) ? Move(L) : (S1)
+| Cell(R, V)  & Key(d) ? Move(R) : (S1)
+| Key(z) & Cell(F, V) ? Move(F) : (S1)
+| Key(s) & Cell(B, V) ? Move(B) : (S1)
+| Key(q) & Cell(L, V) ? Move(L) : (S1)
 | True ? Wait : (S1)
 }
 
