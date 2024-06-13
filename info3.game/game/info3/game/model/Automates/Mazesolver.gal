@@ -7,6 +7,9 @@ Mazesolver(S1){
 | Cell(F,O) ? Move(L) : (S1)
 | True ? Move(F) : (S1)
 
+}
 
-
+Wall(S1){
+*(S1):
+| True ? Wait : (S1)
 }
