@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -33,31 +34,24 @@ public class Grille implements IGrille{
     long m_imageElapsed;
 
     Control m_control;
-    List<Automate> automates;
+    HashMap<String, Automate> automates;
 
     // Viewport
     BufferedImage[] m_images;
     Entity main_Entity;
     int viewport_size = 7;
-    int debut_entre_X=0;
-    int debut_entre_Y=0;
-    int fin_X= 33;
-    int fin_Y= 33;
 
     //Synchro
     boolean authorised;
     char touche;
     
 
-    public Grille(int rows, int cols, Control m_control) throws IOException {
+    public Grille(int rows, int cols, Control m_control, int seed, HashMap<String, Automate> automates) throws IOException, ClassNotFoundException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
-        int debut_entre_X = 0;
-        int debut_entre_Y = 0;
-        int fin_X = 33;
-        int fin_Y = 33;
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
+        this.automates = automates;
         this.authorised = true;
 
         // Création de la grille
@@ -67,50 +61,32 @@ public class Grille implements IGrille{
                 grille[i][j] = new cell(this, j, i);
             }
         }
-        automates = loadAutomate("game/info3/game/model/Automates/automates.gal");
+
+        
         //======generation du labyrinthe======
         //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
         remplir_obstacle();
-        cree_des_salles(51,5,5, 10, 3);
+        cree_des_salles(seed,5,5, 10, 3);
 
         //======generation des entités======
         
         place_monstre(10);
         cell c = randomCell_libre();
-        Player1 p = new Player1(this,c.getCol(),c.getRow(), getAutomate("Player1", automates));
+        Player1 p = new Player1(this,c.getCol(),c.getRow(), automates.get("Joueur1"));
         m_control.addEntity(p);
 
         //======placer le joueur dans le labyrinthe======
         //case vide random
         c = randomCell_libre();
         //MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
-        MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), getAutomate("Mazesolver", automates));
+        MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
         main_Entity = p;
         m_control.addEntity(m);
     }
 
-    List<Automate> loadAutomate(String filename) {
-        List<Automate> automates= new ArrayList<>();
-
-        AST ast = null;
-        try {
-            ast = (AST) Parser.from_file(filename);
-        } catch (Exception e) {e.printStackTrace();}
-        Ast2Automaton visitor = new Ast2Automaton(automates);
-        automates = (List<Automate>) ast.accept(visitor);
-        return automates;
-
-    }
-
-    public Automate getAutomate(String name, List<Automate> automates) {
-        for (Automate a : automates) {
-            if (a.name.equals(name)) {
-                return a;
-            }
-        }
-        return null;
-    }
     
+    
+
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
             int endX, int endY) {
@@ -126,7 +102,7 @@ public class Grille implements IGrille{
 
         for (int i = 0; i < grille.rows; i++) {
             for (int j = 0; j < grille.cols; j++) {
-                if (grille.grille[i][j].pas_obstacle() && !(i == debut_entre_X && j == debut_entre_Y)) {
+                if (grille.grille[i][j].pas_obstacle() && !(i == 0 && j == 0)) {
                     emptyCells.add(grille.grille[i][j]);
                 }
             }
@@ -147,7 +123,7 @@ public class Grille implements IGrille{
             tempObstacles[c.getRow()][c.getCol()] = true;
 
             if (chemin_existe(tempObstacles, startX, startY, endX, endY) ) {
-                Obstacle o = new Obstacle(this, c.getCol(), c.getRow(), getAutomate("Wall", automates));
+                Obstacle o = new Obstacle(this, c.getCol(), c.getRow(), automates.get("MurIncassable"));
                 m_control.addEntity(o);
                 c.setEntity(o);
                 obstaclesPlaced++;
@@ -270,7 +246,7 @@ public class Grille implements IGrille{
     public void remplir_obstacle() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                Obstacle o = new Obstacle(this, j, i , getAutomate("Wall", automates));
+                Obstacle o = new Obstacle(this, j, i , automates.get("MurIncassable"));
                
                 m_control.addEntity(o);
                 grille[i][j].setEntity(o);
@@ -283,7 +259,7 @@ public class Grille implements IGrille{
         
         for (int i = 0; i < nb_monstre; i++) {
             cell c = randomCell_libre();
-            MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), getAutomate("Mazesolver", automates));
+            MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
             m_control.addEntity(m);
             c.setEntity(m);
         }
@@ -292,7 +268,6 @@ public class Grille implements IGrille{
 
 
     /* ======================Partie Synchro========================== */
-    //TODO on ne peux pas jouer le tour suivant apres en avoir sauté un
     public char getTouche() {
         return touche;
     }

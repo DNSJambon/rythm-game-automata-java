@@ -5,11 +5,24 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import java.io.FileReader; 
+import java.util.Iterator; 
+import java.util.Map; 
+  
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
+import gal.ast.AST;
+import gal.parser.Parser;
 import info3.game.graphics.GameCanvas;
 import info3.game.sound.RandomFileInputStream;
 
@@ -38,6 +51,7 @@ public class Game {
     CanvasListener m_listener;
 	Grille m_grille;
 	Control m_control;
+	
 
 	//Sound m_music;
 
@@ -45,8 +59,10 @@ public class Game {
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
 		m_control = new Control();
-		//TODO: INVERSER
-		m_grille = new Grille(34, 34, m_control);
+
+
+		
+		m_grille = config("game/info3/game/config.json");
 		// creating a listener for all the events
 		// from the game canvas, that would be
 		// the controller in the MVC pattern
@@ -54,9 +70,6 @@ public class Game {
 		// creating the game canvas to render the game,
 		// that would be a part of the view in the MVC pattern
 		m_canvas = new GameCanvas(m_listener);
-
-		
-		
 
 		System.out.println("  - creating frame...");
 		Dimension d = new Dimension(1138, 817);
@@ -66,6 +79,68 @@ public class Game {
 		setupFrame();
 	}
 
+	//parse the json file to get the configuration of the game
+	Grille config(String config_file) {
+		//automates = loadAutomate("game/info3/game/model/Automates/"+automate_file);
+		int seed;
+		int difficulty;
+		int decision_time;
+		String automate_file;
+		List<Automate> automates;
+		HashMap<String, Automate> entities_automates = new HashMap<>();
+
+		try {
+			Path path = Path.of(config_file);
+			String reader =  Files.readString(path);
+			JSONObject config = new JSONObject(reader);
+			seed = config.getInt("seed");
+			difficulty = config.getInt("difficulty");
+			decision_time = config.getInt("decision_time");
+			automate_file = config.getString("automate_file");
+			automates = loadAutomate("game/info3/game/model/Automates/" + automate_file);
+
+			//go through the list "entities" in the json file
+			JSONArray entities = config.getJSONArray("entities");
+			for (int i = 0; i < entities.length(); i++) {
+				JSONObject entity = entities.getJSONObject(i);
+				String name = entity.getString("name");
+				String auto = entity.getString("automate");
+				entities_automates.put(name, getAutomate(auto, automates));
+			}
+
+			//create the grid
+			Grille grille = new Grille(34, 34, m_control, seed, entities_automates);
+			return grille;
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	List<Automate> loadAutomate(String filename) {
+        List<Automate> automates= new ArrayList<>();
+
+        AST ast = null;
+        try {
+            ast = (AST) Parser.from_file(filename);
+        } catch (Exception e) {e.printStackTrace();}
+        Ast2Automaton visitor = new Ast2Automaton(automates);
+        automates = (List<Automate>) ast.accept(visitor);
+        return automates;
+
+    }
+
+    public Automate getAutomate(String name, List<Automate> automates) {
+        for (Automate a : automates) {
+            if (a.name.equals(name)) {
+                return a;
+            }
+        }
+        return null;
+    }
 	/*
 	 * Then it lays out the frame, with a border layout, adding a label to the north
 	 * and the game canvas to the center.
@@ -119,7 +194,7 @@ public class Game {
 
 	
 	private long decision=1000;
-	private long Rythme=500;
+	private long Rythme=300;
     private long m_textElapsed;
 	private long m_timekey;
 	private boolean authorised = true;

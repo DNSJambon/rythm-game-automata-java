@@ -1,0 +1,28 @@
+{
+    "seed": 1,
+    "difficulty": 1,
+    "decision_time" : 1,
+    "automate_file" : "automates.gal",
+    "entities" : [
+        {   
+            "name" : "Joueur1",
+            "automate" : "Player1"
+        },
+        {
+            "name" : "Joueur2",
+            "automate" : "Player2"
+        },
+        {
+            "name" : "MurIncassable",
+            "automate" : "Wall"
+
+        },
+        {
+            "name" : "MazeSolver",
+            "automate" : "Mazesolver"
+        }
+
+    ]
+
+
+}
