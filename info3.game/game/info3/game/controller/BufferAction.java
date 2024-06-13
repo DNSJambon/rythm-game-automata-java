@@ -1,7 +1,6 @@
 package info3.game.controller;
 
 import info3.game.model.Entities.Entity;
-import info3.game.controller.Mode;
 
 public class BufferAction {
     /* ici on construit un buffer d'action pour permettre au moteur de resoudre toutes les actions en meme temps 
@@ -27,7 +26,7 @@ public class BufferAction {
      * Si mode=null, buffer inchangé.
      * Si buffer plein, action non ajoutée.
     */
-    public void addAct(Entity e, Mode mode) {
+    public void addAct(Entity e, Modes mode) {
         if (mode != null) {
             if (index < size) {
                 this.act[index] = new Act(e, mode);

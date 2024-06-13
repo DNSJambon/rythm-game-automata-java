@@ -31,20 +31,13 @@ public class Automate {
      */
     public boolean step_A(Entity e,BufferAction buff){
         int i=0;
-        while (Trans.get(i)!=null) {
-            if (e.etat_courant.equals(Trans.get(i).init)) {
-                if (Trans.get(i).cond.eval(e)) {
-                    e.etat_courant = Trans.get(i).end;
-                    buff.addAction(Trans.get(i).act);
-                    return true;
-                }
+        while (i<modes.size()){
+            if (modes.get(i).etat.equals(status)){
+                buff.addAct(e,modes.get(i));
+                return true;
             }
             i++;
-            if (i== Trans.size()) {
-                return false;
-            }
         }
-        return true;
-        
+        return false;
     }
 }
