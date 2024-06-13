@@ -30,4 +30,12 @@ public class Transitions {
         this.init = Integer.toString(i);
         this.end = Integer.toString(e);
     }
+
+    public Action GetAct() {
+        return this.act;
+    }
+
+    public Conditions GetCond() {
+        return this.cond;
+    }
 }
