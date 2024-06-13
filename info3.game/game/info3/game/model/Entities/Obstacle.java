@@ -9,10 +9,10 @@ import info3.game.model.*;
 
 public class Obstacle extends Entity {
 
-    public Obstacle(IGrille g, Automate a, int x, int y) {
+    public Obstacle(IGrille g, int x, int y, Automate automate) {
         super(g);
-        etat_courant = "0";
-        this.a = a;
+        etat_courant = automate.getState();
+        this.a = automate;
         this.x = x;
         this.y = y;
         this.direction = Direction.Sud;
@@ -21,6 +21,10 @@ public class Obstacle extends Entity {
     }
     
     
+
+    
+
+
 
     @Override
     public cellType getType() {
@@ -129,33 +133,7 @@ public class Obstacle extends Entity {
         }
     }
 
-    @Override
-    public boolean do_egg(Entity e) {
-        switch (e.direction) {
-            case Nord:
-                e.y+=(g.getCols()-1);
-                e.y=e.y%g.getRows();
-                g.getCell(x,y).setEntity(new Obstacle(g, a, x, y));
-                return true;
-            case Sud:
-                e.y+=1;
-                e.y=e.y%g.getRows();
-                g.getCell(x,y).setEntity(new Obstacle(g, a, x, y));
-                return true;
-            case Est:
-                e.x+=1;
-                e.x=e.x%g.getCols();
-                g.getCell(x,y).setEntity(new Obstacle(g, a, x, y));
-                return true;
-            case Ouest:
-                e.x+=(g.getRows()-1);
-                e.x=e.x%g.getCols();
-                g.getCell(x,y).setEntity(new Obstacle(g, a, x, y));
-                return true;
-            default:
-                return false;
-        }
-    }
+
 
     @Override
     public boolean do_pick(Entity e) {
@@ -235,6 +213,18 @@ public class Obstacle extends Entity {
     @Override
     public void tick(long elapsed) {
         
+    }
+
+
+
+
+
+
+
+    @Override
+    public boolean do_egg(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
     }
 
     

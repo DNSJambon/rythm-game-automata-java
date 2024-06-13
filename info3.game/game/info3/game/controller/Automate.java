@@ -6,8 +6,8 @@ import info3.game.model.Entities.Entity;
 
 public class Automate {
 
-    String name;
-    public String status;
+    public String name;
+    String status;
     List<Modes> modes;
 
 
@@ -17,6 +17,9 @@ public class Automate {
         this.status=s;
     }
 
+    public String getState(){
+        return status;
+    }
 
     public Modes getLastMode(){
         return modes.get(modes.size()-1);
