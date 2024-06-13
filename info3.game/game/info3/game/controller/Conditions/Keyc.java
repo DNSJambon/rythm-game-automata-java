@@ -2,12 +2,12 @@ package info3.game.controller.Conditions;
 
 import info3.game.model.Entities.*;
 
-public class Key implements Conditions {
+public class Keyc implements Conditions {
     char c;
     int key_code;
    
 
-    public Key (char c) {
+    public Keyc (char c) {
         this.c = c;
     }
 

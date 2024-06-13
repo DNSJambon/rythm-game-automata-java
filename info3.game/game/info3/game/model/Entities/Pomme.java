@@ -23,27 +23,7 @@ public class Pomme extends Entity {
     }
     
     //Constructeur avec automate par defaut
-    public Pomme(Grille g){
-        super(g);
-        etat_courant = "0";
-
-        this.x = g.getCols() - 1;
-        this.y = 1;
-        g.getCell(x, y).setEntity(this);
-
-        Transitions[] T = new Transitions[1];
-
-        Cell c = new Cell(DirRelative.soi, Category.T); 
-
-        Pick p = new Pick();
-
-        T[0] = new Transitions(p, c, 0, 0);
-
-        Automate a = new Automate("0", T);
-        this.a = a;
-        p.e_or=this;
-    }
-
+    
     @Override
     public cellType getType() {
         return cellType.Apple;
