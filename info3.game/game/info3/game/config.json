@@ -2,29 +2,24 @@
     "seed": 1,
     "difficulty": 1,
     "decision_time" : 1,
-    "automates" : "automates.gal",
+    "automate_file" : "automates.gal",
     "entities" : [
         {   
             "name" : "Joueur1",
-            "automate" : "Player1",
-            "class" : "Player1"
+            "automate" : "Player1"
         },
         {
             "name" : "Joueur2",
-            "automate" : "Player2",
-            "class" : "Player2"
+            "automate" : "Player2"
         },
         {
             "name" : "MurIncassable",
-            "automate" : "Wall",
-            "class" : "Obstacle"
+            "automate" : "Wall"
 
         },
         {
-            "name" : "Slime",
-            "automate" : "Mazesolveur",
-            "class" : "MazeSolver"
-
+            "name" : "MazeSolver",
+            "automate" : "Mazesolver"
         }
 
     ]
