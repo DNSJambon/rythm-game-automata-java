@@ -20,24 +20,7 @@ public class Obstacle extends Entity {
         g.getCell(x, y).setEntity(this);
     }
     
-    //Obstacle avec automate par défaut (automate vide)
-    public Obstacle(IGrille g, int x, int y) {
-        super(g);
-        etat_courant = "0";
-        this.x = x;
-        this.y = y;
-        this.direction = Direction.Sud;
-
-        g.getCell(x, y).setEntity(this);
-
-
-        Transitions[] T = new Transitions[1];
-        True t = new True();
-        Wait w = new Wait();
-        T[0] = new Transitions(w, t, 0, 0);
-        w.e_or = this;
-        this.a = new Automate("0", T);
-    }
+    
 
     @Override
     public cellType getType() {

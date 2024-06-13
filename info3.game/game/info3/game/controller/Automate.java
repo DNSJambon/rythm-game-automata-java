@@ -8,26 +8,18 @@ public class Automate {
 
     String name;
     public String status;
-    List<Transitions> Trans;
+    List<Modes> modes;
 
 
-    public Automate(String name ,String s, List<Transitions> T){
+    public Automate(String name ,String s, List<Modes> m){
         this.name=name;
-        this.Trans=T;
+        this.modes=m;
         this.status=s;
     }
 
-    public Automate(String s, Transitions[] T){
-        this.name="Automate";
-        this.status=s;
-        this.Trans = new ArrayList<Transitions>();
-        for (int i=0;i<T.length;i++){
-            Trans.add(T[i]);
-        }
-    }
 
-    public Transitions getLastTrans(){
-        return Trans.get(Trans.size()-1);
+    public Modes getLastMode(){
+        return modes.get(modes.size()-1);
 
     }
     

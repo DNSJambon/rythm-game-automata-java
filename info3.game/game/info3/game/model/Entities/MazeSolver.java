@@ -17,60 +17,6 @@ public class MazeSolver extends Entity {
 
     
     
-    public MazeSolver(Grille g, int x, int y) {
-        super(g);
-        etat_courant = "0";
-        direction = Direction.Est;
-        this.x = x;
-        this.y = y;
-        g.getCell(x, y).setEntity(this);
-
-        try {
-            m_images = Grille.loadSprite("resources/slime.png", 1, 4);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        //Automate par defaut (technique de la main droite)
-        Transitions[] T = new Transitions[6];
-
-        Cell obstacle_devant = new Cell(DirRelative.Devant, Category.O);
-        Cell obstacle_droite = new Cell(DirRelative.Droite, Category.O);
-        Cell obstacle_gauche = new Cell(DirRelative.Gauche, Category.O);
-        Cell droite_vide = new Cell(DirRelative.Droite, Category.V);
-        True t = new True();
-        //Key devan = new Key('z');
-        //Key derrière = new Key('s');
-        //Key droit = new Key('d');
-        //Key gauch = new Key('q');
-
-        Move devant = new Move(DirRelative.Devant);
-        Move droite = new Move(DirRelative.Droite);
-        Move gauche = new Move(DirRelative.Gauche);
-        Move demi_tour = new Move(DirRelative.Derriere);
-
-        T[0] = new Transitions(droite, droite_vide, 0, 0);
-        //T[0] = new Transition(droite, droit, 0, 0);
-        T[1] = new Transitions(demi_tour, new Et(obstacle_devant, obstacle_droite, obstacle_gauche), 0, 0);
-        T[2] = new Transitions(gauche, new Et(obstacle_devant, obstacle_droite), 0, 0);
-        //T[1] = new Transition(gauche, gauch, 0, 0);
-        T[3] = new Transitions(droite, new Et(obstacle_devant, obstacle_gauche), 0, 0);
-        T[4] = new Transitions(gauche, obstacle_devant, 0, 0);
-        T[5] = new Transitions(devant, t, 0, 0);
-        //T[2] = new Transition(devant, devan, 0, 0);
-        //T[3] = new Transition(demi_tour, derrière, 0, 0);
-        
-
-        Automate a = new Automate("0", T);
-
-        this.a = a;
-        droite.e_or = this;
-        gauche.e_or = this;
-        devant.e_or = this;
-        demi_tour.e_or = this;
-        
-    }
 
     public MazeSolver(Grille grille, int col, int row, Automate a) {
         super(grille);

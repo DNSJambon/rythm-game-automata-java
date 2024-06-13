@@ -72,6 +72,8 @@ public class Ast2Automaton implements IVisitor{
 
 	public Object build(FunCall funcall, List<Object> params) {
 		switch (funcall.name) {
+            case "Key":
+                return new Keyc(((String) params.get(0)).charAt(0));
             case "Move":
                 switch ((String) params.get(0)) {
                     case "R":
@@ -227,7 +229,7 @@ public class Ast2Automaton implements IVisitor{
 
     @Override
     public Object build(Automaton automaton, Object initial_state, List<Object> modes) {
-        return new Automate(automaton.name, (String) initial_state, (List<Transitions>) modes.get(0));
+        return new Automate(automaton.name, (String) initial_state, (List<Modes>) (List<?>) modes);
         //TODO: Add more modes
     }
 
