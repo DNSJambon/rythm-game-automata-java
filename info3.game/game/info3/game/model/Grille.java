@@ -391,7 +391,8 @@ public class Grille implements IGrille{
 
     int x_main_old = 3;
     int y_main_old = 3;
-    int mouvement = 8; //nombre de frame pour le decalage de la vue
+    int frames_anim = 8;
+    int mouvement = frames_anim; //nombre de frame pour le decalage de la vue
     Color vide = new Color(223, 208, 184);
     Color obstacle = new Color(139, 127, 109);
     Color player = new Color(60, 91, 111);
@@ -438,15 +439,15 @@ public class Grille implements IGrille{
                     + load_x_positif; i++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
                     g.drawImage(m_images[0],
-                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
-                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / 8,
+                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / frames_anim,
+                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / frames_anim,
                             width / viewport_size,
                             height / viewport_size,
                             null);
                 else
                     g.drawImage(m_images[21],
-                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
-                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / 8,
+                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / frames_anim,
+                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / frames_anim,
                             width / viewport_size,
                             height / viewport_size,
                             null);
@@ -458,8 +459,8 @@ public class Grille implements IGrille{
             for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2
                     + load_x_positif; i++) {
                 grille[j][i].paint(g,
-                        (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / 8,
-                        (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / 8,
+                        (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / frames_anim,
+                        (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / frames_anim,
                         width / viewport_size,
                         height / viewport_size);
             }
@@ -467,13 +468,13 @@ public class Grille implements IGrille{
 
         if (offset_x != 0 || offset_y != 0) {
             mouvement--;
-            if (mouvement == -1)
-                mouvement = 8;
+            if (mouvement == -1){
+                mouvement = frames_anim;
+                x_main_old = x_main;
+                y_main_old = y_main;
+            }
         }
-        if (mouvement == 8) {
-            x_main_old = x_main;
-            y_main_old = y_main;
-        }
+        
 
         //MiniMap
         drawMinimap(g, width, (height - 340) / 2, 340, 340);
