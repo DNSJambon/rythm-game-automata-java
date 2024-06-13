@@ -1,5 +1,6 @@
 package info3.game.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -98,6 +99,8 @@ public class Ast2Automaton implements IVisitor{
                 }
             case "True":
                 return new True();
+            case "Wait":
+                return new Wait();
             //TODO: Add more cases
         }
         return null;
@@ -160,7 +163,7 @@ public class Ast2Automaton implements IVisitor{
 
     @Override
     public Object build(Mode mode, Object source_state, Object behaviour) {
-        return behaviour;
+        return new Modes((String) source_state, (List<Transitions>) behaviour);
     }
 
 

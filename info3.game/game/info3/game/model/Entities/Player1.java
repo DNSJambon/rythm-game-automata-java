@@ -36,16 +36,6 @@ public class Player1 extends Entity{
         }
     }
     
-    public Player1(Automate a,Grille g) {
-        super(g);
-        super.a = a;
-        life = 3;
-        g.getCell(1, 1).setEntity(this);
-        direction = Direction.Nord;
-        x = 1;
-        y = 1;
-
-    }
 
     @Override
     public cellType getType() {
