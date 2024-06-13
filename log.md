@@ -4,6 +4,10 @@
 - génèration des salles
 - faire le file config
 - écrire les automates qu'on utilise pour l'instant dans un seul fichier automates.gal
+## A régler pour demain
+- Réorganiser Grille.java
+- Réorganiser l'ordre des actions
+- Gérer le joueur2 (son automate, ses actions)
 
 # <span style="color: #d54020 ">***12 juin 2024***</span>
 ## <span style="color:green">**Game**</span>
