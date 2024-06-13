@@ -77,7 +77,7 @@ public class Grille implements IGrille{
         
         place_monstre(10);
         cell c = randomCell_libre();
-        Player1 p = new Player1(this,c.getCol(),c.getRow(), getAutomate("Mazesolver", automates));
+        Player1 p = new Player1(this,c.getCol(),c.getRow(), getAutomate("Player1", automates));
         m_control.addEntity(p);
 
         //======placer le joueur dans le labyrinthe======
@@ -85,7 +85,7 @@ public class Grille implements IGrille{
         c = randomCell_libre();
         //MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
         MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), getAutomate("Mazesolver", automates));
-        main_Entity = m;
+        main_Entity = p;
         m_control.addEntity(m);
     }
 
