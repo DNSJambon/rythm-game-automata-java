@@ -20,7 +20,7 @@ public class MazeSolver extends Entity {
 
     public MazeSolver(Grille grille, int col, int row, Automate a) {
         super(grille);
-        etat_courant = a.status;
+        etat_courant = a.getState();
         direction = Direction.Est;
         this.x = col;
         this.y = row;

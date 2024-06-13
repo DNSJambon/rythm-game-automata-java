@@ -19,7 +19,22 @@ public class Player1 extends Entity{
     int in_movement = -1;
     int nb_frame_move = 6;
 
-    
+    public Player1(IGrille g, int x, int y, Automate a) {
+        super(g);
+        life = 3;
+        etat_courant = a.getState();
+        this.a = a;
+        g.getCell(x, y).setEntity(this);
+        direction = Direction.Nord;
+        this.x = x;
+        this.y = y;
+
+         try {
+            m_images = Grille.loadSprite("resources/squelette.png", 1, 4);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     public Player1(Automate a,Grille g) {
         super(g);

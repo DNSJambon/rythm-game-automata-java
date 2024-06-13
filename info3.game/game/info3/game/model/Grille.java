@@ -33,6 +33,7 @@ public class Grille implements IGrille{
     long m_imageElapsed;
 
     Control m_control;
+    List<Automate> automates;
 
     // Viewport
     BufferedImage[] m_images;
@@ -72,17 +73,17 @@ public class Grille implements IGrille{
         cree_des_salles(51,5,5, 10, 3);
 
         //======generation des entités======
+        automates = loadAutomate("game/info3/game/model/Automates/automates.gal");
         place_monstre(10);
         cell c = randomCell_libre();
-        Player1 p = new Player1(this,c.getCol(),c.getRow());
+        Player1 p = new Player1(this,c.getCol(),c.getRow(), getAutomate("Player1", automates));
         m_control.addEntity(p);
 
         //======placer le joueur dans le labyrinthe======
         //case vide random
         c = randomCell_libre();
         //MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
-        Automate a = loadAutomate("game/info3/game/model/Automates/Mazesolver.gal").get(0);
-        MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(),a);
+        MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), getAutomate("MazeSolver", automates));
         main_Entity = m;
         m_control.buffer.main_entity = m;
         m_control.addEntity(m);
@@ -91,7 +92,6 @@ public class Grille implements IGrille{
     List<Automate> loadAutomate(String filename) {
         List<Automate> automates= new ArrayList<>();
 
-       
         AST ast = null;
         try {
             ast = (AST) Parser.from_file(filename);
@@ -100,7 +100,15 @@ public class Grille implements IGrille{
         automates = (List<Automate>) ast.accept(visitor);
         return automates;
 
+    }
 
+    public Automate getAutomate(String name, List<Automate> automates) {
+        for (Automate a : automates) {
+            if (a.name.equals(name)) {
+                return a;
+            }
+        }
+        return null;
     }
     
 
@@ -139,7 +147,7 @@ public class Grille implements IGrille{
             tempObstacles[c.getRow()][c.getCol()] = true;
 
             if (chemin_existe(tempObstacles, startX, startY, endX, endY) ) {
-                Obstacle o = new Obstacle(this, c.getCol(), c.getRow());
+                Obstacle o = new Obstacle(this, c.getCol(), c.getRow(), getAutomate("Obstacle", automates));
                 m_control.addEntity(o);
                 c.setEntity(o);
                 obstaclesPlaced++;
@@ -169,7 +177,7 @@ public class Grille implements IGrille{
         visitedFromStart[startX][startY] = true;
         visitedFromEnd[endX][endY] = true;
 
-        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } }; 
 
         while (!queueStart.isEmpty() && !queueEnd.isEmpty()) {
             if (avancer_largeur(queueStart, visitedFromStart, visitedFromEnd, obstacles, directions)) {
@@ -262,7 +270,7 @@ public class Grille implements IGrille{
     public void remplir_obstacle() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                Obstacle o = new Obstacle(this, j, i);
+                Obstacle o = new Obstacle(this, j, i , getAutomate("Obstacle", automates));
                
                 m_control.addEntity(o);
                 grille[i][j].setEntity(o);
@@ -275,7 +283,7 @@ public class Grille implements IGrille{
         
         for (int i = 0; i < nb_monstre; i++) {
             cell c = randomCell_libre();
-            MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
+            MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), getAutomate("MazeSolver", automates));
             m_control.addEntity(m);
             c.setEntity(m);
         }
