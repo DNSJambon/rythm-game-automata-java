@@ -74,13 +74,16 @@ public class Grille implements IGrille{
         cell c = randomCell_libre();
         Player1 p = new Player1(this,c.getCol(),c.getRow(), automates.get("Joueur1"));
         m_control.addEntity(p);
+        main_Entity = p;
+        x_main_old = p.getX();
+        y_main_old = p.getY();
 
         //======placer le joueur dans le labyrinthe======
         //case vide random
         c = randomCell_libre();
         //MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
         MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
-        main_Entity = p;
+        
         m_control.addEntity(m);
     }
 
@@ -358,8 +361,8 @@ public class Grille implements IGrille{
 
     /*=========================Paint et ticks=============================*/
 
-    int x_main_old = 3;
-    int y_main_old = 3;
+    int x_main_old;
+    int y_main_old;
     int frames_anim = 8;
     int mouvement = frames_anim; //nombre de frame pour le decalage de la vue
     Color vide = new Color(223, 208, 184);
