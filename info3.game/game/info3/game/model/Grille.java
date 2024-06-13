@@ -67,7 +67,7 @@ public class Grille implements IGrille{
                 grille[i][j] = new cell(this, j, i);
             }
         }
-        automates = loadAutomate("game/info3/game/model/Automates/Mazesolver.gal");
+        automates = loadAutomate("game/info3/game/model/Automates/automates.gal");
         //======generation du labyrinthe======
         //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
         remplir_obstacle();
@@ -319,20 +319,6 @@ public class Grille implements IGrille{
             this.authorised = false;
         }
     }   
-    
-    public Grille(int rows, int cols) throws IOException {
-        m_images = loadSprite("resources/tiles.png", 24, 21);
-        this.rows = rows;
-        this.cols = cols;
-
-        // Création de la grille
-        grille = new cell[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                grille[i][j] = new cell(this, i, j);
-            }
-        }
-    }
 
     public cell getCell(int col, int row) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {

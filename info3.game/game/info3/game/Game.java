@@ -150,8 +150,7 @@ public class Game {
 				if (m_timekey > decision) {
 					m_timekey = 0;
 					m_control.step();
-					m_grille.switchAuthorised();
-					authorised = false;
+
 				}
 			}
 			else{
