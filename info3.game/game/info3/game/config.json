@@ -25,6 +25,10 @@
         {
             "name" : "MazeSolver",
             "automate" : "Mazesolver"
+        },
+        {
+            "name" : "Squelette",
+            "automate" : "Squelette"
         }
 
     ]

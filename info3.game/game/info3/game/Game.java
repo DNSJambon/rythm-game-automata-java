@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import java.io.FileReader; 
-import java.util.Iterator; 
-import java.util.Map; 
-  
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -193,7 +189,7 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=1000;
+	private long decision=10000;
 	private long Rythme=300;
     private long m_textElapsed;
 	private long m_timekey;
@@ -206,32 +202,26 @@ public class Game {
 	void tick(long elapsed) {
 		
 		m_timekey += elapsed;
-
-			
-			
-			
 			
 			// If the game is authorized, check if it becomes unauthorized
-			
-			
 		
-			if (authorised) {
+			if (this.authorised) {
    	 			if (m_grille.IsAuthorised() == false) {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
-					authorised = false;					
+					this.authorised = false;					
 				}
 				if (m_timekey > decision) {
 					m_timekey = 0;
 					m_control.step();
-
+					m_grille.resetTouche();
 				}
 			}
 			else{
 				if (m_timekey > Rythme) {
 					m_timekey = 0;
-					m_grille.switchAuthorised();
+					m_grille.Authorised_True();
 					authorised = true;
 				}
 			}

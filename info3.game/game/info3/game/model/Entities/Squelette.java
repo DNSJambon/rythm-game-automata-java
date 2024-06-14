@@ -10,72 +10,55 @@ import info3.game.controller.Conditions.*;
 import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
-public class Player1 extends Entity{
 
+public class Squelette extends Entity {
     int life;
     BufferedImage[] m_images;
     int image_index = 0;
-    
 
-    public Player1(IGrille g, int x, int y, Automate a) {
+    public Squelette(IGrille g, int x, int y, Automate a) {
         super(g);
-        life = 3;
         etat_courant = a.getState();
+        life = 1;
         this.a = a;
         g.getCell(x, y).setEntity(this);
-        direction = Direction.Nord;
+        direction = Direction.Ouest; //Start by moving left
         this.x = x;
         this.y = y;
 
-         try {
-            m_images = Grille.loadSprite("resources/magesquelette.png", 1, 4);
+        try {
+            m_images = Grille.loadSprite("resources/squelette.png", 1, 4); 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
 
     @Override
     public cellType getType() {
-        return cellType.Player1;
-    }
-
-     @Override
-    public char getCategory() {
-        return Category.H;
+        return cellType.Squelette;
     }
 
     @Override
+    public char getCategory() {
+        return Category.E; //Ennemy
+    }
+
     public boolean eval_cell(Entity e, DirRelative dir, char type) {
         switch (dir) {
             case Devant:
-                if (y == 0) {
-                    return type == Category.O;
-                }
                 return g.getCell(x, y - 1).getCategory() == type;
-            
-                case Gauche:
-                if (x == 0) {
-                    return type == Category.O;
-                }
-                return g.getCell(x-1, y).getCategory() ==type;
-        
-            
+
+            case Gauche:
+                return g.getCell(x - 1, y).getCategory() == type;
+
             case Droite:
-                if (x == g.getCols()-1) {
-                    return type == Category.O;
-                }
-                return g.getCell(x+1, y).getCategory() ==type;
+                return g.getCell(x + 1, y).getCategory() == type;
 
             case Derriere:
-                if (y == g.getRows()-1) {
-                    return type == Category.O;
-                }
-                return g.getCell(x, y+1).getCategory() ==type;
+                return g.getCell(x, y + 1).getCategory() == type;
 
             default:
-
-                return g.getCell(x, y).getCategory() ==type;
+                return false;
         }
     }
 
@@ -83,18 +66,11 @@ public class Player1 extends Entity{
     public boolean do_move(Entity e, DirRelative dir) {
         in_movement = nb_frame_move;
         switch (dir) {
-
-            case Devant:
-                this.y--;
-                g.getCell(this.x, this.y + 1).resetEntity();
+            case Gauche:
+                this.x--;
+                g.getCell(this.x + 1, this.y).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Nord;
-                return true;
-            case Derriere:
-                this.y++;
-                g.getCell(this.x, this.y - 1).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Sud;
+                direction = Direction.Ouest;
                 return true;
             case Droite:
                 this.x++;
@@ -102,17 +78,26 @@ public class Player1 extends Entity{
                 g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Est;
                 return true;
-            case Gauche:
-                this.x--;
-                g.getCell(this.x + 1, this.y).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Ouest;
-                return true;
             default:
                 return false;
         }
     }
-    
+
+    @Override
+    public boolean do_turn(Entity e, DirRelative dir) {
+        switch (dir) {
+            case Gauche:
+                direction = Direction.Est;
+                break;
+            case Droite:
+                direction = Direction.Ouest;
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
     @Override
     public boolean do_egg(Entity e) {
         // TODO Auto-generated method stub
@@ -128,27 +113,20 @@ public class Player1 extends Entity{
     @Override
     public boolean do_pop(Entity e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+        throw new UnsupportedOperationException("Unimplemented method 'do_pop'");
     }
 
     @Override
     public boolean do_wizz(Entity e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+        throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
     }
 
-    @Override
-    public boolean do_turn(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
-    }
-
-    //variables pour l'animation de deplacement
+    // Variables pour l'animation de déplacement
     int in_movement = -1;
     int nb_frame_move = 7;
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
-        
         if (in_movement != -1) {
             if (direction == Direction.Nord) {
                 y += (height * in_movement) / nb_frame_move;
@@ -161,14 +139,12 @@ public class Player1 extends Entity{
             }
             in_movement--;
         }
-            
 
         graphics.drawImage(m_images[image_index], x, y, width, height, null);
-
     }
 
-    
     int animation_elapsed = 0;
+
     @Override
     public void tick(long elapsed) {
         animation_elapsed += elapsed;
@@ -176,9 +152,7 @@ public class Player1 extends Entity{
             image_index = (image_index + 1) % 4;
             animation_elapsed = 0;
         }
-        
     }
 
-   
-
 }
+

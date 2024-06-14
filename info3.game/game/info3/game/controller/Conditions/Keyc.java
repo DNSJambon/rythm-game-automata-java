@@ -13,7 +13,12 @@ public class Keyc implements Conditions {
 
     public boolean eval (Entity e) {
         key_code=-1;
-        return e.getGrille().getTouche()==this.c;
+        if (!(e.getGrille().getTouche()==this.c)){
+            return e.getGrille().getTouche2()==this.c;
+        }
+        else {
+            return true;
+        }
     }
 
 }

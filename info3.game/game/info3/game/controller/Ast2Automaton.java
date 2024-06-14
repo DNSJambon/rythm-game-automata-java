@@ -107,11 +107,20 @@ public class Ast2Automaton implements IVisitor{
                         return new Cell(DirRelative.Devant, ((String) params.get(1)).charAt(0));
                     case "B":
                         return new Cell(DirRelative.Derriere, ((String) params.get(1)).charAt(0));
+                    case "H":
+                        return new Cell(DirRelative.soi, ((String) params.get(1)).charAt(0));
                 }
+
             case "True":
                 return new True();
             case "Wait":
                 return new Wait();
+            case "Egg":
+                return new Egg();
+            case "Pop":
+                return new Pop();
+            case "Wizz":
+                return new Wizz();
             //TODO: Add more cases
         }
         return null;

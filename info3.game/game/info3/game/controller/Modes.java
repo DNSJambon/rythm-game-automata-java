@@ -18,7 +18,7 @@ public class Modes {
     }
 
     public Transitions getTrans(Entity e){
-        for (int i=0;i<=Trans.size();i++){
+        for (int i=0;i<Trans.size();i++){
             if (Trans.get(i).GetCond().eval(e)){
                 return Trans.get(i);
             }
