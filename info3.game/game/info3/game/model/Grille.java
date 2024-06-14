@@ -489,6 +489,7 @@ public class Grille implements IGrille{
         //TODO:
         g.setColor(Color.WHITE);
         g.fillRect(x, y, width, height);
+        g.drawImage(coeur[0], 1000, 20, null);
 
     }
     
