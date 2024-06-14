@@ -30,11 +30,12 @@ Player2(Init){
 | Key(s) ? Move(B) :(Init)
 | Key(d) ? Move(R) :(Init)
 
-| Key(a) ? Pop() :(Init)
+| Key(a) & Cell(H, V) ? Egg() :(Init)
 
-| Key(r) & Cell(H, V) ? Egg() :(Init)
+| Key(r) & Cell(H, V) ? Pop() :(Init)
 
-| Key(e) ? Wizz() :(Init)
+| Key(e) & Cell(H, V) ? Wizz() :(Init)
+| True ? Wait : (Init)
 
 
 }

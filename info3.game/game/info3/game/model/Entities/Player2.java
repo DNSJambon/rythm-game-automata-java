@@ -13,6 +13,9 @@ import info3.game.model.cellType;
 public class Player2 extends Entity {
     BufferedImage[] m_images;
     int image_index = 0;
+    int cooldown_egg = 0;
+    int cooldown_pop = 0;
+    int cooldown_wizz = 0;
 
     public Player2(Grille g, int x, int y, Automate a) {
         super(g);
@@ -79,6 +82,12 @@ public class Player2 extends Entity {
 
     public boolean do_move(Entity e, DirRelative dir) {
         in_movement = nb_frame_move;
+        if (cooldown_egg != 0)
+            cooldown_egg--;
+        if (cooldown_pop != 0)
+            cooldown_pop--;
+        if (cooldown_wizz != 0)
+            cooldown_wizz--;
         switch (dir) {
             case Devant:
                 this.y--;
@@ -112,7 +121,12 @@ public class Player2 extends Entity {
 
     @Override
     public boolean do_egg(Entity e) {
-        new MazeSolver((Grille) g, x, y, ((Grille) g).automates.get("MazeSolver"));
+        if (cooldown_egg == 0) {
+            new MazeSolver((Grille) g, x, y, ((Grille) g).automates.get("MazeSolver"));
+            cooldown_egg = 3;
+        }
+        else
+            cooldown_egg --;
         return true;
     }
 
@@ -126,6 +140,17 @@ public class Player2 extends Entity {
     @Override
     public boolean do_wizz(Entity e) {
         return false;
+    }
+
+    @Override
+    public boolean do_wait(Entity e) {
+        if (cooldown_egg != 0)
+            cooldown_egg--;
+        if (cooldown_pop != 0)
+            cooldown_pop--;
+        if (cooldown_wizz != 0)
+            cooldown_wizz--;
+        return true;
     }
 
     @Override

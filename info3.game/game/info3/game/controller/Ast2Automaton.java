@@ -99,6 +99,7 @@ public class Ast2Automaton implements IVisitor{
                     case "H":
                         return new Cell(DirRelative.soi, ((String) params.get(1)).charAt(0));
                 }
+
             case "True":
                 return new True();
             case "Wait":
