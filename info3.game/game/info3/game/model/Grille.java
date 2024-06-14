@@ -90,6 +90,15 @@ public class Grille implements IGrille{
         main_Entity = p1;
         x_main_old = main_Entity.getX();
         y_main_old = main_Entity.getY();
+         //on s'assure que la vue ne sorte pas de la grille
+        if (x_main_old < viewport_size / 2)
+            x_main_old = viewport_size / 2;
+        if (x_main_old > rows - viewport_size / 2 - 1)
+            x_main_old = rows - viewport_size / 2 - 1;
+        if (y_main_old < viewport_size / 2)
+            y_main_old = viewport_size / 2;
+        if (y_main_old > cols - viewport_size / 2 - 1)
+            y_main_old = cols - viewport_size / 2 - 1;
     }
 
     
