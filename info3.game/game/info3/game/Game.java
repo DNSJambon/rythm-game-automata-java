@@ -190,8 +190,8 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=5000;
-	private long freeze=5000;
+	private long decision=200;
+	private long freeze=800;
     private long m_textElapsed;
 	private long m_timekey;
 	private long m_freeze;
