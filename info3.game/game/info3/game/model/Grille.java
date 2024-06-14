@@ -493,8 +493,15 @@ public class Grille implements IGrille{
     }
     
     void drawATH_bas(Graphics g, int x, int y, int width, int height) {
-        //TODO:
-        g.setColor(Color.WHITE);
+        
+        if (authorised) {
+            g.setColor(Color.GREEN);
+            g.drawImage(null, x, y, null);
+
+        }
+        else {
+        g.setColor(Color.RED);
+    }
         g.fillRect(x, y, width, height);
 
     }
