@@ -73,6 +73,17 @@ public class Ast2Automaton implements IVisitor{
 
 	public Object build(FunCall funcall, List<Object> params) {
 		switch (funcall.name) {
+            case "Closest":
+                switch ((String) params.get(1)) {
+                    case "N":
+                        return new Closest(((String) params.get(0)).charAt(0), info3.game.controller.Direction.Nord);
+                    case "S":
+                        return new Closest(((String) params.get(0)).charAt(0), info3.game.controller.Direction.Sud);
+                    case "E":
+                        return new Closest(((String) params.get(0)).charAt(0), info3.game.controller.Direction.Est);
+                    case "W":
+                        return new Closest(((String) params.get(0)).charAt(0), info3.game.controller.Direction.Ouest);
+                }
             case "Key":
                 return new Keyc(((String) params.get(0)).charAt(0));
             case "Move":

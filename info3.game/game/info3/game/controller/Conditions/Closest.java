@@ -5,10 +5,10 @@ import info3.game.model.Category;
 import info3.game.model.Entities.*;
 
 public class Closest implements Conditions{
-    Category c;
+    char c;
     Direction d;
 
-    public Closest(Category c, Direction d) {
+    public Closest(char c, Direction d) {
         this.c = c;
         this.d = d;
     }

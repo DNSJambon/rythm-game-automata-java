@@ -46,39 +46,36 @@ public class Suiveur extends Ennemi{
 
     @Override
     public boolean do_move(Entity e, DirRelative dir) {
-
-        direction = RelativeToAbsolute(dir);
-
-        g.getCell(x, y).resetEntity();
-        switch (direction) {
-            case Nord:
-                if (y == 0) {
-                    return false;
-                }
-                y -= 1;
-                break;
-            case Est:
-                if (x == g.getCols() - 1) {
-                    return false;
-                }
-                x += 1;
-                break;
-            case Sud:
-                if (y == g.getRows() - 1) {
-                    return false;
-                }
-                y += 1;
-                break;
-            case Ouest:
-                if (x == 0) {
-                    return false;
-                }
-                x -= 1;
-                break;
-        }
-        g.getCell(x, y).setEntity(this);
         in_movement = nb_frame_move;
-        return true;
+        switch (dir) {
+            
+            case Devant:
+                this.y--;
+                g.getCell(this.x,this.y+1).resetEntity();
+                g.getCell(this.x,this.y).setEntity(this);
+                direction = Direction.Nord;
+                return true;
+            case Derriere:
+                this.y++;
+                g.getCell(this.x,this.y-1).resetEntity();
+                g.getCell(this.x,this.y).setEntity(this);
+                direction = Direction.Sud;
+                return true;
+            case Droite:
+                this.x++;
+                g.getCell(this.x-1,this.y).resetEntity();
+                g.getCell(this.x,this.y).setEntity(this);
+                direction = Direction.Est;
+                return true;
+            case Gauche:
+                this.x--;
+                g.getCell(this.x+1,this.y).resetEntity();
+                g.getCell(this.x,this.y).setEntity(this);
+                direction = Direction.Ouest;
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override
@@ -112,9 +109,9 @@ public class Suiveur extends Ennemi{
     }
 
     @Override
-    public boolean eval_closest(Category c, Direction dir) {
-        int xverif=this.g.getMainEntity().getX();
-        int yverif=this.g.getMainEntity().getY();
+    public boolean eval_closest(char c, Direction dir) {
+        int xverif=(this.g.getMainEntity().getX())-this.x;
+        int yverif=this.g.getMainEntity().getY()-this.y;
         if (xverif==0) {
             xverif=g.getCols()+1;
         }

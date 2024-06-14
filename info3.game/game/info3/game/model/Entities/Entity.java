@@ -104,7 +104,7 @@ public abstract class Entity {
         return this.direction == RelativeToAbsolute(dir);
     }
 
-    public boolean eval_closest(Category c, Direction dir) {
+    public boolean eval_closest(char c, Direction dir) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
     }
