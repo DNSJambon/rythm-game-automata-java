@@ -484,7 +484,7 @@ public class Grille implements IGrille{
     }
     
 
-    
+    BufferedImage[] coeur = loadSprite("resources/coeur.png", 2, 3);
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
         //TODO:
         g.setColor(Color.WHITE);
