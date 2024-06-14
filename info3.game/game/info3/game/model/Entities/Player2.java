@@ -130,6 +130,9 @@ public class Player2 extends Entity {
         return true;
     }
 
+    public int getCooldown_egg() {
+        return cooldown_egg;
+    }
    
 
     @Override
