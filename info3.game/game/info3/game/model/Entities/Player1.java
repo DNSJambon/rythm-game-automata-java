@@ -42,7 +42,7 @@ public class Player1 extends Entity{
 
      @Override
     public char getCategory() {
-        return Category.P;
+        return Category.H;
     }
 
     @Override
@@ -83,36 +83,36 @@ public class Player1 extends Entity{
     public boolean do_move(Entity e, DirRelative dir) {
         in_movement = nb_frame_move;
         switch (dir) {
-            
+
             case Devant:
                 this.y--;
-                g.getCell(this.x,this.y+1).resetEntity();
-                g.getCell(this.x,this.y).setEntity(this);
+                g.getCell(this.x, this.y + 1).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Nord;
                 return true;
             case Derriere:
                 this.y++;
-                g.getCell(this.x,this.y-1).resetEntity();
-                g.getCell(this.x,this.y).setEntity(this);
+                g.getCell(this.x, this.y - 1).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Sud;
                 return true;
             case Droite:
                 this.x++;
-                g.getCell(this.x-1,this.y).resetEntity();
-                g.getCell(this.x,this.y).setEntity(this);
+                g.getCell(this.x - 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Est;
                 return true;
             case Gauche:
                 this.x--;
-                g.getCell(this.x+1,this.y).resetEntity();
-                g.getCell(this.x,this.y).setEntity(this);
+                g.getCell(this.x + 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Ouest;
                 return true;
             default:
                 return false;
         }
     }
-
+    
     @Override
     public boolean do_egg(Entity e) {
         // TODO Auto-generated method stub

@@ -25,6 +25,7 @@ import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
+import info3.game.model.Entities.Player2;
 
 
 public class Grille implements IGrille{
@@ -34,11 +35,12 @@ public class Grille implements IGrille{
     long m_imageElapsed;
 
     Control m_control;
-    HashMap<String, Automate> automates;
+    public HashMap<String, Automate> automates;
 
     // Viewport
     BufferedImage[] m_images;
-    Entity main_Entity;
+    Entity main_Entity; //(joueur 1)
+    Entity joueur2; //(joueur 2)
     int viewport_size = 7;
 
     //Synchro
@@ -70,25 +72,30 @@ public class Grille implements IGrille{
 
         //======generation des entités======
         
-        
-        cell c = randomCell_libre();
-        Player1 p = new Player1(this,c.getCol(),c.getRow(), automates.get("Joueur1"));
-        m_control.addEntity(p);
-        main_Entity = p;
-        x_main_old = p.getX();
-        y_main_old = p.getY();
-
         place_monstre(10);
-        //case vide random
-        c = randomCell_libre();
-        //MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
-        MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
         
-        m_control.addEntity(m);
+        //======placer Player2 dans le labyrinthe====== 
+
+        cell c = randomCell_libre();
+        Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
+        joueur2 = p2;
+
+
+        //======placer le joueur dans le labyrinthe======
+        c = randomCell_libre();
+        Player1 p1 = new Player1(this,c.getCol(),c.getRow(), automates.get("Joueur1"));
+        
+
+        //main_Entity;
+        main_Entity = p1;
+        x_main_old = main_Entity.getX();
+        y_main_old = main_Entity.getY();
     }
 
     
-    
+    public void addEntity(Entity e) {
+        m_control.addEntity(e);
+    }
 
 
     private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
@@ -127,8 +134,6 @@ public class Grille implements IGrille{
 
             if (chemin_existe(tempObstacles, startX, startY, endX, endY) ) {
                 Obstacle o = new Obstacle(this, c.getCol(), c.getRow(), automates.get("MurIncassable"));
-                m_control.addEntity(o);
-                c.setEntity(o);
                 obstaclesPlaced++;
             } else {
                 tempObstacles[c.getRow()][c.getCol()] = false;
@@ -250,9 +255,6 @@ public class Grille implements IGrille{
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 Obstacle o = new Obstacle(this, j, i , automates.get("MurIncassable"));
-               
-                m_control.addEntity(o);
-                grille[i][j].setEntity(o);
             }
         }
     }
@@ -262,9 +264,7 @@ public class Grille implements IGrille{
         
         for (int i = 0; i < nb_monstre; i++) {
             cell c = randomCell_libre();
-            MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
-            m_control.addEntity(m);
-            c.setEntity(m);
+            new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
         }
     }
 
@@ -321,7 +321,7 @@ public class Grille implements IGrille{
     public cell randomCell_libre() {
         int x = (int) (Math.random() * rows);
         int y = (int) (Math.random() * cols);
-        while (grille[x][y].getType() != cellType.Vide) {
+        while (grille[x][y].getCategory() != 'V') {
             x = (int) (Math.random() * rows);
             y = (int) (Math.random() * cols);
         }
@@ -460,7 +460,7 @@ public class Grille implements IGrille{
 
     }
     
-    void drawMinimap(Graphics g, int x, int y, int width, int height) { 
+    void drawMinimap(Graphics g, int x, int y, int width, int height) {
         for (int j = 0; j < rows; j++) {
             for (int i = 0; i < cols; i++) {
                 switch (grille[j][i].getCategory()) {
@@ -476,11 +476,19 @@ public class Grille implements IGrille{
                     case 'T':
                         g.setColor(player);
                         break;
+                    case '#':
+                        g.setColor(Color.BLUE);
+                        break;
+
 
                 }
                 g.fillRect(x + (i * width / cols), y + (j * height / rows), width / cols, height / rows);
             }
         }
+
+        //on place la cible (jouer 2) (une croix rouge)
+        g.setColor(Color.RED);
+        g.fillRect(x + (joueur2.getX() * width / cols)+2, y + (joueur2.getY() * height / rows)+2, width / cols-4, height / rows-4);
     }
     
 

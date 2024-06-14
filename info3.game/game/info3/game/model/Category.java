@@ -9,4 +9,6 @@ public class Category {
     public static final char E = 'E'; // Ennemy
     public static final char D = 'D'; // Door
     public static final char T = 'T'; // In my team but not me
+    public static final char A = 'A'; // Player2
+    public static final char H = '#';
 }
