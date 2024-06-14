@@ -25,6 +25,7 @@ import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
+import info3.game.model.Entities.Suiveur;
 
 
 public class Grille implements IGrille{
@@ -71,7 +72,11 @@ public class Grille implements IGrille{
         //======generation des entités======
         
         place_monstre(10);
+
         cell c = randomCell_libre();
+        Suiveur s = new Suiveur(this, c.getCol(), c.getRow(), automates.get("Faucheuse"));
+        m_control.addEntity(s);
+        c = randomCell_libre();
         Player1 p = new Player1(this,c.getCol(),c.getRow(), automates.get("Joueur1"));
         m_control.addEntity(p);
         main_Entity = p;
