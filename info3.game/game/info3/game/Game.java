@@ -193,7 +193,7 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=1000;
+	private long decision=10000;
 	private long Rythme=300;
     private long m_textElapsed;
 	private long m_timekey;
@@ -206,14 +206,8 @@ public class Game {
 	void tick(long elapsed) {
 		
 		m_timekey += elapsed;
-
-			
-			
-			
 			
 			// If the game is authorized, check if it becomes unauthorized
-			
-			
 		
 			if (authorised) {
    	 			if (m_grille.IsAuthorised() == false) {
@@ -225,13 +219,12 @@ public class Game {
 				if (m_timekey > decision) {
 					m_timekey = 0;
 					m_control.step();
-
 				}
 			}
 			else{
 				if (m_timekey > Rythme) {
 					m_timekey = 0;
-					m_grille.switchAuthorised();
+					m_grille.Authorised_True();
 					authorised = true;
 				}
 			}

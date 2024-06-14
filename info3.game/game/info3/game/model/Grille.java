@@ -55,6 +55,7 @@ public class Grille implements IGrille{
         this.m_control = m_control;
         this.automates = automates;
         this.authorised = true;
+        this.authorised2 = true;
 
         // Création de la grille
         grille = new cell[rows][cols];
@@ -281,12 +282,12 @@ public class Grille implements IGrille{
         return touche2;
     }
     
-    public void setAuthorised(boolean authorised) {
-        if (this.authorised == authorised){
-            this.authorised2 = authorised;
+    public void setAuthorised(boolean auto) {
+        if (this.authorised == auto){
+            this.authorised2 = auto;
         }
         else {
-            this.authorised = authorised;}
+            this.authorised = auto;}
         
     }
     
@@ -300,9 +301,9 @@ public class Grille implements IGrille{
         
     }
 
-    public void switchAuthorised(){
-        this.authorised = !this.authorised;
-        this.authorised2 = !this.authorised2;
+    public void Authorised_True(){
+        this.authorised = true;
+        this.authorised2 = true;
     }
 
     public void resetTouche() {
