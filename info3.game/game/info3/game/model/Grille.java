@@ -316,6 +316,11 @@ public class Grille implements IGrille{
         this.authorised2 = true;
     }
 
+    public void Authorised_False(){
+        this.authorised = false;
+        this.authorised2 = false;
+    }
+
     public void resetTouche() {
         this.touche = ' ';
         this.touche2 = ' ';
@@ -553,7 +558,7 @@ public class Grille implements IGrille{
         g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);
         
-        if (authorised) {
+        if (IsAuthorised()) {
             g.setColor(Color.GREEN);
         }
         else {

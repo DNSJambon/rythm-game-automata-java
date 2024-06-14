@@ -30,6 +30,7 @@ public class Game {
 
 	static Game game;
 	static int duration = 1000;
+	boolean Jump=false;
 
 	public static void main(String args[]) throws Exception {
 		try {
@@ -189,10 +190,11 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=1000;
-	private long Rythme=300;
+	private long decision=200;
+	private long freeze=800;
     private long m_textElapsed;
 	private long m_timekey;
+	private long m_freeze;
 	private boolean authorised = true;
 
 	/*
@@ -202,29 +204,57 @@ public class Game {
 	void tick(long elapsed) {
 		
 		m_timekey += elapsed;
+		m_freeze += elapsed;
 			
-			// If the game is authorized, check if it becomes unauthorized
-		
+		if (Jump) { 
 			if (this.authorised) {
-   	 			if (m_grille.IsAuthorised() == false) {
+				if (m_grille.IsAuthorised() == false) {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
-					this.authorised = false;					
+					this.authorised = false;
+					m_freeze=0;					
 				}
 				if (m_timekey > decision) {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
+					m_grille.Authorised_False();
+					this.authorised = false;
+					m_freeze=0;		
 				}
 			}
 			else{
-				if (m_timekey > Rythme) {
-					m_timekey = 0;
+				if (m_freeze > freeze) {
+					m_freeze = 0;
 					m_grille.Authorised_True();
 					authorised = true;
+					m_timekey = 0;
 				}
 			}
+		}
+		else {
+			if (this.authorised) {
+				if (m_timekey > decision) {
+					m_timekey = 0;
+					m_control.step();
+					m_grille.resetTouche();
+					m_grille.Authorised_False();
+					System.out.println(m_grille.IsAuthorised());
+					this.authorised = false;
+					m_freeze=0;
+				}
+			}
+			else{
+				if (m_freeze > freeze) {
+					m_freeze = 0;
+					m_grille.Authorised_True();
+					authorised = true;
+					m_timekey = 0;
+				}
+			}
+		}
+		
 
 
 			// Update the game grid
