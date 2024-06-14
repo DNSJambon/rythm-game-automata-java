@@ -1,0 +1,158 @@
+package info3.game.model.Entities;
+
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import info3.game.controller.*;
+import info3.game.controller.Conditions.*;
+import info3.game.controller.Actions.*;
+import info3.game.model.*;
+
+
+public class Squelette extends Entity {
+    int life;
+    BufferedImage[] m_images;
+    int image_index = 0;
+
+    public Squelette(IGrille g, int x, int y, Automate a) {
+        super(g);
+        etat_courant = a.getState();
+        life = 1;
+        this.a = a;
+        g.getCell(x, y).setEntity(this);
+        direction = Direction.Ouest; //Start by moving left
+        this.x = x;
+        this.y = y;
+
+        try {
+            m_images = Grille.loadSprite("resources/squelette.png", 1, 4); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public cellType getType() {
+        return cellType.Squelette;
+    }
+
+    @Override
+    public char getCategory() {
+        return Category.E; //Ennemy
+    }
+
+    public boolean eval_cell(Entity e, DirRelative dir, char type) {
+        switch (dir) {
+            case Devant:
+                return g.getCell(x, y - 1).getCategory() == type;
+
+            case Gauche:
+                return g.getCell(x - 1, y).getCategory() == type;
+
+            case Droite:
+                return g.getCell(x + 1, y).getCategory() == type;
+
+            case Derriere:
+                return g.getCell(x, y + 1).getCategory() == type;
+
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public boolean do_move(Entity e, DirRelative dir) {
+        in_movement = nb_frame_move;
+        switch (dir) {
+            case Gauche:
+                this.x--;
+                g.getCell(this.x + 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                direction = Direction.Ouest;
+                return true;
+            case Droite:
+                this.x++;
+                g.getCell(this.x - 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                direction = Direction.Est;
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public boolean do_turn(Entity e, DirRelative dir) {
+        switch (dir) {
+            case Gauche:
+                direction = Direction.Est;
+                break;
+            case Droite:
+                direction = Direction.Ouest;
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean do_egg(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
+    }
+
+    @Override
+    public boolean do_pick(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
+    }
+
+    @Override
+    public boolean do_pop(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_pop'");
+    }
+
+    @Override
+    public boolean do_wizz(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
+    }
+
+    // Variables pour l'animation de déplacement
+    int in_movement = -1;
+    int nb_frame_move = 7;
+    @Override
+    public void paint(Graphics graphics, int x, int y, int width, int height) {
+        if (in_movement != -1) {
+            if (direction == Direction.Nord) {
+                y += (height * in_movement) / nb_frame_move;
+            } else if (direction == Direction.Est) {
+                x -= (width * in_movement) / nb_frame_move;
+            } else if (direction == Direction.Sud) {
+                y -= (height * in_movement) / nb_frame_move;
+            } else if (direction == Direction.Ouest) {
+                x += (width * in_movement) / nb_frame_move;
+            }
+            in_movement--;
+        }
+
+        graphics.drawImage(m_images[image_index], x, y, width, height, null);
+    }
+
+    int animation_elapsed = 0;
+
+    @Override
+    public void tick(long elapsed) {
+        animation_elapsed += elapsed;
+        if (animation_elapsed > 200) {
+            image_index = (image_index + 1) % 4;
+            animation_elapsed = 0;
+        }
+    }
+
+}
+

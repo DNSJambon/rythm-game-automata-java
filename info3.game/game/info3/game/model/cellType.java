@@ -1,6 +1,9 @@
 package info3.game.model;
 
+import java.sql.SQLClientInfoException;
+
 import info3.game.model.Entities.Player1;
+import info3.game.model.Entities.Squelette;
 import info3.game.view.display;
 
 public enum cellType {
@@ -14,6 +17,7 @@ public enum cellType {
     Door,
     Player2,
     Ennemi,
-    Projectile;
+    Projectile,
+    Squelette;
     
 }
