@@ -112,4 +112,7 @@ Key(S1){
 | True ? Wait : (S2)
 }
 
-
+Door(S1){
+*(S1):
+| Cell(H,#) ? Pick :(S2)    
+}
