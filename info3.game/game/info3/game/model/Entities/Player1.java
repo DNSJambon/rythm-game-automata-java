@@ -42,7 +42,7 @@ public class Player1 extends Entity{
 
      @Override
     public char getCategory() {
-        return Category.P;
+        return Category.H;
     }
 
     @Override
