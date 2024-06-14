@@ -535,6 +535,9 @@ public class Grille implements IGrille{
     int coeur_index = 0;
     int indice = 0;
     boolean petit_coeur = false;
+    int c1 = 0;
+    int c2 = 0;
+    int c3 = 0;
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
         //TODO:
         indice++;
@@ -558,10 +561,39 @@ public class Grille implements IGrille{
         }
         
         g.fillRect(x, y+height/2, width, height/2);
-        //vie center in height
-        g.drawImage(coeur[coeur_index], x + 20, y + 5, 100, 100, null);
-        g.drawImage(coeur[coeur_index], x + 120, y + 5, 100, 100, null);
-        g.drawImage(coeur[coeur_index+1], x + 220, y + 5, 100, 100, null);
+        //coeur
+        int life = ((Player1)main_Entity).getLife();
+        
+        switch (life) {
+            case 5:
+                c3 = 1;
+                break;
+        
+            case 4:
+                c3 = 2;
+                break;
+            case 3:
+                c2 = 1;
+                c3 = 2;
+                break;
+            case 2:
+                c2 = 2;
+                c3 = 2;
+                break;
+            case 1:
+                c1 = 1;
+                c2 = 2;
+                c3 = 2;
+                break;
+            case 0:
+                c1 = 2;
+                c2 = 2;
+                c3 = 2;
+                break;
+        }
+        g.drawImage(coeur[coeur_index+c1], x + 20, y + 5, 100, 100, null);
+        g.drawImage(coeur[coeur_index+c2], x + 120, y + 5, 100, 100, null);
+        g.drawImage(coeur[coeur_index+c3], x + 220, y + 5, 100, 100, null);
         
         
 
@@ -571,9 +603,15 @@ public class Grille implements IGrille{
     void drawATH_bas(Graphics g, int x, int y, int width, int height) {
         
         
+
         g.setColor(Color.BLACK);
     
         g.fillRect(x, y, width, height);
+
+        //affichage cooldown
+        int cooldown = ((Player2)joueur2).getCooldown_egg();
+        g.setColor(Color.PINK);
+        g.fillRect(x, y , width/3, height/3*(3-cooldown));
 
     }
     
