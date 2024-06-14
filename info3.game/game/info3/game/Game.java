@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import java.io.FileReader; 
-import java.util.Iterator; 
-import java.util.Map; 
-  
 import org.json.JSONArray;
 import org.json.JSONObject;
 

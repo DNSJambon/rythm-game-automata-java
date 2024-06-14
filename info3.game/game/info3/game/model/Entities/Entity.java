@@ -17,6 +17,7 @@ public abstract class Entity {
 
     public Entity(IGrille g) {
         this.g = g;
+        g.addEntity(this);
         direction = Direction.Est;
     }
 

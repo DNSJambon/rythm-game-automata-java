@@ -49,7 +49,12 @@ public class cell implements Icell {
 
     public char getCategory() {
         if (vide == 1) {
+            
+            if (e[0] != null) 
+                return e[0].getCategory();         
+
             return Category.V;
+       
         } else {
             return e[1].getCategory();
         }
@@ -65,9 +70,8 @@ public class cell implements Icell {
         vide = 0;
     }
 
-    public void setP2(Player2 p2) {
-        this.e[2] = p2;
-        vide = 0;
+    public void setP2(Entity e) {
+        this.e[2] = e;
     }
 
     public void resetall() {
@@ -76,6 +80,7 @@ public class cell implements Icell {
 
     public void resetP2() {
         e[2] = null;
+
     }
 
     public void resetEntity() {
@@ -96,7 +101,7 @@ public class cell implements Icell {
     }
   
     public void paint(Graphics g, int x, int y, int width, int height) {
-        if (vide == 0) {
+        if (true) {
             for (int i = 0; i < 3; i++) {
                 if (e[i] != null) {
                     e[i].paint(g, x, y, width, height);
