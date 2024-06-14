@@ -527,24 +527,47 @@ public class Grille implements IGrille{
     
 
     BufferedImage[] coeur = loadSprite("resources/coeur.png", 2, 3);
+    int coeur_index = 0;
+    int indice = 0;
+    boolean petit_coeur = false;
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
         //TODO:
-        g.setColor(Color.WHITE);
+        indice++;
+        if (petit_coeur) {
+            indice+=5;
+        }
+        if (indice >= 20) {
+            coeur_index = (coeur_index + 3) % 6;
+            indice = 0;
+            petit_coeur = !petit_coeur;
+        }
+        
+        g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);
-        g.drawImage(coeur[0], 1000, 20, null);
+        
+        if (authorised) {
+            g.setColor(Color.GREEN);
+        }
+        else {
+        g.setColor(Color.RED);
+        }
+        
+        g.fillRect(x, y+height/2, width, height/2);
+        //vie center in height
+        g.drawImage(coeur[coeur_index], x + 20, y + 5, 100, 100, null);
+        g.drawImage(coeur[coeur_index], x + 120, y + 5, 100, 100, null);
+        g.drawImage(coeur[coeur_index+1], x + 220, y + 5, 100, 100, null);
+        
+        
+
 
     }
     
     void drawATH_bas(Graphics g, int x, int y, int width, int height) {
         
-        if (authorised) {
-            g.setColor(Color.GREEN);
-            g.drawImage(null, x, y, null);
-
-        }
-        else {
-        g.setColor(Color.RED);
-    }
+        
+        g.setColor(Color.BLACK);
+    
         g.fillRect(x, y, width, height);
 
     }
