@@ -190,8 +190,8 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=5000;
-	private long freeze=2000;
+	private long decision=200;
+	private long freeze=1000;
     private long m_textElapsed;
 	private long m_timekey;
 	private long m_freeze;
@@ -218,6 +218,7 @@ public class Game {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
+					m_grille.Authorised_False();
 					this.authorised = false;
 				}
 			}
@@ -238,6 +239,7 @@ public class Game {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
+					m_grille.Authorised_False();
 					this.authorised = false;
 				}
 			}

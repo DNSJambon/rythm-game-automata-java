@@ -316,6 +316,11 @@ public class Grille implements IGrille{
         this.authorised2 = true;
     }
 
+    public void Authorised_False(){
+        this.authorised = false;
+        this.authorised2 = false;
+    }
+
     public void resetTouche() {
         this.touche = ' ';
         this.touche2 = ' ';
