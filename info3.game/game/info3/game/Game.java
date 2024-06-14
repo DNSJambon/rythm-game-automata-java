@@ -238,6 +238,7 @@ public class Game {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
+					this.authorised = false;
 				}
 			}
 			else{
