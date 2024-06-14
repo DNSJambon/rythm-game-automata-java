@@ -59,11 +59,9 @@ public class Player1 extends Entity{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
     }
-
     @Override
     public boolean do_pick(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
+        return true;
     }
 
     @Override
