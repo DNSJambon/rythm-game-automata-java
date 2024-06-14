@@ -189,7 +189,7 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=10000;
+	private long decision=1000;
 	private long Rythme=300;
     private long m_textElapsed;
 	private long m_timekey;
