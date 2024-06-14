@@ -316,6 +316,10 @@ public class Grille implements IGrille{
     public BufferedImage getImage(int index) {
         return m_images[index];
     }
+
+    public Entity getMainEntity() {
+        return main_Entity;
+    }
     
 
     public cell randomCell_libre() {

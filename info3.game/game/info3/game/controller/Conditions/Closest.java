@@ -6,9 +6,9 @@ import info3.game.model.Entities.*;
 
 public class Closest implements Conditions{
     Category c;
-    DirRelative d;
+    Direction d;
 
-    public Closest(Category c, DirRelative d) {
+    public Closest(Category c, Direction d) {
         this.c = c;
         this.d = d;
     }
