@@ -14,6 +14,8 @@ public interface IGrille {
 
     public char getTouche();
 
+    public char getTouche2();
+
     public BufferedImage getImage(int index);
 
     public void addEntity(Entity entity);

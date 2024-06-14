@@ -45,7 +45,9 @@ public class Grille implements IGrille{
 
     //Synchro
     boolean authorised;
+    boolean authorised2;
     char touche;
+    char touche2;
     
 
     public Grille(int rows, int cols, Control m_control, int seed, HashMap<String, Automate> automates) throws IOException, ClassNotFoundException {
@@ -55,6 +57,7 @@ public class Grille implements IGrille{
         this.m_control = m_control;
         this.automates = automates;
         this.authorised = true;
+        this.authorised2 = true;
 
         // Création de la grille
         grille = new cell[rows][cols];
@@ -284,27 +287,49 @@ public class Grille implements IGrille{
         return touche;
     }
 
-    public void setAuthorised(boolean authorised) {
-        this.authorised = authorised;
+    public char getTouche2() {
+        return touche2;
+    }
+    
+    public void setAuthorised(boolean auto) {
+        if (this.authorised == auto){
+            this.authorised2 = auto;
+        }
+        else {
+            this.authorised = auto;}
+        
     }
     
     public boolean IsAuthorised(){
-        return this.authorised;
+        if (this.authorised2 == this.authorised){
+            return this.authorised;
+        }
+        else {
+            return this.authorised2;
+        }
+        
     }
 
-    public void switchAuthorised(){
-        this.authorised = !this.authorised;
+    public void Authorised_True(){
+        this.authorised = true;
+        this.authorised2 = true;
     }
 
     public void resetTouche() {
         this.touche = ' ';
+        this.touche2 = ' ';
     }
 
     public void key(char touche) {
-        if (this.authorised==true){
-            this.touche = touche;
-            this.authorised = false;
+        if (IsAuthorised()) {
+            if (this.touche != ' ') {
+                this.touche2 = touche;
+            }
+            else {
+                this.touche = touche;
+            }
         }
+        
     }   
 
     public cell getCell(int col, int row) {
