@@ -10,53 +10,39 @@ import info3.game.controller.Conditions.*;
 import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
-public class Player1 extends Entity{
 
+public class Slime extends Entity {
     int life;
     BufferedImage[] m_images;
     int image_index = 0;
-    
 
-    public Player1(IGrille g, int x, int y, Automate a) {
+    public Slime(IGrille g, int x, int y, Automate a) {
         super(g);
-        life = 6;
         etat_courant = a.getState();
+        this.life=1;
         this.a = a;
         g.getCell(x, y).setEntity(this);
         direction = Direction.Nord;
         this.x = x;
         this.y = y;
 
-         try {
-            m_images = Grille.loadSprite("resources/magesquelette.png", 1, 4);
+        try {
+            m_images = Grille.loadSprite("resources/faucheuse.png", 1, 4); 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    public int getLife() {
-        return life;
-    }
-
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    public void takeDamage(int damage) {
-        life-=damage;
-    }
 
     @Override
     public cellType getType() {
-        return cellType.Player1;
-    }
-
-     @Override
-    public char getCategory() {
-        return Category.H;
+        return cellType.Slime;
     }
 
     @Override
+    public char getCategory() {
+        return Category.E;
+    }
+
     public boolean eval_cell(Entity e, DirRelative dir, char type) {
         switch (dir) {
             case Devant:
@@ -64,37 +50,38 @@ public class Player1 extends Entity{
                     return type == Category.O;
                 }
                 return g.getCell(x, y - 1).getCategory() == type;
-            
-                case Gauche:
+
+            case Gauche:
                 if (x == 0) {
                     return type == Category.O;
                 }
-                return g.getCell(x-1, y).getCategory() ==type;
-        
-            
+                return g.getCell(x - 1, y).getCategory() == type;
+
             case Droite:
-                if (x == g.getCols()-1) {
+                if (x == g.getCols() - 1) {
                     return type == Category.O;
                 }
-                return g.getCell(x+1, y).getCategory() ==type;
+                return g.getCell(x + 1, y).getCategory() == type;
 
             case Derriere:
-                if (y == g.getRows()-1) {
+                if (y == g.getRows() - 1) {
                     return type == Category.O;
                 }
-                return g.getCell(x, y+1).getCategory() ==type;
+                return g.getCell(x, y + 1).getCategory() == type;
 
             default:
-
-                return g.getCell(x, y).getCategory() ==type;
+                return g.getCell(x, y).getCategory() == type;
         }
     }
+
+    int animation_elapsed=0;
+    int in_movement = -1;
+    int nb_frame_move = 7;
 
     @Override
     public boolean do_move(Entity e, DirRelative dir) {
         in_movement = nb_frame_move;
         switch (dir) {
-
             case Devant:
                 this.y--;
                 g.getCell(this.x, this.y + 1).resetEntity();
@@ -107,23 +94,11 @@ public class Player1 extends Entity{
                 g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Sud;
                 return true;
-            case Droite:
-                this.x++;
-                g.getCell(this.x - 1, this.y).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Est;
-                return true;
-            case Gauche:
-                this.x--;
-                g.getCell(this.x + 1, this.y).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Ouest;
-                return true;
             default:
                 return false;
         }
     }
-    
+
     @Override
     public boolean do_egg(Entity e) {
         // TODO Auto-generated method stub
@@ -139,47 +114,38 @@ public class Player1 extends Entity{
     @Override
     public boolean do_pop(Entity e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+        throw new UnsupportedOperationException("Unimplemented method 'do_pop'");
     }
 
     @Override
     public boolean do_wizz(Entity e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+        throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
     }
 
     @Override
     public boolean do_turn(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
+        if (dir == DirRelative.Devant || dir == DirRelative.Derriere) {
+            direction = (direction == Direction.Nord) ? Direction.Sud : Direction.Nord;
+            return true;
+        }
+        return false;
     }
 
-    //variables pour l'animation de deplacement
-    int in_movement = -1;
-    int nb_frame_move = 7;
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
-        
         if (in_movement != -1) {
             if (direction == Direction.Nord) {
                 y += (height * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Est) {
-                x -= (width * in_movement) / nb_frame_move;
             } else if (direction == Direction.Sud) {
                 y -= (height * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Ouest) {
-                x += (width * in_movement) / nb_frame_move;
             }
             in_movement--;
         }
-            
 
         graphics.drawImage(m_images[image_index], x, y, width, height, null);
-
     }
 
-    
-    int animation_elapsed = 0;
     @Override
     public void tick(long elapsed) {
         animation_elapsed += elapsed;
@@ -189,7 +155,4 @@ public class Player1 extends Entity{
         }
         
     }
-
-   
-
 }
