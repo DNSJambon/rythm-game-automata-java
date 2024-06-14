@@ -40,5 +40,12 @@ Player2(Init){
 
 }
 
+Squelette(Left){
+* (Left):
+| Cell(L, V) ? Move(L) : (Left)
+| Cell(L, O) ? Turn(R) : (Right)
 
-
+* (Right):
+| Cell(R, V) ? Move(R) : (Right)
+| Cell(R, O) ? Turn(L) : (Left)
+}
