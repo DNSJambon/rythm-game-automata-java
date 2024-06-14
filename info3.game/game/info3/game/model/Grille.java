@@ -70,7 +70,7 @@ public class Grille implements IGrille{
 
         //======generation des entités======
         
-        place_monstre(10);
+        
         cell c = randomCell_libre();
         Player1 p = new Player1(this,c.getCol(),c.getRow(), automates.get("Joueur1"));
         m_control.addEntity(p);
@@ -78,7 +78,7 @@ public class Grille implements IGrille{
         x_main_old = p.getX();
         y_main_old = p.getY();
 
-        //======placer le joueur dans le labyrinthe======
+        place_monstre(10);
         //case vide random
         c = randomCell_libre();
         //MazeSolver m = new MazeSolver(this, c.getCol(), c.getRow());
@@ -484,17 +484,25 @@ public class Grille implements IGrille{
     }
     
 
-    
+    BufferedImage[] coeur = loadSprite("resources/coeur.png", 2, 3);
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
         //TODO:
         g.setColor(Color.WHITE);
         g.fillRect(x, y, width, height);
+        g.drawImage(coeur[0], 1000, 20, null);
 
     }
     
     void drawATH_bas(Graphics g, int x, int y, int width, int height) {
-        //TODO:
-        g.setColor(Color.WHITE);
+        
+        if (authorised) {
+            g.setColor(Color.GREEN);
+            g.drawImage(null, x, y, null);
+
+        }
+        else {
+        g.setColor(Color.RED);
+    }
         g.fillRect(x, y, width, height);
 
     }
