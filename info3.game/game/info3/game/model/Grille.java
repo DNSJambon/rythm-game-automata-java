@@ -555,7 +555,7 @@ public class Grille implements IGrille{
         g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);
         
-        if (authorised) {
+        if (IsAuthorised()) {
             g.setColor(Color.GREEN);
         }
         else {

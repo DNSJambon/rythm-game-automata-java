@@ -30,7 +30,7 @@ public class Game {
 
 	static Game game;
 	static int duration = 1000;
-	boolean Jump=true;
+	boolean Jump=false;
 
 	public static void main(String args[]) throws Exception {
 		try {
@@ -190,8 +190,8 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=200;
-	private long freeze=1000;
+	private long decision=5000;
+	private long freeze=5000;
     private long m_textElapsed;
 	private long m_timekey;
 	private long m_freeze;
@@ -212,7 +212,8 @@ public class Game {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
-					this.authorised = false;					
+					this.authorised = false;
+					m_freeze=0;					
 				}
 				if (m_timekey > decision) {
 					m_timekey = 0;
@@ -220,6 +221,7 @@ public class Game {
 					m_grille.resetTouche();
 					m_grille.Authorised_False();
 					this.authorised = false;
+					m_freeze=0;		
 				}
 			}
 			else{
@@ -227,20 +229,20 @@ public class Game {
 					m_freeze = 0;
 					m_grille.Authorised_True();
 					authorised = true;
+					m_timekey = 0;
 				}
 			}
 		}
 		else {
 			if (this.authorised) {
-				if (m_grille.IsAuthorised() == false) {
-					this.authorised = false;					
-				}
 				if (m_timekey > decision) {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
 					m_grille.Authorised_False();
+					System.out.println(m_grille.IsAuthorised());
 					this.authorised = false;
+					m_freeze=0;
 				}
 			}
 			else{
@@ -248,6 +250,7 @@ public class Game {
 					m_freeze = 0;
 					m_grille.Authorised_True();
 					authorised = true;
+					m_timekey = 0;
 				}
 			}
 		}
