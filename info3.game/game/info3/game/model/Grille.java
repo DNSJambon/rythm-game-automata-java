@@ -43,7 +43,9 @@ public class Grille implements IGrille{
 
     //Synchro
     boolean authorised;
+    boolean authorised2;
     char touche;
+    char touche2;
     
 
     public Grille(int rows, int cols, Control m_control, int seed, HashMap<String, Automate> automates) throws IOException, ClassNotFoundException {
@@ -274,17 +276,29 @@ public class Grille implements IGrille{
     public char getTouche() {
         return touche;
     }
-
+    
     public void setAuthorised(boolean authorised) {
-        this.authorised = authorised;
+        if (this.authorised == authorised){
+            this.authorised2 = authorised;
+        }
+        else {
+            this.authorised = authorised;}
+        
     }
     
     public boolean IsAuthorised(){
-        return this.authorised;
+        if (this.authorised2 == this.authorised){
+            return this.authorised;
+        }
+        else {
+            return this.authorised2;
+        }
+        
     }
 
     public void switchAuthorised(){
         this.authorised = !this.authorised;
+        this.authorised2 = !this.authorised2;
     }
 
     public void resetTouche() {
