@@ -276,6 +276,10 @@ public class Grille implements IGrille{
     public char getTouche() {
         return touche;
     }
+
+    public char getTouche2() {
+        return touche2;
+    }
     
     public void setAuthorised(boolean authorised) {
         if (this.authorised == authorised){
@@ -303,12 +307,18 @@ public class Grille implements IGrille{
 
     public void resetTouche() {
         this.touche = ' ';
+        this.touche2 = ' ';
     }
 
     public void key(char touche) {
         if (this.authorised==true){
-            this.touche = touche;
-            this.authorised = false;
+            if (this.touche != ' ') {
+                this.touche2 = touche;
+            }
+            else {
+                this.touche = touche;
+                this.authorised = false;
+            }
         }
     }   
 
