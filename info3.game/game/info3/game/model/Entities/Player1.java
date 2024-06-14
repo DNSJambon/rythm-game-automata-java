@@ -19,7 +19,7 @@ public class Player1 extends Entity{
 
     public Player1(IGrille g, int x, int y, Automate a) {
         super(g);
-        life = 3;
+        life = 6;
         etat_courant = a.getState();
         this.a = a;
         g.getCell(x, y).setEntity(this);
@@ -34,6 +34,17 @@ public class Player1 extends Entity{
         }
     }
     
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public void takeDamage(int damage) {
+        life-=damage;
+    }
 
     @Override
     public cellType getType() {
