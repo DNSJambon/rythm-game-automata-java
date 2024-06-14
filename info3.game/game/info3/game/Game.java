@@ -29,7 +29,6 @@ import info3.game.controller.*;
 public class Game {
 
 	static Game game;
-	static int duration = 1000;
 	boolean Jump=false;
 
 	public static void main(String args[]) throws Exception {
@@ -80,8 +79,6 @@ public class Game {
 	Grille config(String config_file) {
 		//automates = loadAutomate("game/info3/game/model/Automates/"+automate_file);
 		int seed;
-		int difficulty;
-		int decision_time;
 		String automate_file;
 		List<Automate> automates;
 		HashMap<String, Automate> entities_automates = new HashMap<>();
@@ -90,9 +87,25 @@ public class Game {
 			Path path = Path.of(config_file);
 			String reader =  Files.readString(path);
 			JSONObject config = new JSONObject(reader);
+
+			int rythm = config.getInt("rythm");
+			if (rythm == 0) {
+				//on freeze seulement le temps d'animation
+				Jump = true;
+				decision = 100000;
+				freeze = 500;
+
+			}
+			else {
+				//jeu basé sur le rythme
+				int bpm = config.getInt("bpm");
+				Jump = false;
+				decision = 200;
+				freeze = 60000/bpm - 200;
+			}
+
 			seed = config.getInt("seed");
-			difficulty = config.getInt("difficulty");
-			decision_time = config.getInt("decision_time");
+			int difficulty = config.getInt("difficulty");
 			automate_file = config.getString("automate_file");
 			automates = loadAutomate("game/info3/game/model/Automates/" + automate_file);
 
@@ -190,8 +203,8 @@ public class Game {
 	private String[] m_musicNames = new String[] { "nostalgia" };
 
 	
-	private long decision=200;
-	private long freeze=800;
+	private long decision;
+	private long freeze;
     private long m_textElapsed;
 	private long m_timekey;
 	private long m_freeze;

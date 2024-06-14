@@ -1,7 +1,8 @@
 {
     "seed": 1,
     "difficulty": 1,
-    "decision_time" : 1,
+    "rythm": 1,
+    "bpm": 60,
     "automate_file" : "automates.gal",
     "entities" : [
         {   
