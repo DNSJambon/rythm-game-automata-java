@@ -25,6 +25,7 @@ import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
+import info3.game.model.Entities.Suiveur;
 import info3.game.model.Entities.Player2;
 
 
@@ -349,6 +350,10 @@ public class Grille implements IGrille{
 
     public BufferedImage getImage(int index) {
         return m_images[index];
+    }
+
+    public Entity getMainEntity() {
+        return main_Entity;
     }
     
 

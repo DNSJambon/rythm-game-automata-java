@@ -23,6 +23,18 @@ Player1(S1){
 | True ? Wait : (S1)
 }
 
+Suiveur(S1){
+*(S1):
+| Closest(#, N) & Cell (F, V) ? Move(F) : (S1)
+| Closest(#, S) & Cell (B, V) ? Move(B) : (S1)
+| Closest(#, E) & Cell (R, V) ? Move(R) : (S1)
+| Closest(#, W) & Cell (L, V) ? Move(L) : (S1)
+| Cell (F, #) ? Hit (F) : (S1)
+| Cell (B, #) ? Hit (B) : (S1)
+| Cell (R, #) ? Hit (R) : (S1)
+| Cell (L, #) ? Hit (L) : (S1)
+| True ? Wait : (S1)
+}
 Player2(Init){
 * (Init):
 | Key(z) ? Move(F) :(Init)
