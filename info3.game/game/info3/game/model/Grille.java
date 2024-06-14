@@ -312,15 +312,15 @@ public class Grille implements IGrille{
     }
 
     public void key(char touche) {
-        if (this.authorised==true){
+        if (IsAuthorised()) {
             if (this.touche != ' ') {
                 this.touche2 = touche;
             }
             else {
                 this.touche = touche;
-                this.authorised = false;
             }
         }
+        
     }   
 
     public cell getCell(int col, int row) {

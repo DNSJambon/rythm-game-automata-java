@@ -209,12 +209,12 @@ public class Game {
 			
 			// If the game is authorized, check if it becomes unauthorized
 		
-			if (authorised) {
+			if (this.authorised) {
    	 			if (m_grille.IsAuthorised() == false) {
 					m_timekey = 0;
 					m_control.step();
 					m_grille.resetTouche();
-					authorised = false;					
+					this.authorised = false;					
 				}
 				if (m_timekey > decision) {
 					m_timekey = 0;
