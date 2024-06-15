@@ -300,12 +300,10 @@ public class Grille implements IGrille {
 
     int x_main_old;
     int y_main_old;
-    int frames_anim = 8;
+    int frames_anim = 10;
     int mouvement = frames_anim; //nombre de frame pour le decalage de la vue
-    Color vide = new Color(223, 208, 184);
-    Color obstacle = new Color(139, 127, 109);
-    Color player = new Color(60, 91, 111);
-    Color pickable = new Color(240, 194, 80);
+    float[] slide = {1.0f, 0.7f, 0.36f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f};
+   
 
     public void paint(Graphics g, int width, int height) {
         int x_main = main_Entity.getX();
@@ -341,25 +339,20 @@ public class Grille implements IGrille {
             load_y_positif = 1;
 
         //on dessine le sol en premier
+        int r;
         for (int j = y_main - viewport_size / 2 - load_y_negatif; j <= y_main + viewport_size / 2
                 + load_y_positif; j++) {
             for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2
                     + load_x_positif; i++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
-                    g.drawImage(m_images[0],
-                            (i - x_main + viewport_size / 2) * width / viewport_size
-                                    + offset_x * mouvement / frames_anim,
-                            (j - y_main + viewport_size / 2) * height / viewport_size
-                                    + offset_y * mouvement / frames_anim,
-                            width / viewport_size,
-                            height / viewport_size,
-                            null);
+                    r = 0;
                 else
-                    g.drawImage(m_images[21],
-                            (i - x_main + viewport_size / 2) * width / viewport_size
-                                    + offset_x * mouvement / frames_anim,
-                            (j - y_main + viewport_size / 2) * height / viewport_size
-                                    + offset_y * mouvement / frames_anim,
+                    r = 21;
+                g.drawImage(m_images[r],
+                           (int) ((i - x_main + viewport_size / 2) * width / viewport_size
+                                    + offset_x  * slide[frames_anim - mouvement]),
+                           (int) ((j - y_main + viewport_size / 2) * height / viewport_size
+                                    + offset_y * slide[frames_anim - mouvement]),
                             width / viewport_size,
                             height / viewport_size,
                             null);
@@ -371,8 +364,8 @@ public class Grille implements IGrille {
             for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2
                     + load_x_positif; i++) {
                 grille[j][i].paint(g,
-                        (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / frames_anim,
-                        (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / frames_anim,
+                        (int)((i - x_main + viewport_size / 2) * width / viewport_size + offset_x * slide[frames_anim - mouvement]),
+                        (int)((j - y_main + viewport_size / 2) * height / viewport_size + offset_y * slide[frames_anim - mouvement]),
                         width / viewport_size,
                         height / viewport_size);
             }
@@ -397,6 +390,11 @@ public class Grille implements IGrille {
         drawATH_bas(g, width, (height + 340) / 2, 340, (height - 340) / 2);
 
     }
+    
+    Color vide = new Color(223, 208, 184);
+    Color obstacle = new Color(139, 127, 109);
+    Color player = new Color(60, 91, 111);
+    Color pickable = new Color(240, 194, 80);
 
     void drawMinimap(Graphics g, int x, int y, int width, int height) {
         for (int j = 0; j < rows; j++) {

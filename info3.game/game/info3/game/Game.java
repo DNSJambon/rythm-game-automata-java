@@ -211,7 +211,7 @@ public class Game {
 	}
 
 	private int m_musicIndex = 0;
-	private String[] m_musicNames = new String[] { "beat120" };
+	private String[] m_musicNames = new String[] { "beat100" };
 
 	
 	private long decision;
@@ -219,7 +219,6 @@ public class Game {
     private long m_textElapsed;
 	private long m_timekey;
 	private long m_freeze;
-	private boolean beat = false;
 	private boolean mbeat = false;
 	private long m_beat;
 	private boolean authorised = true;
@@ -235,8 +234,7 @@ public class Game {
 		m_beat += elapsed;
 		
 		if (!mbeat)
-			if (m_beat > 900
-			) {
+			if (m_beat > 925) {
 				loadMusic();
 				mbeat = true;
 			}
@@ -272,10 +270,7 @@ public class Game {
 		}
 		else {
 			if (this.authorised) {
-				if (m_timekey > 95 && !beat) {
-					//playBeat();
-					beat = true;
-				}
+
 				if (m_timekey > decision) {
 					m_timekey = m_timekey - decision;
 					m_control.step();
@@ -292,7 +287,6 @@ public class Game {
 					m_grille.Authorised_True();
 					authorised = true;
 					m_timekey = m_timekey - freeze;
-					beat = false;
 				}
 			}
 		}

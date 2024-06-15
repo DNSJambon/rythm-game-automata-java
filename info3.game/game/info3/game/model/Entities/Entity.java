@@ -1,6 +1,7 @@
 package info3.game.model.Entities;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import info3.game.controller.*;
 import info3.game.model.Category;
@@ -14,6 +15,9 @@ public abstract class Entity {
     public Direction direction;
 
     int x, y;
+
+    BufferedImage[] m_images;
+    int image_index = 0;
 
     public Entity(IGrille g) {
         this.g = g;
@@ -133,7 +137,38 @@ public abstract class Entity {
     }
     
     
-    public abstract void paint(Graphics graphics, int x, int y, int width, int height);
-    public abstract void tick(long elapsed);
+    //variables pour l'animation de deplacement
+    int in_movement = -1;
+    int nb_frame_move = 10;
+    float[] slide = {1.0f, 0.7f, 0.36f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f};
+    public void paint(Graphics graphics, int x, int y, int width, int height) {
+        if (in_movement != -1) {
+            if (direction == Direction.Nord) {
+                y += height * slide[nb_frame_move - in_movement];
+            } else if (direction == Direction.Est) {
+                x -= width * slide[nb_frame_move - in_movement];
+            } else if (direction == Direction.Sud) {
+                y -= height * slide[nb_frame_move - in_movement];
+            } else if (direction == Direction.Ouest) {
+                x += width * slide[nb_frame_move - in_movement];
+            }
+            in_movement--;
+        }
+            
+
+        graphics.drawImage(m_images[image_index], x, y, width, height, null);
+
+    }
+
+    
+    int animation_elapsed = 0;
+    public void tick(long elapsed) {
+        animation_elapsed += elapsed;
+        if (animation_elapsed > 200) {
+            image_index = (image_index + 1) % 4;
+            animation_elapsed = 0;
+        }
+        
+    }
 
 }

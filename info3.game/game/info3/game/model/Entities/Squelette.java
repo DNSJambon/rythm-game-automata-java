@@ -13,8 +13,7 @@ import info3.game.model.*;
 
 public class Squelette extends Entity {
     int life;
-    BufferedImage[] m_images;
-    int image_index = 0;
+
 
     public Squelette(IGrille g, int x, int y, Automate a) {
         super(g);
@@ -122,37 +121,6 @@ public class Squelette extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
     }
 
-    // Variables pour l'animation de déplacement
-    int in_movement = -1;
-    int nb_frame_move = 7;
-    @Override
-    public void paint(Graphics graphics, int x, int y, int width, int height) {
-        if (in_movement != -1) {
-            if (direction == Direction.Nord) {
-                y += (height * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Est) {
-                x -= (width * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Sud) {
-                y -= (height * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Ouest) {
-                x += (width * in_movement) / nb_frame_move;
-            }
-            in_movement--;
-        }
-
-        graphics.drawImage(m_images[image_index], x, y, width, height, null);
-    }
-
-    int animation_elapsed = 0;
-
-    @Override
-    public void tick(long elapsed) {
-        animation_elapsed += elapsed;
-        if (animation_elapsed > 200) {
-            image_index = (image_index + 1) % 4;
-            animation_elapsed = 0;
-        }
-    }
-
+    
 }
 

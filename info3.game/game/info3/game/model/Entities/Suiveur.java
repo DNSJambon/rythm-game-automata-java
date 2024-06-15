@@ -14,8 +14,6 @@ import info3.game.model.cellType;
 
 public class Suiveur extends Ennemi{
 
-    BufferedImage[] m_images;
-    int image_index = 0;
     Direction DirClosest;
 
     public Suiveur(Grille g, int x, int y,Automate a) {
@@ -135,38 +133,7 @@ public class Suiveur extends Ennemi{
         return DirClosest == dir ;
     }
 
-    int in_movement = -1;
-    int nb_frame_move = 8;
-    @Override
-    public void paint(Graphics graphics, int x, int y, int width, int height) {
-
-        if (in_movement != -1) {
-            if (direction == Direction.Nord) {
-                y += (height * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Est) {
-                x -= (width * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Sud) {
-                y -= (height * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Ouest) {
-                x += (width * in_movement) / nb_frame_move;
-            }
-            in_movement--;
-        }
-        
-        graphics.drawImage(m_images[image_index], x, y, width, height, null);
-
-    }
-
-    int animation_elapsed = 0;
-    @Override
-    public void tick(long elapsed) {
-        animation_elapsed += elapsed;
-        if (animation_elapsed > 200) {
-            image_index = (image_index + 1) % 4;
-            animation_elapsed = 0;
-        }
-        
-    }
+    
 }
 
 
