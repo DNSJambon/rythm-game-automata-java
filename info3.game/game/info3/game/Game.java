@@ -222,7 +222,7 @@ public class Game {
 	private boolean mbeat = false;
 	private long m_beat;
 	private boolean authorised = true;
-
+	
 	/*
 	 * This method is invoked almost periodically, given the number of milli-seconds
 	 * that elapsed since the last time this method was invoked.
@@ -234,12 +234,12 @@ public class Game {
 		m_beat += elapsed;
 		
 		if (!mbeat)
-			if (m_beat > 925) {
+			if (m_beat > 1000) {
 				loadMusic();
 				mbeat = true;
 			}
 		
-	
+	    
 			
 		if (Jump) { 
 			if (this.authorised) {
@@ -312,11 +312,7 @@ public class Game {
 				m_text.setText(txt);
 				
 			}
-
-			// Update the time key and check if it exceeds the rhythm
-			
-			
-			
+		
 		}
 	
 		
