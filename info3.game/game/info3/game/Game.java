@@ -192,7 +192,7 @@ public class Game {
 		try {
 			RandomAccessFile file = new RandomAccessFile(filename, "r");
 			RandomFileInputStream fis = new RandomFileInputStream(file);
-			m_canvas.playMusic(fis, 0, 0.0F);
+			m_canvas.playMusic(fis, 0, 1.0F);
 		} catch (Throwable th) {
 			th.printStackTrace(System.err);
 			System.exit(-1);
@@ -220,6 +220,8 @@ public class Game {
 	private long m_timekey;
 	private long m_freeze;
 	private boolean beat = false;
+	private boolean mbeat = false;
+	private long m_beat;
 	private boolean authorised = true;
 
 	/*
@@ -230,8 +232,15 @@ public class Game {
 		
 		m_timekey += elapsed;
 		m_freeze += elapsed;
+		m_beat += elapsed;
 		
-
+		if (!mbeat)
+			if (m_beat > 900
+			) {
+				loadMusic();
+				mbeat = true;
+			}
+		
 	
 			
 		if (Jump) { 
@@ -264,25 +273,25 @@ public class Game {
 		else {
 			if (this.authorised) {
 				if (m_timekey > 95 && !beat) {
-					playBeat();
+					//playBeat();
 					beat = true;
 				}
 				if (m_timekey > decision) {
-					m_timekey = 0; //potentiel fix désynchro : m_timekey = m_timekey - decision
+					m_timekey = m_timekey - decision;
 					m_control.step();
 					m_grille.resetTouche();
 					m_grille.Authorised_False();
 					System.out.println(m_grille.IsAuthorised());
 					this.authorised = false;
-					m_freeze=0;
+					m_freeze= m_freeze - decision;
 				}
 			}
 			else{
 				if (m_freeze > freeze) {
-					m_freeze = 0;
+					m_freeze = m_freeze - freeze;
 					m_grille.Authorised_True();
 					authorised = true;
-					m_timekey = 0;
+					m_timekey = m_timekey - freeze;
 					beat = false;
 				}
 			}
