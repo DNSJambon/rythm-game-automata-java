@@ -268,7 +268,7 @@ public class Game {
 					beat = true;
 				}
 				if (m_timekey > decision) {
-					m_timekey = 0;
+					m_timekey = 0; //potentiel fix désynchro : m_timekey = m_timekey - decision
 					m_control.step();
 					m_grille.resetTouche();
 					m_grille.Authorised_False();
