@@ -29,7 +29,7 @@ import info3.game.model.Entities.Suiveur;
 import info3.game.model.Entities.Player2;
 
 
-public class Grille implements IGrille{
+public class Grille implements IGrille {
     cell[][] grille;
     int rows;
     int cols;
@@ -49,9 +49,9 @@ public class Grille implements IGrille{
     boolean authorised2;
     char touche;
     char touche2;
-    
 
-    public Grille(int rows, int cols, Control m_control, int seed, HashMap<String, Automate> automates) throws IOException, ClassNotFoundException {
+    public Grille(int rows, int cols, Control m_control, int seed, HashMap<String, Automate> automates)
+            throws IOException, ClassNotFoundException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
         this.rows = rows;
         this.cols = cols;
@@ -68,33 +68,30 @@ public class Grille implements IGrille{
             }
         }
 
-        
         //======generation du labyrinthe======
         //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
         remplir_obstacle();
-        cree_des_salles(seed,5,5, 10, 3);
+        cree_des_salles(seed, 5, 5, 10, 3);
 
         //======generation des entités======
-        
+
         place_monstre(10);
-        
-        //======placer Player2 dans le labyrinthe====== 
+
+        //======placer le joueur 2 dans le labyrinthe====== 
 
         cell c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
 
-
-        //======placer le joueur dans le labyrinthe======
+        //======placer le joueur 1 dans le labyrinthe======
         c = randomCell_libre();
-        Player1 p1 = new Player1(this,c.getCol(),c.getRow(), automates.get("Joueur1"));
-        
+        Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
 
         //main_Entity;
         main_Entity = p1;
         x_main_old = main_Entity.getX();
         y_main_old = main_Entity.getY();
-         //on s'assure que la vue ne sorte pas de la grille
+        //on s'assure que la vue ne sorte pas de la grille
         if (x_main_old < viewport_size / 2)
             x_main_old = viewport_size / 2;
         if (x_main_old > rows - viewport_size / 2 - 1)
@@ -105,114 +102,12 @@ public class Grille implements IGrille{
             y_main_old = cols - viewport_size / 2 - 1;
     }
 
-    
     public void addEntity(Entity e) {
         m_control.addEntity(e);
     }
 
-
-    private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
-            int endX, int endY) {
-        if (pourcentage < 0 || pourcentage > 100) {
-            return -1;
-        }
-
-        int totalCells = grille.rows * grille.cols;
-        int numObstacles = (totalCells * pourcentage) / 100;
-
-        Random random = new Random(seed);
-        List<cell> emptyCells = new ArrayList<>();
-
-        for (int i = 0; i < grille.rows; i++) {
-            for (int j = 0; j < grille.cols; j++) {
-                if (grille.grille[i][j].pas_obstacle() && !(i == 0 && j == 0)) {
-                    emptyCells.add(grille.grille[i][j]);
-                }
-            }
-        }
-        
-        Collections.shuffle(emptyCells, random);
-        // System.out.println("print cells : "+emptyCells);
-        boolean[][] tempObstacles = new boolean[grille.rows][grille.cols];
-        for (int i = 0; i < grille.rows; i++) {
-            for (int j = 0; j < grille.cols; j++) {
-                tempObstacles[i][j] = !grille.grille[i][j].pas_obstacle();
-            }
-        }
-
-        int obstaclesPlaced = 0;
-        for (int i = 0; i < emptyCells.size() && obstaclesPlaced < numObstacles; i++) {
-            cell c = emptyCells.get(i);
-            tempObstacles[c.getRow()][c.getCol()] = true;
-
-            if (chemin_existe(tempObstacles, startX, startY, endX, endY) ) {
-                Obstacle o = new Obstacle(this, c.getCol(), c.getRow(), automates.get("MurIncassable"));
-                obstaclesPlaced++;
-            } else {
-                tempObstacles[c.getRow()][c.getCol()] = false;
-            }
-        }
-        return 0;
-    }
-
-    // L'idéale est d'utiliser un algo de parcours en largeur afin de vérifier
-    // qu'une grille est faisable
-    // pour l'instant on fait que pour 2 cases // 3 cases à faire après( porte, clée
-    // , case de départ )
-    private boolean chemin_existe(boolean[][] obstacles, int startX, int startY, int endX, int endY) {
-        if (startX == endX && startY == endY) {
-            return true;
-        }
-        boolean[][] visitedFromStart = new boolean[rows][cols];
-        boolean[][] visitedFromEnd = new boolean[rows][cols];
-        Queue<int[]> queueStart = new LinkedList<>();
-        Queue<int[]> queueEnd = new LinkedList<>();
-
-        queueStart.add(new int[] { startX, startY });
-        queueEnd.add(new int[] { endX, endY });
-
-        visitedFromStart[startX][startY] = true;
-        visitedFromEnd[endX][endY] = true;
-
-        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } }; 
-
-        while (!queueStart.isEmpty() && !queueEnd.isEmpty()) {
-            if (avancer_largeur(queueStart, visitedFromStart, visitedFromEnd, obstacles, directions)) {
-                return true;
-            }
-            if (avancer_largeur(queueEnd, visitedFromEnd, visitedFromStart, obstacles, directions)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean avancer_largeur(Queue<int[]> queue, boolean[][] visited, boolean[][] visitedOther,
-            boolean[][] obstacles, int[][] directions) {
-        int[] current = queue.poll();
-        int x = current[0];
-        int y = current[1];
-
-        for (int[] dir : directions) {
-            int newX = x + dir[0];
-            int newY = y + dir[1];
-
-            if (Valid(newX, newY) && !obstacles[newX][newY] && !visited[newX][newY]) {
-                if (visitedOther[newX][newY]) {
-                    return true;
-                }
-
-                visited[newX][newY] = true;
-                queue.add(new int[] { newX, newY });
-            }
-        }
-
-        return false;
-    }
-    private boolean Valid(int x, int y) {
-        return x >= 0 && x < rows && y >= 0 && y < cols;
-    }
-
+    
+    
     //le but est de créer des salles dans le labyrinthe rempli de monstres
     //met des rectangelles de vide dans la grille
     private void cree_des_salles(long seed, int largeur,int longueur, int nb_salle, int variance) {
@@ -221,7 +116,7 @@ public class Grille implements IGrille{
         int longueur_salle = random.nextInt(variance) + longueur;
         // tableau coordonnees des salles
         int[][] coordonnees_salle = new int[nb_salle][2];
-
+    
         for (int i = 0; i < nb_salle; i++) {
             largeur_salle = random.nextInt(variance) + largeur;
             longueur_salle = random.nextInt(variance) + longueur;
@@ -239,9 +134,9 @@ public class Grille implements IGrille{
                 }
             }
         }
-
+    
         //creer les chemin entre les salles
-
+    
         for (int i = 0; i < nb_salle; i++) {
             int x = coordonnees_salle[i][0];
             int y = coordonnees_salle[i][1];
@@ -260,9 +155,9 @@ public class Grille implements IGrille{
                 grille[x][y].resetEntity();
             }
         }
-
+    
     }
-
+    
     //remplir la grille d'obstacle
     public void remplir_obstacle() {
         for (int i = 0; i < rows; i++) {
@@ -271,7 +166,7 @@ public class Grille implements IGrille{
             }
         }
     }
-
+    
     //place les monstres dans la grille a des endroit vide et aléatoire
     public void place_monstre(int nb_monstre) {
         
@@ -280,9 +175,9 @@ public class Grille implements IGrille{
             new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
         }
     }
-
-
-
+    
+    
+    
     /* ======================Partie Synchro========================== */
     public char getTouche() {
         return touche;
@@ -291,32 +186,31 @@ public class Grille implements IGrille{
     public char getTouche2() {
         return touche2;
     }
-    
+
     public void setAuthorised(boolean auto) {
-        if (this.authorised == auto){
+        if (this.authorised == auto) {
             this.authorised2 = auto;
+        } else {
+            this.authorised = auto;
         }
-        else {
-            this.authorised = auto;}
-        
-    }
-    
-    public boolean IsAuthorised(){
-        if (this.authorised2 == this.authorised){
-            return this.authorised;
-        }
-        else {
-            return this.authorised2;
-        }
-        
+
     }
 
-    public void Authorised_True(){
+    public boolean IsAuthorised() {
+        if (this.authorised2 == this.authorised) {
+            return this.authorised;
+        } else {
+            return this.authorised2;
+        }
+
+    }
+
+    public void Authorised_True() {
         this.authorised = true;
         this.authorised2 = true;
     }
 
-    public void Authorised_False(){
+    public void Authorised_False() {
         this.authorised = false;
         this.authorised2 = false;
     }
@@ -330,13 +224,12 @@ public class Grille implements IGrille{
         if (IsAuthorised()) {
             if (this.touche != ' ') {
                 this.touche2 = touche;
-            }
-            else {
+            } else {
                 this.touche = touche;
             }
         }
-        
-    }   
+
+    }
 
     public cell getCell(int col, int row) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
@@ -360,7 +253,6 @@ public class Grille implements IGrille{
     public Entity getMainEntity() {
         return main_Entity;
     }
-    
 
     public cell randomCell_libre() {
         int x = (int) (Math.random() * rows);
@@ -392,7 +284,11 @@ public class Grille implements IGrille{
         }
         return null;
     }
+
     
+
+    /*=========================Paint et ticks=============================*/
+
     public void tick(long elapsed) {
         m_imageElapsed += elapsed;
 
@@ -401,9 +297,6 @@ public class Grille implements IGrille{
         }
 
     }
-    
-
-    /*=========================Paint et ticks=============================*/
 
     int x_main_old;
     int y_main_old;
@@ -414,7 +307,6 @@ public class Grille implements IGrille{
     Color player = new Color(60, 91, 111);
     Color pickable = new Color(240, 194, 80);
 
-   
     public void paint(Graphics g, int width, int height) {
         int x_main = main_Entity.getX();
         int y_main = main_Entity.getY();
@@ -455,15 +347,19 @@ public class Grille implements IGrille{
                     + load_x_positif; i++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
                     g.drawImage(m_images[0],
-                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / frames_anim,
-                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / frames_anim,
+                            (i - x_main + viewport_size / 2) * width / viewport_size
+                                    + offset_x * mouvement / frames_anim,
+                            (j - y_main + viewport_size / 2) * height / viewport_size
+                                    + offset_y * mouvement / frames_anim,
                             width / viewport_size,
                             height / viewport_size,
                             null);
                 else
                     g.drawImage(m_images[21],
-                            (i - x_main + viewport_size / 2) * width / viewport_size + offset_x * mouvement / frames_anim,
-                            (j - y_main + viewport_size / 2) * height / viewport_size + offset_y * mouvement / frames_anim,
+                            (i - x_main + viewport_size / 2) * width / viewport_size
+                                    + offset_x * mouvement / frames_anim,
+                            (j - y_main + viewport_size / 2) * height / viewport_size
+                                    + offset_y * mouvement / frames_anim,
                             width / viewport_size,
                             height / viewport_size,
                             null);
@@ -484,18 +380,16 @@ public class Grille implements IGrille{
 
         if (offset_x != 0 || offset_y != 0) {
             mouvement--;
-            if (mouvement == -1){
+            if (mouvement == -1) {
                 mouvement = frames_anim;
                 x_main_old = x_main;
                 y_main_old = y_main;
             }
         }
-        
 
         //MiniMap
         drawMinimap(g, width, (height - 340) / 2, 340, 340);
 
-         
         //ATH huta
         drawATH_haut(g, width, 0, 340, (height - 340) / 2);
 
@@ -503,7 +397,7 @@ public class Grille implements IGrille{
         drawATH_bas(g, width, (height + 340) / 2, 340, (height - 340) / 2);
 
     }
-    
+
     void drawMinimap(Graphics g, int x, int y, int width, int height) {
         for (int j = 0; j < rows; j++) {
             for (int i = 0; i < cols; i++) {
@@ -524,7 +418,6 @@ public class Grille implements IGrille{
                         g.setColor(Color.BLUE);
                         break;
 
-
                 }
                 g.fillRect(x + (i * width / cols), y + (j * height / rows), width / cols, height / rows);
             }
@@ -532,9 +425,9 @@ public class Grille implements IGrille{
 
         //on place la cible (jouer 2) (une croix rouge)
         g.setColor(Color.RED);
-        g.fillRect(x + (joueur2.getX() * width / cols)+2, y + (joueur2.getY() * height / rows)+2, width / cols-4, height / rows-4);
+        g.fillRect(x + (joueur2.getX() * width / cols) + 2, y + (joueur2.getY() * height / rows) + 2, width / cols - 4,
+                height / rows - 4);
     }
-    
 
     BufferedImage[] coeur = loadSprite("resources/coeur.png", 2, 3);
     int coeur_index = 0;
@@ -543,37 +436,37 @@ public class Grille implements IGrille{
     int c1 = 0;
     int c2 = 0;
     int c3 = 0;
+
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
         //TODO:
         indice++;
         if (petit_coeur) {
-            indice+=5;
+            indice += 5;
         }
         if (indice >= 20) {
             coeur_index = (coeur_index + 3) % 6;
             indice = 0;
             petit_coeur = !petit_coeur;
         }
-        
+
         g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);
-        
+
         if (IsAuthorised()) {
             g.setColor(Color.GREEN);
+        } else {
+            g.setColor(Color.RED);
         }
-        else {
-        g.setColor(Color.RED);
-        }
-        
-        g.fillRect(x, y+height/2, width, height/2);
+
+        g.fillRect(x, y + height / 2, width, height / 2);
         //coeur
-        int life = ((Player1)main_Entity).getLife();
-        
+        int life = ((Player1) main_Entity).getLife();
+
         switch (life) {
             case 5:
                 c3 = 1;
                 break;
-        
+
             case 4:
                 c3 = 2;
                 break;
@@ -596,29 +489,130 @@ public class Grille implements IGrille{
                 c3 = 2;
                 break;
         }
-        g.drawImage(coeur[coeur_index+c1], x + 20, y + 5, 100, 100, null);
-        g.drawImage(coeur[coeur_index+c2], x + 120, y + 5, 100, 100, null);
-        g.drawImage(coeur[coeur_index+c3], x + 220, y + 5, 100, 100, null);
-        
-        
-
+        g.drawImage(coeur[coeur_index + c1], x + 20, y + 5, 100, 100, null);
+        g.drawImage(coeur[coeur_index + c2], x + 120, y + 5, 100, 100, null);
+        g.drawImage(coeur[coeur_index + c3], x + 220, y + 5, 100, 100, null);
 
     }
-    
+
     void drawATH_bas(Graphics g, int x, int y, int width, int height) {
-        
-        
 
         g.setColor(Color.BLACK);
-    
+
         g.fillRect(x, y, width, height);
 
         //affichage cooldown
-        int cooldown = ((Player2)joueur2).getCooldown_egg();
+        int cooldown = ((Player2) joueur2).getCooldown_egg();
         g.setColor(Color.PINK);
-        g.fillRect(x, y , width/3, height/3*(3-cooldown));
+        g.fillRect(x, y, width / 3, height / 3 * (3 - cooldown));
 
     }
+
+
+
+
+    /* 
+    private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
+            int endX, int endY) {
+        if (pourcentage < 0 || pourcentage > 100) {
+            return -1;
+        }
     
+        int totalCells = grille.rows * grille.cols;
+        int numObstacles = (totalCells * pourcentage) / 100;
+    
+        Random random = new Random(seed);
+        List<cell> emptyCells = new ArrayList<>();
+    
+        for (int i = 0; i < grille.rows; i++) {
+            for (int j = 0; j < grille.cols; j++) {
+                if (grille.grille[i][j].pas_obstacle() && !(i == 0 && j == 0)) {
+                    emptyCells.add(grille.grille[i][j]);
+                }
+            }
+        }
+        
+        Collections.shuffle(emptyCells, random);
+        // System.out.println("print cells : "+emptyCells);
+        boolean[][] tempObstacles = new boolean[grille.rows][grille.cols];
+        for (int i = 0; i < grille.rows; i++) {
+            for (int j = 0; j < grille.cols; j++) {
+                tempObstacles[i][j] = !grille.grille[i][j].pas_obstacle();
+            }
+        }
+    
+        int obstaclesPlaced = 0;
+        for (int i = 0; i < emptyCells.size() && obstaclesPlaced < numObstacles; i++) {
+            cell c = emptyCells.get(i);
+            tempObstacles[c.getRow()][c.getCol()] = true;
+    
+            if (chemin_existe(tempObstacles, startX, startY, endX, endY) ) {
+                Obstacle o = new Obstacle(this, c.getCol(), c.getRow(), automates.get("MurIncassable"));
+                obstaclesPlaced++;
+            } else {
+                tempObstacles[c.getRow()][c.getCol()] = false;
+            }
+        }
+        return 0;
+    }
+    
+    // L'idéale est d'utiliser un algo de parcours en largeur afin de vérifier
+    // qu'une grille est faisable
+    // pour l'instant on fait que pour 2 cases // 3 cases à faire après( porte, clée
+    // , case de départ )
+    private boolean chemin_existe(boolean[][] obstacles, int startX, int startY, int endX, int endY) {
+        if (startX == endX && startY == endY) {
+            return true;
+        }
+        boolean[][] visitedFromStart = new boolean[rows][cols];
+        boolean[][] visitedFromEnd = new boolean[rows][cols];
+        Queue<int[]> queueStart = new LinkedList<>();
+        Queue<int[]> queueEnd = new LinkedList<>();
+    
+        queueStart.add(new int[] { startX, startY });
+        queueEnd.add(new int[] { endX, endY });
+    
+        visitedFromStart[startX][startY] = true;
+        visitedFromEnd[endX][endY] = true;
+    
+        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } }; 
+    
+        while (!queueStart.isEmpty() && !queueEnd.isEmpty()) {
+            if (avancer_largeur(queueStart, visitedFromStart, visitedFromEnd, obstacles, directions)) {
+                return true;
+            }
+            if (avancer_largeur(queueEnd, visitedFromEnd, visitedFromStart, obstacles, directions)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean avancer_largeur(Queue<int[]> queue, boolean[][] visited, boolean[][] visitedOther,
+            boolean[][] obstacles, int[][] directions) {
+        int[] current = queue.poll();
+        int x = current[0];
+        int y = current[1];
+    
+        for (int[] dir : directions) {
+            int newX = x + dir[0];
+            int newY = y + dir[1];
+    
+            if (Valid(newX, newY) && !obstacles[newX][newY] && !visited[newX][newY]) {
+                if (visitedOther[newX][newY]) {
+                    return true;
+                }
+    
+                visited[newX][newY] = true;
+                queue.add(new int[] { newX, newY });
+            }
+        }
+    
+        return false;
+    }
+    private boolean Valid(int x, int y) {
+        return x >= 0 && x < rows && y >= 0 && y < cols;
+    }
+        */
 
 }

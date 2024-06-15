@@ -189,10 +189,21 @@ public class Game {
 		m_musicName = m_musicNames[m_musicIndex];
 		String filename = "resources/" + m_musicName + ".ogg";
 		m_musicIndex = (m_musicIndex + 1) % m_musicNames.length;
-		try { 
-			RandomAccessFile file = new RandomAccessFile(filename,"r");
+		try {
+			RandomAccessFile file = new RandomAccessFile(filename, "r");
 			RandomFileInputStream fis = new RandomFileInputStream(file);
-			m_canvas.playMusic(fis, 0, 1.0F);
+			m_canvas.playMusic(fis, 0, 0.0F);
+		} catch (Throwable th) {
+			th.printStackTrace(System.err);
+			System.exit(-1);
+		}
+	}
+	
+	void playBeat() {
+		try {
+			RandomAccessFile file = new RandomAccessFile("resources/beat.ogg", "r");
+			RandomFileInputStream fis = new RandomFileInputStream(file);
+			m_canvas.playSound("beat",fis, 0, 1.0F);
 		} catch (Throwable th) {
 			th.printStackTrace(System.err);
 			System.exit(-1);
@@ -200,7 +211,7 @@ public class Game {
 	}
 
 	private int m_musicIndex = 0;
-	private String[] m_musicNames = new String[] { "nostalgia" };
+	private String[] m_musicNames = new String[] { "beat120" };
 
 	
 	private long decision;
@@ -208,6 +219,7 @@ public class Game {
     private long m_textElapsed;
 	private long m_timekey;
 	private long m_freeze;
+	private boolean beat = false;
 	private boolean authorised = true;
 
 	/*
@@ -218,6 +230,9 @@ public class Game {
 		
 		m_timekey += elapsed;
 		m_freeze += elapsed;
+		
+
+	
 			
 		if (Jump) { 
 			if (this.authorised) {
@@ -248,6 +263,10 @@ public class Game {
 		}
 		else {
 			if (this.authorised) {
+				if (m_timekey > 95 && !beat) {
+					playBeat();
+					beat = true;
+				}
 				if (m_timekey > decision) {
 					m_timekey = 0;
 					m_control.step();
@@ -264,6 +283,7 @@ public class Game {
 					m_grille.Authorised_True();
 					authorised = true;
 					m_timekey = 0;
+					beat = false;
 				}
 			}
 		}
@@ -277,6 +297,7 @@ public class Game {
 			// the text on top of the frame: tick and fps
 			m_textElapsed += elapsed;
 			if (m_textElapsed > 1000) {
+
 				m_textElapsed = 0;
 				float period = m_canvas.getTickPeriod();
 				int fps = m_canvas.getFPS();
