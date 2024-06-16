@@ -30,7 +30,12 @@
         {
             "name" : "Squelette",
             "automate" : "Squelette"
+        },
+        {
+            "name" : "Slime",
+            "automate" : "Slime"
         }
+
 
     ]
 

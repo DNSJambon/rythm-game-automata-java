@@ -27,6 +27,7 @@ import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
 import info3.game.model.Entities.Player2;
+import info3.game.model.Entities.Slime;
 
 
 public class Grille implements IGrille {
@@ -69,17 +70,18 @@ public class Grille implements IGrille {
         }
 
         //======generation du labyrinthe======
-        //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); // Exemple de pourcentage et de seed
+        //pourcentage_aleatoire_obstacle(this, 90, 666, debut_entre_X, debut_entre_Y, fin_X, fin_Y); 
         remplir_obstacle();
         cree_des_salles(seed, 5, 5, 10, 3);
-
+        cell c;
         //======generation des entités======
 
         place_monstre(10);
+        c = randomCell_libre();
 
         //======placer le joueur 2 dans le labyrinthe====== 
 
-        cell c = randomCell_libre();
+        c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
 
