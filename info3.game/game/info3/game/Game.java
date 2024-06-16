@@ -90,10 +90,9 @@ public class Game {
 
 			int rythm = config.getInt("rythm");
 			if (rythm == 0) {
-				//on freeze seulement le temps d'animation
 				Jump = true;
 				decision = 100000;
-				freeze = 500;
+				freeze = 500;				//on freeze seulement le temps d'animation
 
 			}
 			else {
@@ -220,7 +219,6 @@ public class Game {
 	private long m_timekey;
 	private long m_freeze;
 	private boolean mbeat = false;
-	private long m_beat;
 	private boolean authorised = true;
 	
 	/*
@@ -231,13 +229,17 @@ public class Game {
 		
 		m_timekey += elapsed;
 		m_freeze += elapsed;
-		m_beat += elapsed;
+
 		
-		if (!mbeat)
-			if (m_beat > 1000) {
-				loadMusic();
+		if (!mbeat) {
+			if (m_timekey > 200) {
+				m_timekey = 0;
+				m_freeze = 0;
 				mbeat = true;
 			}
+			return;
+		}
+			
 		
 	    
 			
