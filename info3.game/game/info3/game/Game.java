@@ -68,7 +68,7 @@ public class Game {
 		m_canvas = new GameCanvas(m_listener);
 
 		System.out.println("  - creating frame...");
-		Dimension d = new Dimension(1138, 817);
+		Dimension d = new Dimension(1343, 1042);
 		m_frame = m_canvas.createFrame(d);
 
 		System.out.println("  - setting up the frame...");
@@ -93,7 +93,6 @@ public class Game {
 				Jump = true;
 				decision = 100000;
 				freeze = 500;				//on freeze seulement le temps d'animation
-
 			}
 			else {
 				//jeu basé sur le rythme
@@ -232,7 +231,7 @@ public class Game {
 
 		
 		if (!mbeat) {
-			if (m_timekey > 200) {
+			if (m_timekey > 180) {
 				m_timekey = 0;
 				m_freeze = 0;
 				mbeat = true;
@@ -338,6 +337,8 @@ public class Game {
 		g.fillRect(0, 0, width, height);
 
 		// paint
+		System.out.println(width);
+		System.out.println(height);
 		m_grille.paint(g, width - 340, height);
 		
 	}

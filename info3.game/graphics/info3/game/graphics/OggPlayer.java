@@ -145,20 +145,8 @@ public class OggPlayer extends AudioPlayer implements Runnable {
 
   @Override
   public void playMusic(String name, InputStream is, long duration, float volume) {
-    m_name = name;
-    m_volume = volume;
-    m_inputStream = is;
-    m_duration = duration;
-    m_loop = true;
-    is.mark(Integer.MAX_VALUE);
-    if (m_worker != null) {
-      m_stop = true;
-      m_worker.interrupt();
-    } else {
-      m_worker = new Thread(this, "AudioPlayer:" + name);
-      m_worker.start();
-    }
-    // _play(name, is, duration, volume);
+   
+    _play(name, is, duration, volume);
   }
 
   @Override
@@ -178,19 +166,19 @@ public class OggPlayer extends AudioPlayer implements Runnable {
     // _play(name, is, duration, volume);
   }
 
-//  private void _play(String name, InputStream is, long duration, float volume) {
-//    m_name = name;
-//    m_volume = volume;
-//    m_inputStream = is;
-//    m_duration = duration;
-//    m_worker = new Thread(this, "AudioPlayer:" + name);
-//    try {
-//      // m_worker.setDaemon(true);
-//      // m_worker.setPriority(Thread.MAX_PRIORITY);
-//    } catch (Exception e) {
-//    }
-//    m_worker.start();
-//  }
+  private void _play(String name, InputStream is, long duration, float volume) {
+    m_name = name;
+    m_volume = volume;
+   m_inputStream = is;
+    m_duration = duration;
+    m_worker = new Thread(this, "AudioPlayer:" + name);
+   try {
+       m_worker.setDaemon(true);
+      m_worker.setPriority(Thread.MAX_PRIORITY);
+    } catch (Exception e) {
+    }
+    m_worker.start();
+  }
 
   @Override
   public void run() {
