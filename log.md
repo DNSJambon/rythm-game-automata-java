@@ -1,4 +1,14 @@
 # <span style="color: #d54020 ">***13 juin 2024***</span>
+
+## A faire lundi 17
+- Hit / PV
+- Clé / porte
+- Etats mort ()
+- Fin de partie
+
+
+
+
 ## <span style="color:green">**Game**</span>
 - régler le déplacement du player1
 - génèration des salles
