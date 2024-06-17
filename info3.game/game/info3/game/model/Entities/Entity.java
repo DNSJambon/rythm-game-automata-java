@@ -140,7 +140,14 @@ public abstract class Entity {
     public abstract boolean do_pop(Entity e);
     public abstract boolean do_wizz(Entity e);
     public abstract boolean do_turn(Entity e, DirRelative dir);
+
     public abstract boolean do_hit(Entity e, DirRelative dir);
+    
+    
+    public boolean do_die(Entity e){
+        g.getCell(x, y).resetEntity();
+        return true;
+    }
     
     public void get_hit(int damage){
         this.life-=damage;
