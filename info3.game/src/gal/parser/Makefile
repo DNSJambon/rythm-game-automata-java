@@ -1,4 +1,4 @@
-JAVAPROJECT = ../../../../JavaProject
+JAVAPROJECT = ../../../../info3.game
 CLASS_PATH = $(JAVAPROJECT)/bin
 SRC = $(JAVAPROJECT)/src
 
