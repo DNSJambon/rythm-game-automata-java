@@ -6,7 +6,10 @@ La syntaxe GAL est décrite dans le fichier [SYNTAXE.md](SYNTAXE.md)
 
 ## LE PARSER
 
-- Le parser est écrit en `JavaCC`, il est fourni par les enseignants
+- Le parser est écrit en `JavaCC`, il est fourni par les enseignants sous la forme d'un fichier `parser.jj` dans le répertoire `src/gal/parser`.
+
+- :warning: le répertoire contient un `.gitignore` qui demande d'ignorer les fichiers `.java` générer par `JavaCC`.
+  Vous pouvez le supprimer puisque vous ne modifierez pas le parser.
 
 - il produit un AST (*Abstract Syntaxe Tree*) qui correspond à l'arbre de dérivation construit lors du parsing.
 
@@ -20,7 +23,11 @@ Pour se familiariser avec le structure de l'AST que génère le parser, vous pou
 
 1. `apt get install javacc`
 2. `make parser`
-3. `make exemples.txt`
+
+Pour chaque fichier `fichier.gal` vous pouvez ensuite faire 
+1. `make fichier.txt` pour vérifier que votre `fichier.gal` est accepté par le parser
+2. `make fichier.ast.jpg` pour avoir une représentation graphique de l'AST généré par le parser
+3. `make fichier.aut.jpg` pour avoir une représentation graphique de l'automate correspondant à `fichier.gal`
 
 ### Le parser propose deux sorties à partir d'un [fichier .gal]
 
@@ -73,10 +80,11 @@ que vous pouvez parcourir en explorant ses champs pour y piocher les information
 
 ### 2. Le package AST est fourni avec un Visitor
 
+
 La méthode `accept(Visitor)` de l'AST déclenche un parcours d'arbre et appelle les fonctions du Visitor
 sur chacun des noeuds de l'arbre.
 
-Pour générer les automates il _suffit_ donc de fournir l'implémentation de ces fonctions en respectant l'interface `IVisitor`.
+Pour générer les automates il _suffit_ donc de fournir l'implémentation de ces fonctions en respectant l'interface [IVisitor](../gal/ast/IVisitor.java).
 
 Voici trois exemples d'implémentations de l'interface `IVisitor`
 

@@ -64,6 +64,7 @@ CONDITION ::=
   | "Cell" 
   | "Closest" 
   | "Got" 
+  | "Key"
 ```
 
 ## Action
@@ -78,6 +79,7 @@ Action ::= (Percent)? . ACTION . (OptionalParameters)?
 Percent ::= INTEGER . "%"
 
 ACTION ::= 
+  | "Add"
   | "Egg" 
   | "Explode" 
   | "Get"  
@@ -85,14 +87,15 @@ ACTION ::=
   | "Jump" 
   | "Move" 
   | "Pick" 
-  | "Pop"  
   | "Protect"
   | "Rest" 
   | "Store" 
   | "Throw" 
   | "Turn" 
-  | "Wizz" 
   | "Wait"
+  // action with no semantics 
+  | "Pop"
+  | "Wizz" 
 ```
 
 
@@ -134,8 +137,32 @@ DIRECTION ::=
 ```haskell
 Category ::= 
   | CATEGORY
-  | "e" | "c" 
+  | "c" 
   | "_" 
+
+CATEGORY ::=  
+  | "Adversary" | "A"   
+  | "Clue"      | "C" 
+  | "Danger"    | "D"  
+  | "Gate"      | "G"  
+  | "Icon"      | "I" 
+  | "Jumpable"  | "J"  
+  | "Killable"  | "K"   
+  | "Moveable"  | "M" 
+  | "Obstacle"  | "O"  
+  | "Pickable"  | "P" 
+  | "Team"      | "T"
+  | "Util"      | "U" 
+  | "Void"      | "V" 
+  | "PlayerT"   | "@" 
+  | "PlayerA"   | "#"
+  | "Power"     
+  | "Stuff"    
+  // categories with no semantics
+  | "Qube"      | "Q" 
+  | "Xics"      | "X" 
+  | "Ygre"      | "Y" 
+  | "Zedd"      | "Z"
 ```
 
 ## KEYS, MOUSE CONTROL
