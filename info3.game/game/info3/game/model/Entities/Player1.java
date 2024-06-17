@@ -33,14 +33,17 @@ public class Player1 extends Entity{
         }
     }
     
+    @Override
     public int getLife() {
         return life;
     }
 
+    @Override
     public void setLife(int life) {
         this.life = life;
     }
 
+    @Override
     public void takeDamage(int damage) {
         life-=damage;
     }

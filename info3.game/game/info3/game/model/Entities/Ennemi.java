@@ -27,4 +27,24 @@ public abstract class Ennemi extends Entity{
         return Category.E;
     }
 
+    @Override
+    public int getLife() {
+        return this.life;
+    }
+
+    @Override
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        life-=damage;
+    }
+
+    @Override
+    public boolean eval_got_power(Entity e,int i) {
+        return e.getLife()>i;
+    }
+
 }

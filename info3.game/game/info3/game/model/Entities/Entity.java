@@ -45,6 +45,18 @@ public abstract class Entity {
     public IGrille getGrille() {
         return g;
     }
+
+    public int getLife () {
+        return 0;
+    }
+
+    public void setLife(int life) {
+        throw new UnsupportedOperationException("Unimplemented method 'setLife'");
+    }
+
+    public void takeDamage(int damage) {
+        throw new UnsupportedOperationException("Unimplemented method 'takeDamage'");
+    }
     
     public Direction RelativeToAbsolute(DirRelative d){
         Direction[] dirs = { Direction.Nord, Direction.Est, Direction.Sud, Direction.Ouest };

@@ -8,8 +8,18 @@ public class Got implements Conditions {
     String str;
     Category cat;
 
-    public Got(int a) {
+    public Got(String s,int a) {
         this.i=a;
+        this.str=s;
+    }
+
+    public Got(String s) {
+        this.i=0;
+        this.str=s;
+    }
+
+    public Got(Category c) {
+        this.cat=c;
     }
 
     public boolean eval (Entity e) {
