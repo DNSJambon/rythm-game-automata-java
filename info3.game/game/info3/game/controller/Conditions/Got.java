@@ -6,7 +6,7 @@ import info3.game.model.Entities.Entity;
 public class Got implements Conditions {
     int i;
     String str;
-    Category cat;
+    char cat;
 
     public Got(String s,int a) {
         this.i=a;
@@ -18,7 +18,7 @@ public class Got implements Conditions {
         this.str=s;
     }
 
-    public Got(Category c) {
+    public Got(char c) {
         this.cat=c;
     }
 

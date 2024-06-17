@@ -123,7 +123,7 @@ public abstract class Entity {
         throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
     }
 
-    public boolean eval_got(Entity e,Category cat) {
+    public boolean eval_got(Entity e,char cat) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'eval_got'");
     }
