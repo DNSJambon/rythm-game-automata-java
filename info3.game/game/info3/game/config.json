@@ -1,7 +1,7 @@
 {
     "seed": 10,
     "difficulty": 1,
-    "rythm": 1,
+    "rythm": 0,
     "bpm": 100,
     "automate_file" : "automates.gal",
     "entities" : [
