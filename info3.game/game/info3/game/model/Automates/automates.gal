@@ -79,14 +79,4 @@ Slime(Monter1){
 | Cell(F, O) ? Move(B) : (Descendre1)
 }
 
-Projectile(Alive){
 
-* (Alive):
-| Cell(F,V) ? Move(F) :(Alive) 
-| Cell(F,P) ?  Hit(F)  :()
-| True ? :()
- 
-* ():
-| True ? :()
-
-}
