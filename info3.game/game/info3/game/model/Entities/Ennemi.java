@@ -8,13 +8,14 @@ import info3.game.model.cellType;
 
 public abstract class Ennemi extends Entity{
     int life;
-    Player1 p;
+    
     public Ennemi(IGrille g, int x, int y) {
         super(g);
         etat_courant = "0";
         direction = Direction.Est;
         this.x = x;
         this.y = y;
+        
         g.getCell(x, y).setEntity(this);
     }
 
@@ -30,13 +31,14 @@ public abstract class Ennemi extends Entity{
 
     public boolean Do_hit(Entity E, DirRelative dir) {
         if (E.eval_cell(E, dir, 'H')){
-            p.gethit(1);
+            g.getMainEntity().get_hit(1);
             return true;
         }
         return false;        
     }
     public void get_hit(int damage) {
-        p.setLife(life-damage);
+        this.life -= damage;
+        
     }
 
 }
