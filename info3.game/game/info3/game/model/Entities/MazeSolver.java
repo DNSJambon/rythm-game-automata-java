@@ -10,13 +10,12 @@ import info3.game.controller.Conditions.*;
 import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
-public class MazeSolver extends Entity {
- 
-    
+public class MazeSolver extends Ennemi {
 
     public MazeSolver(Grille grille, int col, int row, Automate a) {
-        super(grille);
+        super(grille,col,row);
         etat_courant = a.getState();
+        life = 1;
         direction = Direction.Est;
         this.x = col;
         this.y = row;
