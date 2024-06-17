@@ -277,7 +277,6 @@ public class Game {
 					m_control.step();
 					m_grille.resetTouche();
 					m_grille.Authorised_False();
-					System.out.println(m_grille.IsAuthorised());
 					this.authorised = false;
 					m_freeze= m_freeze - decision;
 				}
@@ -337,8 +336,7 @@ public class Game {
 		g.fillRect(0, 0, width, height);
 
 		// paint
-		System.out.println(width);
-		System.out.println(height);
+		
 		m_grille.paint(g, width - 340, height);
 		
 	}

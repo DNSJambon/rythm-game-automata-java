@@ -134,6 +134,12 @@ public class Suiveur extends Ennemi{
         return DirClosest == dir ;
     }
 
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
+    }
+
     
 }
 

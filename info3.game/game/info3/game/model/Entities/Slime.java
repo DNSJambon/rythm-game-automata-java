@@ -24,7 +24,7 @@ public class Slime extends Ennemi {
         this.y = y;
 
         try {
-            m_images = Grille.loadSprite("resources/faucheuse.png", 1, 4); 
+            m_images = Grille.loadSprite("resources/slime.png", 1, 4); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,6 +125,12 @@ public class Slime extends Ennemi {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
     }
 
    

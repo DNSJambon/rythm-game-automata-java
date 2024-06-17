@@ -46,6 +46,9 @@ public class cell implements Icell {
             return e[1].getType();
         }
     }
+    public Entity GetEntity() {
+        return e[1];
+    }
 
     public char getCategory() {
         if (vide == 1) {

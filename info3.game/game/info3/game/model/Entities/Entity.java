@@ -13,13 +13,14 @@ public abstract class Entity {
     public String etat_courant;
     Automate a;
     public Direction direction;
-
+    int life;
     int x, y;
 
     BufferedImage[] m_images;
     int image_index = 0;
 
     public Entity(IGrille g) {
+        this.life=1;
         this.g = g;
         g.addEntity(this);
         direction = Direction.Est;
@@ -139,6 +140,12 @@ public abstract class Entity {
     public abstract boolean do_pop(Entity e);
     public abstract boolean do_wizz(Entity e);
     public abstract boolean do_turn(Entity e, DirRelative dir);
+    public abstract boolean do_hit(Entity e, DirRelative dir);
+    
+    public void get_hit(int damage){
+        this.life-=damage;
+    }
+
 
     public boolean do_wait(Entity e) {
         return true;

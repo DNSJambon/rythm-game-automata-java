@@ -70,15 +70,11 @@ public class Door extends Entity{
     }
 
     @Override
-    public void paint(Graphics graphics, int x, int y, int width, int height) {
+    public boolean do_hit(Entity e, DirRelative dir) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'paint'");
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
     }
 
-    @Override
-    public void tick(long elapsed) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tick'");
-    }
+    
     
 }

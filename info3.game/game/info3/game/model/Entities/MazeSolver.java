@@ -35,11 +35,6 @@ public class MazeSolver extends Ennemi {
     }
 
     @Override
-    public char getCategory() {
-        return Category.T;
-    }
-
-    @Override
     public boolean do_move(Entity e, DirRelative dir) {
         //on change la direction du MazeSolver
         direction = RelativeToAbsolute(dir);
@@ -106,6 +101,12 @@ public class MazeSolver extends Ennemi {
     public boolean do_turn(Entity e, DirRelative dir) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
+    }
+
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
     }
     
 

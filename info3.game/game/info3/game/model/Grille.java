@@ -26,6 +26,7 @@ import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
 import info3.game.model.Entities.Player2;
 import info3.game.model.Entities.Slime;
+import info3.game.model.Entities.Squelette;
 
 
 public class Grille implements IGrille {
@@ -74,8 +75,12 @@ public class Grille implements IGrille {
         cell c;
         //======generation des entités======
 
-        place_monstre(10);
+        
+
+
+        //======placer le joueur 1 dans le labyrinthe======
         c = randomCell_libre();
+        Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
 
         //======placer le joueur 2 dans le labyrinthe====== 
 
@@ -83,9 +88,10 @@ public class Grille implements IGrille {
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
 
-        //======placer le joueur 1 dans le labyrinthe======
+        place_monstre(10);
         c = randomCell_libre();
-        Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
+
+     
 
         //main_Entity;
         main_Entity = p1;
@@ -230,6 +236,8 @@ public class Grille implements IGrille {
         }
 
     }
+
+    
 
     public cell getCell(int col, int row) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
