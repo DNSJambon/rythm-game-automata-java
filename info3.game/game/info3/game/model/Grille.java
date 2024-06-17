@@ -421,6 +421,9 @@ public class Grille implements IGrille {
                     case 'T':
                         g.setColor(player);
                         break;
+                    case 'E':
+                        g.setColor(Color.YELLOW);
+                        break;
                     case '#':
                         g.setColor(Color.BLUE);
                         break;
