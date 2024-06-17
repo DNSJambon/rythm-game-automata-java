@@ -35,11 +35,6 @@ public class MazeSolver extends Ennemi {
     }
 
     @Override
-    public char getCategory() {
-        return Category.T;
-    }
-
-    @Override
     public boolean do_move(Entity e, DirRelative dir) {
         //on change la direction du MazeSolver
         direction = RelativeToAbsolute(dir);
