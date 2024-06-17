@@ -16,6 +16,7 @@ public class Act {
         if (mode != null) {
             if (mode.getTrans(owner) != null) {
                 mode.getTrans(owner).GetAct().exec(owner);
+                owner.etat_courant=mode.getTrans(owner).GetEnd();
             }
         }
     }
