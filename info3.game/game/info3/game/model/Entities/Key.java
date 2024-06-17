@@ -71,16 +71,6 @@ public class Key extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
 
-    @Override
-    public void paint(Graphics graphics, int x, int y, int width, int height) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'paint'");
-    }
-
-    @Override
-    public void tick(long elapsed) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tick'");
-    }
+   
     
 }
