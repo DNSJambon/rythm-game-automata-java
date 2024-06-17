@@ -176,7 +176,7 @@ public class Grille implements IGrille {
     public void remplir_obstacle() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                Obstacle o = new Obstacle(this, j, i , automates.get("MurIncassable"));
+                new Obstacle(this, j, i , automates.get("MurIncassable"));
             }
         }
     }
@@ -447,6 +447,7 @@ public class Grille implements IGrille {
     }
 
     BufferedImage[] coeur = loadSprite("resources/coeur.png", 2, 3);
+    BufferedImage[] indicator = loadSprite("resources/indicator.png", 2, 1);
     int coeur_index = 0;
     int indice = 0;
     boolean petit_coeur = false;
@@ -470,12 +471,11 @@ public class Grille implements IGrille {
         g.fillRect(x, y, width, height);
 
         if (IsAuthorised()) {
-            g.setColor(Color.GREEN);
+            g.drawImage(indicator[0], x, y + height / 2, width, height / 2, null);
         } else {
-            g.setColor(Color.RED);
+            g.drawImage(indicator[1], x, y + height / 2, width, height / 2, null);
         }
 
-        g.fillRect(x, y + height / 2, width, height / 2);
         //coeur
         int life = ((Player1) main_Entity).getLife();
 
