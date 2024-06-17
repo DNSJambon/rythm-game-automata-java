@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import info3.game.controller.*;
 import info3.game.controller.Conditions.Cell;
 import info3.game.model.Entities.Entity;
+import info3.game.model.Entities.Key;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
@@ -81,6 +82,10 @@ public class Grille implements IGrille {
         //======placer le joueur 1 dans le labyrinthe======
         c = randomCell_libre();
         Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
+        
+        c = randomCell_libre();
+        Key k = new Key(this, c.getCol(), c.getRow(), automates.get("Key"));
+        addEntity(k);
 
         //======placer le joueur 2 dans le labyrinthe====== 
 
@@ -429,7 +434,7 @@ public class Grille implements IGrille {
                     case '#':
                         g.setColor(Color.BLUE);
                         break;
-
+   
                 }
                 g.fillRect(x + (i * width / cols), y + (j * height / rows), width / cols, height / rows);
             }

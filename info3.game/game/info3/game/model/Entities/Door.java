@@ -44,7 +44,7 @@ public class Door extends Entity{
 
     @Override
     public boolean do_pick(Entity e) {
-        if (k.picked()) {
+        if (k.isPicked()) {
             opened=true;
             return true;
         }

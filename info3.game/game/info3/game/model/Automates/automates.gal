@@ -36,13 +36,13 @@ Wall(S1){
 Player1(S1){
 *(S1):
 | !Got(Power) ? Rest : ()
-| Key(m) & Cell(R, V) ? Move(R) : (S1)
+| Key(m) & Cell(R, V)/Cell(R, P) ? Move(R) : (S1)
 | Key(m) & Cell(R, E) ? Hit(R) : (S1)
-| Key(o) & Cell(F, V) ? Move(F) : (S1)
+| Key(o) & Cell(F, V)/Cell(F, P) ? Move(F) : (S1)
 | Key(o) & Cell(F, E) ? Hit(F) : (S1)
-| Key(l) & Cell(B, V) ? Move(B) : (S1)
+| Key(l) & Cell(B, V)/Cell(B, P) ? Move(B) : (S1)
 | Key(l) & Cell(B, E) ? Hit(B) : (S1)
-| Key(k) & Cell(L, V) ? Move(L) : (S1)
+| Key(k) & Cell(L, V)/Cell(L, P) ? Move(L) : (S1)
 | Key(k) & Cell(L, E) ? Hit(L) : (S1)
 | True ? Wait : (S1)
 
@@ -102,6 +102,14 @@ Slime(Monter1){
 * (Monter2):
 | Cell(F, V) ? Move(F) : (Monter1)
 | Cell(F, O) ? Move(B) : (Descendre1)
+}
+
+Key(S1){
+*(S1):
+| Cell(H, #) ? Pick : (S2)
+| True ? Wait : (S1)
+* (S2):
+| True ? Wait : (S2)
 }
 
 
