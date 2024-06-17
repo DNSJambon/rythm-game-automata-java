@@ -434,9 +434,7 @@ public class Grille implements IGrille {
                     case '#':
                         g.setColor(Color.BLUE);
                         break;
-                    case 'K':
-                        g.setColor(Color.GREEN);
-                        break;    
+   
                 }
                 g.fillRect(x + (i * width / cols), y + (j * height / rows), width / cols, height / rows);
             }

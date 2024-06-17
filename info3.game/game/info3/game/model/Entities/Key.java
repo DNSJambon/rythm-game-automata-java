@@ -14,7 +14,6 @@ import info3.game.model.cellType;
 public class Key extends Entity {
 
     boolean picked;
-    BufferedImage[] m_images;
 
     public Key(IGrille g, int x, int y, Automate a) {
         super(g);
@@ -76,26 +75,14 @@ public class Key extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
 
-    int in_movement = -1;
-    int nb_frame_move = 7;
-
-    @Override
-    public void paint(Graphics graphics, int x, int y, int width, int height) {
-
-        if (in_movement != -1) {
-            if (direction == Direction.Nord) {
-                y += (height * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Est) {
-                x -= (width * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Sud) {
-                y -= (height * in_movement) / nb_frame_move;
-            } else if (direction == Direction.Ouest) {
-                x += (width * in_movement) / nb_frame_move;
-            }
-            in_movement--;
+   @Override
+    public void tick(long elapsed) {
+        animation_elapsed += elapsed;
+        if (animation_elapsed > 200) {
+            image_index = (image_index + 1) % 6;
+            animation_elapsed = 0;
         }
-
-        graphics.drawImage(m_images[image_index], x, y, width, height, null);
+        
     }
 
 
