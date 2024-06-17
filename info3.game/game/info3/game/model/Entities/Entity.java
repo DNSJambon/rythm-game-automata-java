@@ -46,7 +46,16 @@ public abstract class Entity {
     public IGrille getGrille() {
         return g;
     }
+
+    public int getLife() {
+        return this.life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
     
+
     public Direction RelativeToAbsolute(DirRelative d){
         Direction[] dirs = { Direction.Nord, Direction.Est, Direction.Sud, Direction.Ouest };
         int i = 0;
@@ -115,14 +124,13 @@ public abstract class Entity {
         throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
     }
 
-    public boolean eval_got(Entity e,Category cat) {
+    public boolean eval_got(Entity e,char cat) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'eval_got'");
     }
 
     public boolean eval_got_power(Entity e,int i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eval_got_power'");
+        return e.getLife()>i;
     }
 
     //abstract boolean do(...);
