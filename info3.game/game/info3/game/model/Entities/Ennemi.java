@@ -7,7 +7,6 @@ import info3.game.model.IGrille;
 import info3.game.model.cellType;
 
 public abstract class Ennemi extends Entity{
-    int life;
     
     public Ennemi(IGrille g, int x, int y) {
         super(g);
@@ -39,21 +38,6 @@ public abstract class Ennemi extends Entity{
     public void get_hit(int damage) {
         this.life -= damage;
         
-    }
-
-    @Override
-    public int getLife() {
-        return this.life;
-    }
-
-    @Override
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    @Override
-    public boolean eval_got_power(Entity e,int i) {
-        return e.getLife()>i;
     }
 
 }

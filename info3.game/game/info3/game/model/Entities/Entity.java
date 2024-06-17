@@ -47,14 +47,15 @@ public abstract class Entity {
         return g;
     }
 
-    public int getLife () {
-        throw new UnsupportedOperationException("Unimplemented method 'getLife'");
+    public int getLife() {
+        return this.life;
     }
 
     public void setLife(int life) {
-        throw new UnsupportedOperationException("Unimplemented method 'setLife'");
+        this.life = life;
     }
     
+
     public Direction RelativeToAbsolute(DirRelative d){
         Direction[] dirs = { Direction.Nord, Direction.Est, Direction.Sud, Direction.Ouest };
         int i = 0;
@@ -129,8 +130,7 @@ public abstract class Entity {
     }
 
     public boolean eval_got_power(Entity e,int i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eval_got_power'");
+        return e.getLife()>i;
     }
 
     //abstract boolean do(...);
