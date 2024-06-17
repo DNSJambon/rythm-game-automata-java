@@ -19,6 +19,7 @@ public class Suiveur extends Ennemi{
     public Suiveur(Grille g, int x, int y,Automate a) {
         super(g, x, y);
         etat_courant = a.getState();
+        life = 1;
         direction = Direction.Est;;
         this.x = x;
         this.y = y;
@@ -131,6 +132,12 @@ public class Suiveur extends Ennemi{
             }
         }
         return DirClosest == dir ;
+    }
+
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
     }
 
     

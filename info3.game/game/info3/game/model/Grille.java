@@ -78,7 +78,6 @@ public class Grille implements IGrille {
         //======generation des entités======
 
         
-        c = randomCell_libre();
 
 
         //======placer le joueur 1 dans le labyrinthe======
@@ -91,11 +90,11 @@ public class Grille implements IGrille {
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
 
-        // c = randomCell_libre();
-        // Suiveur s = new Suiveur(this,c.getCol(), c.getRow(), automates.get("Suiveur"));
+        place_monstre(10);
+        c = randomCell_libre();
 
-        place_monstre(1);
-        
+     
+
         //main_Entity;
         main_Entity = p1;
         x_main_old = main_Entity.getX();
@@ -239,6 +238,8 @@ public class Grille implements IGrille {
         }
 
     }
+
+    
 
     public cell getCell(int col, int row) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {

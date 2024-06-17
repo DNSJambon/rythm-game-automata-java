@@ -7,6 +7,8 @@ public interface Icell {
 
     public char getCategory();
 
+    public Entity GetEntity();
+
     public void setEntity(Entity e);
 
     public void resetall();

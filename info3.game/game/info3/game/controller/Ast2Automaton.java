@@ -121,6 +121,17 @@ public class Ast2Automaton implements IVisitor{
                 return new Pop();
             case "Wizz":
                 return new Wizz();
+            case "Hit":
+                switch ((String) params.get(0)) {
+                case "R":
+                    return new Hit(DirRelative.Droite);
+                case "L":
+                    return new Hit(DirRelative.Gauche);
+                case "F":
+                    return new Hit(DirRelative.Devant);
+                case "B":
+                    return new Hit(DirRelative.Derriere);
+                }
             //TODO: Add more cases
         }
         return null;
