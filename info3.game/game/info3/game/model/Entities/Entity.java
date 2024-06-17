@@ -89,7 +89,7 @@ public abstract class Entity {
                 }
                 return g.getCell(x, y - 1).getCategory() == type;
             
-                case Gauche:
+            case Gauche:
                 if (x == 0) {
                     return type == Category.O;
                 }
@@ -171,7 +171,26 @@ public abstract class Entity {
     public abstract boolean do_wizz(Entity e);
     public abstract boolean do_turn(Entity e, DirRelative dir);
 
-    public abstract boolean do_hit(Entity e, DirRelative dir);
+    public boolean do_hit(Entity e, DirRelative dir) { 
+            switch (dir) {
+
+            case Devant:
+                g.getCell(this.x, this.y -1).GetEntity().get_hit(1);
+                return true;
+            case Derriere:
+                g.getCell(this.x, this.y + 1).GetEntity().get_hit(1);
+                return true;
+            case Droite:
+                g.getCell(this.x + 1, this.y).GetEntity().get_hit(1);
+                return true;
+            case Gauche:
+                g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
+                return true;
+            default:   
+                return false;
+        }
+    
+    }
     
     
     public boolean do_die(Entity e){

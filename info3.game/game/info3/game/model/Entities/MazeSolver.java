@@ -66,13 +66,5 @@ public class MazeSolver extends Ennemi {
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
 
-    @Override
-    public boolean do_hit(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
-    }
-    
 
-    
-    
 }
