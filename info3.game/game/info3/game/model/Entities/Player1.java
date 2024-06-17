@@ -153,7 +153,9 @@ public class Player1 extends Entity{
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
 
-    
+    public void gethit(int damage){
+        this.setLife(life-damage);
+    }
 
    
 
