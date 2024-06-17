@@ -186,6 +186,9 @@ public abstract class Entity {
             case Gauche:
                 g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
                 return true;
+            case soi:
+                g.getCell(this.x, this.y).GetEntity().get_hit(1);
+                return true;
             default:   
                 return false;
         }
