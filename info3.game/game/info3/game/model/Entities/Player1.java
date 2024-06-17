@@ -85,7 +85,32 @@ public class Player1 extends Entity{
     }
 
     
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) { 
+            in_hit = true;
+            switch (dir) {
 
+            case Devant:
+                g.getCell(this.x, this.y -1).GetEntity().get_hit(1);
+                direction = Direction.Nord;
+                return true;
+            case Derriere:
+                g.getCell(this.x, this.y + 1).GetEntity().get_hit(1);
+                direction = Direction.Sud;
+                return true;
+            case Droite:
+                g.getCell(this.x + 1, this.y).GetEntity().get_hit(1);
+                direction = Direction.Est;
+                return true;
+            case Gauche:
+                g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
+                direction = Direction.Ouest;
+                return true;
+            default:   
+                return false;
+        }
+    
+    }
     
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
