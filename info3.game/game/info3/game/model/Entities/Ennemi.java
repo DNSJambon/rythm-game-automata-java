@@ -29,7 +29,7 @@ public abstract class Ennemi extends Entity{
     }
 
     public boolean Do_hit(Entity E, DirRelative dir) {
-        if (E.eval_cell(E, dir, 'P')){
+        if (E.eval_cell(E, dir, 'H')){
             p.gethit(1);
             return true;
         }

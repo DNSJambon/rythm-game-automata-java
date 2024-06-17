@@ -233,6 +233,8 @@ public class Grille implements IGrille {
 
     }
 
+    
+
     public cell getCell(int col, int row) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
             return null;

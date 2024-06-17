@@ -127,5 +127,11 @@ public class Slime extends Ennemi {
         return false;
     }
 
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
+    }
+
    
 }
