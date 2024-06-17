@@ -11,7 +11,7 @@ import info3.game.model.*;
 
 public class Player1 extends Entity{
 
-    int life;
+    
     
     public Player1(IGrille g, int x, int y, Automate a) {
         super(g);

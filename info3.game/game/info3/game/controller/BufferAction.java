@@ -42,7 +42,7 @@ public class BufferAction {
 
     public void resolve() {
         for (int i = 0; i < index; i++) {
-            if (this.act!=null) {
+            if (this.act[i]!=null) {
                 this.act[i].resolve();
             }
         }
