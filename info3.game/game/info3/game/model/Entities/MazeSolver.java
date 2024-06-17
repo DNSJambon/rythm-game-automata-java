@@ -10,13 +10,12 @@ import info3.game.controller.Conditions.*;
 import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
-public class MazeSolver extends Entity {
- 
-    
+public class MazeSolver extends Ennemi {
 
     public MazeSolver(Grille grille, int col, int row, Automate a) {
-        super(grille);
+        super(grille,col,row);
         etat_courant = a.getState();
+        life = 1;
         direction = Direction.Est;
         this.x = col;
         this.y = row;
@@ -33,11 +32,6 @@ public class MazeSolver extends Entity {
     @Override
     public cellType getType() {
         return cellType.MazeSolver;
-    }
-
-    @Override
-    public char getCategory() {
-        return Category.T;
     }
 
     @Override
@@ -107,6 +101,12 @@ public class MazeSolver extends Entity {
     public boolean do_turn(Entity e, DirRelative dir) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
+    }
+
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
     }
     
 
