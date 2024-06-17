@@ -11,8 +11,8 @@
 - Creation Piège et implémentation
 
 ## <span style="color:green">**Game**</span>
-- Création et ajout au parseur de la classe hit (+ implémentation de do_hit fonctionnel) (Sami)
-- Création, test et ajout au parseur  de la classe Got (implémentation possible de  got(category) en plus de got(power) (got(power,int) abandonné car inutil)) (Matthieu)
+- Création et ajout au visteur de la classe hit (+ implémentation de do_hit fonctionnel) (Sami)
+- Création, test et ajout au visiteur  de la classe Got (implémentation possible de  got(category) en plus de got(power) (got(power,int) abandonné car inutil)) (Matthieu)
 - Vie du joueur et des monstres prise en compte + Etats Morts et disparition ajouté (a regler pour joueur 1) (Arthur)
 - Ajout animation Hit (Mathis)
 - Creation et implémentation des méthodes de Key et Door permettant la fin du jeu (pas encore fonctionel)(Aymanne et Omar)
