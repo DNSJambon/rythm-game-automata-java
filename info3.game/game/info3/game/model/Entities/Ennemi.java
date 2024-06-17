@@ -7,7 +7,6 @@ import info3.game.model.IGrille;
 import info3.game.model.cellType;
 
 public abstract class Ennemi extends Entity{
-    int life;
     
     public Ennemi(IGrille g, int x, int y) {
         super(g);
