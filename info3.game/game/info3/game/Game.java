@@ -231,14 +231,16 @@ public class Game {
 		m_timekey += elapsed;
 		m_freeze += elapsed;
 
-		
-		if (!mbeat) {
-			if (m_timekey > 180) {
-				m_timekey = 0;
-				m_freeze = 0;
+		//calibration (moche mais pas trouvé mieux pour synchroniser la musique car le temps de chargement tres variable)
+		if (!mbeat & !Jump) {
+			m_timekey = 0;
+			m_freeze = 0;
+			if (!m_grille.IsAuthorised()) {
+				m_grille.Authorised_True();
 				mbeat = true;
+				m_timekey = 100; //100 car la marge d'erreur pur un click est de 200ms,
+				m_freeze = 100; // donc on lance le jeu à 100ms afin d'etre au milieu de la fenetre d'erreur (+-100ms)
 			}
-			return;
 		}
 			
 		
