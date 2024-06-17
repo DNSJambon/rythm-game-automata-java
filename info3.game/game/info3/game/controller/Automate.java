@@ -35,7 +35,7 @@ public class Automate {
     public boolean step_A(Entity e,BufferAction buff){
         int i=0;
         while (i<modes.size()){
-            if (modes.get(i).etat.equals(status)){
+            if (modes.get(i).etat.equals(e.etat_courant)){
                 buff.addAct(e,modes.get(i));
                 return true;
             }
