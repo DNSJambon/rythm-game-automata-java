@@ -35,6 +35,14 @@ public class Transitions {
         return this.act;
     }
 
+    public String GetInit() {
+        return this.init;
+    }
+
+    public String GetEnd() {
+        return this.end;
+    }
+
     public Conditions GetCond() {
         return this.cond;
     }
