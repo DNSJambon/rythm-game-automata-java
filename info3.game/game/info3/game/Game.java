@@ -29,7 +29,9 @@ import info3.game.controller.*;
 public class Game {
 
 	static Game game;
-	boolean Jump=false;
+	boolean Jump = false;
+
+	public int bpm;
 
 	public static void main(String args[]) throws Exception {
 		try {
@@ -96,7 +98,7 @@ public class Game {
 			}
 			else {
 				//jeu basé sur le rythme
-				int bpm = config.getInt("bpm");
+				bpm = config.getInt("bpm");
 				Jump = false;
 				decision = 200;
 				freeze = 60000/bpm - 200;

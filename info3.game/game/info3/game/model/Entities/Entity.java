@@ -236,7 +236,7 @@ public abstract class Entity {
     int animation_elapsed = 0;
     public void tick(long elapsed) {
         animation_elapsed += elapsed;
-        if (animation_elapsed > 200) {
+        if (animation_elapsed > 1000/(100/600)/4) {
             image_index = (image_index + 1) % 4;
             animation_elapsed = 0;
         }

@@ -356,9 +356,9 @@ public class Grille implements IGrille {
             for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2
                     + load_x_positif; i++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
-                    r = 0;
+                    r = 252;
                 else
-                    r = 21;
+                    r = 231;
                 g.drawImage(m_images[r],
                            (int) ((i - x_main + viewport_size / 2) * width / viewport_size
                                     + offset_x  * slide[frames_anim - mouvement]),
