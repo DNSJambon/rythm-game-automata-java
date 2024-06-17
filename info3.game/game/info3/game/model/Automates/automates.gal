@@ -9,6 +9,7 @@ Mazesolver(S1){
 | True ? Move(F) : (S1)
 
 *()
+| True ? Wait : ()
 
 }
 

@@ -146,6 +146,7 @@ public abstract class Entity {
     
     public boolean do_die(Entity e){
         g.getCell(x, y).resetEntity();
+        g.removeEntity(this);
         return true;
     }
     

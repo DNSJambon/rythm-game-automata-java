@@ -15,7 +15,7 @@ public class MazeSolver extends Ennemi {
     public MazeSolver(Grille grille, int col, int row, Automate a) {
         super(grille,col,row);
         etat_courant = a.getState();
-        life = 2;
+        life = 1;
         direction = Direction.Est;
         this.x = col;
         this.y = row;

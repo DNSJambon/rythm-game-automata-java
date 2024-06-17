@@ -111,6 +111,9 @@ public class Grille implements IGrille {
     public void addEntity(Entity e) {
         m_control.addEntity(e);
     }
+    public void removeEntity(Entity e) {
+        m_control.removeEntity(e);
+    }
 
     
     

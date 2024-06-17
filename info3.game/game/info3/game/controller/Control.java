@@ -21,6 +21,10 @@ public class Control {
         entities.add(e);
     }
 
+    public void removeEntity(Entity e) {
+        entities.remove(e);
+    }
+
     public void step() {
         for (Entity e : entities) {
             e.step(buffer);
