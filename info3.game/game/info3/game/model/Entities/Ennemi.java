@@ -38,11 +38,6 @@ public abstract class Ennemi extends Entity{
     }
 
     @Override
-    public void takeDamage(int damage) {
-        life-=damage;
-    }
-
-    @Override
     public boolean eval_got_power(Entity e,int i) {
         return e.getLife()>i;
     }

@@ -1,6 +1,5 @@
 package info3.game.model.Entities;
 
-
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,8 +13,6 @@ public class Player1 extends Entity{
 
     int life;
     
-    
-
     public Player1(IGrille g, int x, int y, Automate a) {
         super(g);
         life = 6;
@@ -41,11 +38,6 @@ public class Player1 extends Entity{
     @Override
     public void setLife(int life) {
         this.life = life;
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-        life-=damage;
     }
 
     @Override

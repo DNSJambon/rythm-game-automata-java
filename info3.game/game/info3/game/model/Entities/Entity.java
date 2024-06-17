@@ -47,15 +47,11 @@ public abstract class Entity {
     }
 
     public int getLife () {
-        return 0;
+        throw new UnsupportedOperationException("Unimplemented method 'getLife'");
     }
 
     public void setLife(int life) {
         throw new UnsupportedOperationException("Unimplemented method 'setLife'");
-    }
-
-    public void takeDamage(int damage) {
-        throw new UnsupportedOperationException("Unimplemented method 'takeDamage'");
     }
     
     public Direction RelativeToAbsolute(DirRelative d){
