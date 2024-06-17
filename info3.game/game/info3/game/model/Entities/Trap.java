@@ -2,6 +2,7 @@ package info3.game.model.Entities;
 
 import java.io.IOException;
 
+import info3.game.controller.Automate;
 import info3.game.controller.DirRelative;
 import info3.game.model.Grille;
 import info3.game.model.IGrille;
@@ -10,8 +11,10 @@ import info3.game.model.Category;
 
 public class Trap extends Entity{
 
-    public Trap(IGrille g, int x, int y) {
+    public Trap(IGrille g, int x, int y,Automate a) {
         super(g);
+        this.a=a;
+        this.g.getCell(x, y).setTrap(this);
         boolean activated = false;
          try {
             m_images = Grille.loadSprite("resources/trap.png", 1, 2);

@@ -95,8 +95,7 @@ public class Grille implements IGrille {
         //======placer les traps dans le labyrinthe======
         for (int i = 0; i < 1; i++) {
             c = randomCell_libre();
-            Trap t = new Trap(this, c.getCol(), c.getRow());
-            c.setTrap(t);
+            Trap t = new Trap(this, c.getCol(), c.getRow(),automates.get("Trap"));
         }
 
      
