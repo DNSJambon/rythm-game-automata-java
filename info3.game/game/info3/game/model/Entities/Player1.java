@@ -150,8 +150,8 @@ public class Player1 extends Entity{
     @Override
     public void tick(long elapsed) {
         if (in_hit) {
-            hit_anim +=1;
-            if (hit_anim > 70) {
+            hit_anim +=elapsed;
+            if (hit_anim > 35) {
                 hit_anim = 0;
                 image_hit = (image_hit + 1);
                 
