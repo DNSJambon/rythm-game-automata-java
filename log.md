@@ -1,4 +1,27 @@
-# <span style="color: #d54020 ">***13 juin 2024***</span>
+# <span style="color: #d54020 ">***17 juin 2024***</span>
+
+## <span style="color:green">**Game**</span>
+- Création et ajout au parseur de la classe hit (+ implémentation de do_hit fonctionnel) (Sami)
+- Création, test et ajout au parseur  de la classe Got (implémentation possible de  got(category) en plus de got(power) (got(power,int) abandonné car inutil)) (Matthieu)
+- Vie du joueur et des monstres prise en compte + Etats Morts et disparition ajouté (a regler pour joueur 1) (Arthur)
+- Ajout animation Hit (Mathis)
+- Creation et implémentation des méthodes de Key et Door permettant la fin du jeu (pas encore fonctionel)(Aymanne et Omar)
+- Ajout animation clé (Mathis)
+- Fix couleur minimap (Arthur)
+- Fix Bug état automates (Matthieu et Sami)
+
+## A faire mardi 18
+- Regler debut de la musique sur début des tick ( synchro jeu/musique)
+- Fin du jeu et Game Over
+- Creation et implémentation classes mage et Projectiles
+- Possibilité de sortir de la grille pour joueur 2 faisant crash le jeu (sans doute du aux automates)
+- implémentation de l'ajout des deux autres ennemi par le joueur 2 (+cooldown)
+- Petite Refonte graphique (Player et obstacles)
+- Gerer intéraction Clé et Porte
+- Creation Piège et implémentation
+
+
+# <span style="color: #d54020 ">***14 juin 2024***</span>
 
 ## A faire lundi 17
 - Hit / PV
@@ -6,8 +29,18 @@
 - Etats mort ()
 - Fin de partie
 
+## <span style="color:green">**Game**</span>
+- Ajout Musique
+- Ajout cooldown pour le joueur 2 sur apparition ennemi
+- Réorganisation de l'ordre des actions faite
+- Gérer le joueur2 (son automate, ses actions) fait
+- génèration des salles aléatoire sans chevauchement
+- file de config fait
+- Rassemblement  des automates dans le fichier automates.gal
+- Déplacement du joueur 1 fonctionnel
+- Closest fonctionnel (à revoir selon préférence)
 
-
+# <span style="color: #d54020 ">***13 juin 2024***</span>
 
 ## <span style="color:green">**Game**</span>
 - régler le déplacement du player1
