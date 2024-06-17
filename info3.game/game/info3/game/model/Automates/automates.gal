@@ -1,17 +1,32 @@
-Mazesolver(S1){
-*(S1):
+Mazesolver(Haut){
+*(Haut):
 | !Got(Power) ? Rest : ()
-| Cell(R, V) ? Move(R) : (S1)
-| Cell(F,O) & Cell(R, O) & Cell(L, O) ? Move(B) : (S1)
-| Cell(F,O) & Cell(R, O) ? Move(L) : (S1)
-| Cell(F,O) & Cell(L, O) ? Move(R) : (S1)
-| Cell(F,O) ? Move(L) : (S1)
-| True ? Move(F) : (S1)
+| Cell(F, V) ? Move(F) : (Droite)
+| Cell(F, #) ? Hit(F) : (Haut)
+| True ? Wait : (Droite)
+
+*(Droite):
+| !Got(Power) ? Rest : ()
+| Cell(R, V) ? Move(R) : (Bas)
+| Cell(R, #) ? Hit(R) : (Droite)
+| True ? Wait : (Bas)
+
+*(Bas):
+| !Got(Power) ? Rest : ()
+| Cell(B, V) ? Move(B) : (Gauche)
+| Cell(B, #) ? Hit(B) : (Bas)
+| True ? Wait : (Gauche)
+
+*(Gauche):
+| !Got(Power) ? Rest : ()
+| Cell(L, V) ? Move(L) : (Haut)
+| Cell(L, #) ? Hit(L) : (Gauche)
+| True ? Wait : (Haut)
 
 *()
 | True ? Wait : ()
-
 }
+
 
 Wall(S1){
 *(S1):
@@ -20,6 +35,7 @@ Wall(S1){
 
 Player1(S1){
 *(S1):
+| !Got(Power) ? Rest : ()
 | Key(m) & Cell(R, V) ? Move(R) : (S1)
 | Key(m) & Cell(R, E) ? Hit(R) : (S1)
 | Key(o) & Cell(F, V) ? Move(F) : (S1)
@@ -29,6 +45,8 @@ Player1(S1){
 | Key(k) & Cell(L, V) ? Move(L) : (S1)
 | Key(k) & Cell(L, E) ? Hit(L) : (S1)
 | True ? Wait : (S1)
+
+* ()
 }
 
 Suiveur(S1){

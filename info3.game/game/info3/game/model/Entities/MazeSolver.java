@@ -34,44 +34,7 @@ public class MazeSolver extends Ennemi {
         return cellType.MazeSolver;
     }
 
-    @Override
-    public boolean do_move(Entity e, DirRelative dir) {
-        //on change la direction du MazeSolver
-        direction = RelativeToAbsolute(dir);
-
-        //on change sa position
-        g.getCell(x, y).resetEntity();
-        switch (direction) {
-            case Nord:
-                if (y == 0) {
-                    return false;
-                }
-                y -= 1;
-                break;
-            case Est:
-                if (x == g.getCols() - 1) {
-                    return false;
-                }
-                x += 1;
-                break;
-            case Sud:
-                if (y == g.getRows() - 1) {
-                    return false;
-                }
-                y += 1;
-                break;
-            case Ouest:
-                if (x == 0) {
-                    return false;
-                }
-                x -= 1;
-                break;
-        }
-        g.getCell(x, y).setEntity(this);
-        in_movement = nb_frame_move;
-        return true;
-
-    }
+   
 
     @Override
     public boolean do_egg(Entity e) {
@@ -103,13 +66,5 @@ public class MazeSolver extends Ennemi {
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
 
-    @Override
-    public boolean do_hit(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
-    }
-    
 
-    
-    
 }

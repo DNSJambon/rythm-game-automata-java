@@ -11,7 +11,7 @@ import info3.game.model.*;
 
 public class Player1 extends Entity{
 
-    int life;
+    
     
     public Player1(IGrille g, int x, int y, Automate a) {
         super(g);
@@ -51,73 +51,8 @@ public class Player1 extends Entity{
         return Category.H;
     }
 
-    @Override
-    public boolean eval_cell(Entity e, DirRelative dir, char type) {
-        switch (dir) {
-            case Devant:
-                if (y == 0) {
-                    return type == Category.O;
-                }
-                return g.getCell(x, y - 1).getCategory() == type;
-            
-                case Gauche:
-                if (x == 0) {
-                    return type == Category.O;
-                }
-                return g.getCell(x-1, y).getCategory() ==type;
-        
-            
-            case Droite:
-                if (x == g.getCols()-1) {
-                    return type == Category.O;
-                }
-                return g.getCell(x+1, y).getCategory() ==type;
+    
 
-            case Derriere:
-                if (y == g.getRows()-1) {
-                    return type == Category.O;
-                }
-                return g.getCell(x, y+1).getCategory() ==type;
-
-            default:
-
-                return g.getCell(x, y).getCategory() ==type;
-        }
-    }
-
-    @Override
-    public boolean do_move(Entity e, DirRelative dir) {
-        in_movement = nb_frame_move;
-        switch (dir) {
-
-            case Devant:
-                this.y--;
-                g.getCell(this.x, this.y + 1).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Nord;
-                return true;
-            case Derriere:
-                this.y++;
-                g.getCell(this.x, this.y - 1).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Sud;
-                return true;
-            case Droite:
-                this.x++;
-                g.getCell(this.x - 1, this.y).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Est;
-                return true;
-            case Gauche:
-                this.x--;
-                g.getCell(this.x + 1, this.y).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Ouest;
-                return true;
-            default:
-                return false;
-        }
-    }
     
     @Override
     public boolean do_egg(Entity e) {
@@ -150,7 +85,6 @@ public class Player1 extends Entity{
     }
 
     
-
     @Override
     public boolean do_hit(Entity e, DirRelative dir) { 
             in_hit = true;
@@ -177,6 +111,7 @@ public class Player1 extends Entity{
         }
     
     }
+    
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
         if (in_movement != -1) {

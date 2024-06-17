@@ -15,8 +15,9 @@ public class Act {
     public void resolve() {
         if (mode != null) {
             if (mode.getTrans(owner) != null) {
+                Transitions Trans=mode.getTrans(owner);
                 mode.getTrans(owner).GetAct().exec(owner);
-                owner.etat_courant=mode.getTrans(owner).GetEnd();
+                owner.etat_courant=Trans.GetEnd();
                 
             }
         }

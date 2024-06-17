@@ -81,38 +81,70 @@ public abstract class Entity {
     
     
     //abstract boolean eval(...);
-    public boolean eval_cell(Entity e, DirRelative dir, char t) {
-        if (dir == DirRelative.soi) {
-            return g.getCell(this.x, this.y).getCategory() == t;
-        }
-        
-        Direction d = RelativeToAbsolute(dir);
-
-        switch (d) {
-            case Nord:
-                if (this.y == 0)
-                    //On considère que les bords de la grille sont des obstacles
-                    return Category.O == t;
-                return g.getCell(this.x, this.y-1).getCategory() == t;
-
-            case Est:
-                if (this.x == g.getCols()-1)
-                    return Category.O == t;
-                return g.getCell(this.x + 1, this.y).getCategory() == t;
+   public boolean eval_cell(Entity e, DirRelative dir, char type) {
+        switch (dir) {
+            case Devant:
+                if (y == 0) {
+                    return type == Category.O;
+                }
+                return g.getCell(x, y - 1).getCategory() == type;
             
-            case Sud:
-                if (this.y == g.getRows()-1)
-                    return Category.O == t;
-                return g.getCell(this.x, this.y + 1).getCategory() == t;
-            
-            case Ouest:
-                if (this.x == 0)
-                    return Category.O == t;
-                return g.getCell(this.x - 1, this.y).getCategory() == t;
-        }
+            case Gauche:
+                if (x == 0) {
+                    return type == Category.O;
+                }
+                return g.getCell(x-1, y).getCategory() ==type;
         
-        return false;
+            
+            case Droite:
+                if (x == g.getCols()-1) {
+                    return type == Category.O;
+                }
+                return g.getCell(x+1, y).getCategory() ==type;
 
+            case Derriere:
+                if (y == g.getRows()-1) {
+                    return type == Category.O;
+                }
+                return g.getCell(x, y+1).getCategory() ==type;
+
+            default:
+
+                return g.getCell(x, y).getCategory() ==type;
+        }
+    }
+    
+     public boolean do_move(Entity e, DirRelative dir) {
+        in_movement = nb_frame_move;
+        switch (dir) {
+
+            case Devant:
+                this.y--;
+                g.getCell(this.x, this.y + 1).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                direction = Direction.Nord;
+                return true;
+            case Derriere:
+                this.y++;
+                g.getCell(this.x, this.y - 1).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                direction = Direction.Sud;
+                return true;
+            case Droite:
+                this.x++;
+                g.getCell(this.x - 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                direction = Direction.Est;
+                return true;
+            case Gauche:
+                this.x--;
+                g.getCell(this.x + 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                direction = Direction.Ouest;
+                return true;
+            default:
+                return false;
+        }
     }
 
     public boolean eval_dir(DirRelative dir) {
@@ -133,15 +165,32 @@ public abstract class Entity {
         return e.getLife()>i;
     }
 
-    //abstract boolean do(...);
-    public abstract boolean do_move(Entity e, DirRelative dir);
     public abstract boolean do_egg(Entity e);
     public abstract boolean do_pick(Entity e);
     public abstract boolean do_pop(Entity e);
     public abstract boolean do_wizz(Entity e);
     public abstract boolean do_turn(Entity e, DirRelative dir);
 
-    public abstract boolean do_hit(Entity e, DirRelative dir);
+    public boolean do_hit(Entity e, DirRelative dir) { 
+            switch (dir) {
+
+            case Devant:
+                g.getCell(this.x, this.y -1).GetEntity().get_hit(1);
+                return true;
+            case Derriere:
+                g.getCell(this.x, this.y + 1).GetEntity().get_hit(1);
+                return true;
+            case Droite:
+                g.getCell(this.x + 1, this.y).GetEntity().get_hit(1);
+                return true;
+            case Gauche:
+                g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
+                return true;
+            default:   
+                return false;
+        }
+    
+    }
     
     
     public boolean do_die(Entity e){

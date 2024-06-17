@@ -28,16 +28,5 @@ public abstract class Ennemi extends Entity{
         return Category.E;
     }
 
-    public boolean Do_hit(Entity E, DirRelative dir) {
-        if (E.eval_cell(E, dir, 'H')){
-            g.getMainEntity().get_hit(1);
-            return true;
-        }
-        return false;        
-    }
-    public void get_hit(int damage) {
-        this.life -= damage;
-        
-    }
 
 }
