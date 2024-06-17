@@ -11,11 +11,10 @@ import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
 
-public class Slime extends Entity {
-    int life;
+public class Slime extends Ennemi {
 
-    public Slime(IGrille g, int x, int y, Automate a) {
-        super(g);
+    public Slime(Grille g, int x, int y, Automate a) {
+        super(g, x, y);
         etat_courant = a.getState();
         this.life=1;
         this.a = a;

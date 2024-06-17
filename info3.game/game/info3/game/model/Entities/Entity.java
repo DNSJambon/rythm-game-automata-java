@@ -114,22 +114,22 @@ public abstract class Entity {
         throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
     }
 
+    public boolean eval_got(Entity e,Category cat) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eval_got'");
+    }
+
+    public boolean eval_got_power(Entity e,int i) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eval_got_power'");
+    }
+
     //abstract boolean do(...);
     public abstract boolean do_move(Entity e, DirRelative dir);
-
-    public abstract boolean do_egg(Entity e
-    
-    
-    
-    
-    
-    
-    
-    );
+    public abstract boolean do_egg(Entity e);
     public abstract boolean do_pick(Entity e);
     public abstract boolean do_pop(Entity e);
     public abstract boolean do_wizz(Entity e);
-
     public abstract boolean do_turn(Entity e, DirRelative dir);
 
     public boolean do_wait(Entity e) {

@@ -19,6 +19,7 @@ public class Suiveur extends Ennemi{
     public Suiveur(Grille g, int x, int y,Automate a) {
         super(g, x, y);
         etat_courant = a.getState();
+        life = 1;
         direction = Direction.Est;;
         this.x = x;
         this.y = y;
