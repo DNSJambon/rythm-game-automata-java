@@ -11,12 +11,10 @@ import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
 
-public class Squelette extends Entity {
-    int life;
+public class Squelette extends Ennemi {
 
-
-    public Squelette(IGrille g, int x, int y, Automate a) {
-        super(g);
+    public Squelette(Grille g, int x, int y, Automate a) {
+        super(g, x, y);
         etat_courant = a.getState();
         life = 1;
         this.a = a;
@@ -119,6 +117,12 @@ public class Squelette extends Entity {
     public boolean do_wizz(Entity e) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
+    }
+
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
     }
 
     

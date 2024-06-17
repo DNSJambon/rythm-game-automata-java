@@ -79,7 +79,7 @@ public class Parser {
 			new AutPrinter(System.out, ast);
     }
   
-    if ( option("-txt", args) ) {
+    if ( option("-src", args) ) {
       Ast2Gal printer = new Ast2Gal();
       ast.accept(printer);
       System.out.println("\n// Exporting the reformatted SRC of the parsed automata in .txt");
@@ -122,21 +122,23 @@ TOKEN: {
 
 TOKEN: { 
   < ACTION: 
-    "Egg" 
+    "Add"
+  | "Egg" 
   | "Explode" 
   | "Get"  
   | "Hit" 
   | "Jump" 
   | "Move" 
   | "Pick" 
-  | "Pop"  
   | "Protect"
   | "Rest" 
   | "Store" 
   | "Throw" 
   | "Turn" 
-  | "Wizz" 
   | "Wait"
+  // action with no semantics 
+  | "Pop"
+  | "Wizz" 
   > 
 }
 
@@ -176,20 +178,28 @@ TOKEN: {
 
 TOKEN: { 
   < CATEGORY: 
-    "Adversary" | "A"  
+    "Adversary" | "A"   
   | "Clue"      | "C" 
-                | "D"  
+  | "Danger"    | "D"  
   | "Gate"      | "G"  
-  | "Jumpable"  | "J" 
-                | "M"  
-  | "Obstacle"  | "O"
-  | "Pickable"  | "P"
-  | "Team"      | "T"  
-  | "Void"      | "V"  
+  | "Icon"      | "I" 
+  | "Jumpable"  | "J"  
+  | "Killable"  | "K"   
+  | "Moveable"  | "M" 
+  | "Obstacle"  | "O"  
+  | "Pickable"  | "P" 
+  | "Team"      | "T"
+  | "Util"      | "U" 
+  | "Void"      | "V" 
   | "PlayerT"   | "@" 
   | "PlayerA"   | "#"
   | "Power"     
-  | "Stuff"     
+  | "Stuff"    
+  // categories with no semantics
+  | "Qube"      | "Q" 
+  | "Xics"      | "X" 
+  | "Ygre"      | "Y" 
+  | "Zedd"      | "Z"
   > 
 }
 
@@ -230,7 +240,7 @@ TOKEN:
 { < ID: <CAPITAL> (<LETTER>|<DIGIT>|<UNDERSCORE>)* > }
 
 TOKEN:
-{ < INTEGER: (<DIGIT>)+ > }
+{ < INTEGER: ("-")? (<DIGIT>)+ > }
    
 
 

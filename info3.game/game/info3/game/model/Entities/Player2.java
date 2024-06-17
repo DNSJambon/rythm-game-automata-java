@@ -167,6 +167,12 @@ public class Player2 extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
     }
 
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
+    }
+
    
     
 

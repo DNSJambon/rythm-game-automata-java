@@ -60,7 +60,7 @@ public class Parser implements ParserConstants {
                         new AutPrinter(System.out, ast);
     }
 
-    if ( option("-txt", args) ) {
+    if ( option("-src", args) ) {
       Ast2Gal printer = new Ast2Gal();
       ast.accept(printer);
       System.out.println("\n// Exporting the reformatted SRC of the parsed automata in .txt");
