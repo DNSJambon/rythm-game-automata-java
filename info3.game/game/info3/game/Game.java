@@ -58,8 +58,6 @@ public class Game {
 		// in an Model-View-Controller pattern (MVC)
 		m_control = new Control();
 
-
-		
 		m_grille = config("game/info3/game/config.json");
 		// creating a listener for all the events
 		// from the game canvas, that would be
@@ -70,11 +68,33 @@ public class Game {
 		m_canvas = new GameCanvas(m_listener);
 
 		System.out.println("  - creating frame...");
-		Dimension d = new Dimension(1343, 1042);
+		Dimension d = new Dimension(1203, 902);
 		m_frame = m_canvas.createFrame(d);
 
 		System.out.println("  - setting up the frame...");
 		setupFrame();
+	}
+
+	/*
+	 * Then it lays out the frame, with a border layout, adding a label to the north
+	 * and the game canvas to the center.
+	 */
+	private void setupFrame() {
+
+		m_frame.setTitle("Game");
+		m_frame.setLayout(new BorderLayout());
+
+		m_frame.add(m_canvas, BorderLayout.CENTER);
+
+		m_text = new JLabel();
+		m_text.setText("Tick: 0ms FPS=0");
+		m_frame.add(m_text, BorderLayout.NORTH);
+
+		// center the window on the screen
+		m_frame.setLocationRelativeTo(null);
+
+		// make the vindow visible
+		m_frame.setVisible(true);
 	}
 
 	//parse the json file to get the configuration of the game
@@ -151,27 +171,7 @@ public class Game {
         }
         return null;
     }
-	/*
-	 * Then it lays out the frame, with a border layout, adding a label to the north
-	 * and the game canvas to the center.
-	 */
-	private void setupFrame() {
-
-		m_frame.setTitle("Game");
-		m_frame.setLayout(new BorderLayout());
-
-		m_frame.add(m_canvas, BorderLayout.CENTER);
-
-		m_text = new JLabel();
-		m_text.setText("Tick: 0ms FPS=0");
-		m_frame.add(m_text, BorderLayout.NORTH);
-
-		// center the window on the screen
-		m_frame.setLocationRelativeTo(null);
-
-		// make the vindow visible
-		m_frame.setVisible(true);
-	}
+	
 
 	/*
 	 * ================================================================ All the
@@ -338,7 +338,7 @@ public class Game {
 		g.fillRect(0, 0, width, height);
 
 		// paint
-		
+		// System.out.println(width + " " + height);
 		m_grille.paint(g, width - 340, height);
 		
 	}
