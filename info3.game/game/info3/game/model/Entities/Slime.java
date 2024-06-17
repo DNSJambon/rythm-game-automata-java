@@ -24,7 +24,7 @@ public class Slime extends Ennemi {
         this.y = y;
 
         try {
-            m_images = Grille.loadSprite("resources/faucheuse.png", 1, 4); 
+            m_images = Grille.loadSprite("resources/slime.png", 1, 4); 
         } catch (IOException e) {
             e.printStackTrace();
         }

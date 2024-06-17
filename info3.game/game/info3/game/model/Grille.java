@@ -28,6 +28,7 @@ import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
 import info3.game.model.Entities.Player2;
 import info3.game.model.Entities.Slime;
+import info3.game.model.Entities.Squelette;
 
 
 public class Grille implements IGrille {
@@ -78,18 +79,22 @@ public class Grille implements IGrille {
 
         
 
+
+        //======placer le joueur 1 dans le labyrinthe======
+        c = randomCell_libre();
+        Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
+
         //======placer le joueur 2 dans le labyrinthe====== 
 
         c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
 
-        //======placer le joueur 1 dans le labyrinthe======
-        c = randomCell_libre();
-        Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
-
         place_monstre(10);
         c = randomCell_libre();
+
+     
+
         //main_Entity;
         main_Entity = p1;
         x_main_old = main_Entity.getX();
