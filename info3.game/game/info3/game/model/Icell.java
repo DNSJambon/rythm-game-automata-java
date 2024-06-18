@@ -25,5 +25,7 @@ public interface Icell {
 
     public void setP2(Entity e);
 
+    
+
 
 }

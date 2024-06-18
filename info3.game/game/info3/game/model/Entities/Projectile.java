@@ -122,6 +122,7 @@ public class Projectile extends Ennemi{
 
    @Override
     public boolean do_move(Entity e, DirRelative dir) {
+        in_movement = nb_frame_move;
         switch (direction) {
             case Nord:
                 this.y--;
@@ -178,8 +179,151 @@ public class Projectile extends Ennemi{
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
 
-    
-
-    
-
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        switch (direction) {
+            case Nord:
+                switch (dir) {
+                    case Devant:
+                        if (g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity() != null) {
+                            g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
+                                    g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
+                                            - 1);
+                            return true;
+                        }
+                        return false;
+                    case Derriere:
+                        if (g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity() != null) {
+                            g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity()
+                                    .setLife(g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity().getLife() - 1);
+                            return true;
+                        }
+                        return false;
+                    case Droite:
+                        if (g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity() != null) {
+                            g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity()
+                                    .setLife(g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity().getLife() - 1);
+                            return true;
+                        }
+                        return false;
+                    case Gauche:
+                        if (g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity() != null) {
+                            g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().setLife(
+                                    g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().getLife()
+                                            - 1);
+                            return true;
+                        }
+                        return false;
+                    default:
+                        return false;
+                }
+            case Sud:
+                switch (dir) {
+                    case Devant:
+                        if (g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity() != null) {
+                            g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity()
+                                    .setLife(g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity().getLife() - 1);
+                            return true;
+                        }
+                        return false;
+                    case Derriere:
+                        if (g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity() != null) {
+                            g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
+                                    g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
+                                            - 1);
+                            return true;
+                        }
+                        return false;
+                    case Droite:
+                        if (g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity() != null) {
+                            g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().setLife(
+                                    g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().getLife()
+                                            - 1);
+                            return true;
+                        }
+                        return false;
+                    case Gauche:
+                        if (g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity() != null) {
+                            g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity()
+                                    .setLife(g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity().getLife() - 1);
+                            return true;
+                        }
+                        return false;
+                    default:
+                        return false;
+                }
+            case Est:
+                switch (dir) {
+                    case Devant:
+                        if (g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity() != null) {
+                            g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity()
+                                    .setLife(g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity().getLife() - 1);
+                            return true;
+                        }
+                        return false;
+                    case Derriere:
+                        if (g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity() != null) {
+                            g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().setLife(
+                                    g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().getLife()
+                                            - 1);
+                            return true;
+                        }
+                        return false;
+                    case Droite:
+                        if (g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity() != null) {
+                            g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity()
+                                    .setLife(g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity().getLife() - 1);
+                            return true;
+                        }
+                        return false;
+                    case Gauche:
+                        if (g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity() != null) {
+                            g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
+                                    g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
+                                            - 1);
+                            return true;
+                        }
+                        return false;
+                    default:
+                        return false;
+                }
+            case Ouest:
+                switch (dir) {
+                    case Devant:
+                        if (g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity() != null) {
+                            g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().setLife(
+                                    g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().getLife()
+                                            - 1);
+                            return true;
+                        }
+                        return false;
+                    case Derriere:
+                        if (g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity() != null) {
+                            g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity()
+                                    .setLife(g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity().getLife() - 1);
+                            return true;
+                        }
+                        return false;
+                    case Droite:
+                        if (g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity() != null) {
+                            g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
+                                    g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
+                                            - 1);
+                            return true;
+                        }
+                        return false;
+                    case Gauche:
+                        if (g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity() != null) {
+                            g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity()
+                                    .setLife(g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity().getLife() - 1);
+                            return true;
+                        }
+                        return false;
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
+    }
 }
