@@ -31,7 +31,7 @@ public class Trap extends Entity{
 
     @Override
     public char getCategory() {
-        return Category.T;
+        return Category.V;
     }
 
     @Override
