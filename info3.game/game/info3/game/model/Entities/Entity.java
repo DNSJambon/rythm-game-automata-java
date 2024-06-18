@@ -107,11 +107,8 @@ public abstract class Entity {
                     return type == Category.O;
                 }
                 return g.getCell(x, y+1).getCategory() ==type;
-
-            case soi:
-                return g.getCell(x, y).getCategory() ==type;
             default :
-                return false;
+                return g.getCell(x, y).getCategory() == type;
         }
     }
     

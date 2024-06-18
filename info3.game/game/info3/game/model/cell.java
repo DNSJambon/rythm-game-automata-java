@@ -65,7 +65,7 @@ public class cell implements Icell {
 
     public void setTrap(Entity e) {
         this.e[0] = e;
-        vide = 0;
+        
     }
 
     public void setEntity(Entity e) {
