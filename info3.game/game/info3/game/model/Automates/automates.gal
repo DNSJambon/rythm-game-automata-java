@@ -110,5 +110,6 @@ Trap(Init){
 | True ? Wait : (Init)
 * (Activate):
 | Cell(H, #) ? Hit(H) : (Activate)
+| True ? Wait : (Init)
 }
 
