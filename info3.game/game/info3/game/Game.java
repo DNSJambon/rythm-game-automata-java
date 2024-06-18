@@ -30,6 +30,7 @@ public class Game {
 
 	static Game game;
 	boolean Jump = false;
+
 	public int bpm;
 
 	public static void main(String args[]) throws Exception {

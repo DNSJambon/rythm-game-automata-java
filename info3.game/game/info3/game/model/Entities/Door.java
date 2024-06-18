@@ -1,6 +1,7 @@
 package info3.game.model.Entities;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import info3.game.controller.Automate;
@@ -10,12 +11,12 @@ import info3.game.model.Category;
 import info3.game.model.Grille;
 import info3.game.model.IGrille;
 import info3.game.model.cellType;
-import java.awt.image.BufferedImage;
 
 public class Door extends Entity {
-    Direction DirClosest;
     Key k;
     boolean opened;
+    BufferedImage closedImage;
+    BufferedImage openedImage;
 
     public Door(IGrille g, Automate a, int x, int y, Key k) {
         super(g);
@@ -26,11 +27,16 @@ public class Door extends Entity {
         g.getCell(x, y).setEntity(this);
         opened = false;
         try {
-            m_images = Grille.loadSprite("resources/door.png", 1, 1);
+            BufferedImage[] images = Grille.loadSprite("resources/door.png", 1, 2);
+            if (images != null && images.length == 2) {
+                closedImage = images[1];  // Right image is closed
+                openedImage = images[0];  // Left image is open
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public cellType getType() {
         return cellType.Door;
@@ -53,36 +59,21 @@ public class Door extends Entity {
 
     @Override
     public boolean do_pick(Entity e) {
-        if (k.isPicked()) {
-            opened = true;
-            return true;
-        }
-        return false;
+        open(); // Check if the key is picked and open the door
+        return opened;
     }
 
     @Override
     public boolean eval_closest(char c, Direction dir) {
-        int xverif = (this.g.getMainEntity().getX()) - this.x;
-        int yverif = this.g.getMainEntity().getY() - this.y;
-        if (xverif == 0) {
-            xverif = g.getCols() + 1;
-        } else if (yverif == 0) {
-            yverif = g.getRows() + 1;
-        }
-        if (Math.abs(xverif) <= Math.abs(yverif)) {
-            if (xverif > 0) {
-                DirClosest = Direction.Est;
-            } else {
-                DirClosest = Direction.Ouest;
-            }
-        } else if (Math.abs(xverif) > Math.abs(yverif)) {
-            if (yverif > 0) {
-                DirClosest = Direction.Sud;
-            } else {
-                DirClosest = Direction.Nord;
+        for (int i = 0; i < g.getRows(); i++) {
+            for (int j = 0; j < g.getCols(); j++) {
+                Entity entity = g.getCell(i, j).GetEntity();
+                if (entity != null && entity.getCategory() == c) {
+                    return true;
+                }
             }
         }
-        return DirClosest == dir;
+        return false;
     }
 
     @Override
@@ -93,11 +84,12 @@ public class Door extends Entity {
     @Override
     public boolean do_wizz(Entity e) {
         if (opened) {
-            // g.getCell(x, y).resetEntity();
+            g.getCell(x, y).resetEntity();
             return true;
         }
         return false;
     }
+
     @Override
     public boolean do_turn(Entity e, DirRelative dir) {
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
@@ -107,15 +99,28 @@ public class Door extends Entity {
     public boolean do_hit(Entity e, DirRelative dir) {
         throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
     }
-    // public void paint(Graphics g) {
-    //     if (opened) {
-    //         if (m_images[1] != null) {
-    //             g.drawImage(m_images[1], x, y, null);
-    //         }
-    //     } else {
-    //         if (m_images[0] != null) {
-    //             g.drawImage(m_images[0], x, y, null);
-    //         }
-    //     }
-    // }
+
+    public void open() {
+        if (k.isPicked()) {
+            opened = true;
+        }
+    }
+
+    @Override
+    public void paint(Graphics graphics, int x, int y, int width, int height) {
+        if (opened) {
+            if (openedImage != null) {
+                graphics.drawImage(openedImage, x, y, width, height, null);
+            }
+        } else {
+            if (closedImage != null) {
+                graphics.drawImage(closedImage, x, y, width, height, null);
+            }
+        }
+    }
+
+    @Override
+    public void tick(long elapsed) {
+        // Doors do not animate, so this method can be left empty or minimal
+    }
 }

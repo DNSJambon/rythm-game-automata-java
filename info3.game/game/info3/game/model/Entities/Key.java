@@ -22,7 +22,6 @@ public class Key extends Entity {
         this.a = a;
         g.getCell(x, y).setEntity(this);
         picked = false;
-
         try {
             m_images = Grille.loadSprite("resources/clef.png", 1, 6);
         } catch (IOException e) {
