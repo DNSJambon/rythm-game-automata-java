@@ -23,7 +23,7 @@ public class Projectile extends Ennemi{
         this.y = y;
         g.getCell(x, y).setEntity(this);
         try {
-            m_images = Grille.loadSprite("resources/sourichauve.png", 1, 4);
+            m_images = Grille.loadSprite("resources/projectile.png", 1, 4);
            
         } catch (IOException e) {
             e.printStackTrace();
