@@ -40,6 +40,86 @@ public class Projectile extends Ennemi{
         return Category.T;
     }
 
+    @Override
+    public boolean eval_cell(Entity e, DirRelative dir, char t) {
+        if (dir==DirRelative.soi){
+            return g.getCell(this.x, this.y).getCategory() == t;
+        }
+        switch (direction) {
+            case Nord:
+                switch (dir) {
+                    case Devant:
+                        return g.getCell(this.x,(this.y + g.getRows() -1)%g.getRows()).getCategory()==t;   
+                    case Derriere:
+                        return g.getCell(this.x, (this.y + 1) % g.getRows()).getCategory() == t;
+                    case Droite:
+                        return g.getCell((this.x+1)%g.getCols(), this.y).getCategory() == t;
+                    case Gauche:
+                        return g.getCell((this.x + g.getCols() -1) % g.getCols(), this.y).getCategory() == t;
+                    default:
+                        return false;
+                }
+                
+            case Sud:
+                switch (dir) {
+                    case Devant:
+                        return g.getCell(this.x, (this.y + 1) % g.getRows()).getCategory() == t;
+                        
+                    case Derriere: 
+                        return g.getCell(this.x, (this.y  + g.getRows() - 1) % g.getRows()).getCategory() == t;
+                        
+                        
+                    case Droite:
+                        return g.getCell((this.x+g.getCols() - 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    case Gauche:
+                        return g.getCell((this.x + 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    default:
+                        return false;
+                }
+              
+            case Est:
+                switch (dir) {
+                    case Devant:
+                        return g.getCell((this.x + 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    case Derriere:
+                        return g.getCell((this.x +g.getCols()- 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    case Droite:
+                        return g.getCell(this.x, (this.y + 1) % g.getRows()).getCategory() == t;
+                        
+                    case Gauche:
+                        return g.getCell(this.x, (this.y + g.getRows()  - 1) % g.getRows()).getCategory() == t;
+                        
+                    default:
+                        return false;
+                }
+              
+            case Ouest:
+                switch (dir) {
+                    case Devant:
+
+                        return g.getCell((this.x +g.getCols()- 1) % g.getCols(), this.y).getCategory() == t;
+                    case Derriere:
+                        return g.getCell((this.x + 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    case Droite:
+
+                        return g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).getCategory() == t;
+                    case Gauche:
+                        return g.getCell(this.x, (this.y + 1) % g.getRows()).getCategory() == t;
+                        
+                    default:
+                        return false;
+                }
+                
+            default:
+                return false;
+        }
+    }
+
    @Override
     public boolean do_move(Entity e, DirRelative dir) {
         switch (direction) {

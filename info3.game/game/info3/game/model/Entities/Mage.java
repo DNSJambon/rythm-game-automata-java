@@ -53,36 +53,83 @@ public class Mage extends Ennemi {
         
     }
     
-public boolean eval_cell(Entity e, DirRelative dir, char type) {
-        switch (dir) {
-            case Devant:
-                if (y == 0) {
-                    return type == Category.O;
+    @Override
+    public boolean eval_cell(Entity e, DirRelative dir, char t) {
+        if (dir==DirRelative.soi){
+            return g.getCell(this.x, this.y).getCategory() == t;
+        }
+        switch (direction) {
+            case Nord:
+                switch (dir) {
+                    case Devant:
+                        return g.getCell(this.x,(this.y + g.getRows() -1)%g.getRows()).getCategory()==t;   
+                    case Derriere:
+                        return g.getCell(this.x, (this.y + 1) % g.getRows()).getCategory() == t;
+                    case Droite:
+                        return g.getCell((this.x+1)%g.getCols(), this.y).getCategory() == t;
+                    case Gauche:
+                        return g.getCell((this.x + g.getCols() -1) % g.getCols(), this.y).getCategory() == t;
+                    default:
+                        return false;
                 }
-                return g.getCell(x, y - 1).getCategory() == type;
-            
-            case Gauche:
-                if (x == 0) {
-                    return type == Category.O;
+                
+            case Sud:
+                switch (dir) {
+                    case Devant:
+                        return g.getCell(this.x, (this.y + 1) % g.getRows()).getCategory() == t;
+                        
+                    case Derriere: 
+                        return g.getCell(this.x, (this.y  + g.getRows() - 1) % g.getRows()).getCategory() == t;
+                        
+                        
+                    case Droite:
+                        return g.getCell((this.x+g.getCols() - 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    case Gauche:
+                        return g.getCell((this.x + 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    default:
+                        return false;
                 }
-                return g.getCell(x-1, y).getCategory() ==type;
-        
-            
-            case Droite:
-                if (x == g.getCols()-1) {
-                    return type == Category.O;
+              
+            case Est:
+                switch (dir) {
+                    case Devant:
+                        return g.getCell((this.x + 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    case Derriere:
+                        return g.getCell((this.x +g.getCols()- 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    case Droite:
+                        return g.getCell(this.x, (this.y + 1) % g.getRows()).getCategory() == t;
+                        
+                    case Gauche:
+                        return g.getCell(this.x, (this.y + g.getRows()  - 1) % g.getRows()).getCategory() == t;
+                        
+                    default:
+                        return false;
                 }
-                return g.getCell(x+1, y).getCategory() ==type;
+              
+            case Ouest:
+                switch (dir) {
+                    case Devant:
 
-            case Derriere:
-                if (y == g.getRows()-1) {
-                    return type == Category.O;
-                }
-                return g.getCell(x, y+1).getCategory() ==type;
+                        return g.getCell((this.x +g.getCols()- 1) % g.getCols(), this.y).getCategory() == t;
+                    case Derriere:
+                        return g.getCell((this.x + 1) % g.getCols(), this.y).getCategory() == t;
+                        
+                    case Droite:
 
+                        return g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).getCategory() == t;
+                    case Gauche:
+                        return g.getCell(this.x, (this.y + 1) % g.getRows()).getCategory() == t;
+                        
+                    default:
+                        return false;
+                }
+                
             default:
-
-                return g.getCell(x, y).getCategory() ==type;
+                return false;
         }
     }
 
