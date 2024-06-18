@@ -519,9 +519,18 @@ public class Grille implements IGrille {
         g.fillRect(x, y, width, height);
 
         //affichage cooldown
-        int cooldown = ((Player2) joueur2).getCooldown_egg();
+        int cooldown_egg = ((Player2) joueur2).getCooldown_egg();
         g.setColor(Color.PINK);
-        g.fillRect(x, y, width / 3, height / 3 * (3 - cooldown));
+
+        int cooldown_wizz =  ((Player2) joueur2).getCooldown_wizz();
+        g.setColor(Color.BLUE);
+        g.fillRect(x+width / 3, y, width / 3, height / 5 * (5 - cooldown_wizz));
+
+        int cooldown_pop = ((Player2) joueur2).getCooldown_pop();
+        g.setColor(Color.MAGENTA);
+        g.fillRect(x, y, width / 3, height / 10 * (10 - cooldown_pop));
+        
+
 
     }
 
