@@ -50,26 +50,26 @@ public class Player2 extends Entity {
 
             case Devant:
                 if (y == 0) {
-                    return type == Category.O;
+                    return false;
                 }
                 return g.getCell(x, y - 1).getCategory() == type;
             
                 case Gauche:
                 if (x == 0) {
-                    return type == Category.O;
+                    return false;
                 }
                 return g.getCell(x-1, y).getCategory() ==type;
         
             
             case Droite:
                 if (x == g.getCols()-1) {
-                    return type == Category.O;
+                    return false;
                 }
                 return g.getCell(x+1, y).getCategory() ==type;
 
             case Derriere:
                 if (y == g.getRows()-1) {
-                    return type == Category.O;
+                    return false;
                 }
                 return g.getCell(x, y+1).getCategory() ==type;
 
@@ -89,29 +89,45 @@ public class Player2 extends Entity {
             cooldown_wizz--;
         switch (dir) {
             case Devant:
+                if (y == 0) {
+                    return false;
+                }
                 this.y--;
                 g.getCell(this.x,this.y+1).resetP2();
                 g.getCell(this.x,this.y).setP2(this);
                 direction = Direction.Nord;
                 return true;
+            
             case Derriere:
+                if (y == g.getRows()-1) {
+                    return false;
+                }
                 this.y++;
                 g.getCell(this.x,this.y-1).resetP2();
                 g.getCell(this.x,this.y).setP2(this);
                 direction = Direction.Sud;
                 return true;
+            
             case Droite:
+                if (x == g.getCols()-1) {
+                    return false;
+                }
                 this.x++;
                 g.getCell(this.x-1,this.y).resetP2();
                 g.getCell(this.x,this.y).setP2(this);
                 direction = Direction.Est;
                 return true;
+            
             case Gauche:
+                if (x == 0) {
+                    return false;
+                }
                 this.x--;
                 g.getCell(this.x+1,this.y).resetP2();
                 g.getCell(this.x,this.y).setP2(this);
                 direction = Direction.Ouest;
                 return true;
+            
             default:
                 return false;
         }

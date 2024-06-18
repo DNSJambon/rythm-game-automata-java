@@ -38,6 +38,14 @@
         {
             "name" : "Trap",
             "automate" : "Trap"
+        },
+        {
+            "name" : "Key",
+            "automate" : "Key"
+        },
+        {       
+            "name" : "Door",
+            "automate" : "Door"
         }
 
     ]
