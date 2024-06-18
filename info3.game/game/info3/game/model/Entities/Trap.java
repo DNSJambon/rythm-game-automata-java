@@ -12,14 +12,14 @@ import info3.game.model.Category;
 
 
 public class Trap extends Entity{
-    
+
     boolean activated;
 
     public Trap(IGrille g, int x, int y,Automate a) {
         super(g);
         this.a=a;
         this.g.getCell(x, y).setTrap(this);
-        this.activated=true;
+        this.activated=false;
         
          try {
             m_images = Grille.loadSprite("resources/trap.png", 1, 3);
