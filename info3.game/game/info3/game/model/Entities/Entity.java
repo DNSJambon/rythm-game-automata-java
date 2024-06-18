@@ -216,7 +216,8 @@ public abstract class Entity {
     }
     
     public void get_hit(int damage){
-        this.life-=damage;
+        this.life -= damage;
+        got_hit = 1;
     }
 
 
@@ -226,6 +227,7 @@ public abstract class Entity {
     
     
     //variables pour l'animation de deplacement
+    int got_hit = 0;
     int in_movement = -1;
     int nb_frame_move = 10;
     float[] slide = {1.0f, 0.7f, 0.36f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f};
@@ -244,8 +246,12 @@ public abstract class Entity {
         }
             
 
-        graphics.drawImage(m_images[image_index], x, y, width, height, null);
-
+        graphics.drawImage(m_images[image_index+ got_hit], x, y, width, height, null);
+        if (got_hit < 4 && got_hit != 0)
+            got_hit++;
+        else
+            got_hit = 0;
+        
     }
 
     
