@@ -45,6 +45,7 @@ public class Game {
 
 	JFrame m_frame;
 	JLabel m_text;
+	JLabel m_calib;
 	GameCanvas m_canvas;
     CanvasListener m_listener;
 	Grille m_grille;
@@ -54,6 +55,7 @@ public class Game {
 	//Sound m_music;
 
 	Game() throws Exception {
+		
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
 		m_control = new Control();
@@ -73,6 +75,7 @@ public class Game {
 
 		System.out.println("  - setting up the frame...");
 		setupFrame();
+		    
 	}
 
 	/*
@@ -89,6 +92,8 @@ public class Game {
 		m_text = new JLabel();
 		m_text.setText("Tick: 0ms FPS=0");
 		m_frame.add(m_text, BorderLayout.NORTH);
+
+
 
 		// center the window on the screen
 		m_frame.setLocationRelativeTo(null);
@@ -163,14 +168,17 @@ public class Game {
 
     }
 
-    public Automate getAutomate(String name, List<Automate> automates) {
-        for (Automate a : automates) {
-            if (a.name.equals(name)) {
-                return a;
-            }
-        }
-        return null;
-    }
+	public Automate getAutomate(String name, List<Automate> automates) {
+		for (Automate a : automates) {
+			if (a.name.equals(name)) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
+
+	
 	
 
 	/*
@@ -180,46 +188,14 @@ public class Game {
 	 * ==============================================================
 	 */
 
-	/*
-	 * Called from the GameCanvas listener when the frame
-	 */
-	String m_musicName;
-
-	void loadMusic() {
-		m_musicName = m_musicNames[m_musicIndex];
-		String filename = "resources/" + m_musicName + ".ogg";
-		m_musicIndex = (m_musicIndex + 1) % m_musicNames.length;
-		try {
-			RandomAccessFile file = new RandomAccessFile(filename, "r");
-			RandomFileInputStream fis = new RandomFileInputStream(file);
-			m_canvas.playMusic(fis, 0, 1.0F);
-		} catch (Throwable th) {
-			th.printStackTrace(System.err);
-			System.exit(-1);
-		}
-	}
 	
-	void playBeat() {
-		try {
-			RandomAccessFile file = new RandomAccessFile("resources/beat.ogg", "r");
-			RandomFileInputStream fis = new RandomFileInputStream(file);
-			m_canvas.playSound("beat",fis, 0, 1.0F);
-		} catch (Throwable th) {
-			th.printStackTrace(System.err);
-			System.exit(-1);
-		}
-	}
-
-	private int m_musicIndex = 0;
-	private String[] m_musicNames = new String[] { "beat100" };
-
+	boolean calib_done = false;
 	
 	private long decision;
 	private long freeze;
     private long m_textElapsed;
 	private long m_timekey;
 	private long m_freeze;
-	private boolean mbeat = false;
 	private boolean authorised = true;
 	
 	/*
@@ -232,12 +208,12 @@ public class Game {
 		m_freeze += elapsed;
 
 		//calibration (moche mais pas trouvé mieux pour synchroniser la musique car le temps de chargement tres variable)
-		if (!mbeat & !Jump) {
+		if (!calib_done && !Jump) {
 			m_timekey = 0;
 			m_freeze = 0;
 			if (!m_grille.IsAuthorised()) {
 				m_grille.Authorised_True();
-				mbeat = true;
+				calib_done = true;
 				m_timekey = 100; //100 car la marge d'erreur pur un click est de 200ms,
 				m_freeze = 100; // donc on lance le jeu à 100ms afin d'etre au milieu de la fenetre d'erreur (+-100ms)
 			}
@@ -317,12 +293,9 @@ public class Game {
 				
 			}
 		
-		}
+	}
 	
 		
-  
-      
-	
 
 
 	/*
@@ -342,7 +315,51 @@ public class Game {
 		// paint
 		// System.out.println(width + " " + height);
 		m_grille.paint(g, width - 340, height);
-		
+		if (!calib_done && !Jump) {
+			g.setColor(Color.black);
+			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
+			g.fillRect(0, height/7, width-340, height/7);
+			g.setColor(Color.white);
+			g.drawString("Calibration...", (width - 340) / 7 * 3, height / 5);
+			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+			g.drawString("Appuyez 2 fois en rythme pour commencer", (width - 340) / 7 * 2, height / 5 + 30);
+		}
+
 	}
+	
+
+
+	/*
+	 * Called from the GameCanvas listener when the frame
+	 */
+	String m_musicName;
+
+	void loadMusic() {
+		m_musicName = m_musicNames[m_musicIndex];
+		String filename = "resources/" + m_musicName + ".ogg";
+		m_musicIndex = (m_musicIndex + 1) % m_musicNames.length;
+		try {
+			RandomAccessFile file = new RandomAccessFile(filename, "r");
+			RandomFileInputStream fis = new RandomFileInputStream(file);
+			m_canvas.playMusic(fis, 0, 1.0F);
+		} catch (Throwable th) {
+			th.printStackTrace(System.err);
+			System.exit(-1);
+		}
+	}
+	
+	void playBeat() {
+		try {
+			RandomAccessFile file = new RandomAccessFile("resources/beat.ogg", "r");
+			RandomFileInputStream fis = new RandomFileInputStream(file);
+			m_canvas.playSound("beat",fis, 0, 1.0F);
+		} catch (Throwable th) {
+			th.printStackTrace(System.err);
+			System.exit(-1);
+		}
+	}
+
+	private int m_musicIndex = 0;
+	private String[] m_musicNames = new String[] { "beat100" };
 
 }
