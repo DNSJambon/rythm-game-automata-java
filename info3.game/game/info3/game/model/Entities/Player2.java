@@ -133,6 +133,9 @@ public class Player2 extends Entity {
         }
     }
 
+    public int getCooldown_egg() {
+        return cooldown_egg;
+    }
 
     @Override
     public boolean do_egg(Entity e) {
@@ -145,19 +148,36 @@ public class Player2 extends Entity {
         return true;
     }
 
-    public int getCooldown_egg() {
-        return cooldown_egg;
+    public int getCooldown_pop() {
+        return cooldown_pop;
     }
-   
 
     @Override
     public boolean do_pop(Entity e) {
-        return false;
+        if (cooldown_pop == 0) {
+            new Suiveur((Grille) g, x, y, ((Grille) g).automates.get("Suiveur"));
+            cooldown_pop = 10;
+        }
+        else {
+            cooldown_pop --;
+        }
+        return true;
+    }
+
+    public int getCooldown_wizz() {
+        return cooldown_wizz;
     }
 
     @Override
     public boolean do_wizz(Entity e) {
-        return false;
+        if (cooldown_wizz == 0) {
+            new Squelette((Grille) g, x, y, ((Grille) g).automates.get("Squelette"));
+            cooldown_wizz = 5;
+        }
+        else {
+            cooldown_wizz --;
+        }
+        return true;
     }
 
     @Override
