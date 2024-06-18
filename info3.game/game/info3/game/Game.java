@@ -330,9 +330,7 @@ public class Game {
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
 			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
-			g.drawString("Victoire du Joueur 1", (width - 340) / 7 * 3, height / 5);
-			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
-			g.drawString("Appuyez sur Echap pour quitter", (width - 340) / 7 * 2, height / 5 + 30);
+			g.drawString("Victoire du Joueur 1", (width - 340) / 7 * 3, height / 5+30);
 
 		}
 		
@@ -341,9 +339,7 @@ public class Game {
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
 			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
-			g.drawString("Victoire du Joueur 2", (width - 340) / 7 * 3, height / 5);
-			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
-			g.drawString("Appuyez sur Echap pour quitter", (width - 340) / 7 * 2, height / 5 + 30);
+			g.drawString("Victoire du Joueur 2", (width - 340) / 7 * 3, height / 5+25);
 
 		}
 
