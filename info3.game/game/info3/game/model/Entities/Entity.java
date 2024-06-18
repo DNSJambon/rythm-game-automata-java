@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import info3.game.controller.*;
 import info3.game.model.Category;
 import info3.game.model.IGrille;
+import info3.game.model.Grille;
 import info3.game.model.cellType;
 
 public abstract class Entity {
@@ -196,6 +197,9 @@ public abstract class Entity {
     public boolean do_die(Entity e){
         g.getCell(x, y).resetEntity();
         g.removeEntity(this);
+        if (this instanceof Player1) {
+            ((Grille)g).game_over = 2; //joueur 2 a gagné
+        }
         return true;
     }
     

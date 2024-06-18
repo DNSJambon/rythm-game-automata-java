@@ -3,15 +3,11 @@ package info3.game.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+
 import java.util.Random;
 import javax.imageio.ImageIO;
 
-import gal.ast.AST;
-import gal.ast.Automaton;
-import gal.parser.Parser;
+
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -38,6 +34,7 @@ public class Grille implements IGrille {
 
     Control m_control;
     public HashMap<String, Automate> automates;
+    public int game_over = 0; // 0 = en cours, 1 = victoire joueur 1, 2 = victoire joueur 2
 
     // Viewport
     BufferedImage[] m_images;
