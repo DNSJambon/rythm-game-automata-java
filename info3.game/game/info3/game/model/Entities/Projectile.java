@@ -40,10 +40,32 @@ public class Projectile extends Ennemi{
         return Category.T;
     }
 
-    @Override
+   @Override
     public boolean do_move(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
+        switch (direction) {
+            case Nord:
+                this.y--;
+                g.getCell(this.x, this.y + 1).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                return true;
+            case Sud:
+                this.y++;
+                g.getCell(this.x, this.y - 1).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                return true;
+            case Est:
+                this.x++;
+                g.getCell(this.x - 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                return true;
+            case Ouest:
+                this.x--;
+                g.getCell(this.x + 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override

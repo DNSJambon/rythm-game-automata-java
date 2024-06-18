@@ -5,6 +5,7 @@ import java.io.IOException;
 import info3.game.controller.Automate;
 import info3.game.controller.DirRelative;
 import info3.game.controller.Direction;
+import info3.game.model.Category;
 import info3.game.model.Grille;
 import info3.game.model.IGrille;
 
@@ -51,6 +52,39 @@ public class Mage extends Ennemi {
         }
         
     }
+    
+public boolean eval_cell(Entity e, DirRelative dir, char type) {
+        switch (dir) {
+            case Devant:
+                if (y == 0) {
+                    return type == Category.O;
+                }
+                return g.getCell(x, y - 1).getCategory() == type;
+            
+            case Gauche:
+                if (x == 0) {
+                    return type == Category.O;
+                }
+                return g.getCell(x-1, y).getCategory() ==type;
+        
+            
+            case Droite:
+                if (x == g.getCols()-1) {
+                    return type == Category.O;
+                }
+                return g.getCell(x+1, y).getCategory() ==type;
+
+            case Derriere:
+                if (y == g.getRows()-1) {
+                    return type == Category.O;
+                }
+                return g.getCell(x, y+1).getCategory() ==type;
+
+            default:
+
+                return g.getCell(x, y).getCategory() ==type;
+        }
+    }
 
     @Override
     public boolean do_pick(Entity e) {
@@ -76,19 +110,19 @@ public class Mage extends Ennemi {
             case Droite:
                 switch (direction) {
                     case Nord:
-                        direction = Direction.Est;
+                        this.direction = Direction.Est;
                         
                         return true;
                     case Sud:
-                        direction = Direction.Ouest;
+                        this.direction = Direction.Ouest;
                         
                         return true;
                     case Est:
-                        direction = Direction.Sud;
+                        this.direction = Direction.Sud;
                         
                         return true;
                     case Ouest:
-                        direction = Direction.Nord;
+                        this.direction = Direction.Nord;
                        
                         return true;
                     default:
@@ -118,6 +152,36 @@ public class Mage extends Ennemi {
                 }
             default:
                 return false;
+        }
+    }
+
+    @Override
+    public boolean do_move(Entity e, DirRelative dir) {
+        switch (direction) {
+            case Nord:
+                this.y--;
+                g.getCell(this.x, this.y + 1).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                return true;
+            case Sud:
+                this.y++;
+                g.getCell(this.x, this.y - 1).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                return true;
+            case Est:
+                this.x++;
+                g.getCell(this.x - 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                return true;
+            case Ouest:
+                this.x--;
+                g.getCell(this.x + 1, this.y).resetEntity();
+                g.getCell(this.x, this.y).setEntity(this);
+                return true;
+            default:
+                return false;
+
+            
         }
     }
 
