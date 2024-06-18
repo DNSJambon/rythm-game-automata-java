@@ -1,27 +1,27 @@
-Mazesolver(Haut){
+Slime(Haut){
 *(Haut):
 | !Got(Power) ? Rest : ()
-| Cell(F, V) ? Move(F) : (Droite)
+| Cell(F, V) ? Move(F) : (Waitbas)
 | Cell(F, #) ? Hit(F) : (Haut)
-| True ? Wait : (Droite)
+| True ? Wait : (Waitbas)
 
-*(Droite):
-| !Got(Power) ? Rest : ()
-| Cell(R, V) ? Move(R) : (Bas)
-| Cell(R, #) ? Hit(R) : (Droite)
-| True ? Wait : (Bas)
 
 *(Bas):
 | !Got(Power) ? Rest : ()
-| Cell(B, V) ? Move(B) : (Gauche)
+| Cell(B, V) ? Move(B) : (Waithaut)
 | Cell(B, #) ? Hit(B) : (Bas)
-| True ? Wait : (Gauche)
+| True ? Wait : (Waithaut)
 
-*(Gauche):
+
+*(Waithaut):
 | !Got(Power) ? Rest : ()
-| Cell(L, V) ? Move(L) : (Haut)
-| Cell(L, #) ? Hit(L) : (Gauche)
 | True ? Wait : (Haut)
+
+*(Waitbas):
+| !Got(Power) ? Rest : ()  
+| True ? Wait : (Bas)
+
+
 
 *()
 | True ? Wait : ()
@@ -89,20 +89,6 @@ Squelette(Left){
 | Cell(R, O) ? Turn(L) : (Left)
 }
 
-Slime(Monter1){
-* (Monter1):
-| Cell(F, V) ? Move(F) : (Monter1)
-| Cell(F, O) ? Move(B) : (Descendre1)
-* (Descendre1):
-| Cell(B, V) ? Move(B) : (Descendre2)
-| Cell(B, O) ? Move(F) : (Monter2)
-* (Descendre2):
-| Cell(B, V) ? Move(B) : (Monter2)
-| Cell(B, O) ? Move(F) : (Monter2)
-* (Monter2):
-| Cell(F, V) ? Move(F) : (Monter1)
-| Cell(F, O) ? Move(B) : (Descendre1)
-}
 
 Key(S1){
 *(S1):

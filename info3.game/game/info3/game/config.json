@@ -24,8 +24,8 @@
 
         },
         {
-            "name" : "MazeSolver",
-            "automate" : "Mazesolver"
+            "name" : "Slime",
+            "automate" : "Slime"
         },
         {
             "name" : "Squelette",

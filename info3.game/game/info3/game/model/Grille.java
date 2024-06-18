@@ -17,7 +17,7 @@ import info3.game.controller.*;
 import info3.game.controller.Conditions.Cell;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.Key;
-import info3.game.model.Entities.MazeSolver;
+import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
@@ -183,7 +183,7 @@ public class Grille implements IGrille {
         
         for (int i = 0; i < nb_monstre; i++) {
             cell c = randomCell_libre();
-            new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
+            new Slime(this, c.getCol(), c.getRow(), automates.get("Slime"));
         }
     }
     
