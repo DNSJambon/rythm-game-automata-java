@@ -9,20 +9,46 @@ import info3.game.model.IGrille;
 import info3.game.model.cellType;
 import info3.game.model.Category;
 
-public class Trap extends Entity{
 
+public class Trap extends Entity{
+    boolean activated = false;
     public Trap(IGrille g, int x, int y,Automate a) {
         super(g);
         this.a=a;
         this.g.getCell(x, y).setTrap(this);
-        boolean activated = false;
+        
          try {
-            m_images = Grille.loadSprite("resources/trap.png", 1, 2);
+            m_images = Grille.loadSprite("resources/trap.png", 1, 3);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public boolean do_hit(Entity e, DirRelative dir) { 
+        activated = true;
+        switch (dir) {
+
+        case Devant:
+            g.getCell(this.x, this.y -1).GetEntity().get_hit(1);
+            return true;
+        case Derriere:
+            g.getCell(this.x, this.y + 1).GetEntity().get_hit(1);
+            return true;
+        case Droite:
+            g.getCell(this.x + 1, this.y).GetEntity().get_hit(1);
+            return true;
+        case Gauche:
+            g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
+            return true;
+        case soi:
+            g.getCell(this.x, this.y).GetEntity().get_hit(1);
+            return true;
+        default:   
+            return false;
+    }
+
+}
     @Override
     public cellType getType() {
         // TODO Auto-generated method stub
@@ -64,12 +90,16 @@ public class Trap extends Entity{
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
 
+    @Override
     public void tick(long elapsed) {
-        animation_elapsed += elapsed;
-        if (animation_elapsed > 200) {
-            image_index = (image_index + 1) % 2;
-            animation_elapsed = 0;
+        if (activated) {
+            animation_elapsed += elapsed;
+            if (animation_elapsed > 200 ) {
+                image_index = (image_index + 1) % 2+1;
+                animation_elapsed = 0;
+            } 
         }
+        
         
     }
     
