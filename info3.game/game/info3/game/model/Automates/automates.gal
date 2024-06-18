@@ -120,10 +120,8 @@ Mage(Move){
 Projectile(S1){
     *(S1):
     |Cell(F,V)? Move(F) : (S1)
-    |Cell(F,#)? Hit(F) : (S2)
+    |Cell(F,#)? Hit(F) : ()
     |True ? Rest : ()
-    *(S2):
-    |True? Rest : ()
     *()
 }
 

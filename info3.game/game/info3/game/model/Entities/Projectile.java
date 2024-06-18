@@ -181,14 +181,15 @@ public class Projectile extends Ennemi{
 
     @Override
     public boolean do_hit(Entity e, DirRelative dir) {
+        
         switch (direction) {
             case Nord:
                 switch (dir) {
                     case Devant:
                         if (g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity() != null) {
                             g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
-                                    g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
-                                            - 1);
+                                    g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()- 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -196,6 +197,7 @@ public class Projectile extends Ennemi{
                         if (g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity() != null) {
                             g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity()
                                     .setLife(g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity().getLife() - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -203,6 +205,7 @@ public class Projectile extends Ennemi{
                         if (g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity() != null) {
                             g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity()
                                     .setLife(g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity().getLife() - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -211,6 +214,7 @@ public class Projectile extends Ennemi{
                             g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().setLife(
                                     g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().getLife()
                                             - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -223,6 +227,7 @@ public class Projectile extends Ennemi{
                         if (g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity() != null) {
                             g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity()
                                     .setLife(g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity().getLife() - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -231,6 +236,7 @@ public class Projectile extends Ennemi{
                             g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
                                     g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
                                             - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -239,6 +245,7 @@ public class Projectile extends Ennemi{
                             g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().setLife(
                                     g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().getLife()
                                             - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -246,6 +253,7 @@ public class Projectile extends Ennemi{
                         if (g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity() != null) {
                             g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity()
                                     .setLife(g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity().getLife() - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -258,6 +266,7 @@ public class Projectile extends Ennemi{
                         if (g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity() != null) {
                             g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity()
                                     .setLife(g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity().getLife() - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -266,6 +275,7 @@ public class Projectile extends Ennemi{
                             g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().setLife(
                                     g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().getLife()
                                             - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -273,6 +283,7 @@ public class Projectile extends Ennemi{
                         if (g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity() != null) {
                             g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity()
                                     .setLife(g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity().getLife() - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -281,6 +292,7 @@ public class Projectile extends Ennemi{
                             g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
                                     g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
                                             - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -294,6 +306,7 @@ public class Projectile extends Ennemi{
                             g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().setLife(
                                     g.getCell((this.x + g.getCols() - 1) % g.getCols(), this.y).GetEntity().getLife()
                                             - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -301,6 +314,7 @@ public class Projectile extends Ennemi{
                         if (g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity() != null) {
                             g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity()
                                     .setLife(g.getCell((this.x + 1) % g.getCols(), this.y).GetEntity().getLife() - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -309,6 +323,7 @@ public class Projectile extends Ennemi{
                             g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
                                     g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
                                             - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
@@ -316,6 +331,7 @@ public class Projectile extends Ennemi{
                         if (g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity() != null) {
                             g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity()
                                     .setLife(g.getCell(this.x, (this.y + 1) % g.getRows()).GetEntity().getLife() - 1);
+                            do_die(this);
                             return true;
                         }
                         return false;
