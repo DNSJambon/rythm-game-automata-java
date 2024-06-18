@@ -140,7 +140,7 @@ public class Player2 extends Entity {
     @Override
     public boolean do_egg(Entity e) {
         if (cooldown_egg == 0) {
-            new Slime((Grille) g, x, y, ((Grille) g).automates.get("MazeSolver"));
+            new Slime((Grille) g, x, y, ((Grille) g).automates.get("Slime"));
             cooldown_egg = 3;
         }
         else
