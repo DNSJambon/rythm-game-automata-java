@@ -15,7 +15,7 @@ public class Slime extends Ennemi {
     public Slime(Grille grille, int col, int row, Automate a) {
         super(grille,col,row);
         etat_courant = a.getState();
-        life = 1;
+        life = 2;
         direction = Direction.Est;
         this.x = col;
         this.y = row;
@@ -23,7 +23,7 @@ public class Slime extends Ennemi {
         this.a = a;
 
         try {
-            m_images = Grille.loadSprite("resources/slime.png", 1, 4);
+            m_images = Grille.loadSprite("resources/slime.png", 2, 4);
         } catch (IOException e) {
             e.printStackTrace();
         }
