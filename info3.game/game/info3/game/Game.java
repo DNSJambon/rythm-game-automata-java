@@ -318,17 +318,39 @@ public class Game {
 		if (!calib_done && !Jump) {
 			g.setColor(Color.black);
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
-			g.fillRect(0, height/7, width-340, height/7);
+			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
 			g.drawString("Calibration...", (width - 340) / 7 * 3, height / 5);
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
 			g.drawString("Appuyez 2 fois en rythme pour commencer", (width - 340) / 7 * 2, height / 5 + 30);
 		}
+		
+		if (m_grille.game_over == 1) {//victoire joueur 1
+			g.setColor(Color.black);
+			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
+			g.fillRect(0, height / 7, width - 340, height / 7);
+			g.setColor(Color.white);
+			g.drawString("Victoire du Joueur 1", (width - 340) / 7 * 3, height / 5);
+			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+			g.drawString("Appuyez sur Echap pour quitter", (width - 340) / 7 * 2, height / 5 + 30);
+
+		}
+		
+		if (m_grille.game_over == 2) {//victoire joueur 2
+			g.setColor(Color.black);
+			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
+			g.fillRect(0, height / 7, width - 340, height / 7);
+			g.setColor(Color.white);
+			g.drawString("Victoire du Joueur 2", (width - 340) / 7 * 3, height / 5);
+			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+			g.drawString("Appuyez sur Echap pour quitter", (width - 340) / 7 * 2, height / 5 + 30);
+
+		}
 
 	}
 	
 
-
+	//====================MUSIC====================
 	/*
 	 * Called from the GameCanvas listener when the frame
 	 */
