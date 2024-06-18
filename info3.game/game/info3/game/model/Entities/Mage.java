@@ -77,19 +77,19 @@ public class Mage extends Ennemi {
                 switch (direction) {
                     case Nord:
                         direction = Direction.Est;
-                        this.do_move(e, d);
+                        
                         return true;
                     case Sud:
                         direction = Direction.Ouest;
-                        this.do_move(e, d);;
+                        
                         return true;
                     case Est:
                         direction = Direction.Sud;
-                        this.do_move(e, d);
+                        
                         return true;
                     case Ouest:
                         direction = Direction.Nord;
-                        this.do_move(e, d);
+                       
                         return true;
                     default:
                         return false;
@@ -99,19 +99,19 @@ public class Mage extends Ennemi {
                 switch (direction) {
                     case Nord:
                         direction = Direction.Ouest;
-                        this.do_move(e, d);
+                        
                         return true;
                     case Sud:
                         direction = Direction.Est;
-                        this.do_move(e, d);
+                       
                         return true;
                     case Est:
                         direction = Direction.Nord;
-                        this.do_move(e, d);
+                        
                         return true;
                     case Ouest:
                         direction = Direction.Sud;
-                        this.do_move(e, d);
+                        
                         return true;
                     default:
                         return false;
