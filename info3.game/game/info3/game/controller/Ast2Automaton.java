@@ -113,6 +113,8 @@ public class Ast2Automaton implements IVisitor{
 
             case "True":
                 return new True();
+            case "Rest": //repos eternel
+                return new Die();
             case "Wait":
                 return new Wait();
             case "Egg":

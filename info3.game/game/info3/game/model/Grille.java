@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import info3.game.controller.*;
 import info3.game.controller.Conditions.Cell;
 import info3.game.model.Entities.Entity;
+import info3.game.model.Entities.Key;
 import info3.game.model.Entities.MazeSolver;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
@@ -81,6 +82,10 @@ public class Grille implements IGrille {
         //======placer le joueur 1 dans le labyrinthe======
         c = randomCell_libre();
         Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
+        
+        c = randomCell_libre();
+        Key k = new Key(this, c.getCol(), c.getRow(), automates.get("Key"));
+        addEntity(k);
 
         //======placer le joueur 2 dans le labyrinthe====== 
 
@@ -110,6 +115,9 @@ public class Grille implements IGrille {
 
     public void addEntity(Entity e) {
         m_control.addEntity(e);
+    }
+    public void removeEntity(Entity e) {
+        m_control.removeEntity(e);
     }
 
     
@@ -168,7 +176,7 @@ public class Grille implements IGrille {
     public void remplir_obstacle() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                Obstacle o = new Obstacle(this, j, i , automates.get("MurIncassable"));
+                new Obstacle(this, j, i , automates.get("MurIncassable"));
             }
         }
     }
@@ -353,9 +361,9 @@ public class Grille implements IGrille {
             for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2
                     + load_x_positif; i++) {
                 if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
-                    r = 0;
+                    r = 252;
                 else
-                    r = 21;
+                    r = 231;
                 g.drawImage(m_images[r],
                            (int) ((i - x_main + viewport_size / 2) * width / viewport_size
                                     + offset_x  * slide[frames_anim - mouvement]),
@@ -426,7 +434,7 @@ public class Grille implements IGrille {
                     case '#':
                         g.setColor(Color.BLUE);
                         break;
-
+   
                 }
                 g.fillRect(x + (i * width / cols), y + (j * height / rows), width / cols, height / rows);
             }
@@ -439,6 +447,7 @@ public class Grille implements IGrille {
     }
 
     BufferedImage[] coeur = loadSprite("resources/coeur.png", 2, 3);
+    BufferedImage[] indicator = loadSprite("resources/indicator.png", 2, 1);
     int coeur_index = 0;
     int indice = 0;
     boolean petit_coeur = false;
@@ -462,12 +471,11 @@ public class Grille implements IGrille {
         g.fillRect(x, y, width, height);
 
         if (IsAuthorised()) {
-            g.setColor(Color.GREEN);
+            g.drawImage(indicator[0], x, y + height / 2, width, height / 2, null);
         } else {
-            g.setColor(Color.RED);
+            g.drawImage(indicator[1], x, y + height / 2, width, height / 2, null);
         }
 
-        g.fillRect(x, y + height / 2, width, height / 2);
         //coeur
         int life = ((Player1) main_Entity).getLife();
 
