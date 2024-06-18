@@ -79,12 +79,18 @@ Player2(Init){
 
 Squelette(Left){
 * (Left):
+| !Got(Power) ? Rest : ()
 | Cell(L, V) ? Move(L) : (Left)
-| Cell(L, O) ? Turn(R) : (Right)
+| Cell(L, #) ? Hit(L) : (Left)
+| True ? Move(R) : (Right)
 
 * (Right):
+| !Got(Power) ? Rest : ()
 | Cell(R, V) ? Move(R) : (Right)
-| Cell(R, O) ? Turn(L) : (Left)
+| Cell(R, #) ? Hit(R) : (Right)
+| True ? Move(L) : (Left)
+
+* ()
 }
 
 Slime(Monter1){
