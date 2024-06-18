@@ -78,7 +78,7 @@ public class Trap extends Entity{
         if (activated) {
             animation_elapsed += elapsed;
             if (animation_elapsed > 200 ) {
-                image_index = (image_index + 1) % 2+1;
+                image_index = ((image_index + 1) % 2);
                 animation_elapsed = 0;
             } 
         }
