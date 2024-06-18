@@ -71,12 +71,56 @@ public class Mage extends Ennemi {
     }
 
     @Override
-    public boolean do_turn(Entity e, DirRelative dir) {
-        if (dir == DirRelative.Devant || dir == DirRelative.Derriere) {
-            direction = (direction == Direction.Nord) ? Direction.Sud : Direction.Nord;
-            return true;
+    public boolean do_turn(Entity e, DirRelative d) {
+        switch (d) {
+            case Droite:
+                switch (direction) {
+                    case Nord:
+                        direction = Direction.Est;
+                        this.do_move(e, d);
+                        return true;
+                    case Sud:
+                        direction = Direction.Ouest;
+                        this.do_move(e, d);;
+                        return true;
+                    case Est:
+                        direction = Direction.Sud;
+                        this.do_move(e, d);
+                        return true;
+                    case Ouest:
+                        direction = Direction.Nord;
+                        this.do_move(e, d);
+                        return true;
+                    default:
+                        return false;
+                }
+
+            case Gauche:
+                switch (direction) {
+                    case Nord:
+                        direction = Direction.Ouest;
+                        this.do_move(e, d);
+                        return true;
+                    case Sud:
+                        direction = Direction.Est;
+                        this.do_move(e, d);
+                        return true;
+                    case Est:
+                        direction = Direction.Nord;
+                        this.do_move(e, d);
+                        return true;
+                    case Ouest:
+                        direction = Direction.Sud;
+                        this.do_move(e, d);
+                        return true;
+                    default:
+                        return false;
+                }
+            default:
+                return false;
         }
-        return false;
     }
+
+
     
 }
