@@ -3,6 +3,7 @@ package info3.game.model.Entities;
 import java.io.IOException;
 
 import info3.game.controller.Automate;
+import info3.game.controller.BufferAction;
 import info3.game.controller.DirRelative;
 import info3.game.controller.Conditions.True;
 import info3.game.model.Grille;
@@ -20,6 +21,9 @@ public class Trap extends Entity{
         this.a=a;
         this.g.getCell(x, y).setTrap(this);
         this.activated=false;
+        this.x=x;
+        this.y=y;
+        this.etat_courant = a.getState();
         
          try {
             m_images = Grille.loadSprite("resources/trap.png", 1, 3);
@@ -28,28 +32,6 @@ public class Trap extends Entity{
         }
     }
 
-    @Override
-    public boolean do_hit(Entity e, DirRelative dir) { 
-        switch (dir) {
-            case Devant:
-                g.getCell(this.x, this.y -1).GetEntity().get_hit(1);
-                return true;
-            case Derriere:
-                g.getCell(this.x, this.y + 1).GetEntity().get_hit(1);
-                return true;
-            case Droite:
-                g.getCell(this.x + 1, this.y).GetEntity().get_hit(1);
-                return true;
-            case Gauche:
-                g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
-                return true;
-            case soi:
-                g.getCell(this.x, this.y).GetEntity().get_hit(1);
-                return true;
-            default:   
-                return false;
-        }
-}
     @Override
     public cellType getType() {
         // TODO Auto-generated method stub
@@ -75,8 +57,8 @@ public class Trap extends Entity{
 
     @Override
     public boolean do_pop(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pop'");
+        activated=true;
+        return true;
     }
 
     @Override
@@ -100,8 +82,7 @@ public class Trap extends Entity{
                 animation_elapsed = 0;
             } 
         }
-        
-        
     }
-    
+        
 }
+    

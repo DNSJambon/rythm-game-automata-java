@@ -114,10 +114,10 @@ Key(S1){
 
 Trap(Init){
 * (Init):
-| Cell(H, #) ? Wait : (Activate)
+| Cell(H, #) ? Pop : (Activate)
 | True ? Wait : (Init)
 * (Activate):
 | Cell(H, #) ? Hit(H) : (Activate)
-| True ? Wait : (Init)
+| True ? Wait : (Activate)
 }
 

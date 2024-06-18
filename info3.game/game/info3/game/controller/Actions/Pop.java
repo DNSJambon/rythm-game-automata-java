@@ -5,7 +5,7 @@ import info3.game.model.Entities.Entity;
 public class Pop extends Action{
 
     public boolean exec(Entity e) {
-        return e.do_wizz(e);
+        return e.do_pop(e);
     }
 
 }
