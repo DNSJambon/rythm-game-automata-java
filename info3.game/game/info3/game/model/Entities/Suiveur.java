@@ -136,8 +136,23 @@ public class Suiveur extends Ennemi{
 
     @Override
     public boolean do_hit(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
+        switch (dir) {
+
+            case Devant:
+                g.getCell(this.x, this.y -1).GetEntity().get_hit(1);
+                return true;
+            case Derriere:
+                g.getCell(this.x, this.y + 1).GetEntity().get_hit(1);
+                return true;
+            case Droite:
+                g.getCell(this.x + 1, this.y).GetEntity().get_hit(1);
+                return true;
+            case Gauche:
+                g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
+                return true;
+            default:   
+                return false;
+        }
     }
 
     

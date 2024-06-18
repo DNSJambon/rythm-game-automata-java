@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import info3.game.controller.*;
 import info3.game.model.Category;
 import info3.game.model.IGrille;
+import info3.game.model.Grille;
 import info3.game.model.cellType;
 
 public abstract class Entity {
@@ -119,24 +120,36 @@ public abstract class Entity {
         switch (dir) {
 
             case Devant:
+                if (y == 0) {
+                    return false;
+                }
                 this.y--;
                 g.getCell(this.x, this.y + 1).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Nord;
                 return true;
             case Derriere:
+                if (y == g.getRows() - 1) {
+                    return false;
+                }
                 this.y++;
                 g.getCell(this.x, this.y - 1).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Sud;
                 return true;
             case Droite:
+                if (x == g.getCols() - 1) {
+                    return false;
+                }
                 this.x++;
                 g.getCell(this.x - 1, this.y).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Est;
                 return true;
             case Gauche:
+                if (x == 0) {
+                    return false;
+                }
                 this.x--;
                 g.getCell(this.x + 1, this.y).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
@@ -196,6 +209,9 @@ public abstract class Entity {
     public boolean do_die(Entity e){
         g.getCell(x, y).resetEntity();
         g.removeEntity(this);
+        if (this instanceof Player1) {
+            ((Grille)g).game_over = 2; //joueur 2 a gagné
+        }
         return true;
     }
     

@@ -19,13 +19,13 @@
 
         },
         {
-            "name" : "Faucheuse",
+            "name" : "Suiveur",
             "automate" : "Suiveur"
 
         },
         {
-            "name" : "MazeSolver",
-            "automate" : "Mazesolver"
+            "name" : "Slime",
+            "automate" : "Slime"
         },
         {
             "name" : "Squelette",
