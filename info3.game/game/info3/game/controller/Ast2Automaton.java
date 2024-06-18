@@ -23,6 +23,7 @@ import gal.ast.Underscore;
 import gal.ast.Value;
 import info3.game.controller.Actions.*;
 import info3.game.controller.Conditions.*;
+import info3.game.controller.Conditions.Got;
 
 public class Ast2Automaton implements IVisitor{
 
@@ -138,6 +139,9 @@ public class Ast2Automaton implements IVisitor{
                 switch ((String) params.get(0)) {
                     case "Power":
                         return new Got((String) params.get(0));
+                    case "K":
+                        return new Got((char) params.get(0));
+
                     default :
                         return new Got((char) params.get(0));
                 }

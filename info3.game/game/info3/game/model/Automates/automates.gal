@@ -114,7 +114,12 @@ Key(S1){
 
 Door(S1){
 *(S1):
-| Cell(H,#) ? Pick :(S2)   
-| True ? Wait : (S1)
+| Closest(K, N)  ? Wait() : (S1)
+| Closest(K, S)  ? Wait() : (S1)
+| Closest(K, E)  ? Wait() : (S1)
+| Closest(K, W)  ? Wait() : (S1)
+| True ?  Wizz() : (S2)
+*(S2):
+| True ? Wait : (S2)
 }
 
