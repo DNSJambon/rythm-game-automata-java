@@ -42,7 +42,16 @@
         {       
             "name" : "Door",
             "automate" : "Door"
+        },
+        {
+            "name": "Mage",
+            "automate": "Mage"
+        },
+        {
+            "name": "Projectile",
+            "automate": "Projectile"
         }
+
 
 
     ]
