@@ -102,4 +102,29 @@ Key(S1){
 | True ? Wait : (S2)
 }
 
+Mage(Move){
+    *(Move):
+    |!Got(Power) ? Rest : ()
+    |Cell(F,V)? Move(F) : (Hit)
+    |True? Wait : (Hit)
+    *(Hit):
+    |!Got(Power) ? Rest : ()
+    |Cell(F,V)? Egg() : (Turn)
+    |Cell(F,#)? Hit(F) : (Turn)
+    |True? Wait : (Turn)
+    *(Turn):
+    |!Got(Power) ? Rest : ()
+    |True? Turn(R) : (Move)
+    *()
+}
+Projectile(S1){
+    *(S1):
+    |Cell(F,V)? Move(F) : (S1)
+    |Cell(F,#)? Hit(F) : (S2)
+    |True ? Rest : ()
+    *(S2):
+    |True? Rest : ()
+    *()
+}
+
 

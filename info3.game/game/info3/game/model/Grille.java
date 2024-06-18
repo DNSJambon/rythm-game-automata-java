@@ -17,6 +17,8 @@ import info3.game.controller.*;
 import info3.game.controller.Conditions.Cell;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.Key;
+import info3.game.model.Entities.Mage;
+
 import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
@@ -92,6 +94,7 @@ public class Grille implements IGrille {
 
         place_monstre(10);
         c = randomCell_libre();
+        new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
 
      
 
