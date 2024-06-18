@@ -101,6 +101,7 @@ public class Grille implements IGrille {
         for (int i = 0; i < 1; i++) {
             c = randomCell_libre();
             Trap t = new Trap(this, c.getCol(), c.getRow(),automates.get("Trap"));
+            addEntity(t);
         }
 
      
