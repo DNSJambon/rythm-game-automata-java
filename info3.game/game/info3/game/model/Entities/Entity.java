@@ -108,9 +108,10 @@ public abstract class Entity {
                 }
                 return g.getCell(x, y+1).getCategory() ==type;
 
-            default:
-
+            case soi:
                 return g.getCell(x, y).getCategory() ==type;
+            default :
+                return false;
         }
     }
     

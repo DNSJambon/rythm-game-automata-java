@@ -20,6 +20,7 @@ public class Key extends Entity {
         this.x = x;
         this.y = y;
         this.a = a;
+        etat_courant = a.getState();
         g.getCell(x, y).setEntity(this);
         picked = false;
         try {
@@ -55,8 +56,9 @@ public class Key extends Entity {
 
     @Override
     public boolean do_pick(Entity e) {
+        System.out.println("Picking key");
         picked=true;
-        return true;//tout c'est bien passé .
+        return true;//tout s'est bien passé .
     }
 
     @Override
@@ -83,6 +85,7 @@ public class Key extends Entity {
         }
         
     }
+ 
 
 
 }

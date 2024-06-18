@@ -86,11 +86,11 @@ public class Grille implements IGrille {
         
         c = randomCell_libre();
         Key k = new Key(this, c.getCol(), c.getRow(), automates.get("Key"));
-        addEntity(k);
+        
 
         c = randomCell_libre();
         Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
-        addEntity(porte);
+        
         //======placer le joueur 2 dans le labyrinthe====== 
 
         c = randomCell_libre();

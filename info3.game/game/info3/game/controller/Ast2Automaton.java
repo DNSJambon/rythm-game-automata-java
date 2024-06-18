@@ -145,6 +145,8 @@ public class Ast2Automaton implements IVisitor{
                     default :
                         return new Got((char) params.get(0));
                 }
+            case "Pick" :
+                return new Pick();
             //TODO: Add more cases
         }
         return null;

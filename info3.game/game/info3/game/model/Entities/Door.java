@@ -24,7 +24,8 @@ public class Door extends Entity {
         this.y = y;
         this.a = a;
         this.k = k;
-        g.getCell(x, y).setEntity(this);
+        this.etat_courant=a.getState();
+        g.getCell(x, y).setTrap(this);
         opened = false;
         try {
             BufferedImage[] images = Grille.loadSprite("resources/door.png", 1, 2);
@@ -44,7 +45,7 @@ public class Door extends Entity {
 
     @Override
     public char getCategory() {
-        return Category.D;
+        return Category.V;
     }
 
     @Override
@@ -65,15 +66,9 @@ public class Door extends Entity {
 
     @Override
     public boolean eval_closest(char c, Direction dir) {
-        for (int i = 0; i < g.getRows(); i++) {
-            for (int j = 0; j < g.getCols(); j++) {
-                Entity entity = g.getCell(i, j).GetEntity();
-                if (entity != null && entity.getCategory() == c) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return this.k.isPicked();
+                
+        
     }
 
     @Override
@@ -81,15 +76,7 @@ public class Door extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'do_pop'");
     }
 
-    @Override
-    public boolean do_wizz(Entity e) {
-        if (opened) {
-            // g.getCell(x, y).resetEntity();
-            return true;
-        }
-        return false;
-    }
-
+  
     @Override
     public boolean do_turn(Entity e, DirRelative dir) {
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
@@ -119,10 +106,11 @@ public class Door extends Entity {
         }
     }
 
-    @Override//vérifier  à chaque fois
-    public void tick(long elapsed) {
-        if (!opened && k.isPicked()) {
-            open();
-        }
+    @Override
+    public boolean do_wizz(Entity e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
     }
+
+    
 }
