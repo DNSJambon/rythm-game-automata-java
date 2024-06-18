@@ -15,8 +15,8 @@ import info3.game.model.cellType;
 public class Door extends Entity {
     Key k;
     boolean opened;
-    BufferedImage closedImage;
-    BufferedImage openedImage;
+    BufferedImage porte_ferme;
+    BufferedImage porte_ouverte;
 
     public Door(IGrille g, Automate a, int x, int y, Key k) {
         super(g);
@@ -29,8 +29,8 @@ public class Door extends Entity {
         try {
             BufferedImage[] images = Grille.loadSprite("resources/door.png", 1, 2);
             if (images != null && images.length == 2) {
-                closedImage = images[1];  // Right image is closed
-                openedImage = images[0];  // Left image is open
+                porte_ferme = images[1];  
+                porte_ouverte = images[0];  
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class Door extends Entity {
 
     @Override
     public boolean do_pick(Entity e) {
-        open(); // Check if the key is picked and open the door
+        open(); 
         return opened;
     }
 
@@ -84,7 +84,7 @@ public class Door extends Entity {
     @Override
     public boolean do_wizz(Entity e) {
         if (opened) {
-            g.getCell(x, y).resetEntity();
+            // g.getCell(x, y).resetEntity();
             return true;
         }
         return false;
@@ -109,18 +109,20 @@ public class Door extends Entity {
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
         if (opened) {
-            if (openedImage != null) {
-                graphics.drawImage(openedImage, x, y, width, height, null);
+            if (porte_ouverte != null) {
+                graphics.drawImage(porte_ouverte, x, y, width, height, null);
             }
         } else {
-            if (closedImage != null) {
-                graphics.drawImage(closedImage, x, y, width, height, null);
+            if (porte_ferme != null) {
+                graphics.drawImage(porte_ferme, x, y, width, height, null);
             }
         }
     }
 
-    @Override
+    @Override//vérifier  à chaque fois
     public void tick(long elapsed) {
-        // Doors do not animate, so this method can be left empty or minimal
+        if (!opened && k.isPicked()) {
+            open();
+        }
     }
 }
