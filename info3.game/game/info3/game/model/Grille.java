@@ -94,24 +94,14 @@ public class Grille implements IGrille {
 
         c = randomCell_libre();
         Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
-        c = randomCell_libre();
-        Wall_Breakable obs = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
-        addEntity(obs);
-        c = randomCell_libre();
-        Wall_Breakable obs1 = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
-        addEntity(obs1);
-        c = randomCell_libre();
-        Wall_Breakable obs2 = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
-        addEntity(obs2);
-        c = randomCell_libre();
-        Wall_Breakable obs3 = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
-        addEntity(obs3);
+
         
         //======placer le joueur 2 dans le labyrinthe====== 
 
         c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
+        generer_mur_cassable(80);
 
         place_monstre(10);
         for (int i=0 ; i < 2; i++) {
@@ -155,7 +145,14 @@ public class Grille implements IGrille {
     public void removeEntity(Entity e) {
         m_control.removeEntity(e);
     }
-
+    public void generer_mur_cassable(int nombre) {
+        cell c;
+        for (int i = 0; i < nombre; i++) {
+            c = randomCell_libre();
+            Wall_Breakable obs = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
+        }
+    }
+    
     
     
     //le but est de créer des salles dans le labyrinthe rempli de monstres
