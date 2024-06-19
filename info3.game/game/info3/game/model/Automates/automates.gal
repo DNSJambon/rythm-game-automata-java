@@ -130,6 +130,16 @@ Door(S1){
 *(S2):
 | True ? Wait : (S2)
 }
+Wall_Breakable(Vivant){
+*(Vivant):
+| !Got(Power) ? Rest : (Dead)
+| True ? Wait : (Vivant)
+*(Dead):
+*()
+}
+
+
+
 
 Sourischauve(Haut){
 *(Haut):
