@@ -221,7 +221,7 @@ public class Game {
 		}
 			
 		
-	    
+	    if (m_grille.game_over == 0) {
 			
 		if (Jump) { 
 			if (this.authorised) {
@@ -271,6 +271,7 @@ public class Game {
 				}
 			}
 		}
+		}
 		
 
 
@@ -305,6 +306,7 @@ public class Game {
 	 */
 	void paint(Graphics g) {
 
+
 		// get the size of the canvas
 		int width = m_canvas.getWidth();
 		int height = m_canvas.getHeight();
@@ -324,14 +326,18 @@ public class Game {
 			g.drawString("Calibration...", (width - 340) / 7 * 3, height / 5);
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
 			g.drawString("Appuyez 2 fois en rythme pour commencer", (width - 340) / 7 * 2, height / 5 + 30);
+			
 		}
 		
+		
+
 		if (m_grille.game_over == 1) {//victoire joueur 1
 			g.setColor(Color.black);
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
 			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
 			g.drawString("Victoire du Joueur 1", (width - 340) / 7 * 3, height / 5+30);
+			
 
 		}
 		
@@ -341,8 +347,10 @@ public class Game {
 			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
 			g.drawString("Victoire du Joueur 2", (width - 340) / 7 * 3, height / 5+25);
-
+			
 		}
+		
+		
 
 	}
 	

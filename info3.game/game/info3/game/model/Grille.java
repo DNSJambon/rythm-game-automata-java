@@ -123,6 +123,7 @@ public class Grille implements IGrille {
             Sourischauve s = new Sourischauve(this, c.getCol(), c.getRow(),automates.get("Sourischauve"));
         }
      
+       
 
         //main_Entity;
         main_Entity = p1;
