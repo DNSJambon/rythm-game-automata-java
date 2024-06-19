@@ -50,10 +50,11 @@
         {
             "name": "Projectile",
             "automate": "Projectile"
+        },
+        {
+            "name": "Wall_Breakable",
+            "automate": "Wall_Breakable"
         }
-
-
-
     ]
 
 

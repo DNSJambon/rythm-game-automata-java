@@ -11,4 +11,6 @@ public class Category {
     public static final char T = 'T'; // In my team but not me
     public static final char A = 'A'; // Player2
     public static final char H = '#';
+    public static final char W = 'W';// Wall qui  meurt
+
 }
