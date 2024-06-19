@@ -266,7 +266,7 @@ public abstract class Entity {
             in_movement--;
         }
             
-        if (this instanceof Player2 || this instanceof Door)
+        if (this instanceof Player2 || this instanceof Door || this instanceof Trap)
              graphics.drawImage(m_images[image_index+ got_hit], x, y, width, height, null);
         else
             graphics.drawImage(m_images[image_index + got_hit], x, y - height / 4, width, height, null);
