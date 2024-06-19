@@ -24,6 +24,7 @@ public class Trap extends Entity{
         this.x=x;
         this.y=y;
         this.etat_courant = a.getState();
+        this.image_index=0;
         
          try {
             m_images = Grille.loadSprite("resources/trap.png", 1, 3);
@@ -72,17 +73,18 @@ public class Trap extends Entity{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
     }
-
+    
     @Override
     public void tick(long elapsed) {
         if (activated) {
             animation_elapsed += elapsed;
             if (animation_elapsed > 200 ) {
-                image_index = ((image_index + 1) % 2);
+                image_index = ((image_index) % 2)+1;
                 animation_elapsed = 0;
             } 
         }
     }
         
 }
+
     
