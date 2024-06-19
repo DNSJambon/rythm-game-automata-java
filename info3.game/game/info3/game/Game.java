@@ -120,21 +120,39 @@ public class Game {
 			JSONObject config = new JSONObject(reader);
 
 			int rythm = config.getInt("rythm");
+			int difficulty = config.getInt("difficulty");
 			if (rythm == 0) {
 				Jump = true;
 				decision = 100000;
-				freeze = 500;				//on freeze seulement le temps d'animation
+				freeze = 500; //on freeze seulement le temps d'animation
+				bpm = 0;
 			}
 			else {
 				//jeu basé sur le rythme
-				bpm = config.getInt("bpm");
 				Jump = false;
-				decision = 200;
-				freeze = 60000/bpm - 200;
+				switch (difficulty) {
+					case 1:
+						bpm = 60;
+						decision = 200;
+						freeze = 60000/bpm - 200;
+						break;
+					case 2:
+						bpm = 100;
+						decision = 200;
+						freeze = 60000/bpm - 200;
+						break;
+					case 3:
+						bpm = 120;
+						decision = 200;
+						freeze = 60000/bpm - 200;
+						break;
+					default:
+						break;
+				}
+				
 			}
 
 			seed = config.getInt("seed");
-			int difficulty = config.getInt("difficulty");
 			automate_file = config.getString("automate_file");
 			automates = loadAutomate("game/info3/game/model/Automates/" + automate_file);
 
@@ -383,9 +401,8 @@ public class Game {
 	String m_musicName;
 
 	void loadMusic() {
-		m_musicName = m_musicNames[m_musicIndex];
-		String filename = "resources/" + m_musicName + ".ogg";
-		m_musicIndex = (m_musicIndex + 1) % m_musicNames.length;
+		String filename = "resources/beat" + bpm + ".ogg";
+
 		try {
 			RandomAccessFile file = new RandomAccessFile(filename, "r");
 			RandomFileInputStream fis = new RandomFileInputStream(file);
@@ -407,7 +424,6 @@ public class Game {
 		}
 	}
 
-	private int m_musicIndex = 0;
-	private String[] m_musicNames = new String[] { "beat100" };
+	
 
 }
