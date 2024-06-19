@@ -14,7 +14,7 @@ public class Mage extends Ennemi {
     public Mage(IGrille g, int x, int y, Automate a,Automate Proj) {
         super(g, x, y);
         projectile=Proj;
-        life = 1;
+        life = 2;
         this.a = a;
         etat_courant = a.getState();
         
@@ -23,7 +23,7 @@ public class Mage extends Ennemi {
         this.x = x;
         this.y = y;
         try {
-            m_images = Grille.loadSprite("resources/magesquelette.png", 1, 4);
+            m_images = Grille.loadSprite("resources/magesquelette.png", 2, 4);
             
         } catch (IOException e) {
             e.printStackTrace();

@@ -54,7 +54,12 @@
         {
             "name": "Projectile",
             "automate": "Projectile"
+        },
+        {
+            "name": "Sourischauve",
+            "automate": "Sourischauve"
         }
+
 
 
 
