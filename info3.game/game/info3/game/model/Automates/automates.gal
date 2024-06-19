@@ -12,7 +12,6 @@ Slime(Haut){
 | Cell(B, #) ? Hit(B) : (Bas)
 | True ? Wait : (Waithaut)
 
-
 *(Waithaut):
 | !Got(Power) ? Rest : ()
 | True ? Wait : (Haut)
@@ -21,12 +20,9 @@ Slime(Haut){
 | !Got(Power) ? Rest : ()  
 | True ? Wait : (Bas)
 
-
-
 *()
 | True ? Wait : ()
 }
-
 
 Wall(S1){
 *(S1):
@@ -68,11 +64,8 @@ Player2(Init){
 | Key(q) ? Move(L) :(Init)
 | Key(s) ? Move(B) :(Init)
 | Key(d) ? Move(R) :(Init)
-
 | Key(a) & Cell(H, V) ? Egg() :(Init)
-
 | Key(r) & Cell(H, V) ? Pop() :(Init)
-
 | Key(e) & Cell(H, V) ? Wizz() :(Init)
 | True ? Wait : (Init)
 }
@@ -100,6 +93,29 @@ Key(S1){
 | True ? Wait : (S1)
 * (S2):
 | True ? Wait : (S2)
+}
+
+Mage(Move){
+    *(Move):
+    |!Got(Power) ? Rest : ()
+    |Cell(F,V)? Move(F) : (Hit)
+    |True? Wait : (Hit)
+    *(Hit):
+    |!Got(Power) ? Rest : ()
+    |Cell(F,V)? Egg() : (Turn)
+    |Cell(F,#)? Hit(F) : (Turn)
+    |True? Wait : (Turn)
+    *(Turn):
+    |!Got(Power) ? Rest : ()
+    |True? Turn(R) : (Move)
+    *()
+}
+Projectile(S1){
+    *(S1):
+    |Cell(F,V)? Move(F) : (S1)
+    |Cell(F,#)? Hit(F) : ()
+    |True ? Rest : ()
+    *()
 }
 
 Trap(Init){

@@ -60,6 +60,7 @@ public class Game {
 		// in an Model-View-Controller pattern (MVC)
 		m_control = new Control();
 
+		
 		m_grille = config("game/info3/game/config.json");
 		// creating a listener for all the events
 		// from the game canvas, that would be

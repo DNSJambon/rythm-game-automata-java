@@ -27,6 +27,7 @@ public abstract class Ennemi extends Entity{
     public char getCategory() {
         return Category.E;
     }
+    
 
 
 }

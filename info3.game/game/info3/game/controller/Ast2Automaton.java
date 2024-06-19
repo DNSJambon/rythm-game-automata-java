@@ -143,6 +143,17 @@ public class Ast2Automaton implements IVisitor{
                     default :
                         return new Got((char) params.get(0));
                 }
+            case "Turn":
+                switch ((String) params.get(0)) {
+                    case "R":
+                        return new Turn(DirRelative.Droite);
+                    case "L":
+                        return new Turn(DirRelative.Gauche);
+                    case "B":
+                        return new Turn(DirRelative.Derriere);
+                    case "F":
+                        return new Turn(DirRelative.Devant);
+                }
             //TODO: Add more cases
         }
         return null;

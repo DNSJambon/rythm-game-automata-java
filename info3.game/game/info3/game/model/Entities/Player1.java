@@ -22,7 +22,7 @@ public class Player1 extends Entity{
         this.y = y;
 
          try {
-            m_images = Grille.loadSprite("resources/magesquelette.png", 1, 4);
+            m_images = Grille.loadSprite("resources/player1.png", 1, 4);
             m_hit = Grille.loadSprite("resources/hit.png", 1, 4);
         } catch (IOException e) {
             e.printStackTrace();

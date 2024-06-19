@@ -24,7 +24,7 @@ public class Squelette extends Ennemi {
         this.y = y;
 
         try {
-            m_images = Grille.loadSprite("resources/squelette.png", 1, 4); 
+            m_images = Grille.loadSprite("resources/squelette.png", 2, 4); 
         } catch (IOException e) {
             e.printStackTrace();
         }
