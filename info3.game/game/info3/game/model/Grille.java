@@ -486,12 +486,6 @@ public class Grille implements IGrille {
         g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);
 
-        if (IsAuthorised()) {
-            g.drawImage(indicator[0], x, y + height / 2, width, height / 2, null);
-        } else {
-            g.drawImage(indicator[1], x, y + height / 2, width, height / 2, null);
-        }
-
         //coeur
         int life = ((Player1) main_Entity).getLife();
 

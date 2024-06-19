@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +14,8 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.jcraft.jogg.Buffer;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -71,7 +74,7 @@ public class Game {
 		m_canvas = new GameCanvas(m_listener);
 
 		System.out.println("  - creating frame...");
-		Dimension d = new Dimension(1203, 902);
+		Dimension d = new Dimension(1103, 803);
 		m_frame = m_canvas.createFrame(d);
 
 		System.out.println("  - setting up the frame...");
@@ -194,7 +197,8 @@ public class Game {
 	
 	private long decision;
 	private long freeze;
-    private long m_textElapsed;
+	private long m_textElapsed;
+	private long m_rythmElapsed;
 	private long m_timekey;
 	private long m_freeze;
 	private boolean authorised = true;
@@ -215,6 +219,7 @@ public class Game {
 			if (!m_grille.IsAuthorised()) {
 				m_grille.Authorised_True();
 				calib_done = true;
+				m_rythmElapsed = 0;
 				m_timekey = 100; //100 car la marge d'erreur pur un click est de 200ms,
 				m_freeze = 100; // donc on lance le jeu à 100ms afin d'etre au milieu de la fenetre d'erreur (+-100ms)
 			}
@@ -274,25 +279,32 @@ public class Game {
 		
 
 
-			// Update the game grid
-			m_grille.tick(elapsed);
+		// Update the game grid
+		m_grille.tick(elapsed);
 
-			// Update every second
-			// the text on top of the frame: tick and fps
-			m_textElapsed += elapsed;
-			if (m_textElapsed > 1000) {
+		// Update every second
+		// the text on top of the frame: tick and fps
+		m_textElapsed += elapsed;
+		if (m_textElapsed > 1000) {
 
-				m_textElapsed = 0;
-				float period = m_canvas.getTickPeriod();
-				int fps = m_canvas.getFPS();
+			m_textElapsed = 0;
+			float period = m_canvas.getTickPeriod();
+			int fps = m_canvas.getFPS();
 
-				String txt = "Tick=" + period + "ms";
-				while (txt.length() < 15)
-					txt += " ";
-				txt = txt + fps + " fps   ";
-				m_text.setText(txt);
-				
-			}
+			String txt = "Tick=" + period + "ms";
+			while (txt.length() < 15)
+				txt += " ";
+			txt = txt + fps + " fps   ";
+			m_text.setText(txt);
+
+		}
+		
+		//le cycle des 5 images de rythme doit durer 1 bpm
+		m_rythmElapsed += elapsed;
+		if (m_rythmElapsed > (60000 / bpm / 10) & calib_done) {
+			m_rythmElapsed = m_rythmElapsed - 60000 / bpm / 10;
+			rythm_index = (rythm_index + 1) % 10;
+		}
 		
 	}
 	
@@ -308,13 +320,13 @@ public class Game {
 		// get the size of the canvas
 		int width = m_canvas.getWidth();
 		int height = m_canvas.getHeight();
-
+		
 		// erase background
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, width, height);
 
 		// paint
-		// System.out.println(width + " " + height);
+		//System.out.println(width + " " + height);
 		m_grille.paint(g, width - 340, height);
 		if (!calib_done && !Jump) {
 			g.setColor(Color.black);
@@ -325,26 +337,36 @@ public class Game {
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
 			g.drawString("Appuyez 2 fois en rythme pour commencer", (width - 340) / 7 * 2, height / 5 + 30);
 		}
-		
+
 		if (m_grille.game_over == 1) {//victoire joueur 1
 			g.setColor(Color.black);
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
 			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
-			g.drawString("Victoire du Joueur 1", (width - 340) / 7 * 3, height / 5+30);
+			g.drawString("Victoire du Joueur 1", (width - 340) / 7 * 3, height / 5 + 30);
 
 		}
-		
+
 		if (m_grille.game_over == 2) {//victoire joueur 2
 			g.setColor(Color.black);
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
 			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
-			g.drawString("Victoire du Joueur 2", (width - 340) / 7 * 3, height / 5+25);
+			g.drawString("Victoire du Joueur 2", (width - 340) / 7 * 3, height / 5 + 25);
 
 		}
 
+		if (!Jump)
+			paint_rythm(g, 0, height/7*6, width-340, height/7);
+
 	}
+
+	BufferedImage[] rythm = Grille.loadSprite("resources/rythm.png", 10, 1);
+	int rythm_index = 0;
+	void paint_rythm(Graphics g, int x, int y, int width, int height){
+		g.drawImage(rythm[rythm_index], x, y, width, height, null);
+	}
+	
 	
 
 	//====================MUSIC====================
