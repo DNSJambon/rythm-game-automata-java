@@ -300,8 +300,9 @@ public class Game {
 
 		}
 		
-		//le cycle des 5 images de rythme doit durer 1 bpm
+		//le cycle des 10 images de rythme doit durer 1 bpm
 		m_rythmElapsed += elapsed;
+		if (!Jump)
 		if (m_rythmElapsed > (60000 / bpm / 10) & calib_done) {
 			m_rythmElapsed = m_rythmElapsed - 60000 / bpm / 10;
 			rythm_index = (rythm_index + 1) % 10;
