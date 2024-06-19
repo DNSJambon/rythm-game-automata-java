@@ -108,10 +108,8 @@ public abstract class Entity {
                     return type == Category.O;
                 }
                 return g.getCell(x, y+1).getCategory() ==type;
-
-            default:
-
-                return g.getCell(x, y).getCategory() ==type;
+            default :
+                return g.getCell(x, y).getCategory() == type;
         }
     }
     
@@ -165,13 +163,13 @@ public abstract class Entity {
     }
 
     public boolean eval_closest(char c, Direction dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
+            throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
     }
 
     public boolean eval_got(Entity e,char cat) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eval_got'");
+        // throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
+
+        return e.getCategory() == cat;
     }
 
     public boolean eval_got_power(Entity e,int i) {
@@ -184,6 +182,11 @@ public abstract class Entity {
     public abstract boolean do_wizz(Entity e);
     public abstract boolean do_turn(Entity e, DirRelative dir);
 
+
+
+    public boolean do_got(Entity e, char cat) {
+        return this.getCategory() == cat;
+    }
     public boolean do_hit(Entity e, DirRelative dir) { 
             switch (dir) {
 

@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 
 import info3.game.controller.*;
 import info3.game.controller.Conditions.Cell;
+import info3.game.model.Entities.Door;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.Key;
 import info3.game.model.Entities.Mage;
@@ -85,8 +86,11 @@ public class Grille implements IGrille {
         
         c = randomCell_libre();
         Key k = new Key(this, c.getCol(), c.getRow(), automates.get("Key"));
-        addEntity(k);
+        
 
+        c = randomCell_libre();
+        Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
+        
         //======placer le joueur 2 dans le labyrinthe====== 
 
         c = randomCell_libre();
@@ -410,7 +414,7 @@ public class Grille implements IGrille {
         drawMinimap(g, width, (height - 340) / 2, 340, 340);
 
         //ATH huta
-        drawATH_haut(g, width, 0, 340, (height - 340) / 2);
+         drawATH_haut(g, width, 0, 340, (height - 340) / 2);
 
         //ATH bas
         drawATH_bas(g, width, (height + 340) / 2, 340, (height - 340) / 2);
@@ -444,7 +448,9 @@ public class Grille implements IGrille {
                     case '#':
                         g.setColor(Color.BLUE);
                         break;
-   
+                    case 'D':
+                         g.setColor(Color.WHITE);
+                         break;
                 }
                 g.fillRect(x + (i * width / cols), y + (j * height / rows), width / cols, height / rows);
             }

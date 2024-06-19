@@ -126,4 +126,11 @@ Trap(Init){
 | Cell(H, #) ? Hit(H) : (Activate)
 | True ? Pop : (Activate)
 }
+Door(S1){
+*(S1):
+| Closest(K, N)  ? Pick : (S2)
+| True ? Wait : (S1)
+*(S2):
+| True ? Wait : (S2)
+}
 
