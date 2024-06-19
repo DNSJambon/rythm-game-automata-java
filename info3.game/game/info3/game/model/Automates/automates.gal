@@ -47,6 +47,7 @@ Player1(S1){
 
 Suiveur(S1){
 *(S1):
+| !Got(Power) ? Rest : ()
 | Closest(#, N) & Cell (F, V) ? Move(F) : (S1)
 | Closest(#, S) & Cell (B, V) ? Move(B) : (S1)
 | Closest(#, E) & Cell (R, V) ? Move(R) : (S1)
@@ -56,6 +57,7 @@ Suiveur(S1){
 | Cell (R, #) ? Hit (R) : (S1)
 | Cell (L, #) ? Hit (L) : (S1)
 | True ? Wait : (S1)
+*()
 }
 
 Player2(Init){
@@ -75,13 +77,15 @@ Squelette(Left){
 | !Got(Power) ? Rest : ()
 | Cell(L, V) ? Move(L) : (Left)
 | Cell(L, #) ? Hit(L) : (Left)
-| True ? Move(R) : (Right)
+| Cell(R, V) ? Move(R) : (Right)
+| True ? Wait : (Left)
 
 * (Right):
 | !Got(Power) ? Rest : ()
 | Cell(R, V) ? Move(R) : (Right)
 | Cell(R, #) ? Hit(R) : (Right)
-| True ? Move(L) : (Left)
+| Cell(L, V) ? Move(L) : (Left)
+| True ? Wait : (Right)
 
 * ()
 }
@@ -96,26 +100,27 @@ Key(S1){
 }
 
 Mage(Move){
-    *(Move):
-    |!Got(Power) ? Rest : ()
-    |Cell(F,V)? Move(F) : (Hit)
-    |True? Wait : (Hit)
-    *(Hit):
-    |!Got(Power) ? Rest : ()
-    |Cell(F,V)? Egg() : (Turn)
-    |Cell(F,#)? Hit(F) : (Turn)
-    |True? Wait : (Turn)
-    *(Turn):
-    |!Got(Power) ? Rest : ()
-    |True? Turn(R) : (Move)
-    *()
+*(Move):
+| !Got(Power) ? Rest : ()
+| Cell(F,V)? Move(F) : (Hit)
+| True? Wait : (Hit)
+* (Hit):
+| !Got(Power) ? Rest : ()
+| Cell(F,V)? Egg() : (Turn)
+| Cell(F,#)? Hit(F) : (Turn)
+| True? Wait : (Turn)
+* (Turn):
+| !Got(Power) ? Rest : ()
+| True? Turn(R) : (Move)
+* ()
 }
+
 Projectile(S1){
-    *(S1):
-    |Cell(F,V)? Move(F) : (S1)
-    |Cell(F,#)? Hit(F) : ()
-    |True ? Rest : ()
-    *()
+* (S1):
+| Cell(F,V)? Move(F) : (S1)
+| Cell(F,#)? Hit(F) : ()
+| True ? Rest : ()
+* ()
 }
 
 Trap(Init){
@@ -126,6 +131,7 @@ Trap(Init){
 | Cell(H, #) ? Hit(H) : (Activate)
 | True ? Pop : (Activate)
 }
+
 Door(S1){
 *(S1):
 | Closest(K, N)  ? Pick : (S2)

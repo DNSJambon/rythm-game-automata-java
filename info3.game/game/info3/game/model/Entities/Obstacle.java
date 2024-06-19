@@ -1,6 +1,7 @@
 package info3.game.model.Entities;
 
 import java.awt.Graphics;
+import java.io.IOException;
 
 import info3.game.controller.*;
 import info3.game.controller.Actions.Wait;
@@ -18,6 +19,13 @@ public class Obstacle extends Entity {
         this.direction = Direction.Sud;
 
         g.getCell(x, y).setEntity(this);
+
+        try {
+            m_images = Grille.loadSprite("resources/mur.png", 1, 1);
+           
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     
@@ -207,7 +215,7 @@ public class Obstacle extends Entity {
 
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
-        graphics.drawImage(((Grille)g).getImage(43), x, y, width, height, null);
+        graphics.drawImage(m_images[0], x, y-(height/2), width, height*3/2, null);
     }
 
     @Override

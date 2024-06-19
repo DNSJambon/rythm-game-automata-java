@@ -162,31 +162,17 @@ public abstract class Entity {
         return this.direction == RelativeToAbsolute(dir);
     }
 
-    public boolean eval_closest(char c, Direction dir) {
-            throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
-    }
+    
 
     public boolean eval_got(Entity e,char cat) {
-        // throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
-
         return e.getCategory() == cat;
     }
 
-    public boolean eval_got_power(Entity e,int i) {
-        return e.getLife()>i;
+    public boolean eval_got_power(Entity e, int i) {
+        return e.getLife() > i;
+
     }
 
-    public abstract boolean do_egg(Entity e);
-    public abstract boolean do_pick(Entity e);
-    public abstract boolean do_pop(Entity e);
-    public abstract boolean do_wizz(Entity e);
-    public abstract boolean do_turn(Entity e, DirRelative dir);
-
-
-
-    public boolean do_got(Entity e, char cat) {
-        return this.getCategory() == cat;
-    }
     public boolean do_hit(Entity e, DirRelative dir) { 
             switch (dir) {
 
@@ -230,6 +216,35 @@ public abstract class Entity {
     public boolean do_wait(Entity e) {
         return true;
     }
+
+     public boolean eval_closest(char c, Direction dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
+    }
+
+    
+
+    public boolean do_egg(Entity e){
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
+    }
+
+    public boolean do_pick(Entity e){
+        return true;
+    }
+
+    public boolean do_pop(Entity e){
+        return true;
+    }
+
+    public boolean do_wizz(Entity e){
+        return true;
+    }
+
+    public boolean do_turn(Entity e, DirRelative dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
+    }
     
     
     //variables pour l'animation de deplacement
@@ -251,8 +266,11 @@ public abstract class Entity {
             in_movement--;
         }
             
-
-        graphics.drawImage(m_images[image_index+ got_hit], x, y, width, height, null);
+        if (this instanceof Player2 || this instanceof Door || this instanceof Trap)
+             graphics.drawImage(m_images[image_index+ got_hit], x, y, width, height, null);
+        else
+            graphics.drawImage(m_images[image_index + got_hit], x, y - height / 4, width, height, null);
+            
         if (got_hit < 4 && got_hit != 0)
             got_hit++;
         else

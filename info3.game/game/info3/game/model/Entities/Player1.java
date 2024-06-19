@@ -22,7 +22,7 @@ public class Player1 extends Entity{
         this.y = y;
 
          try {
-            m_images = Grille.loadSprite("resources/player1.png", 1, 4);
+            m_images = Grille.loadSprite("resources/player1.png", 2, 4);
             m_hit = Grille.loadSprite("resources/hit.png", 1, 4);
         } catch (IOException e) {
             e.printStackTrace();
@@ -110,21 +110,8 @@ public class Player1 extends Entity{
     
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
-        if (in_movement != -1) {
-            if (direction == Direction.Nord) {
-                y += height * slide[nb_frame_move - in_movement];
-            } else if (direction == Direction.Est) {
-                x -= width * slide[nb_frame_move - in_movement];
-            } else if (direction == Direction.Sud) {
-                y -= height * slide[nb_frame_move - in_movement];
-            } else if (direction == Direction.Ouest) {
-                x += width * slide[nb_frame_move - in_movement];
-            }
-            in_movement--;
-        }
-            
+        super.paint(graphics, x, y, width, height);
 
-        graphics.drawImage(m_images[image_index], x, y, width, height, null);
         if (in_hit) {
             if (direction == Direction.Nord) {
                 graphics.drawImage(m_hit[image_hit], x, y-height, width, height, null);
@@ -162,7 +149,7 @@ public class Player1 extends Entity{
         }
 
         animation_elapsed += elapsed;
-        if (animation_elapsed > 200) {
+        if (animation_elapsed > 150) {
             image_index = (image_index + 1) % 4;
             animation_elapsed = 0;
         }
