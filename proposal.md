@@ -24,8 +24,8 @@ Trouver une clé puis sortir.
   - A des points de vie.
 - Joueur 2 :
   - C'est un curseur. 
-  - Se déplace à l'aide des touches ZQSD.
-  - Peut spawn des monstres avec les touches E,A,R,F.
+  - Se déplace à l'aide des touches zqsd.
+  - Peut spawn des monstres avec les touches e,r,f.
   - Se déplace sans collision et peut placer un mob toutes les X étapes grâce à Egg.
   - Ne peut placer des mobs que sur des cases vides.
 ### ViewPort (vue) : 
@@ -137,40 +137,30 @@ Trouver une clé puis sortir.
 ## Automates en GAL
 ### Joueur 1
 ```gal
-Player1(Init){
-* (Init):
-| pressKey(FU) & eval_cell(P1, N, Ennemy) ? Hit(N) :(Init)
-| pressKey(FD) & eval_cell(P1, S, Ennemy) ? Hit(S) :(Init)
-| pressKey(FR) & eval_cell(P1, E, Ennemy) ? Hit(E) :(Init)
-| pressKey(FL) & eval_cell(P1, O, Ennemy) ? Hit(O) :(Init)
-
-| pressKey(FU) & eval_cell(P1, N, Void) ? Move(N) :(Init)
-| pressKey(FU) & eval_cell(P1, N, Key) ? Move(N) :(Init)
-
-| pressKey(FD) & eval_cell(P1, S, Void) ? Move(S) :(Init)
-| pressKey(FD) & eval_cell(P1, S, Key) ? Move(S) :(Init)
-
-| pressKey(FR) & eval_cell(P1, E, Void) ? Move(E) :(Init)
-| pressKey(FR) & eval_cell(P1, E, Key) ? Move(E) :(Init)
-
-| pressKey(FL) & eval_cell(P1, O, Void) ? Move(O) :(Init)
-| pressKey(FL) & eval_cell(P1, O, Key) ? Move(O) :(Init)
+Player1(S1){
+*(S1):
+| Cell(R, V)  & Key(m) ? Move(R) : (S1)
+| Key(o) & Cell(F, V) ? Move(F) : (S1)
+| Key(l) & Cell(B, V) ? Move(B) : (S1)
+| Key(k) & Cell(L, V) ? Move(L) : (S1)
+| True ? Wait : (S1)
 }
 ```
 ### Joueur 2
 ```gal
 Player2(Init){
 * (Init):
-| pressKey(Z) ? Move(N) :(Init)
-| pressKey(Q) ? Move(O) :(Init)
-| pressKey(S) ? Move(S) :(Init)
-| pressKey(D) ? Move(E) :(Init)
+| Key(z) ? Move(F) :(Init)
+| Key(q) ? Move(L) :(Init)
+| Key(s) ? Move(B) :(Init)
+| Key(d) ? Move(R) :(Init)
 
-| pressKey(A) ? Pop() :(Init)
+| Key(a) & Cell(H, V) ? Egg() :(Init)
 
-| pressKey(R) ? Egg() :(Init)
+| Key(r) & Cell(H, V) ? Pop() :(Init)
 
-| pressKey(E) ? Wizz() :(Init)
+| Key(e) & Cell(H, V) ? Wizz() :(Init)
+| True ? Wait : (Init)
 }
 ```
 ### Piege (pique)
@@ -185,12 +175,17 @@ Piege(1){
 ```
 ### Ennemy suiveur
 ```gal
-Suiveur(1){
-* (1):
-| Closest(d,P) & Cell(d,Obstacle) ? Wait :(1)
-| Closest(d,P) & Cell(d,Ennemy) ? Wait :(1)
-| Closest(d,P) & Cell(d,Void) ? Move(d) :(1)
-| Cell(d,P) ? Hit(d) :(1)
+Suiveur(S1){
+*(S1):
+| Closest(#, N) & Cell (F, V) ? Move(F) : (S1)
+| Closest(#, S) & Cell (B, V) ? Move(B) : (S1)
+| Closest(#, E) & Cell (R, V) ? Move(R) : (S1)
+| Closest(#, W) & Cell (L, V) ? Move(L) : (S1)
+| Cell (F, #) ? Hit (F) : (S1)
+| Cell (B, #) ? Hit (B) : (S1)
+| Cell (R, #) ? Hit (R) : (S1)
+| Cell (L, #) ? Hit (L) : (S1)
+| True ? Wait : (S1)
 }
 ```
 ### Mage
@@ -223,6 +218,24 @@ Projectile(Alive){
 
 }
 ```
+### Slime
+```gal
+Slime(Monter1){
+* (Monter1):
+| Cell(F, V) ? Move(F) : (Monter1)
+| Cell(F, O) ? Move(B) : (Descendre1)
+* (Descendre1):
+| Cell(B, V) ? Move(B) : (Descendre2)
+| Cell(B, O) ? Move(F) : (Monter2)
+* (Descendre2):
+| Cell(B, V) ? Move(B) : (Monter2)
+| Cell(B, O) ? Move(F) : (Monter2)
+* (Monter2):
+| Cell(F, V) ? Move(F) : (Monter1)
+| Cell(F, O) ? Move(B) : (Descendre1)
+}
+```
+
 ## Point Technique - Synchronisation
 ### Jeu Synchrone (Jeu 1)
 La durée du jeu est infinie. Les actions sont synchronisées et se déroulent une fois le joueur 1 fait son action. 

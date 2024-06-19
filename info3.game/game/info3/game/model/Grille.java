@@ -3,15 +3,11 @@ package info3.game.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+
 import java.util.Random;
 import javax.imageio.ImageIO;
 
-import gal.ast.AST;
-import gal.ast.Automaton;
-import gal.parser.Parser;
+
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -22,10 +18,13 @@ import info3.game.controller.Conditions.Cell;
 import info3.game.model.Entities.Door;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.Key;
-import info3.game.model.Entities.MazeSolver;
+import info3.game.model.Entities.Mage;
+
+import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
+import info3.game.model.Entities.Trap;
 import info3.game.model.Entities.Player2;
 import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Squelette;
@@ -39,6 +38,7 @@ public class Grille implements IGrille {
 
     Control m_control;
     public HashMap<String, Automate> automates;
+    public int game_over = 0; // 0 = en cours, 1 = victoire joueur 1, 2 = victoire joueur 2
 
     // Viewport
     BufferedImage[] m_images;
@@ -99,6 +99,16 @@ public class Grille implements IGrille {
 
         place_monstre(10);
         c = randomCell_libre();
+        new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
+
+        //======placer les traps dans le labyrinthe======
+        for (int i = 0; i < 20; i++) {
+            c = randomCell_libre();
+            if (c.e[0]==null) {
+                Trap t = new Trap(this, c.getCol(), c.getRow(),automates.get("Trap"));
+            }
+            else {i--;}
+        }
 
      
 
@@ -190,7 +200,7 @@ public class Grille implements IGrille {
         
         for (int i = 0; i < nb_monstre; i++) {
             cell c = randomCell_libre();
-            new MazeSolver(this, c.getCol(), c.getRow(), automates.get("MazeSolver"));
+            new Slime(this, c.getCol(), c.getRow(), automates.get("Slime"));
         }
     }
     
@@ -525,9 +535,19 @@ public class Grille implements IGrille {
         g.fillRect(x, y, width, height);
 
         //affichage cooldown
-        int cooldown = ((Player2) joueur2).getCooldown_egg();
+        int cooldown_egg = ((Player2) joueur2).getCooldown_egg();
         g.setColor(Color.PINK);
-        g.fillRect(x, y, width / 3, height / 3 * (3 - cooldown));
+        g.fillRect(x, y, width / 3, height / 3 * (3 - cooldown_egg));
+
+        int cooldown_wizz =  ((Player2) joueur2).getCooldown_wizz();
+        g.setColor(Color.BLUE);
+        g.fillRect(x+width / 3, y, width / 3, height / 5 * (5 - cooldown_wizz));
+
+        int cooldown_pop = ((Player2) joueur2).getCooldown_pop();
+        g.setColor(Color.MAGENTA);
+        g.fillRect(x+2*(width / 3), y, width / 3, height / 10 * (10 - cooldown_pop));
+        
+
 
     }
 

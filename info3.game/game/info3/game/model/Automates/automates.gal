@@ -1,32 +1,28 @@
-Mazesolver(Haut){
+Slime(Haut){
 *(Haut):
 | !Got(Power) ? Rest : ()
-| Cell(F, V) ? Move(F) : (Droite)
+| Cell(F, V) ? Move(F) : (Waitbas)
 | Cell(F, #) ? Hit(F) : (Haut)
-| True ? Wait : (Droite)
+| True ? Wait : (Waitbas)
 
-*(Droite):
-| !Got(Power) ? Rest : ()
-| Cell(R, V) ? Move(R) : (Bas)
-| Cell(R, #) ? Hit(R) : (Droite)
-| True ? Wait : (Bas)
 
 *(Bas):
 | !Got(Power) ? Rest : ()
-| Cell(B, V) ? Move(B) : (Gauche)
+| Cell(B, V) ? Move(B) : (Waithaut)
 | Cell(B, #) ? Hit(B) : (Bas)
-| True ? Wait : (Gauche)
+| True ? Wait : (Waithaut)
 
-*(Gauche):
+*(Waithaut):
 | !Got(Power) ? Rest : ()
-| Cell(L, V) ? Move(L) : (Haut)
-| Cell(L, #) ? Hit(L) : (Gauche)
 | True ? Wait : (Haut)
+
+*(Waitbas):
+| !Got(Power) ? Rest : ()  
+| True ? Wait : (Bas)
 
 *()
 | True ? Wait : ()
 }
-
 
 Wall(S1){
 *(S1):
@@ -68,41 +64,28 @@ Player2(Init){
 | Key(q) ? Move(L) :(Init)
 | Key(s) ? Move(B) :(Init)
 | Key(d) ? Move(R) :(Init)
-
 | Key(a) & Cell(H, V) ? Egg() :(Init)
-
 | Key(r) & Cell(H, V) ? Pop() :(Init)
-
 | Key(e) & Cell(H, V) ? Wizz() :(Init)
 | True ? Wait : (Init)
-
-
 }
 
 Squelette(Left){
 * (Left):
+| !Got(Power) ? Rest : ()
 | Cell(L, V) ? Move(L) : (Left)
-| Cell(L, O) ? Turn(R) : (Right)
+| Cell(L, #) ? Hit(L) : (Left)
+| True ? Move(R) : (Right)
 
 * (Right):
+| !Got(Power) ? Rest : ()
 | Cell(R, V) ? Move(R) : (Right)
-| Cell(R, O) ? Turn(L) : (Left)
+| Cell(R, #) ? Hit(R) : (Right)
+| True ? Move(L) : (Left)
+
+* ()
 }
 
-Slime(Monter1){
-* (Monter1):
-| Cell(F, V) ? Move(F) : (Monter1)
-| Cell(F, O) ? Move(B) : (Descendre1)
-* (Descendre1):
-| Cell(B, V) ? Move(B) : (Descendre2)
-| Cell(B, O) ? Move(F) : (Monter2)
-* (Descendre2):
-| Cell(B, V) ? Move(B) : (Monter2)
-| Cell(B, O) ? Move(F) : (Monter2)
-* (Monter2):
-| Cell(F, V) ? Move(F) : (Monter1)
-| Cell(F, O) ? Move(B) : (Descendre1)
-}
 
 Key(S1){
 *(S1):
@@ -112,6 +95,37 @@ Key(S1){
 | True ? Wait : (S2)
 }
 
+Mage(Move){
+    *(Move):
+    |!Got(Power) ? Rest : ()
+    |Cell(F,V)? Move(F) : (Hit)
+    |True? Wait : (Hit)
+    *(Hit):
+    |!Got(Power) ? Rest : ()
+    |Cell(F,V)? Egg() : (Turn)
+    |Cell(F,#)? Hit(F) : (Turn)
+    |True? Wait : (Turn)
+    *(Turn):
+    |!Got(Power) ? Rest : ()
+    |True? Turn(R) : (Move)
+    *()
+}
+Projectile(S1){
+    *(S1):
+    |Cell(F,V)? Move(F) : (S1)
+    |Cell(F,#)? Hit(F) : ()
+    |True ? Rest : ()
+    *()
+}
+
+Trap(Init){
+* (Init):
+| Cell(H, #) ? Wait : (Activate)
+| True ? Wait : (Init)
+* (Activate):
+| Cell(H, #) ? Hit(H) : (Activate)
+| True ? Pop : (Activate)
+}
 Door(S1){
 *(S1):
 | Closest(K, N)  ? Pick : (S2)

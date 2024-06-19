@@ -11,8 +11,6 @@ import info3.game.model.*;
 
 public class Player1 extends Entity{
 
-    
-    
     public Player1(IGrille g, int x, int y, Automate a) {
         super(g);
         life = 6;
@@ -24,7 +22,7 @@ public class Player1 extends Entity{
         this.y = y;
 
          try {
-            m_images = Grille.loadSprite("resources/magesquelette.png", 1, 4);
+            m_images = Grille.loadSprite("resources/player1.png", 1, 4);
             m_hit = Grille.loadSprite("resources/hit.png", 1, 4);
         } catch (IOException e) {
             e.printStackTrace();
@@ -150,8 +148,8 @@ public class Player1 extends Entity{
     @Override
     public void tick(long elapsed) {
         if (in_hit) {
-            hit_anim +=1;
-            if (hit_anim > 70) {
+            hit_anim +=elapsed;
+            if (hit_anim > 35) {
                 hit_anim = 0;
                 image_hit = (image_hit + 1);
                 

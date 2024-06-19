@@ -11,6 +11,8 @@ public interface Icell {
 
     public void setEntity(Entity e);
 
+    public void setTrap(Entity e);
+
     public void resetall();
 
     public void resetEntity();
@@ -25,7 +27,7 @@ public interface Icell {
 
     public void setP2(Entity e);
 
-    public void setTrap(Entity e);
+    
 
 
 }

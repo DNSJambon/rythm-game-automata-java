@@ -24,7 +24,7 @@ public class Squelette extends Ennemi {
         this.y = y;
 
         try {
-            m_images = Grille.loadSprite("resources/squelette.png", 1, 4); 
+            m_images = Grille.loadSprite("resources/squelette.png", 2, 4); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,45 +40,6 @@ public class Squelette extends Ennemi {
         return Category.E; //Ennemy
     }
 
-    public boolean eval_cell(Entity e, DirRelative dir, char type) {
-        switch (dir) {
-            case Devant:
-                return g.getCell(x, y - 1).getCategory() == type;
-
-            case Gauche:
-                return g.getCell(x - 1, y).getCategory() == type;
-
-            case Droite:
-                return g.getCell(x + 1, y).getCategory() == type;
-
-            case Derriere:
-                return g.getCell(x, y + 1).getCategory() == type;
-
-            default:
-                return false;
-        }
-    }
-
-    @Override
-    public boolean do_move(Entity e, DirRelative dir) {
-        in_movement = nb_frame_move;
-        switch (dir) {
-            case Gauche:
-                this.x--;
-                g.getCell(this.x + 1, this.y).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Ouest;
-                return true;
-            case Droite:
-                this.x++;
-                g.getCell(this.x - 1, this.y).resetEntity();
-                g.getCell(this.x, this.y).setEntity(this);
-                direction = Direction.Est;
-                return true;
-            default:
-                return false;
-        }
-    }
 
     @Override
     public boolean do_turn(Entity e, DirRelative dir) {
@@ -119,11 +80,7 @@ public class Squelette extends Ennemi {
         throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
     }
 
-    @Override
-    public boolean do_hit(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_hit'");
-    }
+
 
     
 }

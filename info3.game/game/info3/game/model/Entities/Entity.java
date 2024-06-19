@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import info3.game.controller.*;
 import info3.game.model.Category;
 import info3.game.model.IGrille;
+import info3.game.model.Grille;
 import info3.game.model.cellType;
 
 public abstract class Entity {
@@ -117,24 +118,36 @@ public abstract class Entity {
         switch (dir) {
 
             case Devant:
+                if (y == 0) {
+                    return false;
+                }
                 this.y--;
                 g.getCell(this.x, this.y + 1).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Nord;
                 return true;
             case Derriere:
+                if (y == g.getRows() - 1) {
+                    return false;
+                }
                 this.y++;
                 g.getCell(this.x, this.y - 1).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Sud;
                 return true;
             case Droite:
+                if (x == g.getCols() - 1) {
+                    return false;
+                }
                 this.x++;
                 g.getCell(this.x - 1, this.y).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
                 direction = Direction.Est;
                 return true;
             case Gauche:
+                if (x == 0) {
+                    return false;
+                }
                 this.x--;
                 g.getCell(this.x + 1, this.y).resetEntity();
                 g.getCell(this.x, this.y).setEntity(this);
@@ -189,6 +202,9 @@ public abstract class Entity {
             case Gauche:
                 g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
                 return true;
+            case soi:
+                g.getCell(this.x, this.y).GetEntity().get_hit(1);
+                return true;
             default:   
                 return false;
         }
@@ -199,11 +215,15 @@ public abstract class Entity {
     public boolean do_die(Entity e){
         g.getCell(x, y).resetEntity();
         g.removeEntity(this);
+        if (this instanceof Player1) {
+            ((Grille)g).game_over = 2; //joueur 2 a gagné
+        }
         return true;
     }
     
     public void get_hit(int damage){
-        this.life-=damage;
+        this.life -= damage;
+        got_hit = 1;
     }
 
 
@@ -213,6 +233,7 @@ public abstract class Entity {
     
     
     //variables pour l'animation de deplacement
+    int got_hit = 0;
     int in_movement = -1;
     int nb_frame_move = 10;
     float[] slide = {1.0f, 0.7f, 0.36f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f};
@@ -231,8 +252,12 @@ public abstract class Entity {
         }
             
 
-        graphics.drawImage(m_images[image_index], x, y, width, height, null);
-
+        graphics.drawImage(m_images[image_index+ got_hit], x, y, width, height, null);
+        if (got_hit < 4 && got_hit != 0)
+            got_hit++;
+        else
+            got_hit = 0;
+        
     }
 
     

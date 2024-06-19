@@ -134,6 +134,8 @@ public class Ast2Automaton implements IVisitor{
                     return new Hit(DirRelative.Devant);
                 case "B":
                     return new Hit(DirRelative.Derriere);
+                case "H":
+                    return new Hit(DirRelative.soi);
                 }
             case "Got" :
                 switch ((String) params.get(0)) {
@@ -144,6 +146,17 @@ public class Ast2Automaton implements IVisitor{
 
                     default :
                         return new Got((char) params.get(0));
+                }
+            case "Turn":
+                switch ((String) params.get(0)) {
+                    case "R":
+                        return new Turn(DirRelative.Droite);
+                    case "L":
+                        return new Turn(DirRelative.Gauche);
+                    case "B":
+                        return new Turn(DirRelative.Derriere);
+                    case "F":
+                        return new Turn(DirRelative.Devant);
                 }
             case "Pick" :
                 return new Pick();

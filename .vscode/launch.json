@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Game",
+            "request": "launch",
+            "mainClass": "info3.game.Game",
+            "cwd": "${workspaceFolder}/info3.game"
+        }
+    ]
+}

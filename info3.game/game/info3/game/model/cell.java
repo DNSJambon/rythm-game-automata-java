@@ -51,21 +51,19 @@ public class cell implements Icell {
     }
 
     public char getCategory() {
-        if (vide == 1) {
-            
+        if (vide == 1) { 
             if (e[0] != null) 
                 return e[0].getCategory();         
-
             return Category.V;
-       
-        } else {
+        } 
+        else {
             return e[1].getCategory();
         }
     }
 
     public void setTrap(Entity e) {
         this.e[0] = e;
-        
+        vide = 1;
     }
 
     public void setEntity(Entity e) {
