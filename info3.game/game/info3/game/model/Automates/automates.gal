@@ -47,6 +47,7 @@ Player1(S1){
 
 Suiveur(S1){
 *(S1):
+| !Got(Power) ? Rest : ()
 | Closest(#, N) & Cell (F, V) ? Move(F) : (S1)
 | Closest(#, S) & Cell (B, V) ? Move(B) : (S1)
 | Closest(#, E) & Cell (R, V) ? Move(R) : (S1)
