@@ -80,10 +80,6 @@ Trouver une clé puis sortir.
             "automate" : "Squelette"
         },
         {
-            "name" : "Slime",
-            "automate" : "Slime"
-        },
-        {
             "name" : "Trap",
             "automate" : "Trap"
         },
