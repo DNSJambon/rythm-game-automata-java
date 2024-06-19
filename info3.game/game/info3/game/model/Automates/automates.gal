@@ -57,7 +57,6 @@ Suiveur(S1){
 | Cell (R, #) ? Hit (R) : (S1)
 | Cell (L, #) ? Hit (L) : (S1)
 | True ? Wait : (S1)
-*()
 }
 
 Player2(Init){
@@ -77,15 +76,13 @@ Squelette(Left){
 | !Got(Power) ? Rest : ()
 | Cell(L, V) ? Move(L) : (Left)
 | Cell(L, #) ? Hit(L) : (Left)
-| Cell(R, V) ? Move(R) : (Right)
-| True ? Wait : (Left)
+| True ? Move(R) : (Right)
 
 * (Right):
 | !Got(Power) ? Rest : ()
 | Cell(R, V) ? Move(R) : (Right)
 | Cell(R, #) ? Hit(R) : (Right)
-| Cell(L, V) ? Move(L) : (Left)
-| True ? Wait : (Right)
+| True ? Move(L) : (Left)
 
 * ()
 }
@@ -99,28 +96,23 @@ Key(S1){
 | True ? Wait : (S2)
 }
 
-Mage(Move){
-*(Move):
-| !Got(Power) ? Rest : ()
-| Cell(F,V)? Move(F) : (Hit)
-| True? Wait : (Hit)
-* (Hit):
-| !Got(Power) ? Rest : ()
-| Cell(F,V)? Egg() : (Turn)
-| Cell(F,#)? Hit(F) : (Turn)
-| True? Wait : (Turn)
-* (Turn):
-| !Got(Power) ? Rest : ()
-| True? Turn(R) : (Move)
-* ()
+Mage(Hit){
+    *(Hit):
+    |!Got(Power) ? Rest : ()
+    |Cell(F,V)? Egg() : (Turn)
+    |Cell(F,#)? Hit(F) : (Turn)
+    |True? Wait : (Turn)
+    *(Turn):
+    |!Got(Power) ? Rest : ()
+    |True? Turn(R) : (Hit)
+    *()
 }
-
 Projectile(S1){
-* (S1):
-| Cell(F,V)? Move(F) : (S1)
-| Cell(F,#)? Hit(F) : ()
-| True ? Rest : ()
-* ()
+    *(S1):
+    |Cell(F,V)? Move(F) : (S1)
+    |Cell(F,#)? Hit(F) : ()
+    |True ? Rest : ()
+    *()
 }
 
 Trap(Init){
@@ -131,7 +123,6 @@ Trap(Init){
 | Cell(H, #) ? Hit(H) : (Activate)
 | True ? Pop : (Activate)
 }
-
 Door(S1){
 *(S1):
 | Closest(K, N)  ? Pick : (S2)
@@ -140,4 +131,58 @@ Door(S1){
 | Cell(H,#) ? Egg() : (S2)
 | True ? Wait : (S2)
 }
+Wall_Breakable(Vivant){
+*(Vivant):
+| !Got(Power) ? Rest : (Dead)
+| True ? Wait : (Vivant)
+*(Dead):
+*()
+}
 
+
+
+
+Sourischauve(Haut){
+*(Haut):
+| !Got(Power) ? Rest : ()
+| Cell(F, V) ? Move(F) : (Waitdroite)
+| Cell(F, #) ? Hit(F) : (Haut)
+| True ? Wait : (Waitdroite)
+
+*(Bas):
+| !Got(Power) ? Rest : ()
+| Cell(B, V) ? Move(B) : (Waitgauche)
+| Cell(B, #) ? Hit(B) : (Bas)
+| True ? Wait : (Waitgauche)
+
+*(Gauche):
+| !Got(Power) ? Rest : ()
+| Cell(L, V) ? Move(L) : (Waithaut)
+| Cell(L, #) ? Hit(L) : (Gauche)
+| True ? Wait : (Waithaut)
+
+*(Droite):
+| !Got(Power) ? Rest : ()
+| Cell(R, V) ? Move(R) : (Waitbas)
+| Cell(R, #) ? Hit(R) : (Droite)
+| True ? Wait : (Waitbas)
+
+*(Waithaut):
+| !Got(Power) ? Rest : ()
+| True ? Wait : (Haut)
+
+*(Waitbas):
+| !Got(Power) ? Rest : ()  
+| True ? Wait : (Bas)
+
+*(Waitgauche):
+| !Got(Power) ? Rest : ()
+| True ? Wait : (Gauche)
+
+*(Waitdroite):
+| !Got(Power) ? Rest : ()
+| True ? Wait : (Droite)
+
+*()
+| True ? Wait : ()
+}

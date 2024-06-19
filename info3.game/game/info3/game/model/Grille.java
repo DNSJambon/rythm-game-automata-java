@@ -21,13 +21,17 @@ import info3.game.model.Entities.Key;
 import info3.game.model.Entities.Mage;
 
 import info3.game.model.Entities.Slime;
+import info3.game.model.Entities.Sourischauve;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
+import info3.game.model.Entities.Wall_Breakable;
 import info3.game.model.Entities.Trap;
 import info3.game.model.Entities.Player2;
 import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Squelette;
+import info3.game.model.Entities.Wall_Breakable;
+import info3.game.model.Entities.Trap;
 
 
 public class Grille implements IGrille {
@@ -90,17 +94,21 @@ public class Grille implements IGrille {
 
         c = randomCell_libre();
         Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
+
         
         //======placer le joueur 2 dans le labyrinthe====== 
 
         c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
+        generer_mur_cassable(80);
 
         place_monstre(10);
-        c = randomCell_libre();
-        new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
-
+        for (int i=0 ; i < 2; i++) {
+            c = randomCell_libre();
+            new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
+        }
+        
         //======placer les traps dans le labyrinthe======
         for (int i = 0; i < 20; i++) {
             c = randomCell_libre();
@@ -110,6 +118,10 @@ public class Grille implements IGrille {
             else {i--;}
         }
 
+        for (int i = 0; i < 20; i++) {
+            c = randomCell_libre();
+            Sourischauve s = new Sourischauve(this, c.getCol(), c.getRow(),automates.get("Sourischauve"));
+        }
      
        
 
@@ -134,7 +146,14 @@ public class Grille implements IGrille {
     public void removeEntity(Entity e) {
         m_control.removeEntity(e);
     }
-
+    public void generer_mur_cassable(int nombre) {
+        cell c;
+        for (int i = 0; i < nombre; i++) {
+            c = randomCell_libre();
+            Wall_Breakable obs = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
+        }
+    }
+    
     
     
     //le but est de créer des salles dans le labyrinthe rempli de monstres
@@ -444,8 +463,14 @@ public class Grille implements IGrille {
                         g.setColor(player);
                         break;
                     case 'E':
+                        if (grille[j][i].getType()==cellType.Wall_Breakable){
+                            g.setColor(obstacle);
+                            break;
+                        }
+                        else{
                         g.setColor(Color.YELLOW);
                         break;
+                        }
                     case '#':
                         g.setColor(Color.BLUE);
                         break;
