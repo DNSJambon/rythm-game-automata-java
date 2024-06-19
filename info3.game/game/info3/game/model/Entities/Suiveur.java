@@ -39,11 +39,6 @@ public class Suiveur extends Ennemi{
     }
 
     @Override
-    public char getCategory() {
-        return Category.T;
-    }
-
-    @Override
     public boolean do_move(Entity e, DirRelative dir) {
         in_movement = nb_frame_move;
         switch (dir) {
