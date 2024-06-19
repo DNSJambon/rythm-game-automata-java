@@ -21,6 +21,7 @@ import info3.game.model.Entities.Key;
 import info3.game.model.Entities.Mage;
 
 import info3.game.model.Entities.Slime;
+import info3.game.model.Entities.Sourischauve;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
@@ -102,9 +103,11 @@ public class Grille implements IGrille {
         joueur2 = p2;
 
         place_monstre(10);
-        c = randomCell_libre();
-        new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
-        generer_mur_cassable(75);
+        for (int i=0 ; i < 2; i++) {
+            c = randomCell_libre();
+            new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
+        }
+        
         //======placer les traps dans le labyrinthe======
         for (int i = 0; i < 20; i++) {
             c = randomCell_libre();
@@ -114,6 +117,10 @@ public class Grille implements IGrille {
             else {i--;}
         }
 
+        for (int i = 0; i < 20; i++) {
+            c = randomCell_libre();
+            Sourischauve s = new Sourischauve(this, c.getCol(), c.getRow(),automates.get("Sourischauve"));
+        }
      
 
         //main_Entity;
