@@ -20,12 +20,12 @@ Trouver une clé puis sortir.
   - Joueur 2
 ### Joueurs
 - Joueur 1 :
-  - Se déplace à l'aide des flèches.
+  - Se déplace à l'aide des touches oklm.
   - A des points de vie.
 - Joueur 2 :
   - C'est un curseur. 
   - Se déplace à l'aide des touches zqsd.
-  - Peut spawn des monstres avec les touches e,r,f.
+  - Peut spawn des monstres avec les touches a,e,r.
   - Se déplace sans collision et peut placer un mob toutes les X étapes grâce à Egg.
   - Ne peut placer des mobs que sur des cases vides.
 ### ViewPort (vue) : 
@@ -47,91 +47,72 @@ Trouver une clé puis sortir.
 ### Jeu 1
 ```json
 {
-  
-  "germe" : 734,
-  "difficulty" : 2,  
-  "temps de décision" : 10000,
-  "entities": [
-    { "name" : "PLAYER 1",  
-      "behaviour": "player1.gal",
-      "featurs" : "Warrior",
-      "sprite" : "warrior.png", 
-    },
-    { "name" : "PLAYER 2",  
-      "behaviour": "player2.gal",
-      "features" : "Cursor",
-      "sprite" : "cursor.png", 
-    },
-    { "name" : "WALL breakable", 
-      "%density" : 23, 
-      "behaviour" : "",
-      "features" : "Wall1",
-      "sprite" : "wall1.png",
-    },
-    { "name" : "WALL unbreakable", 
-      "%density" : 23, 
-      "behaviour" : "",
-      "features" : "Wall2",
-      "sprite" : "wall2.png",
-    },
-    { "name" : "SLIME", 
-      "%density" : 5, 
-      "behaviour" : "SLIME.gal",
-      "features" : "Slime",
-      "sprite" : "slime.png",
-    },
-    { "name" : "", 
-      "%density" : 10, 
-      "behaviour" : ".gal",
-      "features" : "",
-      "sprite" : ".png",
-    }
-  ]
-}
-```
-### Jeu 2
-```json
-{
-  
-  "germe" : 732,
-  "difficulty" : 2,  
-  "temps de décision" : 1,
-  "entities": [
-    { "name" : "PLAYER 1",  
-      "behaviour": "player1.gal",
-      "featurs" : "Warrior",
-      "sprite" : "warrior.png", 
-    },
-    { "name" : "PLAYER 2",  
-      "behaviour": "player2.gal",
-      "features" : "Cursor",
-      "sprite" : "cursor.png", 
-    },
-    { "name" : "WALL breakable", 
-      "%density" : 23, 
-      "behaviour" : "",
-      "features" : "Wall1",
-      "sprite" : "wall1.png",
-    },
-    { "name" : "WALL unbreakable", 
-      "%density" : 23, 
-      "behaviour" : "",
-      "features" : "Wall2",
-      "sprite" : "wall2.png",
-    },
-    { "name" : "SLIME", 
-      "%density" : 5, 
-      "behaviour" : "SLIME.gal",
-      "features" : "Slime",
-      "sprite" : "slime.png",
-    },
-    { "name" : "", 
-      "%density" : 10, 
-      "behaviour" : ".gal",
-      "features" : "",
-      "sprite" : ".png",
-    }
-  ]
+    "seed": 5,
+    "difficulty": 1,
+    "rythm": 1,
+    "bpm": 100,
+    "automate_file" : "automates.gal",
+    "entities" : [
+        {   
+            "name" : "Joueur1",
+            "automate" : "Player1"
+        },
+        {
+            "name" : "Joueur2",
+            "automate" : "Player2"
+        },
+        {
+            "name" : "MurIncassable",
+            "automate" : "Wall"
+
+        },
+        {
+            "name" : "Suiveur",
+            "automate" : "Suiveur"
+
+        },
+        {
+            "name" : "Slime",
+            "automate" : "Slime"
+        },
+        {
+            "name" : "Squelette",
+            "automate" : "Squelette"
+        },
+        {
+            "name" : "Slime",
+            "automate" : "Slime"
+        },
+        {
+            "name" : "Trap",
+            "automate" : "Trap"
+        },
+        {
+            "name" : "Key",
+            "automate" : "Key"
+        },
+        {       
+            "name" : "Door",
+            "automate" : "Door"
+        },
+        {
+            "name": "Mage",
+            "automate": "Mage"
+        },
+        {
+            "name": "Projectile",
+            "automate": "Projectile"
+        },
+        {
+            "name": "Wall_Breakable",
+            "automate": "Wall_Breakable"
+        },
+        {
+            "name": "Sourischauve",
+            "automate": "Sourischauve"
+        }
+    ]
+
 }
 ```
 ## Automates en GAL
