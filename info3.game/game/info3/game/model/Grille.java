@@ -101,6 +101,7 @@ public class Grille implements IGrille {
         c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
+        generer_mur_cassable(80);
 
         place_monstre(10);
         for (int i=0 ; i < 2; i++) {
