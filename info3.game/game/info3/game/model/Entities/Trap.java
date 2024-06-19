@@ -63,6 +63,12 @@ public class Trap extends Entity{
     }
 
     @Override
+    public boolean do_hit(Entity e, DirRelative dir) {
+        this.activated=true;
+        return super.do_hit(e,dir);
+    }
+
+    @Override
     public boolean do_wizz(Entity e) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");

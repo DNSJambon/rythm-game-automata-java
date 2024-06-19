@@ -120,10 +120,10 @@ Projectile(S1){
 
 Trap(Init){
 * (Init):
-| Cell(H, #) ? Pop : (Activate)
+| Cell(H, #) ? Wait : (Activate)
 | True ? Wait : (Init)
 * (Activate):
 | Cell(H, #) ? Hit(H) : (Activate)
-| True ? Wait : (Activate)
+| True ? Pop : (Activate)
 }
 
