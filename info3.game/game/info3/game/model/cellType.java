@@ -20,6 +20,6 @@ public enum cellType {
     Suiveur,
     Projectile,
     Slime,
-    Squelette;
-    
+    Squelette,
+    Wall_Breakable
 }

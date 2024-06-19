@@ -24,10 +24,13 @@ import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
+import info3.game.model.Entities.Wall_Breakable;
 import info3.game.model.Entities.Trap;
 import info3.game.model.Entities.Player2;
 import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Squelette;
+import info3.game.model.Entities.Wall_Breakable;
+import info3.game.model.Entities.Trap;
 
 
 public class Grille implements IGrille {
@@ -90,6 +93,18 @@ public class Grille implements IGrille {
 
         c = randomCell_libre();
         Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
+        c = randomCell_libre();
+        Wall_Breakable obs = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
+        addEntity(obs);
+        c = randomCell_libre();
+        Wall_Breakable obs1 = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
+        addEntity(obs1);
+        c = randomCell_libre();
+        Wall_Breakable obs2 = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
+        addEntity(obs2);
+        c = randomCell_libre();
+        Wall_Breakable obs3 = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
+        addEntity(obs3);
         
         //======placer le joueur 2 dans le labyrinthe====== 
 
@@ -443,8 +458,14 @@ public class Grille implements IGrille {
                         g.setColor(player);
                         break;
                     case 'E':
+                        if (grille[j][i].getType()==cellType.Wall_Breakable){
+                            g.setColor(obstacle);
+                            break;
+                        }
+                        else{
                         g.setColor(Color.YELLOW);
                         break;
+                        }
                     case '#':
                         g.setColor(Color.BLUE);
                         break;
