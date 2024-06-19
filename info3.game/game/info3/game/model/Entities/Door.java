@@ -55,7 +55,8 @@ public class Door extends Entity {
 
     @Override
     public boolean do_egg(Entity e) {
-        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
+       ((Grille)g).game_over=1;
+       return true;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class Suiveur extends Ennemi{
         this.a=a;
 
         try {
-            m_images = Grille.loadSprite("resources/faucheuse.png", 1, 4);
+            m_images = Grille.loadSprite("resources/faucheuse.png", 2, 4);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,11 +36,6 @@ public class Suiveur extends Ennemi{
     @Override
     public cellType getType() {
         return cellType.Suiveur;
-    }
-
-    @Override
-    public char getCategory() {
-        return Category.T;
     }
 
     @Override
