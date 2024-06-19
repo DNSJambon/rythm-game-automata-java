@@ -23,6 +23,7 @@ import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
+import info3.game.model.Entities.Trap;
 import info3.game.model.Entities.Player2;
 import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Squelette;
@@ -95,6 +96,15 @@ public class Grille implements IGrille {
         place_monstre(10);
         c = randomCell_libre();
         new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
+
+        //======placer les traps dans le labyrinthe======
+        for (int i = 0; i < 20; i++) {
+            c = randomCell_libre();
+            if (c.e[0]==null) {
+                Trap t = new Trap(this, c.getCol(), c.getRow(),automates.get("Trap"));
+            }
+            else {i--;}
+        }
 
      
 

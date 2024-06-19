@@ -133,6 +133,8 @@ public class Ast2Automaton implements IVisitor{
                     return new Hit(DirRelative.Devant);
                 case "B":
                     return new Hit(DirRelative.Derriere);
+                case "H":
+                    return new Hit(DirRelative.soi);
                 }
             case "Got" :
                 switch ((String) params.get(0)) {
