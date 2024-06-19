@@ -20,9 +20,6 @@ Slime(Haut){
 *(Waitbas):
 | !Got(Power) ? Rest : ()  
 | True ? Wait : (Bas)
-
-
-
 *()
 | True ? Wait : ()
 }
@@ -124,5 +121,14 @@ Projectile(S1){
     |True ? Rest : ()
     *()
 }
+Wall_Breakable(S1){
+*(S1):
+| Cell(H, #) ? Explode : (S2)
+| True ? Wait : (S1)
+*(S2):
+| True ? Wait : (S2)
+*()
+}
+
 
 
