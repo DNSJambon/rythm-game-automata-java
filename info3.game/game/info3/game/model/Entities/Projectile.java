@@ -318,8 +318,9 @@ public class Projectile extends Ennemi{
     
     @Override
     public void tick(long elapsed) {
-        super.tick(elapsed);
-        if (animation_elapsed == 0) {
+         animation_elapsed += elapsed;
+        if (animation_elapsed > 1000/((float)4*100/60)) { //TODO: remplacer 100 par bpm
+            image_index = (image_index + 1) % 4;
             switch (direction) {
                 case Nord:
                     break;
@@ -332,7 +333,11 @@ public class Projectile extends Ennemi{
                 case Ouest:
                     image_index += 12;
                     break;
+                default:
+                    break;
+                
             }
+            animation_elapsed = 0;
         }
     }
 }
