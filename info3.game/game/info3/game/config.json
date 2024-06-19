@@ -1,5 +1,5 @@
 {
-    "seed": 4,
+    "seed": 5,
     "difficulty": 1,
     "rythm": 1,
     "bpm": 100,
@@ -36,6 +36,10 @@
             "automate" : "Slime"
         },
         {
+            "name" : "Trap",
+            "automate" : "Trap"
+        },
+        {
             "name" : "Key",
             "automate" : "Key"
         },
@@ -56,6 +60,5 @@
             "automate": "Wall_Breakable"
         }
     ]
-
 
 }

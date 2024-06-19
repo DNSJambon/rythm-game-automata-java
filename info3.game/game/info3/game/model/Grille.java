@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 
 import info3.game.controller.*;
 import info3.game.controller.Conditions.Cell;
+import info3.game.model.Entities.Door;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.Key;
 import info3.game.model.Entities.Mage;
@@ -24,9 +25,12 @@ import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
 import info3.game.model.Entities.Suiveur;
 import info3.game.model.Entities.Wall_Breakable;
+import info3.game.model.Entities.Trap;
 import info3.game.model.Entities.Player2;
 import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Squelette;
+import info3.game.model.Entities.Wall_Breakable;
+import info3.game.model.Entities.Trap;
 
 
 public class Grille implements IGrille {
@@ -85,7 +89,10 @@ public class Grille implements IGrille {
         
         c = randomCell_libre();
         Key k = new Key(this, c.getCol(), c.getRow(), automates.get("Key"));
-        addEntity(k);
+        
+
+        c = randomCell_libre();
+        Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
         c = randomCell_libre();
         Wall_Breakable obs = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
         addEntity(obs);
@@ -98,7 +105,7 @@ public class Grille implements IGrille {
         c = randomCell_libre();
         Wall_Breakable obs3 = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
         addEntity(obs3);
-
+        
         //======placer le joueur 2 dans le labyrinthe====== 
 
         c = randomCell_libre();
@@ -108,6 +115,15 @@ public class Grille implements IGrille {
         place_monstre(10);
         c = randomCell_libre();
         new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
+
+        //======placer les traps dans le labyrinthe======
+        for (int i = 0; i < 20; i++) {
+            c = randomCell_libre();
+            if (c.e[0]==null) {
+                Trap t = new Trap(this, c.getCol(), c.getRow(),automates.get("Trap"));
+            }
+            else {i--;}
+        }
 
      
 
@@ -413,7 +429,7 @@ public class Grille implements IGrille {
         drawMinimap(g, width, (height - 340) / 2, 340, 340);
 
         //ATH huta
-        drawATH_haut(g, width, 0, 340, (height - 340) / 2);
+         drawATH_haut(g, width, 0, 340, (height - 340) / 2);
 
         //ATH bas
         drawATH_bas(g, width, (height + 340) / 2, 340, (height - 340) / 2);
@@ -453,7 +469,9 @@ public class Grille implements IGrille {
                     case '#':
                         g.setColor(Color.BLUE);
                         break;
-   
+                    case 'D':
+                         g.setColor(Color.WHITE);
+                         break;
                 }
                 g.fillRect(x + (i * width / cols), y + (j * height / rows), width / cols, height / rows);
             }
