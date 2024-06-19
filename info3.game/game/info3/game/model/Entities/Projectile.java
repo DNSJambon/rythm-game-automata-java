@@ -149,46 +149,19 @@ public class Projectile extends Ennemi{
         }
     }
 
-    @Override
-    public boolean do_egg(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
-    }
 
-    @Override
-    public boolean do_pick(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
-    }
-
-    @Override
-    public boolean do_pop(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
-    }
-
-    @Override
-    public boolean do_wizz(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
-    }
-
-    @Override
-    public boolean do_turn(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
-    }
 
     @Override
     public boolean do_hit(Entity e, DirRelative dir) {
-        
+        //TODO: ameliorer la fonction
         switch (direction) {
             case Nord:
                 switch (dir) {
                     case Devant:
                         if (g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity() != null) {
                             g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().setLife(
-                                    g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()- 1);
+                                    g.getCell(this.x, (this.y + g.getRows() - 1) % g.getRows()).GetEntity().getLife()
+                                            - 1);
                             do_die(this);
                             return true;
                         }
@@ -341,5 +314,24 @@ public class Projectile extends Ennemi{
             default:
                 return false;
         }
+    }
+    
+    @Override
+    public void tick(long elapsed) {
+        super.tick(elapsed);
+        // switch (direction) {
+        //     case Nord:
+        //         image_index *= 1;
+        //         break;
+        //     case Sud:
+        //         image_index *= 2;
+        //         break;
+        //     case Est:
+        //         image_index *= 3;
+        //         break;
+        //     case Ouest:
+        //         image_index *= 4;
+        //         break;
+        // }
     }
 }
