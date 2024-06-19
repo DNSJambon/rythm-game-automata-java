@@ -414,7 +414,7 @@ public class Grille implements IGrille {
         drawMinimap(g, width, (height - 340) / 2, 340, 340);
 
         //ATH huta
-        // drawATH_haut(g, width, 0, 340, (height - 340) / 2);
+         drawATH_haut(g, width, 0, 340, (height - 340) / 2);
 
         //ATH bas
         drawATH_bas(g, width, (height + 340) / 2, 340, (height - 340) / 2);
