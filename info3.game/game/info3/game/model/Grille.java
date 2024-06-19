@@ -113,7 +113,7 @@ public class Grille implements IGrille {
      
 
         //main_Entity;
-        main_Entity = porte;
+        main_Entity = p1;
         x_main_old = main_Entity.getX();
         y_main_old = main_Entity.getY();
         //on s'assure que la vue ne sorte pas de la grille
