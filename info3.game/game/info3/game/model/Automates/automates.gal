@@ -76,13 +76,17 @@ Squelette(Left){
 | !Got(Power) ? Rest : ()
 | Cell(L, V) ? Move(L) : (Left)
 | Cell(L, #) ? Hit(L) : (Left)
-| True ? Move(R) : (Right)
+| Cell(R, V) ? Move(R) : (Right)
+| Cell(R, #) ? Hit(R) : (Right)
+| True ? Wait : (Right)
 
 * (Right):
 | !Got(Power) ? Rest : ()
 | Cell(R, V) ? Move(R) : (Right)
 | Cell(R, #) ? Hit(R) : (Right)
-| True ? Move(L) : (Left)
+| Cell(L, V) ? Move(L) : (Left)
+| Cell(L, #) ? Hit(L) : (Left)
+| True ? Wait : (Left)
 
 * ()
 }
