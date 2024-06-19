@@ -23,7 +23,7 @@ public class Projectile extends Ennemi{
         this.y = y;
         g.getCell(x, y).setEntity(this);
         try {
-            m_images = Grille.loadSprite("resources/projectile.png", 1, 4);
+            m_images = Grille.loadSprite("resources/projectile.png", 4, 4);
            
         } catch (IOException e) {
             e.printStackTrace();
@@ -318,20 +318,26 @@ public class Projectile extends Ennemi{
     
     @Override
     public void tick(long elapsed) {
-        super.tick(elapsed);
-        // switch (direction) {
-        //     case Nord:
-        //         image_index *= 1;
-        //         break;
-        //     case Sud:
-        //         image_index *= 2;
-        //         break;
-        //     case Est:
-        //         image_index *= 3;
-        //         break;
-        //     case Ouest:
-        //         image_index *= 4;
-        //         break;
-        // }
+         animation_elapsed += elapsed;
+        if (animation_elapsed > 1000/((float)4*100/60)) { //TODO: remplacer 100 par bpm
+            image_index = (image_index + 1) % 4;
+            switch (direction) {
+                case Nord:
+                    break;
+                case Sud:
+                    image_index += 4;
+                    break;
+                case Est:
+                    image_index += 8;
+                    break;
+                case Ouest:
+                    image_index += 12;
+                    break;
+                default:
+                    break;
+                
+            }
+            animation_elapsed = 0;
+        }
     }
 }

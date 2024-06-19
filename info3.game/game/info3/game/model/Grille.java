@@ -512,12 +512,6 @@ public class Grille implements IGrille {
         g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);
 
-        if (IsAuthorised()) {
-            g.drawImage(indicator[0], x, y + height / 2, width, height / 2, null);
-        } else {
-            g.drawImage(indicator[1], x, y + height / 2, width, height / 2, null);
-        }
-
         //coeur
         int life = ((Player1) main_Entity).getLife();
 
@@ -562,15 +556,15 @@ public class Grille implements IGrille {
 
         //affichage cooldown
         int cooldown_egg = ((Player2) joueur2).getCooldown_egg();
-        g.setColor(Color.PINK);
+        g.setColor(new Color(130, 163, 104));
         g.fillRect(x, y, width / 3, height / 3 * (3 - cooldown_egg));
 
         int cooldown_wizz =  ((Player2) joueur2).getCooldown_wizz();
-        g.setColor(Color.BLUE);
+        g.setColor(new Color(222,249,252));
         g.fillRect(x+width / 3, y, width / 3, height / 5 * (5 - cooldown_wizz));
 
         int cooldown_pop = ((Player2) joueur2).getCooldown_pop();
-        g.setColor(Color.MAGENTA);
+        g.setColor(new Color(66,66,143));
         g.fillRect(x+2*(width / 3), y, width / 3, height / 10 * (10 - cooldown_pop));
         
 
