@@ -108,10 +108,8 @@ public abstract class Entity {
                     return type == Category.O;
                 }
                 return g.getCell(x, y+1).getCategory() ==type;
-
-            default:
-
-                return g.getCell(x, y).getCategory() ==type;
+            default :
+                return g.getCell(x, y).getCategory() == type;
         }
     }
     
@@ -166,11 +164,14 @@ public abstract class Entity {
 
     
 
-    public boolean eval_got_power(Entity e, int i) {
-        return e.getLife() > i;
+    public boolean eval_got(Entity e,char cat) {
+        return e.getCategory() == cat;
     }
 
-   
+    public boolean eval_got_power(Entity e, int i) {
+        return e.getLife() > i;
+
+    }
 
     public boolean do_hit(Entity e, DirRelative dir) { 
             switch (dir) {
@@ -186,6 +187,9 @@ public abstract class Entity {
                 return true;
             case Gauche:
                 g.getCell(this.x - 1, this.y).GetEntity().get_hit(1);
+                return true;
+            case soi:
+                g.getCell(this.x, this.y).GetEntity().get_hit(1);
                 return true;
             default:   
                 return false;
@@ -218,10 +222,7 @@ public abstract class Entity {
         throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
     }
 
-    public boolean eval_got(Entity e,char cat) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eval_got'");
-    }
+    
 
     public boolean do_egg(Entity e){
         // TODO Auto-generated method stub
