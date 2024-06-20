@@ -350,7 +350,8 @@ public class Grille implements IGrille {
     int y_main_old;
     int frames_anim = 10;
     int mouvement = frames_anim; //nombre de frame pour le decalage de la vue
-    float[] slide = {1.0f, 0.7f, 0.36f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f};
+    float[] slide = { 1.0f, 0.7f, 0.38f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f };
+    //float[]slide = {1.0f, 0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f, 0.3f, 0.2f, 0.1f, 0.0f};
    
 
     public void paint(Graphics g, int width, int height) {
@@ -406,13 +407,13 @@ public class Grille implements IGrille {
                             height / viewport_size,
                             null);
             }
-        }*/
+        }*//* 
         g.drawImage(m_sol,
                 ((int) ((-width / viewport_size)*(x_main-3) + offset_x * slide[frames_anim- mouvement])),
                 ((int) ((-height / viewport_size)*(y_main-3) + offset_y * slide[frames_anim - mouvement])),
                 width / viewport_size * 34,
                 height / viewport_size * 34,
-                                null);
+                                null);*/
 
 
 
