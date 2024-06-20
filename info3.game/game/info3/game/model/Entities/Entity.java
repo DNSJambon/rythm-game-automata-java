@@ -264,7 +264,8 @@ public abstract class Entity {
             } else if (direction == Direction.Ouest) {
                 x += width * slide[nb_frame_move - in_movement];
             }
-            y -= height * jump[nb_frame_move - in_movement];
+            if (!(this instanceof Projectile))
+                y -= height * jump[nb_frame_move - in_movement];
             in_movement--;
         }
             
