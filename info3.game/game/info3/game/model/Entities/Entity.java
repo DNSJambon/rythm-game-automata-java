@@ -264,7 +264,7 @@ public abstract class Entity {
             } else if (direction == Direction.Ouest) {
                 x += width * slide[nb_frame_move - in_movement];
             }
-            if (!(this instanceof Projectile))
+            if (!(this instanceof Projectile) && !(this instanceof Player2))
                 y -= height * jump[nb_frame_move - in_movement];
             in_movement--;
         }
@@ -272,7 +272,7 @@ public abstract class Entity {
         if (this instanceof Player2 || this instanceof Door || this instanceof Trap)
              graphics.drawImage(m_images[image_index+ got_hit], x, y, width, height, null);
         else
-            graphics.drawImage(m_images[image_index + got_hit], x, y - height / 3, width, height, null);
+            graphics.drawImage(m_images[image_index + got_hit], x, y - height / 4, width, height, null);
             
         if (got_hit < 4 && got_hit != 0)
             got_hit++;

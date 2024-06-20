@@ -146,7 +146,7 @@ Wall_Breakable(Vivant){
 
 
 
-Sourischauve(Haut){
+CarreWait(Haut){
 *(Haut):
 | !Got(Power) ? Rest : ()
 | Cell(F, V) ? Move(F) : (Waitdroite)
@@ -186,6 +186,35 @@ Sourischauve(Haut){
 *(Waitdroite):
 | !Got(Power) ? Rest : ()
 | True ? Wait : (Droite)
+
+*()
+| True ? Wait : ()
+}
+
+Sourischauve(Haut){
+*(Haut):
+| !Got(Power) ? Rest : ()
+| Cell(F, V) ? Move(F) : (Droite)
+| Cell(F, #) ? Hit(F) : (Haut)
+| True ? Wait : (Droite)
+
+*(Bas):
+| !Got(Power) ? Rest : ()
+| Cell(B, V) ? Move(B) : (Gauche)
+| Cell(B, #) ? Hit(B) : (Bas)
+| True ? Wait : (Gauche)
+
+*(Gauche):
+| !Got(Power) ? Rest : ()
+| Cell(L, V) ? Move(L) : (Haut)
+| Cell(L, #) ? Hit(L) : (Gauche)
+| True ? Wait : (Haut)
+
+*(Droite):
+| !Got(Power) ? Rest : ()
+| Cell(R, V) ? Move(R) : (Bas)
+| Cell(R, #) ? Hit(R) : (Droite)
+| True ? Wait : (Bas)
 
 *()
 | True ? Wait : ()

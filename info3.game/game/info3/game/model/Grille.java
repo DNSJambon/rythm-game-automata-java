@@ -368,7 +368,6 @@ public class Grille implements IGrille {
     int frames_anim = 10;
     int mouvement = frames_anim; //nombre de frame pour le decalage de la vue
     float[] slide = { 1.0f, 0.7f, 0.38f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f };
-    //float[]slide = {1.0f, 0.9f, 0.8f, 0.7f, 0.6f, 0.5f, 0.4f, 0.3f, 0.2f, 0.1f, 0.0f};
    
 
     public void paint(Graphics g, int width, int height) {
@@ -448,10 +447,11 @@ public class Grille implements IGrille {
 
     }
     
-    Color vide = new Color(223, 208, 184);
-    Color obstacle = new Color(139, 127, 109);
-    Color player = new Color(60, 91, 111);
+    Color vide = new Color(20, 12, 28);
+    Color obstacle = new Color(78, 74, 78);
+    Color player = new Color(36, 63, 114);
     Color pickable = new Color(240, 194, 80);
+    Color monstre = new Color(169,59,59);
 
     void drawMinimap(Graphics g, int x, int y, int width, int height) {
         for (int j = 0; j < rows; j++) {
@@ -467,7 +467,7 @@ public class Grille implements IGrille {
                         g.setColor(vide);
                         break;
                     case 'T':
-                        g.setColor(player);
+                        g.setColor(monstre);
                         break;
                     case 'E':
                         if (grille[j][i].getType()==cellType.Wall_Breakable){
@@ -475,11 +475,11 @@ public class Grille implements IGrille {
                             break;
                         }
                         else{
-                        g.setColor(Color.YELLOW);
+                        g.setColor(monstre);
                         break;
                         }
                     case '#':
-                        g.setColor(Color.BLUE);
+                        g.setColor(player);
                         break;
                     case 'D':
                          g.setColor(Color.WHITE);
@@ -490,7 +490,7 @@ public class Grille implements IGrille {
         }
 
         //on place la cible (jouer 2) (une croix rouge)
-        g.setColor(Color.RED);
+        g.setColor(Color.GREEN);
         g.fillRect(x + (joueur2.getX() * width / cols) + 2, y + (joueur2.getY() * height / rows) + 2, width / cols - 4,
                 height / rows - 4);
     }
