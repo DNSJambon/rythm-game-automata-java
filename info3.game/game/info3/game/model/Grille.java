@@ -405,32 +405,13 @@ public class Grille implements IGrille {
             load_y_positif = 1;
 
         //on dessine le sol en premier
-        /* 
-        int r;
-        for (int j = y_main - viewport_size / 2 - load_y_negatif; j <= y_main + viewport_size / 2
-                + load_y_positif; j++) {
-            for (int i = x_main - viewport_size / 2 - load_x_negatif; i <= x_main + viewport_size / 2
-                    + load_x_positif; i++) {
-                if (i % 2 == 0 && j % 2 == 0 || i % 2 == 1 && j % 2 == 1)
-                    r = 252;
-                else
-                    r = 231;
-                g.drawImage(m_images[r],
-                           (int) ((i - x_main + viewport_size / 2) * width / viewport_size
-                                    + offset_x  * slide[frames_anim - mouvement]),
-                           (int) ((j - y_main + viewport_size / 2) * height / viewport_size
-                                    + offset_y * slide[frames_anim - mouvement]),
-                            width / viewport_size,
-                            height / viewport_size,
-                            null);
-            }
-        }*//* 
+        
         g.drawImage(m_sol,
                 ((int) ((-width / viewport_size)*(x_main-3) + offset_x * slide[frames_anim- mouvement])),
                 ((int) ((-height / viewport_size)*(y_main-3) + offset_y * slide[frames_anim - mouvement])),
                 width / viewport_size * 34,
                 height / viewport_size * 34,
-                                null);*/
+                                null);
 
 
 
