@@ -474,7 +474,7 @@ public class Grille implements IGrille {
                         g.setColor(obstacle);
                         break;
                     case 'P':
-                        g.setColor(pickable);
+                        g.setColor(vide);
                         break;
                     case 'T':
                         g.setColor(player);
