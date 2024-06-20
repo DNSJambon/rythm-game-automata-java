@@ -18,8 +18,6 @@ public interface IGrille {
 
     public Entity getMainEntity();
 
-    public BufferedImage getImage(int index);
-
     public void addEntity(Entity entity);
 
     public void removeEntity(Entity entity);

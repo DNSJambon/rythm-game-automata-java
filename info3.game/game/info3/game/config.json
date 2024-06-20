@@ -1,6 +1,6 @@
 {
     "seed": 5,
-    "difficulty": 1,
+    "difficulty": 2,
     "rythm": 1,
     "automate_file" : "automates.gal",
     "entities" : [

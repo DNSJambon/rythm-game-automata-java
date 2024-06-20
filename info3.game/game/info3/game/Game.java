@@ -349,6 +349,8 @@ public class Game {
 		// paint
 		//System.out.println(width + " " + height);
 		m_grille.paint(g, width - 340, height);
+
+		
 		if (!calib_done && !Jump) {
 			g.setColor(Color.black);
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));

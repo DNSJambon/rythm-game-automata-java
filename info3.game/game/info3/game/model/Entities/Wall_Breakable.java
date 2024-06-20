@@ -19,7 +19,7 @@ public class Wall_Breakable extends Entity {
         this.a = a;
         image_index=361;
         try {
-            m_images = Grille.loadSprite("resources/tiles.png", 24, 21);
+            m_images = Grille.loadSprite("resources/tiles.png", 24, 21);//TODO change path
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -45,10 +45,10 @@ public class Grille implements IGrille {
     public int game_over = 0; // 0 = en cours, 1 = victoire joueur 1, 2 = victoire joueur 2
 
     // Viewport
-    BufferedImage[] m_images;
+    BufferedImage m_sol;
     Entity main_Entity; //(joueur 1)
     Entity joueur2; //(joueur 2)
-    int viewport_size = 7;
+    int viewport_size = 7; //have to be odd
 
     //Synchro
     boolean authorised;
@@ -58,7 +58,7 @@ public class Grille implements IGrille {
 
     public Grille(int rows, int cols, Control m_control, int seed, int difficulty, HashMap<String, Automate> automates)
             throws IOException, ClassNotFoundException {
-        m_images = loadSprite("resources/tiles.png", 24, 21);
+        m_sol = loadSprite("resources/sol.png", 1, 1)[0];
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
@@ -296,9 +296,7 @@ public class Grille implements IGrille {
         return cols;
     }
 
-    public BufferedImage getImage(int index) {
-        return m_images[index];
-    }
+   
 
     public Entity getMainEntity() {
         return main_Entity;
@@ -389,6 +387,7 @@ public class Grille implements IGrille {
             load_y_positif = 1;
 
         //on dessine le sol en premier
+        /* 
         int r;
         for (int j = y_main - viewport_size / 2 - load_y_negatif; j <= y_main + viewport_size / 2
                 + load_y_positif; j++) {
@@ -407,7 +406,16 @@ public class Grille implements IGrille {
                             height / viewport_size,
                             null);
             }
-        }
+        }*/
+        g.drawImage(m_sol,
+                ((int) ((-width / viewport_size)*(x_main-3) + offset_x * slide[frames_anim- mouvement])),
+                ((int) ((-height / viewport_size)*(y_main-3) + offset_y * slide[frames_anim - mouvement])),
+                width / viewport_size * 34,
+                height / viewport_size * 34,
+                                null);
+
+
+
         //on dessine les entités
         for (int j = y_main - viewport_size / 2 - load_y_negatif; j <= y_main + viewport_size / 2
                 + load_y_positif; j++) {
@@ -571,111 +579,5 @@ public class Grille implements IGrille {
 
     }
 
-
-
-
-    /* 
-    private int pourcentage_aleatoire_obstacle(Grille grille, int pourcentage, long seed, int startX, int startY,
-            int endX, int endY) {
-        if (pourcentage < 0 || pourcentage > 100) {
-            return -1;
-        }
-    
-        int totalCells = grille.rows * grille.cols;
-        int numObstacles = (totalCells * pourcentage) / 100;
-    
-        Random random = new Random(seed);
-        List<cell> emptyCells = new ArrayList<>();
-    
-        for (int i = 0; i < grille.rows; i++) {
-            for (int j = 0; j < grille.cols; j++) {
-                if (grille.grille[i][j].pas_obstacle() && !(i == 0 && j == 0)) {
-                    emptyCells.add(grille.grille[i][j]);
-                }
-            }
-        }
-        
-        Collections.shuffle(emptyCells, random);
-        // System.out.println("print cells : "+emptyCells);
-        boolean[][] tempObstacles = new boolean[grille.rows][grille.cols];
-        for (int i = 0; i < grille.rows; i++) {
-            for (int j = 0; j < grille.cols; j++) {
-                tempObstacles[i][j] = !grille.grille[i][j].pas_obstacle();
-            }
-        }
-    
-        int obstaclesPlaced = 0;
-        for (int i = 0; i < emptyCells.size() && obstaclesPlaced < numObstacles; i++) {
-            cell c = emptyCells.get(i);
-            tempObstacles[c.getRow()][c.getCol()] = true;
-    
-            if (chemin_existe(tempObstacles, startX, startY, endX, endY) ) {
-                Obstacle o = new Obstacle(this, c.getCol(), c.getRow(), automates.get("MurIncassable"));
-                obstaclesPlaced++;
-            } else {
-                tempObstacles[c.getRow()][c.getCol()] = false;
-            }
-        }
-        return 0;
-    }
-    
-    // L'idéale est d'utiliser un algo de parcours en largeur afin de vérifier
-    // qu'une grille est faisable
-    // pour l'instant on fait que pour 2 cases // 3 cases à faire après( porte, clée
-    // , case de départ )
-    private boolean chemin_existe(boolean[][] obstacles, int startX, int startY, int endX, int endY) {
-        if (startX == endX && startY == endY) {
-            return true;
-        }
-        boolean[][] visitedFromStart = new boolean[rows][cols];
-        boolean[][] visitedFromEnd = new boolean[rows][cols];
-        Queue<int[]> queueStart = new LinkedList<>();
-        Queue<int[]> queueEnd = new LinkedList<>();
-    
-        queueStart.add(new int[] { startX, startY });
-        queueEnd.add(new int[] { endX, endY });
-    
-        visitedFromStart[startX][startY] = true;
-        visitedFromEnd[endX][endY] = true;
-    
-        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } }; 
-    
-        while (!queueStart.isEmpty() && !queueEnd.isEmpty()) {
-            if (avancer_largeur(queueStart, visitedFromStart, visitedFromEnd, obstacles, directions)) {
-                return true;
-            }
-            if (avancer_largeur(queueEnd, visitedFromEnd, visitedFromStart, obstacles, directions)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private boolean avancer_largeur(Queue<int[]> queue, boolean[][] visited, boolean[][] visitedOther,
-            boolean[][] obstacles, int[][] directions) {
-        int[] current = queue.poll();
-        int x = current[0];
-        int y = current[1];
-    
-        for (int[] dir : directions) {
-            int newX = x + dir[0];
-            int newY = y + dir[1];
-    
-            if (Valid(newX, newY) && !obstacles[newX][newY] && !visited[newX][newY]) {
-                if (visitedOther[newX][newY]) {
-                    return true;
-                }
-    
-                visited[newX][newY] = true;
-                queue.add(new int[] { newX, newY });
-            }
-        }
-    
-        return false;
-    }
-    private boolean Valid(int x, int y) {
-        return x >= 0 && x < rows && y >= 0 && y < cols;
-    }
-        */
 
 }
