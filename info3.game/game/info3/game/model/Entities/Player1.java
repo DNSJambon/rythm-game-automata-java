@@ -107,7 +107,7 @@ public class Player1 extends Entity{
         }
     
     }
-    
+
     @Override
     public void paint(Graphics graphics, int x, int y, int width, int height) {
         super.paint(graphics, x, y, width, height);

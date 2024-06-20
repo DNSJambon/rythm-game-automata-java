@@ -251,7 +251,8 @@ public abstract class Entity {
     int got_hit = 0;
     int in_movement = -1;
     int nb_frame_move = 10;
-    float[] slide = {1.0f, 0.7f, 0.36f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f};
+    float[] slide = { 1.0f, 0.7f, 0.36f, 0.22f, 0.13f, 0.07f, 0.05f, 0.03f, 0.015f, 0.007f, 0.0f };
+    float[] jump = {0.0f, 0.1f, 0.3f, 0.4f, 0.4f, 0.3f, 0.1f, 0.0f, 0.0f, 0.0f, 0.0f};
     public void paint(Graphics graphics, int x, int y, int width, int height) {
         if (in_movement != -1) {
             if (direction == Direction.Nord) {
@@ -263,13 +264,14 @@ public abstract class Entity {
             } else if (direction == Direction.Ouest) {
                 x += width * slide[nb_frame_move - in_movement];
             }
+            y -= height * jump[nb_frame_move - in_movement];
             in_movement--;
         }
             
         if (this instanceof Player2 || this instanceof Door || this instanceof Trap)
              graphics.drawImage(m_images[image_index+ got_hit], x, y, width, height, null);
         else
-            graphics.drawImage(m_images[image_index + got_hit], x, y - height / 4, width, height, null);
+            graphics.drawImage(m_images[image_index + got_hit], x, y - height / 3, width, height, null);
             
         if (got_hit < 4 && got_hit != 0)
             got_hit++;

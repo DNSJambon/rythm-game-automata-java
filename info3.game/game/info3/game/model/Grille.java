@@ -45,7 +45,7 @@ public class Grille implements IGrille {
     public int game_over = 0; // 0 = en cours, 1 = victoire joueur 1, 2 = victoire joueur 2
 
     // Viewport
-    BufferedImage m_sol;
+    BufferedImage[] m_sol;
     Entity main_Entity; //(joueur 1)
     Entity joueur2; //(joueur 2)
     int viewport_size = 7; //have to be odd
@@ -58,7 +58,7 @@ public class Grille implements IGrille {
 
     public Grille(int rows, int cols, Control m_control, int seed, int difficulty, HashMap<String, Automate> automates)
             throws IOException, ClassNotFoundException {
-        m_sol = loadSprite("resources/sol.png", 1, 1)[0];
+        m_sol = loadSprite("resources/sol2.png", 1, 1);
         this.rows = rows;
         this.cols = cols;
         this.m_control = m_control;
@@ -353,13 +353,13 @@ public class Grille implements IGrille {
     
 
     /*=========================Paint et ticks=============================*/
-
     public void tick(long elapsed) {
         m_imageElapsed += elapsed;
 
         for (Entity e : m_control.getEntities()) {
             e.tick(elapsed);
         }
+
 
     }
 
@@ -406,7 +406,7 @@ public class Grille implements IGrille {
 
         //on dessine le sol en premier
         
-        g.drawImage(m_sol,
+        g.drawImage(m_sol[0],
                 ((int) ((-width / viewport_size)*(x_main-3) + offset_x * slide[frames_anim- mouvement])),
                 ((int) ((-height / viewport_size)*(y_main-3) + offset_y * slide[frames_anim - mouvement])),
                 width / viewport_size * 34,
