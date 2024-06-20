@@ -166,7 +166,7 @@ public class Game {
 			}
 
 			//create the grid
-			Grille grille = new Grille(34, 34, m_control, seed, entities_automates);
+			Grille grille = new Grille(34, 34, m_control, seed, difficulty,  entities_automates);
 			return grille;
 			
 			

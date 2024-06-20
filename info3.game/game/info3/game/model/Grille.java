@@ -56,7 +56,7 @@ public class Grille implements IGrille {
     char touche;
     char touche2;
 
-    public Grille(int rows, int cols, Control m_control, int seed, HashMap<String, Automate> automates)
+    public Grille(int rows, int cols, Control m_control, int seed, int difficulty, HashMap<String, Automate> automates)
             throws IOException, ClassNotFoundException {
         m_images = loadSprite("resources/tiles.png", 24, 21);
         this.rows = rows;
