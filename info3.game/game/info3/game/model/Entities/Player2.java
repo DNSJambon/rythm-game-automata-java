@@ -1,7 +1,5 @@
 package info3.game.model.Entities;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 import info3.game.controller.Automate;
 import info3.game.controller.DirRelative;

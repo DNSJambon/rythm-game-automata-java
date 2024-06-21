@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import info3.game.controller.*;
-import info3.game.controller.Conditions.*;
-import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
 public class Player1 extends Entity{
@@ -50,36 +48,12 @@ public class Player1 extends Entity{
     }
 
     
-
-    
-    @Override
-    public boolean do_egg(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
-    }
     @Override
     public boolean do_pick(Entity e) {
         return true;
     }
 
-    @Override
-    public boolean do_pop(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
-    }
-
-    @Override
-    public boolean do_wizz(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_move'");
-    }
-
-    @Override
-    public boolean do_turn(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
-    }
-
+    
     
     @Override
     public boolean do_hit(Entity e, DirRelative dir) { 

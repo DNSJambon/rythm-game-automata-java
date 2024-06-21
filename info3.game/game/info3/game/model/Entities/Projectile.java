@@ -1,6 +1,5 @@
 package info3.game.model.Entities;
 
-import java.awt.Graphics;
 import java.io.IOException;
 
 import info3.game.controller.Automate;

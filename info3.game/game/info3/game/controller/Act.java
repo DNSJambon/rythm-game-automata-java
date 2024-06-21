@@ -1,7 +1,6 @@
 package info3.game.controller;
 
 import info3.game.model.Entities.Entity;
-import info3.game.controller.Modes;
 
 public class Act {
     Entity owner;

@@ -1,15 +1,10 @@
 package info3.game.model;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.Obstacle;
-import info3.game.model.Entities.Player2;
+
 
 public class cell implements Icell {
 

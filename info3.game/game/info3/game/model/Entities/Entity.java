@@ -217,16 +217,14 @@ public abstract class Entity {
         return true;
     }
 
-     public boolean eval_closest(char c, Direction dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eval_closest'");
+    public boolean eval_closest(char c, Direction dir) {
+        return true;
     }
 
     
 
     public boolean do_egg(Entity e){
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
+        return true;
     }
 
     public boolean do_pick(Entity e){
@@ -242,8 +240,7 @@ public abstract class Entity {
     }
 
     public boolean do_turn(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
+        return true;
     }
     
     
@@ -285,7 +282,7 @@ public abstract class Entity {
     int animation_elapsed = 0;
     public void tick(long elapsed) {
         animation_elapsed += elapsed;
-        if (animation_elapsed > 60000/100/4) { //TODO: remplacer 100 par bpm
+        if (animation_elapsed > 60000/100/4) {
             image_index = (image_index + 1) % 4;
             animation_elapsed = 0;
         }

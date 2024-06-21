@@ -1,8 +1,6 @@
 package info3.game.controller;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import gal.ast.AST;
 import gal.ast.Actions;
@@ -220,6 +218,7 @@ public class Ast2Automaton implements IVisitor{
     public void exit(Mode mode) {
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Object build(Mode mode, Object source_state, Object behaviour) {
         return new Modes((String) source_state, (List<Transitions>) behaviour);
@@ -289,6 +288,7 @@ public class Ast2Automaton implements IVisitor{
     public void exit(Automaton automaton) {
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Object build(Automaton automaton, Object initial_state, List<Object> modes) {
         return new Automate(automaton.name, (String) initial_state, (List<Modes>) (List<?>) modes);

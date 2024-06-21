@@ -5,7 +5,6 @@ import java.io.IOException;
 import info3.game.controller.Automate;
 import info3.game.controller.DirRelative;
 import info3.game.controller.Direction;
-import info3.game.model.Category;
 import info3.game.model.Grille;
 import info3.game.model.IGrille;
 
@@ -33,19 +32,19 @@ public class Mage extends Ennemi {
 
     @Override
     public boolean do_egg(Entity e) {
-        Projectile p;
+
         switch (direction) {
             case Nord:
-                p = new Projectile(g, x, y-1, direction,projectile );
+                new Projectile(g, x, y-1, direction,projectile );
                 return true;
             case Sud:
-                p = new Projectile(g, x, y+1, direction,projectile);
+                new Projectile(g, x, y+1, direction,projectile);
                 return true;
             case Est:   
-                p = new Projectile(g, x+1, y, direction,projectile);
+                new Projectile(g, x+1, y, direction,projectile);
                 return true;
             case Ouest:
-                p = new Projectile(g, x-1, y, direction,projectile);
+                new Projectile(g, x-1, y, direction,projectile);
                 return true;
             default:
                 return false;

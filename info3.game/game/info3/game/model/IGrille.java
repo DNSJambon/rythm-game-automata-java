@@ -1,7 +1,4 @@
 package info3.game.model;
-
-import java.awt.image.BufferedImage;
-
 import info3.game.model.Entities.Entity;
 
 public interface IGrille {

@@ -1,11 +1,9 @@
 package info3.game.model.Entities;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+
 import java.io.IOException;
 import info3.game.controller.Automate;
 import info3.game.controller.DirRelative;
-import info3.game.controller.Direction;
 import info3.game.model.Category;
 import info3.game.model.Grille;
 import info3.game.model.IGrille;

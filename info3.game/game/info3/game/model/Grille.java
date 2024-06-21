@@ -14,7 +14,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import info3.game.controller.*;
-import info3.game.controller.Conditions.Cell;
 import info3.game.model.Entities.Door;
 import info3.game.model.Entities.Entity;
 import info3.game.model.Entities.Key;
@@ -24,14 +23,11 @@ import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Sourischauve;
 import info3.game.model.Entities.Obstacle;
 import info3.game.model.Entities.Player1;
-import info3.game.model.Entities.Suiveur;
 import info3.game.model.Entities.Wall_Breakable;
 import info3.game.model.Entities.Trap;
 import info3.game.model.Entities.Player2;
-import info3.game.model.Entities.Slime;
 import info3.game.model.Entities.Squelette;
-import info3.game.model.Entities.Wall_Breakable;
-import info3.game.model.Entities.Trap;
+
 
 
 public class Grille implements IGrille {
@@ -95,7 +91,7 @@ public class Grille implements IGrille {
         Key k = new Key(this, c.getCol(), c.getRow(), automates.get("Key"));
         
         c = randomCell_libre();
-        Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
+        new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
 
         
         //======placer le joueur 2 dans le labyrinthe====== 
@@ -136,7 +132,7 @@ public class Grille implements IGrille {
         cell c;
         for (int i = 0; i < nombre; i++) {
             c = randomCell_libre();
-            Wall_Breakable obs = new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
+            new Wall_Breakable(this, c.getCol(), c.getRow(), automates.get("Wall_Breakable"));
         }
     }
     
@@ -207,32 +203,32 @@ public class Grille implements IGrille {
         //======placer les Slimes dans le labyrinthe======//
         for (int i = 0; i < (10+(difficulty-1)*5); i++) {
             cell c = randomCell_libre();
-            Slime sl = new Slime(this, c.getCol(), c.getRow(), automates.get("Slime"));
+            new Slime(this, c.getCol(), c.getRow(), automates.get("Slime"));
         }
 
         //======placer les Chauve-Souris dans le labyrinthe======//
         for (int i = 0; i < (difficulty*5); i++) {
             cell c = randomCell_libre();
-            Sourischauve ch = new Sourischauve(this, c.getCol(), c.getRow(),automates.get("Sourischauve"));
+            new Sourischauve(this, c.getCol(), c.getRow(),automates.get("Sourischauve"));
         }
 
         //======placer les Mages dans le labyrinthe======//
         for (int i=0 ; i < (1+difficulty); i++) {
             cell c = randomCell_libre();
-            Mage m = new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
+            new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
         }
 
         //======placer les Squelettes dans le labyrinthe======//
         for (int i = 0; i < (10+(difficulty-1)*5); i++) {
             cell c = randomCell_libre();
-            Squelette sq = new Squelette(this, c.getCol(), c.getRow(),automates.get("Squelette"));
+            new Squelette(this, c.getCol(), c.getRow(),automates.get("Squelette"));
         }
 
       //======placer les Traps dans le labyrinthe======//
         for (int i = 0; i < difficulty*10; i++) {
            cell c = randomCell_libre();
             if (c.e[0]==null) {
-               Trap t = new Trap(this, c.getCol(), c.getRow(),automates.get("Trap"));
+               new Trap(this, c.getCol(), c.getRow(),automates.get("Trap"));
             }
             else {i--;}
         }
@@ -499,7 +495,6 @@ public class Grille implements IGrille {
     int c3 = 0;
 
     void drawATH_haut(Graphics g, int x, int y, int width, int height) {
-        //TODO:
         indice++;
         if (petit_coeur) {
             indice += 5;

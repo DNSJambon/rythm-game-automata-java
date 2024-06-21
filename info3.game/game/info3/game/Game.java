@@ -15,7 +15,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.jcraft.jogg.Buffer;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -177,6 +176,7 @@ public class Game {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	List<Automate> loadAutomate(String filename) {
         List<Automate> automates= new ArrayList<>();
 

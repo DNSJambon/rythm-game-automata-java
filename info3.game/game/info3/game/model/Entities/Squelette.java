@@ -1,13 +1,9 @@
 package info3.game.model.Entities;
 
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import info3.game.controller.*;
-import info3.game.controller.Conditions.*;
-import info3.game.controller.Actions.*;
 import info3.game.model.*;
 
 
@@ -56,29 +52,7 @@ public class Squelette extends Ennemi {
         return true;
     }
 
-    @Override
-    public boolean do_egg(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
-    }
 
-    @Override
-    public boolean do_pick(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
-    }
-
-    @Override
-    public boolean do_pop(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pop'");
-    }
-
-    @Override
-    public boolean do_wizz(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
-    }
 
 
 

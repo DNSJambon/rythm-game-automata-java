@@ -3,9 +3,7 @@ package info3.game.model.Entities;
 import java.io.IOException;
 
 import info3.game.controller.Automate;
-import info3.game.controller.BufferAction;
 import info3.game.controller.DirRelative;
-import info3.game.controller.Conditions.True;
 import info3.game.model.Grille;
 import info3.game.model.IGrille;
 import info3.game.model.cellType;
@@ -33,28 +31,13 @@ public class Trap extends Entity{
         }
     }
 
-    @Override
-    public cellType getType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getType'");
-    }
-
+   
     @Override
     public char getCategory() {
         return Category.V;
     }
 
-    @Override
-    public boolean do_egg(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
-    }
-
-    @Override
-    public boolean do_pick(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
-    }
+   
 
     @Override
     public boolean do_pop(Entity e) {
@@ -68,17 +51,6 @@ public class Trap extends Entity{
         return super.do_hit(e,dir);
     }
 
-    @Override
-    public boolean do_wizz(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
-    }
-
-    @Override
-    public boolean do_turn(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
-    }
     
     @Override
     public void tick(long elapsed) {
@@ -89,6 +61,12 @@ public class Trap extends Entity{
                 animation_elapsed = 0;
             } 
         }
+    }
+
+
+    @Override
+    public cellType getType() {
+        return cellType.Trap;
     }
         
 }

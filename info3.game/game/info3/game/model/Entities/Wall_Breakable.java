@@ -1,12 +1,10 @@
 package info3.game.model.Entities;
 import info3.game.controller.Automate;
-import info3.game.controller.DirRelative;
 import info3.game.controller.Direction;
 import info3.game.model.Category;
 import info3.game.model.Grille;
 import info3.game.model.cellType;
 import java.awt.Graphics;
-import java.io.IOException;
 
 public class Wall_Breakable extends Entity {
 
@@ -21,7 +19,7 @@ public class Wall_Breakable extends Entity {
         this.a = a;
         image_index=0;
         try {
-            m_images = Grille.loadSprite("resources/mur_cassable.png", 1, 1);//TODO change path
+            m_images = Grille.loadSprite("resources/mur_cassable.png", 1, 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,38 +35,7 @@ public class Wall_Breakable extends Entity {
         return Category.E;
     }
 
-    // public void setPower(int power) {
-    //     this.power = power;
-    // }
-    @Override
-    public boolean do_egg(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_egg'");
-    }
 
-    @Override
-    public boolean do_pick(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pick'");
-    }
-
-    @Override
-    public boolean do_pop(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_pop'");
-    }
-
-    @Override
-    public boolean do_wizz(Entity e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_wizz'");
-    }
-
-    @Override
-    public boolean do_turn(Entity e, DirRelative dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'do_turn'");
-    }
     @Override
     public void tick(long elapsed) {
 

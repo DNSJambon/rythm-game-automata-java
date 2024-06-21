@@ -4,8 +4,6 @@ import java.awt.Graphics;
 import java.io.IOException;
 
 import info3.game.controller.*;
-import info3.game.controller.Actions.Wait;
-import info3.game.controller.Conditions.True;
 import info3.game.model.*;
 
 public class Obstacle extends Entity {
