@@ -7,7 +7,7 @@ import info3.game.model.Entities.Entity;
  * Hit action, always in the direction of the entity.
  */
 
-public class Hit extends Action {
+public class Hit implements Action {
 
     DirRelative dir;
 

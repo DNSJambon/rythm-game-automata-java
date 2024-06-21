@@ -7,7 +7,7 @@ import info3.game.model.Entities.Entity;
  * Action de déplacement, toujours dans la direction de l'entité.
  */
 
-public class Move extends Action {
+public class Move implements Action {
 
     DirRelative dir;
 
