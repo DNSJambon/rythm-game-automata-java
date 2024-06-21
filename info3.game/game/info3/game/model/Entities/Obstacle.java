@@ -27,12 +27,6 @@ public class Obstacle extends Entity {
             e.printStackTrace();
         }
     }
-    
-    
-
-    
-
-
 
     @Override
     public cellType getType() {
@@ -40,7 +34,7 @@ public class Obstacle extends Entity {
     }
 
     public char getCategory() {
-        return Category.O;
+        return Category.E;
     }
 
 
