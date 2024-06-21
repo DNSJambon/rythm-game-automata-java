@@ -5,6 +5,8 @@ import info3.game.controller.Direction;
 import info3.game.model.Category;
 import info3.game.model.Grille;
 import info3.game.model.cellType;
+import java.awt.Graphics;
+import java.io.IOException;
 
 public class Wall_Breakable extends Entity {
 
@@ -69,6 +71,11 @@ public class Wall_Breakable extends Entity {
     }
     @Override
     public void tick(long elapsed) {
-        
+
+    }
+    
+    @Override
+    public void paint(Graphics graphics, int x, int y, int width, int height) {
+        graphics.drawImage(m_images[0], x, y-(height/2), width, height*3/2, null);
     }
 }
