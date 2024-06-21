@@ -87,11 +87,13 @@ public class Grille implements IGrille {
         //======placer le joueur 1 dans le labyrinthe======
         c = randomCell_libre();
         Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
-        
+        //main_Entity;
+        main_Entity = p1;
+
+        //======placer la clé et la porte dans le labyrinthe======   
         c = randomCell_libre();
         Key k = new Key(this, c.getCol(), c.getRow(), automates.get("Key"));
         
-
         c = randomCell_libre();
         Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
 
@@ -102,15 +104,15 @@ public class Grille implements IGrille {
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
         generer_mur_cassable(20+(difficulty*30));
-        System.out.println("Mur : "+(20+(difficulty*20)));
 
         place_monstre(difficulty);
+
+       
         
      
        
 
-        //main_Entity;
-        main_Entity = p1;
+        
         x_main_old = main_Entity.getX();
         y_main_old = main_Entity.getY();
         //on s'assure que la vue ne sorte pas de la grille
@@ -207,28 +209,24 @@ public class Grille implements IGrille {
             cell c = randomCell_libre();
             Slime sl = new Slime(this, c.getCol(), c.getRow(), automates.get("Slime"));
         }
-        System.out.println("Slimes : "+(10+(difficulty-1)*5));
 
         //======placer les Chauve-Souris dans le labyrinthe======//
         for (int i = 0; i < (difficulty*5); i++) {
             cell c = randomCell_libre();
             Sourischauve ch = new Sourischauve(this, c.getCol(), c.getRow(),automates.get("Sourischauve"));
         }
-        System.out.println("Chauve-Souris : "+(difficulty*5));
 
         //======placer les Mages dans le labyrinthe======//
         for (int i=0 ; i < (1+difficulty); i++) {
             cell c = randomCell_libre();
             Mage m = new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
         }
-        System.out.println("Mages : "+(1+difficulty));
 
         //======placer les Squelettes dans le labyrinthe======//
         for (int i = 0; i < (10+(difficulty-1)*5); i++) {
             cell c = randomCell_libre();
             Squelette sq = new Squelette(this, c.getCol(), c.getRow(),automates.get("Squelette"));
         }
-        System.out.println("Squelettes : "+(10+(difficulty-1)*5));
 
       //======placer les Traps dans le labyrinthe======//
         for (int i = 0; i < difficulty*10; i++) {
@@ -238,7 +236,6 @@ public class Grille implements IGrille {
             }
             else {i--;}
         }
-        System.out.println("Traps : "+(difficulty*10));
     }
     
     
@@ -406,8 +403,8 @@ public class Grille implements IGrille {
         //on dessine le sol en premier
         
         g.drawImage(m_sol[0],
-                ((int) ((-width / viewport_size)*(x_main-3) + offset_x * slide[frames_anim- mouvement])),
-                ((int) ((-height / viewport_size)*(y_main-3) + offset_y * slide[frames_anim - mouvement])),
+                ((int) ((-width / viewport_size)*(x_main-viewport_size/2) + offset_x * slide[frames_anim- mouvement])),
+                ((int) ((-height / viewport_size)*(y_main-viewport_size/2) + offset_y * slide[frames_anim - mouvement])),
                 width / viewport_size * 34,
                 height / viewport_size * 34,
                                 null);
@@ -460,9 +457,6 @@ public class Grille implements IGrille {
                     case 'V':
                         g.setColor(vide);
                         break;
-                    case 'O':
-                        g.setColor(obstacle);
-                        break;
                     case 'P':
                         g.setColor(vide);
                         break;
@@ -470,7 +464,7 @@ public class Grille implements IGrille {
                         g.setColor(monstre);
                         break;
                     case 'E':
-                        if (grille[j][i].getType()==cellType.Wall_Breakable){
+                        if ((grille[j][i].getType()==cellType.Wall_Breakable)||(grille[j][i].getType()==cellType.Obstacle)){
                             g.setColor(obstacle);
                             break;
                         }
