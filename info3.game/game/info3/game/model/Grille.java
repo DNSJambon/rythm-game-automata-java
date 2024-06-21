@@ -87,11 +87,13 @@ public class Grille implements IGrille {
         //======placer le joueur 1 dans le labyrinthe======
         c = randomCell_libre();
         Player1 p1 = new Player1(this, c.getCol(), c.getRow(), automates.get("Joueur1"));
-        
+        //main_Entity;
+        main_Entity = p1;
+
+        //======placer la clé et la porte dans le labyrinthe======   
         c = randomCell_libre();
         Key k = new Key(this, c.getCol(), c.getRow(), automates.get("Key"));
         
-
         c = randomCell_libre();
         Door porte = new Door(this, automates.get("Door"),c.getCol(), c.getRow(),k);
 
@@ -101,16 +103,19 @@ public class Grille implements IGrille {
         c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
-        generer_mur_cassable(20+(difficulty*30));
+        
+        //generer_mur_cassable(20+(difficulty*30));
         System.out.println("Mur : "+(20+(difficulty*20)));
 
-        place_monstre(difficulty);
+        //place_monstre(difficulty);
+        c = randomCell_libre();
+        new Slime( this, main_Entity.getX()-2, main_Entity.getY()-2, automates.get("Slime"));
+       
         
      
        
 
-        //main_Entity;
-        main_Entity = p1;
+        
         x_main_old = main_Entity.getX();
         y_main_old = main_Entity.getY();
         //on s'assure que la vue ne sorte pas de la grille
@@ -406,8 +411,8 @@ public class Grille implements IGrille {
         //on dessine le sol en premier
         
         g.drawImage(m_sol[0],
-                ((int) ((-width / viewport_size)*(x_main-3) + offset_x * slide[frames_anim- mouvement])),
-                ((int) ((-height / viewport_size)*(y_main-3) + offset_y * slide[frames_anim - mouvement])),
+                ((int) ((-width / viewport_size)*(x_main-viewport_size/2) + offset_x * slide[frames_anim- mouvement])),
+                ((int) ((-height / viewport_size)*(y_main-viewport_size/2) + offset_y * slide[frames_anim - mouvement])),
                 width / viewport_size * 34,
                 height / viewport_size * 34,
                                 null);
