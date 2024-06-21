@@ -107,9 +107,8 @@ public class Grille implements IGrille {
         //generer_mur_cassable(20+(difficulty*30));
         System.out.println("Mur : "+(20+(difficulty*20)));
 
-        //place_monstre(difficulty);
-        c = randomCell_libre();
-        new Wall_Breakable( this, main_Entity.getX()-2, main_Entity.getY()-2, automates.get("Wall_Breakable"));
+        place_monstre(difficulty);
+
        
         
      
