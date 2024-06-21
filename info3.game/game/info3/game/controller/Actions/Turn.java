@@ -7,7 +7,7 @@ import info3.game.model.Entities.Entity;
  * Action qui change la direction absolue de l'entité.
  */
 
-public class Turn extends Action {
+public class Turn implements Action {
 
     DirRelative dir;
     
