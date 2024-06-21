@@ -99,9 +99,12 @@ public class Grille implements IGrille {
         c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
-        generer_mur_cassable(20+(difficulty*30));
-
+        
+        //======placer les monstres dans le labyrinthe======
         place_monstre(difficulty);
+
+        //======placer les murs cassables dans le labyrinthe======
+        generer_mur_cassable(20+(difficulty*30));
 
        
         
