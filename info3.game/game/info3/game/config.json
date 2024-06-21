@@ -31,10 +31,6 @@
             "automate" : "Squelette"
         },
         {
-            "name" : "Slime",
-            "automate" : "Slime"
-        },
-        {
             "name" : "Trap",
             "automate" : "Trap"
         },
