@@ -109,7 +109,7 @@ public class Grille implements IGrille {
 
         //place_monstre(difficulty);
         c = randomCell_libre();
-        new Slime( this, main_Entity.getX()-2, main_Entity.getY()-2, automates.get("Slime"));
+        new Wall_Breakable( this, main_Entity.getX()-2, main_Entity.getY()-2, automates.get("Wall_Breakable"));
        
         
      
