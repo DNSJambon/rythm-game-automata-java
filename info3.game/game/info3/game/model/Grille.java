@@ -103,9 +103,7 @@ public class Grille implements IGrille {
         c = randomCell_libre();
         Player2 p2 = new Player2(this, c.getCol(), c.getRow(), automates.get("Joueur2"));
         joueur2 = p2;
-        
-        //generer_mur_cassable(20+(difficulty*30));
-        System.out.println("Mur : "+(20+(difficulty*20)));
+        generer_mur_cassable(20+(difficulty*30));
 
         place_monstre(difficulty);
 
@@ -211,28 +209,24 @@ public class Grille implements IGrille {
             cell c = randomCell_libre();
             Slime sl = new Slime(this, c.getCol(), c.getRow(), automates.get("Slime"));
         }
-        System.out.println("Slimes : "+(10+(difficulty-1)*5));
 
         //======placer les Chauve-Souris dans le labyrinthe======//
         for (int i = 0; i < (difficulty*5); i++) {
             cell c = randomCell_libre();
             Sourischauve ch = new Sourischauve(this, c.getCol(), c.getRow(),automates.get("Sourischauve"));
         }
-        System.out.println("Chauve-Souris : "+(difficulty*5));
 
         //======placer les Mages dans le labyrinthe======//
         for (int i=0 ; i < (1+difficulty); i++) {
             cell c = randomCell_libre();
             Mage m = new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
         }
-        System.out.println("Mages : "+(1+difficulty));
 
         //======placer les Squelettes dans le labyrinthe======//
         for (int i = 0; i < (10+(difficulty-1)*5); i++) {
             cell c = randomCell_libre();
             Squelette sq = new Squelette(this, c.getCol(), c.getRow(),automates.get("Squelette"));
         }
-        System.out.println("Squelettes : "+(10+(difficulty-1)*5));
 
       //======placer les Traps dans le labyrinthe======//
         for (int i = 0; i < difficulty*10; i++) {
@@ -242,7 +236,6 @@ public class Grille implements IGrille {
             }
             else {i--;}
         }
-        System.out.println("Traps : "+(difficulty*10));
     }
     
     
