@@ -17,9 +17,9 @@ public class Wall_Breakable extends Entity {
         this.y = y;
         g.getCell(x, y).setEntity(this);
         this.a = a;
-        image_index=361;
+        image_index=0;
         try {
-            m_images = Grille.loadSprite("resources/tiles.png", 24, 21);//TODO change path
+            m_images = Grille.loadSprite("resources/mur_cassable.png", 1, 1);//TODO change path
         } catch (Exception e) {
             e.printStackTrace();
         }
