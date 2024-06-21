@@ -465,9 +465,6 @@ public class Grille implements IGrille {
                     case 'V':
                         g.setColor(vide);
                         break;
-                    case 'O':
-                        g.setColor(obstacle);
-                        break;
                     case 'P':
                         g.setColor(vide);
                         break;
@@ -475,7 +472,7 @@ public class Grille implements IGrille {
                         g.setColor(monstre);
                         break;
                     case 'E':
-                        if (grille[j][i].getType()==cellType.Wall_Breakable){
+                        if ((grille[j][i].getType()==cellType.Wall_Breakable)||(grille[j][i].getType()==cellType.Obstacle)){
                             g.setColor(obstacle);
                             break;
                         }
