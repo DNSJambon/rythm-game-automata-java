@@ -1,6 +1,7 @@
 {
     "seed": 7,
     "difficulty": 2,
+    "mob_multiplier": 3,
     "rythm": 0,
     "automate_file" : "automates.gal",
     "entities" : [

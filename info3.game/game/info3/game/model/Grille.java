@@ -52,7 +52,7 @@ public class Grille implements IGrille {
     char touche;
     char touche2;
 
-    public Grille(int rows, int cols, Control m_control, int seed, int difficulty, HashMap<String, Automate> automates)
+    public Grille(int rows, int cols, Control m_control, int seed, int difficulty, int mob_multiplier, HashMap<String, Automate> automates)
             throws IOException, ClassNotFoundException {
         m_sol = loadSprite("resources/sol2.png", 1, 1);
         this.rows = rows;
@@ -101,7 +101,7 @@ public class Grille implements IGrille {
         joueur2 = p2;
         
         //======placer les monstres dans le labyrinthe======
-        place_monstre(difficulty);
+        place_monstre(mob_multiplier);
 
         //======placer les murs cassables dans le labyrinthe======
         generer_mur_cassable(20+(difficulty*30));
@@ -201,34 +201,34 @@ public class Grille implements IGrille {
     }
     
     //place les monstres dans la grille a des endroit vide et aléatoire
-    public void place_monstre(int difficulty) {
+    public void place_monstre(int mob_multiplier) {
         
         //======placer les Slimes dans le labyrinthe======//
-        for (int i = 0; i < (10+(difficulty-1)*5); i++) {
+        for (int i = 0; i < (4*mob_multiplier); i++) {
             cell c = randomCell_libre();
             new Slime(this, c.getCol(), c.getRow(), automates.get("Slime"));
         }
 
         //======placer les Chauve-Souris dans le labyrinthe======//
-        for (int i = 0; i < (difficulty*5); i++) {
+        for (int i = 0; i < (4*mob_multiplier); i++) {
             cell c = randomCell_libre();
             new Sourischauve(this, c.getCol(), c.getRow(),automates.get("Sourischauve"));
         }
 
         //======placer les Mages dans le labyrinthe======//
-        for (int i=0 ; i < (1+difficulty); i++) {
+        for (int i=0 ; i < (mob_multiplier); i++) {
             cell c = randomCell_libre();
             new Mage(this, c.getCol(), c.getRow(), automates.get("Mage"),automates.get("Projectile"));
         }
 
         //======placer les Squelettes dans le labyrinthe======//
-        for (int i = 0; i < (10+(difficulty-1)*5); i++) {
+        for (int i = 0; i < (4* mob_multiplier); i++) {
             cell c = randomCell_libre();
             new Squelette(this, c.getCol(), c.getRow(),automates.get("Squelette"));
         }
 
       //======placer les Traps dans le labyrinthe======//
-        for (int i = 0; i < difficulty*10; i++) {
+        for (int i = 0; i < (4* mob_multiplier); i++) {
            cell c = randomCell_libre();
             if (c.e[0]==null) {
                new Trap(this, c.getCol(), c.getRow(),automates.get("Trap"));

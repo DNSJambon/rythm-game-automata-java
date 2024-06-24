@@ -120,6 +120,7 @@ public class Game {
 
 			int rythm = config.getInt("rythm");
 			int difficulty = config.getInt("difficulty");
+			int mob_multiplier = config.getInt("mob_multiplier");
 			if (rythm == 0) {
 				Jump = true;
 				decision = 100000;
@@ -165,7 +166,7 @@ public class Game {
 			}
 
 			//create the grid
-			Grille grille = new Grille(34, 34, m_control, seed, difficulty,  entities_automates);
+			Grille grille = new Grille(34, 34, m_control, seed, difficulty, mob_multiplier,  entities_automates);
 			return grille;
 			
 			
@@ -230,7 +231,7 @@ public class Game {
 		m_timekey += elapsed;
 		m_freeze += elapsed;
 
-		//calibration (moche mais pas trouvé mieux pour synchroniser la musique car le temps de chargement tres variable)
+		//calibration (moche mais pas trouvé mieux pour synchroniser la musique car le temps de chargement est tres variable)
 		if (!calib_done && !Jump) {
 			m_timekey = 0;
 			m_freeze = 0;
