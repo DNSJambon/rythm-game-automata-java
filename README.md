@@ -12,6 +12,142 @@ Vous trouverez également un sous-dossier Conditions qui regroupe toutes les con
 
 ## 3) Instruction de lancement
 - Fichiers de configurations 
+    - Fichier de configuration Jeu 1 :
+    ```json
+    {
+    "seed": 7,
+    "difficulty": 2,
+    "mob_multiplier": 2,
+    "rythm": 1,
+    "automate_file" : "automates.gal",
+    "entities" : [
+        {   
+            "name" : "Joueur1",
+            "automate" : "Player1"
+        },
+        {
+            "name" : "Joueur2",
+            "automate" : "Player2"
+        },
+        {
+            "name" : "MurIncassable",
+            "automate" : "Wall"
+
+        },
+        {
+            "name" : "Suiveur",
+            "automate" : "Suiveur"
+
+        },
+        {
+            "name" : "Slime",
+            "automate" : "Slime"
+        },
+        {
+            "name" : "Squelette",
+            "automate" : "Squelette"
+        },
+        {
+            "name" : "Trap",
+            "automate" : "Trap"
+        },
+        {
+            "name" : "Key",
+            "automate" : "Key"
+        },
+        {       
+            "name" : "Door",
+            "automate" : "Door"
+        },
+        {
+            "name": "Mage",
+            "automate": "Mage"
+        },
+        {
+            "name": "Projectile",
+            "automate": "Projectile"
+        },
+        {
+            "name": "Wall_Breakable",
+            "automate": "Wall_Breakable"
+        },
+        {
+            "name": "Sourischauve",
+            "automate": "Sourischauve"
+        }
+    ]
+
+    }
+    ```
+
+    - Fichier de configuration Jeu 2 :
+    ```json
+    {
+    "seed": 7,
+    "difficulty": 2,
+    "mob_multiplier": 3,
+    "rythm": 0,
+    "automate_file" : "automates.gal",
+    "entities" : [
+        {   
+            "name" : "Joueur1",
+            "automate" : "Player1"
+        },
+        {
+            "name" : "Joueur2",
+            "automate" : "Player2"
+        },
+        {
+            "name" : "MurIncassable",
+            "automate" : "Wall"
+
+        },
+        {
+            "name" : "Suiveur",
+            "automate" : "Suiveur"
+
+        },
+        {
+            "name" : "Slime",
+            "automate" : "Slime"
+        },
+        {
+            "name" : "Squelette",
+            "automate" : "Squelette"
+        },
+        {
+            "name" : "Trap",
+            "automate" : "Trap"
+        },
+        {
+            "name" : "Key",
+            "automate" : "Key"
+        },
+        {       
+            "name" : "Door",
+            "automate" : "Door"
+        },
+        {
+            "name": "Mage",
+            "automate": "Mage"
+        },
+        {
+            "name": "Projectile",
+            "automate": "Projectile"
+        },
+        {
+            "name": "Wall_Breakable",
+            "automate": "Wall_Breakable"
+        },
+        {
+            "name": "Sourischauve",
+            "automate": "Sourischauve"
+        }
+    ]
+    
+    }
+    ```
+
 - Automates GAL : Tous les automates sont définies dans model/Automates/automates.gal :
 
 ```gal
