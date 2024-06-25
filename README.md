@@ -14,7 +14,7 @@ Le code du projet est structuré selon le modèle Model-View-Controller (MVC) av
 
 * Le dossier model :
     
-    Ce dossier comprend le sous-dossier Automates qui contient le fichier automates.gal. Ce fichier décrit les comportements des différentes entités (joueurs, ennemis, obstacles, etc.) au sein du moteur de jeu. Le sous-dossier Entities qui contient les classes représentant les différentes entités du jeu. Chaque entité a sa propre classe. Le fichier Grille.java gère l'affichage graphique des actions à travers les avatars associés aux entités.
+    Ce dossier comprend le sous-dossier Automates qui contient le fichier automates.gal. Ce fichier décrit les comportements des différentes entités (joueurs, ennemis, obstacles, etc.) au sein du moteur de jeu. Le sous-dossier Entities contient les classes représentant les différentes entités du jeu. Chaque entité a sa propre classe. Le fichier Grille.java gère l'affichage graphique des actions à travers les avatars associés aux entités.
 
 ## 3) Instruction de lancement
 * Fichiers de configurations :
