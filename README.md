@@ -33,8 +33,28 @@ Le code du projet est structuré selon le modèle Model-View-Controller (MVC) av
     
     Tous les automates sont définies dans un seul fichier model/Automates/automates.gal 
 
+* Important, remarque sur les commandes du jeu :
+
+    Dans "proposal.md", nous avions prévu que le joueur 1 se déplace à l'aide des touches o, k, l, m, le joueur 2 se déplace avec les touches z, q, s, d et peut faire apparaître des monstres avec les touches a, e, r.
+
+    Cependant, pour des raisons d'adaptation du jeu, nous avons modifié les commandes comme suit :
+    - Le joueur 1 se déplace maintenant avec les touches z, q, s, d.
+    - Le joueur 2 se déplace avec les touches o, k, l, m. Il fait apparaître des monstres avec les touches suivantes : u pour le Slime, p pour le Suiveur, i pour le Squelette.
+
+    Nous avons laissé cette remarque ici afin de ne pas toucher au fichier proposal.md.
+
 ## 4) Lien vers la video 
 
 
 ## 5) Pourcentage de participation 
+``` 
+Arthur  : 17.5% 
+Sami    : 16.5% 
+Mathieu : 16.5% 
+Mathis  : 16.5% 
+Aymane  : 16.5% 
+Omar    : 16.5%
+```
+
+
 
