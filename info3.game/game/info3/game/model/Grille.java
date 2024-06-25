@@ -444,31 +444,56 @@ public class Grille implements IGrille {
     }
     
     Color vide = new Color(20, 12, 28);
+    Color vue = new Color(93, 75, 110);
     Color obstacle = new Color(78, 74, 78);
     Color player = new Color(36, 63, 114);
     Color pickable = new Color(240, 194, 80);
-    Color monstre = new Color(169,59,59);
+    Color monstre = new Color(169, 59, 59);
+
+    boolean isOnScreen(int j, int i) {
+        if ((i < main_Entity.getX() - viewport_size / 2
+                || i > main_Entity.getX() + viewport_size / 2
+                || j < main_Entity.getY() - viewport_size / 2
+                || j > main_Entity.getY() + viewport_size / 2)
+                &&
+                (i < joueur2.getX() - viewport_size / 2
+                || i > joueur2.getX() + viewport_size / 2
+                || j < joueur2.getY() - viewport_size / 2
+                || j > joueur2.getY() + viewport_size / 2))
+            return false;
+
+        return true;
+    }
 
     void drawMinimap(Graphics g, int x, int y, int width, int height) {
         for (int j = 0; j < rows; j++) {
             for (int i = 0; i < cols; i++) {
                 switch (grille[j][i].getCategory()) {
                     case 'V':
-                        g.setColor(vide);
+                        if (!isOnScreen(j, i))
+                            g.setColor(vide);
+                        else
+                            g.setColor(vue);
                         break;
                     case 'P':
                         g.setColor(vide);
                         break;
                     case 'T':
-                        g.setColor(monstre);
+                        if (!isOnScreen(j, i))
+                                g.setColor(vide);
+                        else
+                            g.setColor(monstre);
                         break;
                     case 'E':
                         if ((grille[j][i].getType()==cellType.Wall_Breakable)||(grille[j][i].getType()==cellType.Obstacle)){
                             g.setColor(obstacle);
                             break;
                         }
-                        else{
-                        g.setColor(monstre);
+                        else {
+                            if (!isOnScreen(j, i))
+                                g.setColor(vide);
+                            else
+                                g.setColor(monstre);
                         break;
                         }
                     case '#':
@@ -541,9 +566,9 @@ public class Grille implements IGrille {
                 c3 = 2;
                 break;
         }
-        g.drawImage(coeur[coeur_index + c1], x + 20, y + 5, 100, 100, null);
-        g.drawImage(coeur[coeur_index + c2], x + 120, y + 5, 100, 100, null);
-        g.drawImage(coeur[coeur_index + c3], x + 220, y + 5, 100, 100, null);
+        g.drawImage(coeur[coeur_index + c1], x + 20, y + 50, 100, 100, null);
+        g.drawImage(coeur[coeur_index + c2], x + 120, y + 50, 100, 100, null);
+        g.drawImage(coeur[coeur_index + c3], x + 220, y + 50, 100, 100, null);
 
     }
 

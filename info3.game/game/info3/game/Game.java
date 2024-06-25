@@ -124,7 +124,7 @@ public class Game {
 			if (rythm == 0) {
 				Jump = true;
 				decision = 100000;
-				freeze = 500; //on freeze seulement le temps d'animation
+				freeze = 300; //on freeze seulement le temps d'animation
 				bpm = 0;
 			}
 			else {
@@ -370,7 +370,7 @@ public class Game {
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
 			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
-			g.drawString("Victoire du Joueur 1", (width - 340) / 7 * 3, height / 5+30);
+			g.drawString("Victoire du Joueur 1", (width - 340) / 7 * 2 +30, height / 5+25);
 			
 
 		}
@@ -380,7 +380,7 @@ public class Game {
 			g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 27));
 			g.fillRect(0, height / 7, width - 340, height / 7);
 			g.setColor(Color.white);
-			g.drawString("Victoire du Joueur 2", (width - 340) / 7 * 3, height / 5+25);
+			g.drawString("Victoire du Joueur 2", (width - 340) / 7 * 2 +30, height / 5+25);
 			
 		}
 
