@@ -2,7 +2,9 @@
 Ce fichier fournit principalement les instructions pour la compilation sous Eclipse, la structuration du code en utilisant le modèle Model-View-Controller avec les Bots. Vous y trouverez également les instructions de lancement (pour les fichiers de configuration, les automates GAL), un lien vers la vidéo de démonstration ainsi que le pourcentage de participation de chaque membre du groupe.
 
 ## 1) Compilation sous Eclipse
-Importer le dossier info3.game en projet puis lancer Game.java
+- git clone git@gricad-gitlab.univ-grenoble-alpes.fr:michael_perin_private_project/2023_info3_ple/g1.git
+- ouvrir le dossier g1 en tant que workspace
+- importer le projet info3.game
 
 ## 2) Structuration du code (M, V, C, B)
 Le code du projet est structuré selon le modèle Model-View-Controller (MVC) avec l'ajout de Bots. Il est organisé dans le dossier game/info3/game qui contient principalement deux sous-dossiers : controller et model.
