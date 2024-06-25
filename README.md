@@ -44,7 +44,7 @@ Le code du projet est structuré selon le modèle Model-View-Controller (MVC) av
     Nous avons laissé cette remarque ici afin de ne pas toucher au fichier proposal.md.
 
 ## 4) Lien vers la video 
-
+https://www.youtube.com/watch?v=z3R9XRUVyAY
 
 ## 5) Pourcentage de participation 
 ``` 
