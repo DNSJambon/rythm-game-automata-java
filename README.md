@@ -2,7 +2,7 @@
 Ce fichier fournit principalement les instructions pour la compilation sous Eclipse, la structuration du code en utilisant le modèle Model-View-Controller avec les Bots. Vous y trouverez également les instructions de lancement (pour les fichiers de configuration, les automates GAL), un lien vers la vidéo de démonstration ainsi que le pourcentage de participation de chaque membre du groupe.
 
 
-## ) Structuration du code (M, V, C, B)
+## 1) Structuration du code (M, V, C, B)
 Le code du projet est structuré selon le modèle Model-View-Controller (MVC) avec l'ajout de Bots. Il est organisé dans le dossier game/info3/game qui contient principalement deux sous-dossiers : controller et model.
 
 * Le dossier controller :
@@ -14,7 +14,7 @@ Le code du projet est structuré selon le modèle Model-View-Controller (MVC) av
     
     Ce dossier comprend le sous-dossier Automates qui contient le fichier automates.gal. Ce fichier décrit les comportements des différentes entités (joueurs, ennemis, obstacles, etc.) au sein du moteur de jeu. Le sous-dossier Entities contient les classes représentant les différentes entités du jeu. Chaque entité a sa propre classe. Le fichier Grille.java gère l'affichage graphique des actions à travers les avatars associés aux entités.
 
-## ) Instruction de lancement
+## 2) Instruction de lancement
 * Fichiers de configurations :
 
     Les fichiers de configuration pour jeu1 et  jeu2 se trouvent dans le dossier principal game/info3/game. Ils sont nommés comme suit :
@@ -41,7 +41,7 @@ Le code du projet est structuré selon le modèle Model-View-Controller (MVC) av
 
     Nous avons laissé cette remarque ici afin de ne pas toucher au fichier proposal.md.
 
-## 4) Lien vers la video 
+## 3) Lien vers la video 
 https://www.youtube.com/watch?v=z3R9XRUVyAY
 
 
